@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="col-sm-10 col-sm-offset-1 col-xs-12">
+		<table>
+			<tr>
+				<th>Date</th>
+				<th>Description</th>
+				<th>Amount</th>
+				<th>?</th>
+			</tr>
+			<% @transactions.each do |transaction| %>
+			<tr>
+				<td><%= transaction.trx_date %></td>
+				<td><%= transaction.description %></td>
+				<td><%= transaction.amount %></td>
+				<td><%= link_to "DETAILS", transaction_path(transaction) %>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+</div>
