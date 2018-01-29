@@ -31,7 +31,7 @@ class TransactionsController < ApplicationController
 	def update
 		if @transaction.update_attributes(transaction_params)
 		  flash[:notice] = "Successfully updated transaction!"
-		  redirect_to transaction_path(@transactions)
+		  redirect_to transaction_path(@transaction)
 		else
 		  flash[:alert] = "Error updating transaction!"
 		  render :edit
