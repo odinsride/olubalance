@@ -20,7 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'simple_form'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Use CoffeeScript for .coffee assets and views

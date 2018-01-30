@@ -1,14 +1,41 @@
-<div class="col-sm-11 col-xs-12">
-	<h2 class="text-center"><%= @transaction.description %></h2>
-	<h5 class="text-center"><%= @transaction.created_at.strftime('%b %d, %Y') %></h5>
-	<table>
-		<tr>
-			<th>Transaction Date</th>
-			<th>Amount</th>
-		</tr>
-		<tr>
-			<td><%= @transaction.trx_date.strftime('%m/%d/%Y') %></td>
-			<td><%= @transaction.amount %></td>
-		</tr>
-	</table>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6">
+			<h2 class="text-center">Transaction Details</h2>
+			<br />
+			<div class="row">
+				<div class="col-sm-12 text-right">
+					<%= link_to "Edit", edit_transaction_path(@transaction), class: "btn-sm btn-primary" %>&nbsp;
+					<%= link_to "Delete", @transaction, method: :delete, class: "btn-sm btn-danger" %>
+				</div>	
+			</div>
+			<div class="row mt-2">
+				<div class="col-sm-12 text-center">
+					<table class="table table-bordered table-striped">
+						<tbody>
+							<tr class="row m-0">
+								<td class="col-sm-6 text-center font-weight-bold">Transaction #</td>
+								<td class="col-sm-6 text-center"><%= @transaction.id %></td>
+							</tr>
+							<tr class="row m-0">
+							    <td class="col-sm-6 text-center font-weight-bold">Transaction Date</td>
+								<td class="col-sm-6 text-center"><%= @transaction.trx_date.strftime('%m/%d/%Y') %></td>
+							</tr>
+							<tr class="row m-0">
+							    <td class="col-sm-6 text-center font-weight-bold">Description</td>
+								<td class="col-sm-6 text-center"><%= @transaction.description %></td>
+							</tr>
+							<tr class="row m-0">
+							    <td class="col-sm-6 text-center font-weight-bold">Amount</td>
+								<td class="col-sm-6 text-center"><%= number_to_currency(@transaction.amount) %></td>
+							</tr>
+						</tbody>
+					</table>
+					<small class="text-muted">Transaction created on <%= @transaction.trx_date.strftime('%b %d, %Y @ %I:%M %p') %></small>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3"></div>
+	</div>
 </div>

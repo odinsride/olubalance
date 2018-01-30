@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>Olubalance</title>
+    <title>Olu Balance</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,7 @@
   </head>
 
   <body>
-    <%= yield %>
+	 <%= render "layouts/navbar" %>
+     <%= yield %>
   </body>
 </html>

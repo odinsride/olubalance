@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-	before_action :find_transaction, only: [:edit, :update, :show, :delete]
+	before_action :find_transaction, only: [:edit, :update, :show, :destroy]
 
 	# Index action to render all transactions
 	def index
