@@ -1,30 +1,40 @@
 class TransactionsController < ApplicationController
+	before_action :find_account
 	before_action :find_transaction, only: [:edit, :update, :show, :destroy]
 
 	# Index action to render all transactions
 	def index
-		@transactions = Transaction.all
+		@transactions = account.transactions
 	end
 
 	# New action for creating transaction
 	def new
-		@transaction = Transaction.new
+		@transaction = account.transactions.build
+
+		respond_to do |format|
+	      format.html # new.html.erb
+	      format.xml  { render :xml => @transaction }
+	    end
 	end
 
 	# Create action saves the trasaction into database
 	def create
-		@transaction = Transaction.new(transaction_params)
-		if @transaction.save(transaction_params)
-			flash[:notice] = "Successfully created transaction!"
-			redirect_to transaction_path(@transaction)
-		else
-			flash[:alert] = "Error creating new transaction!"
-			render :new
+		@transaction = account.transactions.create(transaction_params)
+
+		respond_to do |format|
+			if @transaction.save
+				format.html { redirect_to([@transaction.account, @transaction], :notice => 'Transaction was successfully created.'
+        		format.xml  { render :xml => @transaction, :status => :created, :location => [@transaction.account, @transaction] }
+			else
+				format.html { render :action => "new" }
+        		format.xml  { render :xml => @transaction.errors, :status => :unprocessable_entity }
+			end
 		end
 	end
 
 	# Edit action retrieves the transaction and renders the edit page
 	def edit
+		@transaction = account.transactions.find(params[:id])
 	end
 
 	  # Update action updates the transaction with the new information
@@ -60,5 +70,9 @@ class TransactionsController < ApplicationController
 
 	def find_transaction
 		@transaction = Transaction.find(params[:id])
+	end
+
+	def find_account
+		@account = Account.find(params[:account_id])
 	end
 end
