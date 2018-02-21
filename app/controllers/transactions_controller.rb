@@ -4,12 +4,17 @@ class TransactionsController < ApplicationController
 
 	# Index action to render all transactions
 	def index
-		@transactions = account.transactions
+		@transactions = @account.transactions
+
+		respond_to do |format|
+    		format.html # index.html.erb
+      		format.xml  { render :xml => @transactions }
+    	end
 	end
 
 	# New action for creating transaction
 	def new
-		@transaction = account.transactions.build
+		@transaction = @account.transactions.build
 
 		respond_to do |format|
 	      format.html # new.html.erb
@@ -19,11 +24,11 @@ class TransactionsController < ApplicationController
 
 	# Create action saves the trasaction into database
 	def create
-		@transaction = account.transactions.create(transaction_params)
+		@transaction = @account.transactions.create(transaction_params)
 
 		respond_to do |format|
 			if @transaction.save
-				format.html { redirect_to([@transaction.account, @transaction], :notice => 'Transaction was successfully created.'
+				format.html { redirect_to([@transaction.account, @transaction], :notice => 'Transaction was successfully created.') }
         		format.xml  { render :xml => @transaction, :status => :created, :location => [@transaction.account, @transaction] }
 			else
 				format.html { render :action => "new" }
@@ -34,31 +39,36 @@ class TransactionsController < ApplicationController
 
 	# Edit action retrieves the transaction and renders the edit page
 	def edit
-		@transaction = account.transactions.find(params[:id])
 	end
 
 	  # Update action updates the transaction with the new information
 	def update
-		if @transaction.update_attributes(transaction_params)
-		  flash[:notice] = "Successfully updated transaction!"
-		  redirect_to transaction_path(@transaction)
-		else
-		  flash[:alert] = "Error updating transaction!"
-		  render :edit
+	    respond_to do |format|
+			if @transaction.update_attributes(transaction_params)
+			  	format.html { redirect_to([@transaction.account, @transaction], :notice => 'Transaction was successfully updated.') }
+        		format.xml  { head :ok }
+			else
+			  	format.html { render :action => "edit" }
+        		format.xml  { render :xml => @transaction.errors, :status => :unprocessable_entity }
+			end
 		end
 	end
 
 	# The show action renders the individual transaction after retrieving the the id
 	def show
+		respond_to do |format|
+	    	format.html # show.html.erb
+	      	format.xml  { render :xml => @transaction }
+	    end
 	end
 
 	# The destroy action removes the transaction permanently from the database
 	def destroy
-		if @transaction.destroy
-		  flash[:notice] = "Successfully deleted transaction!"
-		  redirect_to transactions_path
-		else
-		  flash[:alert] = "Error updating transaction!"
+		@transaction.destroy
+
+		respond_to do |format|
+			format.html { redirect_to(account_transactions_url) }
+      		format.xml  { head :ok }
 		end
 	end
 
@@ -68,11 +78,12 @@ class TransactionsController < ApplicationController
 		params.require(:transaction).permit(:trx_date, :description, :amount)
 	end
 
-	def find_transaction
-		@transaction = Transaction.find(params[:id])
-	end
-
 	def find_account
 		@account = Account.find(params[:account_id])
 	end
+
+	def find_transaction
+		@transaction = @account.transactions.find(params[:id])
+	end
+
 end

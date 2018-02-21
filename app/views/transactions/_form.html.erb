@@ -1,5 +1,5 @@
-<%= simple_form_for @transaction do |f| %>
-	<% if @account_transaction.errors.any? %>
+<%= simple_form_for ([@transaction.account, @transaction]) do |f| %>
+	<% if @transaction.errors.any? %>
 		<div id="error explanation">
 			<h2>
 				<%= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:" %>
