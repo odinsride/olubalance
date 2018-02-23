@@ -1,37 +1,31 @@
-<div class="container mt-5">
+	<h2>Transactions</h2>
+	<br />
 	<div class="row">
+		<div class="col-sm-12 text-right">
+			<%= link_to "Add Transaction", new_account_transaction_path, class: "btn btn-primary" %>
+		</div>	
+	</div>
+	<div class="row mt-2">
 		<div class="col-sm-12">
-			<h2>Transactions</h2>
-			<br />
-			<div class="row">
-				<div class="col-sm-12 text-right">
-					<%= link_to "Add Transaction", new_account_transaction_path, class: "btn btn-primary" %>
-				</div>	
-			</div>
-			<div class="row mt-2">
-				<div class="col-sm-12">
-					<table class="table table-sm table-hover">
-						<thead>
-							<tr class="row m-0">
-								<th class="col-sm-1 text-center">#</th>
-								<th class="col-sm-2 text-center">Date</th>
-								<th class="col-sm-5">Description</th>
-								<th class="col-sm-4 text-right">Amount</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% @transactions.each do |transaction| %>
-							<tr class="row m-0">
-								<td class="col-sm-1 text-center"><%= link_to transaction.id, [transaction.account, transaction] %></td>
-								<td class="col-sm-2 text-center"><%= transaction.trx_date.strftime('%m/%d/%Y') %></td>
-								<td class="col-sm-5"><%= transaction.description %></td>
-								<td class="col-sm-4 text-right"><%= number_to_currency(transaction.amount) %></td>
-							</tr>
-							<% end %>
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr class="row m-0">
+						<th class="col-sm-1 text-center">#</th>
+						<th class="col-sm-2 text-center">Date</th>
+						<th class="col-sm-5">Description</th>
+						<th class="col-sm-4 text-right">Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @transactions.each do |transaction| %>
+					<tr class="row m-0">
+						<td class="col-sm-1 text-center"><%= link_to transaction.id, [transaction.account, transaction] %></td>
+						<td class="col-sm-2 text-center"><%= transaction.trx_date.strftime('%m/%d/%Y') %></td>
+						<td class="col-sm-5"><%= transaction.description %></td>
+						<td class="col-sm-4 text-right"><%= number_to_currency(transaction.amount) %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
 		</div>
 	</div>
-</div>

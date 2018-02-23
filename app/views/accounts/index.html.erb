@@ -1,29 +1,30 @@
-<h1>Accounts</h1>
+<h1>My Accounts</h1>
+<br />
+<div class="row">
+  <div class="col-sm-12">
+    <%= link_to "Add Account", new_account_path, class: "btn btn-primary" %>
+  </div>  
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Starting balance</th>
-      <th>Current balance</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @accounts.each do |account| %>
-      <tr>
-        <td><%= account.name %></td>
-        <td><%= account.starting_balance %></td>
-        <td><%= account.current_balance %></td>
-        <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
-        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row mt-2">
+  <div class="col-sm-12">
+    <% @accounts.each_slice(4) do |accounts| %>
+      <div class="row">
+      <% accounts.each do |account| %>
+        <div class="col-sm-3">
+          <div class="card">
+            <h5 class="card-header"><%= account.name %></h5>
+            <div class="card-body">
+              Current Balance: <%= number_to_currency(account.current_balance) %>
+            </div>
+            
+            <%= link_to 'Show', account %>
+            <%= link_to 'Edit', edit_account_path(account) %>
+            <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </div>
+      <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Account', new_account_path %>
+  </div>
+</div>
