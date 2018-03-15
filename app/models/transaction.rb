@@ -8,18 +8,18 @@ class Transaction < ApplicationRecord
 	
 	def update_account_balance_new
 		@account = Account.find(account_id)
-		@account.update_attributes(current_balance: @account.current_balance - amount)
+		@account.update_attributes(current_balance: @account.current_balance + amount)
 	end
 
 	def update_account_balance_edit
 		@account = Account.find(account_id)
 		if amount_changed?
-			@account.update_attributes(current_balance: @account.current_balance + amount_was - amount)
+			@account.update_attributes(current_balance: @account.current_balance - amount_was + amount)
 		end
 	end
 
 	def update_account_balance_destroy
 		@account = Account.find(account_id)
-		@account.update_attributes(current_balance: @account.current_balance + amount_was)
+		@account.update_attributes(current_balance: @account.current_balance - amount_was)
 	end
 end
