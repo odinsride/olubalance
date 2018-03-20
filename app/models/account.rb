@@ -8,4 +8,5 @@ class Account < ApplicationRecord
 		Transaction.create(trx_date: DateTime.now, account_id: self.id, description: "Starting Balance", amount: self.starting_balance)
 		#self.update_attributes(current_balance: @initbalance)
 	end
+
 end

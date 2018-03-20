@@ -24,7 +24,7 @@ class TransactionsController < ApplicationController
 
 	# Create action saves the trasaction into database
 	def create
-		@transaction = @account.transactions.create(transaction_params)
+		@transaction = @account.transactions.new(transaction_params)
 
 		respond_to do |format|
 			if @transaction.save
@@ -75,7 +75,7 @@ class TransactionsController < ApplicationController
 	private
 
 	def transaction_params
-		params.require(:transaction).permit(:trx_date, :description, :amount)
+		params.require(:transaction).permit(:trx_date, :description, :amount, :trx_type)
 	end
 
 	def find_account
@@ -85,5 +85,4 @@ class TransactionsController < ApplicationController
 	def find_transaction
 		@transaction = @account.transactions.find(params[:id])
 	end
-
 end
