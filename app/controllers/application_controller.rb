@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   before_action :assign_navbar_content
 
   def assign_navbar_content
-  	@navbar_accounts = current_user.accounts
+  	if user_signed_in?
+  		@navbar_accounts = current_user.accounts
+  	end
   end
 
 end

@@ -10,6 +10,9 @@ class Transaction < ApplicationRecord
 		if self.trx_type == "debit"
 			self.amount = -self.amount.abs
 		end
+
+		@account = Account.find(account_id)
+		self.running_balance = @account.current_balance + self.amount
 	end
 
 	def update_account_balance_new
