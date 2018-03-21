@@ -24,7 +24,7 @@ class TransactionsController < ApplicationController
 
 	# Create action saves the trasaction into database
 	def create
-		@transaction = @account.transactions.new(transaction_params)
+		@transaction = @account.transactions.build(transaction_params)
 
 		respond_to do |format|
 			if @transaction.save

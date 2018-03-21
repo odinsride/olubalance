@@ -7,20 +7,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <%= link_to root_path, class: "nav-link" do %>
+          Home <span class="sr-only">(current)</span>
+        <% end %>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          My Accounts
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <% @navbar_accounts.each do |account| %>
+            <% if account.persisted? %>
+              <%= link_to account.name, account_transactions_path(account.id), class: "dropdown-item" %>
+            <% end %>
+          <% end %>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <%= link_to "+ Add Account", new_account_path, class: "dropdown-item" %>
         </div>
       </li>
       <li class="nav-item">

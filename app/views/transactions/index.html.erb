@@ -1,4 +1,5 @@
-	<h2>Transactions</h2>
+	<h2><%= @account.name %></h2>
+	<h5>Balance: <%= number_to_currency(@account.current_balance) %></h5>
 	<br />
 	<div class="row">
 		<div class="col-sm-12 text-right">
@@ -13,7 +14,8 @@
 						<th class="col-sm-1 text-center">#</th>
 						<th class="col-sm-2 text-center">Date</th>
 						<th class="col-sm-5">Description</th>
-						<th class="col-sm-4 text-right">Amount</th>
+						<th class="col-sm-2 text-right">Credit</th>
+						<th class="col-sm-2 text-right">Debit</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -22,7 +24,8 @@
 						<td class="col-sm-1 text-center"><%= link_to transaction.id, [transaction.account, transaction] %></td>
 						<td class="col-sm-2 text-center"><%= transaction.trx_date.strftime('%m/%d/%Y') %></td>
 						<td class="col-sm-5"><%= transaction.description %></td>
-						<td class="col-sm-4 text-right"><%= number_to_currency(transaction.amount) %></td>
+						<td class="col-sm-2 text-right"><%= if transaction.amount >= 0 then number_to_currency(transaction.amount) end %></td>
+						<td class="col-sm-2 text-right"><%= if transaction.amount < 0 then "(" + number_to_currency(transaction.amount.abs) + ")" end %></td>
 					</tr>
 					<% end %>
 				</tbody>

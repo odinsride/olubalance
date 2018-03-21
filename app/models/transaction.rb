@@ -7,10 +7,8 @@ class Transaction < ApplicationRecord
 	attr_accessor :trx_type
 
 	before_save do
-		puts "CALLING BEFORE_SAVE"
 		if self.trx_type == "debit"
-			puts "TRX_TYPE IS DEBIT"
-			self.amount = self.amount * -1
+			self.amount = -self.amount.abs
 		end
 	end
 
