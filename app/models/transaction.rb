@@ -12,7 +12,11 @@ class Transaction < ApplicationRecord
 		end
 
 		@account = Account.find(account_id)
-		self.running_balance = @account.current_balance + self.amount
+		if new_record?
+			self.running_balance = @account.current_balance + self.amount
+		else
+			self.running_balance = @account.current_balance - self.amount_was + self.amount
+		end
 	end
 
 	def update_account_balance_new
