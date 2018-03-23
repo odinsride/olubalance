@@ -86,3 +86,4 @@ production:
   database: olubalance_production
   username: sitheris
   password: <%= ENV['OLUBALANCE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['OLUBALANCE_DATABASE_URL'] %>
