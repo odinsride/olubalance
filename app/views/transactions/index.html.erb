@@ -12,25 +12,24 @@
 				<thead>
 					<tr class="row m-0">
 						<th class="col-sm-1 text-center">#</th>
-						<th class="col-sm-1 text-center">Date</th>
-						<th class="col-sm-4">Description</th>
+						<th class="col-sm-2 text-center">Date</th>
+						<th class="col-sm-5">Description</th>
 						<th class="col-sm-2 text-right">Credit</th>
 						<th class="col-sm-2 text-right">Debit</th>
-						<th class="col-sm-2 text-right">Balance</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% @transactions.each do |transaction| %>
 						<tr class="row m-0">
 							<td class="col-sm-1 text-center"><%= link_to transaction.id, [transaction.account, transaction] %></td>
-							<td class="col-sm-1 text-center"><%= transaction.trx_date.strftime('%m/%d/%Y') %></td>
-							<td class="col-sm-4"><%= transaction.description %></td>
+							<td class="col-sm-2 text-center"><%= transaction.trx_date.strftime('%m/%d/%Y') %></td>
+							<td class="col-sm-5"><%= transaction.description %></td>
 							<td class="col-sm-2 text-right"><%= if transaction.amount >= 0 then number_to_currency(transaction.amount) end %></td>
 							<td class="col-sm-2 text-right"><%= if transaction.amount < 0 then "(" + number_to_currency(transaction.amount.abs) + ")" end %></td>
-							<td class="col-sm-2 text-right"><%= number_to_currency(transaction.running_balance) %></td>
 						</tr>
 					<% end %>
 				</tbody>
 			</table>
+			<%= will_paginate @transactions %>
 		</div>
 	</div>

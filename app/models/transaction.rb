@@ -2,6 +2,7 @@ class Transaction < ApplicationRecord
 	belongs_to :account
 	attr_accessor :trx_type
 
+	default_scope { order('trx_date, id DESC') }
 	validates_presence_of :trx_type, :message => "Please select debit or credit"
 	validates :trx_date, presence: true
 	validates :description, presence: true, length: { maximum: 150 }
@@ -19,12 +20,15 @@ class Transaction < ApplicationRecord
 			self.amount = -self.amount.abs
 		end
 
+=begin
 		@account = Account.find(account_id)
 		if new_record?
 			self.running_balance = @account.current_balance + self.amount
 		else
 			self.running_balance = @account.current_balance - self.amount_was + self.amount
 		end
+=end
+
 	end
 
 	def update_account_balance_new
