@@ -84,6 +84,5 @@ test:
 production:
   <<: *default
   database: olubalance_production
-  username: sitheris
+  username: <%= ENV['OLUBALANCE_DATABASE_USERNAME'] %>
   password: <%= ENV['OLUBALANCE_DATABASE_PASSWORD'] %>
-  url: <%= ENV['OLUBALANCE_DATABASE_URL'] %>
