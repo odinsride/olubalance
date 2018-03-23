@@ -29,10 +29,10 @@ development:
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  username: <%= Rails.application.secrets[:database][:username] %>
+  username: <%= ENV['OLUBALANCE_DATABASE_USERNAME'] %>
 
   # The password associated with the postgres role (username).
-  password: <%= Rails.application.secrets[:database][:password] %>
+  password: <%= ENV['OLUBALANCE_DATABASE_PASSWORD'] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -58,8 +58,8 @@ development:
 test:
   <<: *default
   database: olubalance_test
-  username: <%= Rails.application.secrets[:database][:username] %>
-  password: <%= Rails.application.secrets[:database][:password] %>
+  username: <%= ENV['OLUBALANCE_DATABASE_USERNAME'] %>
+  password: <%= ENV['OLUBALANCE_DATABASE_PASSWORD'] %>
   host: localhost
   
 # As with config/secrets.yml, you never want to store sensitive information,
