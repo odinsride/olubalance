@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
 
 	# Index action to render all transactions
 	def index
-		@transactions = @account.transactions
+		@transactions = @account.transactions.order(:id)
 
 		respond_to do |format|
     		format.html # index.html.erb
@@ -75,7 +75,7 @@ class TransactionsController < ApplicationController
 	private
 
 	def transaction_params
-		params.require(:transaction).permit(:trx_date, :description, :amount, :trx_type)
+		params.require(:transaction).permit(:trx_date, :description, :amount, :trx_type, :memo)
 	end
 
 	def find_account

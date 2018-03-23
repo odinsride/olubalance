@@ -24,7 +24,15 @@
 				</tr>
 				<tr class="row m-0">
 				    <td class="col-sm-6 text-center font-weight-bold">Amount</td>
-					<td class="col-sm-6 text-center"><%= number_to_currency(@transaction.amount) %></td>
+					<td class="col-sm-6 text-center"><%= number_to_currency(@transaction.amount.abs) %></td>
+				</tr>
+				<tr class="row m-0">
+				    <td class="col-sm-6 text-center font-weight-bold">Transaction Type</td>
+					<td class="col-sm-6 text-center"><%= if @transaction.amount >= 0 then 'Credit' else 'Debit' end %></td>
+				</tr>
+				<tr class="row m-0">
+				    <td class="col-sm-6 text-center font-weight-bold">Memo</td>
+					<td class="col-sm-6 text-center"><%= @transaction.memo %></td>
 				</tr>
 			</tbody>
 		</table>

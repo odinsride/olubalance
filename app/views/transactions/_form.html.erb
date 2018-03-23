@@ -1,9 +1,9 @@
 <%= simple_form_for ([@transaction.account, @transaction]) do |f| %>
 	<% if @transaction.errors.any? %>
 		<div id="error explanation">
-			<h2>
+			<h4>
 				<%= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:" %>
-			</h2>
+			</h4>
 			<ul>
 				<% @transaction.errors.full_messages.each do |msg| %>
 					<li>
@@ -15,7 +15,7 @@
 	<% end %>
 
 	<div class="form-group">
-		<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], class: "form-control", :label => 'Transaction Type' %>
+		<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], class: "form-control", :label => 'Transaction Type', :checked => @transaction.transaction_type %>
 	</div>
 	
 	<div class="form-group">
@@ -27,7 +27,11 @@
 	</div>
 
 	<div class="form-group">
-		<%= f.input :amount, class: "form-control" %>
+		<%= f.input :amount, class: "form-control", :input_html => { :value => number_with_precision(f.object.amount.abs, precision: 2) } %>
+	</div>
+
+	<div class="form-group">
+		<%= f.input :memo, class: "form-control" %>
 	</div>
 
 	<div class="form-group">
