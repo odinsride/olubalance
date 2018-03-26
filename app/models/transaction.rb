@@ -9,16 +9,26 @@ class Transaction < ApplicationRecord
 	validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
 	validates :memo, length: { maximum: 500 }
 
+	before_save :convert_amount, :set_running_balance
 	after_create :update_account_balance_new
 	after_update :update_account_balance_edit
 	after_destroy :update_account_balance_destroy
 
-
-
-	before_save do
-		if self.trx_type == "debit"
-			self.amount = -self.amount.abs
+	# Determine the transaction_type for existing records based on amount
+	def transaction_type
+		if !new_record?
+			if self.amount >= 0
+				return ['Credit', 'credit']
+			else
+				return ['Debit', 'debit']
+			end
+		else
+			return ['Debit', 'debit']
 		end
+	end
+
+private
+		
 
 =begin
 		@account = Account.find(account_id)
@@ -29,6 +39,22 @@ class Transaction < ApplicationRecord
 		end
 =end
 
+	def set_running_balance
+		previous_balance = previous_transaction_for_user.try(:running_balance) || 0
+		self.running_balance = previous_balance + amount
+	end
+
+	def previous_transaction_for_user
+		scope = Transaction.where(account: account).order('id desc')
+		scope = scope.where('id < ?', id) if persisted?
+
+		scope.last
+	end
+
+	def convert_amount
+		if self.trx_type == "debit"
+			self.amount = -self.amount.abs
+		end
 	end
 
 	def update_account_balance_new
@@ -48,15 +74,4 @@ class Transaction < ApplicationRecord
 		@account.update_attributes(current_balance: @account.current_balance - amount_was)
 	end
 
-	def transaction_type
-		if !new_record?
-			if self.amount >= 0
-				return ['Credit', 'credit']
-			else
-				return ['Debit', 'debit']
-			end
-		else
-			return ['Debit', 'debit']
-		end
-	end
 end
