@@ -27,7 +27,11 @@
 	</div>
 
 	<div class="form-group">
-		<%= f.input :amount, class: "form-control", :input_html => { :value => number_with_precision(f.object.amount.abs, precision: 2) } %>
+		<% if f.object.new_record? %>
+			<%= f.input :amount, class: "form-control"  %>
+		<% else %>
+			<%= f.input :amount, class: "form-control", :input_html => { :value => number_with_precision(f.object.amount.abs, precision: 2) } %>
+		<% end %>
 	</div>
 
 	<div class="form-group">
