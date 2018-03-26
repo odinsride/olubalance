@@ -2,7 +2,7 @@ class Transaction < ApplicationRecord
 	belongs_to :account
 	attr_accessor :trx_type
 
-	default_scope { order('trx_date, id DESC') }
+	#default_scope { order('trx_date, id DESC') }
 	validates_presence_of :trx_type, :message => "Please select debit or credit"
 	validates :trx_date, presence: true
 	validates :description, presence: true, length: { maximum: 150 }
@@ -13,6 +13,8 @@ class Transaction < ApplicationRecord
 	after_create :update_account_balance_new
 	after_update :update_account_balance_edit
 	after_destroy :update_account_balance_destroy
+
+	scope :desc, -> { order('trx_date, id DESC') }
 
 	# Determine the transaction_type for existing records based on amount
 	def transaction_type
@@ -45,7 +47,7 @@ private
 	end
 
 	def previous_transaction_for_user
-		scope = Transaction.where(account: account).order('id desc')
+		scope = Transaction.where(account: account).order(:id)
 		scope = scope.where('id < ?', id) if persisted?
 
 		scope.last
