@@ -1,30 +1,27 @@
 <h1>My Accounts</h1>
-<br />
 <div class="row">
   <div class="col-sm-12">
-    <%= link_to "Add Account", new_account_path, class: "btn btn-primary" %>
+    <%= link_to "Add Account", new_account_path, class: "btn btn-success float-right" %>
   </div>  
 </div>
 
-<div class="row mt-2">
+<div class="row mt-3">
   <div class="col-sm-12">
-    <% @accounts.each_slice(4) do |accounts| %>
-      <div class="row">
-      <% accounts.each do |account| %>
-        <div class="col-sm-3">
-          <div class="card">
-            <h5 class="card-header"><%= account.name %></h5>
-            <div class="card-body">
-              Current Balance: <%= number_to_currency(account.current_balance) %>
-            </div>
-            
-            <%= link_to 'Show', account %>
-            <%= link_to 'Edit', edit_account_path(account) %>
-            <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </div>
+    <div class="card">
+        <div class="card-header text-muted">
+          <strong>Account List</strong>
+        </div>
+    <div class="list-group">
+    <% @accounts.each do |account| %>
+      <%= link_to(account_transactions_path(account.id), class: "list-group-item list-group-item-action flex-column align-items-center") do %>
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <span><h2><strong><%= account.name %></strong></h2>
+                    <small>Account last updated on <%= account.updated_at.strftime('%b %d, %Y @ %I:%M %p') %></small></span>
+          <span><strong><span class="text-muted">Current Balance</span></strong><h2><span class="badge badge-secondary"><%= number_to_currency(account.current_balance) %></span></h2></span>
         </div>
       <% end %>
-      </div>
     <% end %>
+    </div>
+  </div>
   </div>
 </div>
