@@ -20,7 +20,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @transactions.desc.each do |transaction| %>
+					<% @transactions.each do |transaction| %>
 						<tr class="row m-0">
 							<td class="col-sm-1 text-center"><%= link_to transaction.id, [transaction.account, transaction] %></td>
 							<td class="col-sm-1 text-center"><%= transaction.trx_date.strftime('%m/%d/%Y') %></td>

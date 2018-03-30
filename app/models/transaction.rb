@@ -18,7 +18,8 @@ class Transaction < ApplicationRecord
 	after_update :update_account_balance_edit
 	after_destroy :update_account_balance_destroy
 
-	scope :desc, -> { order('trx_date, id DESC') }
+	scope :with_balance, -> { includes(:transaction_balance).references(:transaction_balance) }
+	scope :desc, -> { order('trx_date DESC, id DESC') }
 
 	# Determine the transaction_type for existing records based on amount
 	def transaction_type
