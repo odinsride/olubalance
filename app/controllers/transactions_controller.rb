@@ -28,7 +28,7 @@ class TransactionsController < ApplicationController
 
 		respond_to do |format|
 			if @transaction.save
-				format.html { redirect_to([@transaction.account, @transaction], :notice => 'Transaction was successfully created.') }
+				format.html { redirect_to account_transactions_path, :notice => 'Transaction was successfully created.' }
         		format.xml  { render :xml => @transaction, :status => :created, :location => [@transaction.account, @transaction] }
 			else
 				format.html { render :action => "new" }
@@ -45,7 +45,7 @@ class TransactionsController < ApplicationController
 	def update
 	    respond_to do |format|
 			if @transaction.update_attributes(transaction_params)
-			  	format.html { redirect_to([@transaction.account, @transaction], :notice => 'Transaction was successfully updated.') }
+			  	format.html { redirect_to account_transactions_path, :notice => 'Transaction was successfully updated.' }
         		format.xml  { head :ok }
 			else
 			  	format.html { render :action => "edit" }
