@@ -33,6 +33,12 @@
 					<% end %>
 				</tbody>
 			</table>
-			<%= will_paginate @transactions %>
+			<div class="text-center">
+				<%= will_paginate @transactions %>
+			</div>
+			<div class="text-center">
+				<%= link_to 'Edit Account', edit_account_path(@account), class: "btn btn-secondary btn-sm" %>
+				<%= link_to 'Delete Account', @account, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: 'Are you sure you want to delete the account?' } %>
+			</div>
 		</div>
 	</div>

@@ -15,11 +15,11 @@
 	<% end %>
 
 	<div class="form-group">
-		<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], class: "form-control", :label => 'Transaction Type', :checked => @transaction.transaction_type %>
+		<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], class: "form-control", :label => 'Transaction Type', :item_wrapper_tag => :div, :checked => @transaction.transaction_type %>
 	</div>
 	
 	<div class="form-group">
-		<%= f.input :trx_date, as: :date, html5: true, class: "form-control" %>
+		<%= f.input :trx_date, as: :date, html5: true, :label => 'Transaction Date', class: "form-control" %>
 	</div>
 
 	<div class="form-group">
@@ -39,6 +39,6 @@
 	</div>
 
 	<div class="form-group">
-		<%= f.button :submit %>
+		<%= f.button :submit, class: "btn-primary" %>
 	</div>
 <% end %>
