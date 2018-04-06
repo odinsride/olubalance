@@ -27,6 +27,11 @@
           </div>
         </li>
       <% end %>
+      <li class="nav-item">
+        <%= link_to static_pages_releasenotes_path, class: "nav-link" do %>
+          Release Notes <span class="sr-only">(current)</span>
+        <% end %>
+      </li>
     </ul>
     <span class="navbar-text pull-right">
     <% if user_signed_in? %>

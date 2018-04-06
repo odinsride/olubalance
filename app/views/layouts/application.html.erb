@@ -10,19 +10,21 @@
 
   <body>
 
-    <%= render "layouts/navbar" %>
+    <% if user_signed_in? %>
+      <%= render "layouts/navbar" %>
 
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
     <% end %>
 
     <div class="container mt-5">
       <div class="row">
         <div class="col-sm-12">
-          <%= yield %>
+            <%= yield %>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :find_account
 	before_action :find_transaction, only: [:edit, :update, :show, :destroy]
 

@@ -1,0 +1,23 @@
+<style type="text/css">
+   body { background: #222222 !important; color: white;} /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>
+<div class="container text-center">
+	<h1><strong>olubalance</strong></h1>
+	<h3 style="color: #a4a4a4">olubalance is a simple application for keeping track of your personal fincances.</h3><br />
+	<h5>Follow us on GitHub!<br />
+	<a class="github-button" href="https://github.com/odinsride/olubalance/subscription" data-icon="octicon-eye" aria-label="Watch odinsride/olubalance on GitHub">Watch olubalance</a></h5>
+	<div class="row mt-5">
+		<div class="col-sm-6">
+			<%= image_tag "olubalance_accounts.png", style: "max-height: 263px; box-shadow: 2px 4px 5px grey" %>
+		</div>
+		<div class="col-sm-6">
+			<%= image_tag "olubalance_transactions.png", style: "max-width: 470px; box-shadow: 2px 4px 5px grey" %>
+		</div>
+	</div>
+	<div class="mt-5">
+		<%= link_to "New User?", new_user_registration_path, class: "btn btn-warning" %>
+		<%= link_to "Login", new_user_session_path, class: "btn btn-success" %>
+	</div>
+</div>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
