@@ -34,6 +34,10 @@
 				    <td class="col-sm-6 text-center font-weight-bold">Memo</td>
 					<td class="col-sm-6 text-center"><%= @transaction.memo %></td>
 				</tr>
+				<tr class="row m-0">
+				    <td class="col-sm-6 text-center font-weight-bold">Attachment</td>
+					<td class="col-sm-6 text-center"><%= image_tag @transaction.attachment.url(:medium) %></td>
+				</tr>
 			</tbody>
 		</table>
 		<small class="text-muted">Transaction created on <%= @transaction.created_at.strftime('%b %d, %Y @ %I:%M %p') %></small>
