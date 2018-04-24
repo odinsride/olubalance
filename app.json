@@ -1,0 +1,11 @@
+{
+  "name": "olubalance",
+  "description": "olubalance",
+  "keywords": [
+  ],
+  "scripts": {
+    "dokku": {
+      "postdeploy": "bundle exec rake db:migrate"
+    }
+  }
+}
