@@ -25,7 +25,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem "paperclip", "~> 6.0.0"
-
+gem "aws-sdk"
 gem 'figaro'
 
 # Use CoffeeScript for .coffee assets and views
