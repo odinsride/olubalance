@@ -34,6 +34,23 @@
 				    <td class="col-sm-6 text-center font-weight-bold">Memo</td>
 					<td class="col-sm-6 text-center"><%= @transaction.memo %></td>
 				</tr>
+				<tr class="row m-0">
+				    <td class="col-sm-6 text-center font-weight-bold">Attachment</td>
+					<td class="col-sm-6 text-center">
+						<table class="table">
+							<tbody>
+								<tr class="row m-0">
+									<td class="col-sm-6 text-center font-weight-bold">
+										<%= link_to @transaction.attachment_file_name, @transaction.attachment.url, :class => 'text-secondary', :target => '_blank' %>
+									</td>
+									<td class="col-sm-6 text-center">
+										<%= link_to image_tag(@transaction.attachment.url(:thumb)), @transaction.attachment.url, :target => '_blank' %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<small class="text-muted">Transaction created on <%= @transaction.created_at.strftime('%b %d, %Y @ %I:%M %p') %></small>

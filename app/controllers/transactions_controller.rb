@@ -76,7 +76,7 @@ class TransactionsController < ApplicationController
 	private
 
 	def transaction_params
-		params.require(:transaction).permit(:trx_date, :description, :amount, :trx_type, :memo)
+		params.require(:transaction).permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :attachment_file_name)
 	end
 
 	def find_account
