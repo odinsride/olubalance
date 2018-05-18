@@ -32,6 +32,9 @@
           Release Notes <span class="sr-only">(current)</span>
         <% end %>
       </li>
+      <% if !Rails.env.production? %>
+        <h4><span class="nav-item badge badge-danger" style="margin-top: 5px; margin-left: 40px"><%= Rails.env.upcase %></span></h4>
+      <% end %>
     </ul>
     <span class="navbar-text pull-right">
     <% if user_signed_in? %>

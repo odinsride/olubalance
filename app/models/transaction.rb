@@ -2,6 +2,37 @@ class Transaction < ApplicationRecord
 	belongs_to :account
 	has_one :transaction_balance
 
+	#has_attached_file :attachment, styles: { large: "1000x1000>", medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+	#validates_attachment_content_type :attachment, content_type: ['image/jpeg', 'image/png', 'image/gif', 'application/pdf']
+
+	has_attached_file :attachment,
+	    # In order to determine the styles of the image we want to save
+	    # e.g. a small style copy of the image, plus a large style copy
+	    # of the image, call the check_file_type method
+	    styles: { large: ["1000x1000>", :png], medium: ["300x300>", :png], thumb: ["100x100>", :png] }
+
+	# Validate that we accept the type of file the user is uploading
+	# by explicitly listing the mimetypes we are willing to accept
+	validates_attachment_content_type :attachment,
+		content_type: [
+		  "image/jpg", 
+		  "image/jpeg", 
+		  "image/png", 
+		  "image/gif",
+		  "application/pdf",
+
+		  "file/txt",
+		  "text/plain",
+
+		  "application/doc",
+		  "application/msword", 
+
+		  "application/vnd.ms-excel",     
+		  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+		  ],
+		message: "Sorry! We do not accept the attached file type"
+
+	# Link running_balance to view
 	delegate :running_balance, to: :transaction_balance
 	
 	attr_accessor :trx_type
