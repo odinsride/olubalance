@@ -27,6 +27,8 @@ gem 'will_paginate', '~> 3.1.0'
 gem "paperclip", "~> 6.0.0"
 gem "aws-sdk"
 gem 'figaro'
+gem 'materialize-sass', '~> 1.0.0.rc1'
+gem 'material_icons'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

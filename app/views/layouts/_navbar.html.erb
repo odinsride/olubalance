@@ -1,50 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <h2><a class="navbar-brand" href="#">.olubalance</a></h2>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="cyan darken-4 z-depth-2" role="navigation">
+  <div class="nav-wrapper container">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <%= link_to root_path, class: "nav-link" do %>
-          Home <span class="sr-only">(current)</span>
-        <% end %>
-      </li>
-      <% if user_signed_in? %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            My Accounts
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% @navbar_accounts.each do |account| %>
-              <% if account.persisted? %>
-                <%= link_to account.name, account_transactions_path(account.id), class: "dropdown-item" %>
-              <% end %>
-            <% end %>
-            <div class="dropdown-divider"></div>
-            <%= link_to "+ Add Account", new_account_path, class: "dropdown-item" %>
-          </div>
-        </li>
-      <% end %>
-      <li class="nav-item">
-        <%= link_to static_pages_releasenotes_path, class: "nav-link" do %>
-          Release Notes <span class="sr-only">(current)</span>
-        <% end %>
-      </li>
-      <% if !Rails.env.production? %>
-        <h4><span class="nav-item badge badge-danger" style="margin-top: 5px; margin-left: 40px"><%= Rails.env.upcase %></span></h4>
-      <% end %>
-    </ul>
-    <span class="navbar-text pull-right">
-    <% if user_signed_in? %>
-      Logged in as <strong><%= current_user.email %></strong>.
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-      <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+    <%= link_to root_path, id: "logo-container", class: "brand-logo" do %>
+      <i class="material-icons">opacity</i>olubalance
     <% end %>
-    </span>
+    
+    <ul class="right hide-on-med-and-down">
+      <li>
+        <%= link_to root_path do %>
+          Home
+        <% end %>
+      </li>
+    </ul>
+
+    <ul id="nav-mobile" class="sidenav">
+      <li>
+        <%= link_to root_path do %>
+          Home
+        <% end %>
+      </li>
+    </ul>
+
+    <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
   </div>
 </nav>

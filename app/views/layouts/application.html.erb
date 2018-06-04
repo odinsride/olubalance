@@ -1,32 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
     <title>olubalance</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
 
-    <% if user_signed_in? %>
-      <%= render "layouts/navbar" %>
+    <%= render "layouts/navbar" %>
 
-      <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% end %>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
     <% end %>
-
-    <div class="container mt-5">
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    
+    <div class="container">
       <div class="row">
-        <div class="col-sm-12">
-            <%= yield %>
+        <div class="col sm12">
+          <%= yield %>
         </div>
       </div>
     </div>
+
   </body>
+
 </html>

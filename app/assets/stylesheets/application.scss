@@ -12,7 +12,14 @@
  *
  */
 
-@import "bootstrap";
+/* @import "bootstrap"; */
+
+
+@import "materialize/components/color-variables";
+$primary-color: color("cyan", "darken-4") !default;
+$secondary-color: color("teal", "lighten-2") !default;
+@import "materialize";
+@import "material_icons";
 
 .control-label {
     margin-right: 10px;
