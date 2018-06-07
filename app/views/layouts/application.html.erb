@@ -14,20 +14,13 @@
 
     <%= render "layouts/navbar" %>
 
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    
     <div class="container">
-      <div class="row">
-        <div class="col sm12">
           <%= yield %>
-        </div>
-      </div>
     </div>
+
+    <% flash.each do |message_type, message| %>
+      <%= javascript_tag "Materialize.toast('#{message}', 4000)" %>
+    <% end %>
 
   </body>
 
