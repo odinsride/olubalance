@@ -27,5 +27,13 @@ $secondary-color: color("teal", "lighten-2") !default;
 
 
 .text-muted { 
-    color: #8c8c8c;
+    color: #494949;
+}
+
+.ob-linked-card {
+    color: #494949;
+}
+
+.ob-shadow {
+    text-shadow: 1px 1px 2px #ccc;
 }
