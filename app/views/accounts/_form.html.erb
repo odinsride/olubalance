@@ -1,13 +1,18 @@
 <div class="row">
-<%= simple_form_for(@account) do |f| %>
-  <%= f.error_notification %>
+    <%= simple_form_for(@account) do |f| %>
+      <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :starting_balance %>
-  </div>
+      <div class="row">
+        <%= f.input :name, wrapper_html: { class: 'col s12 l4' } %>
+      </div>
+      <div class="row">
+        <%= f.input :starting_balance, wrapper_html: { class: 'col s12 l4' } %>
+      </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
-  </div>
-<% end %>
+      <div class="row">
+        <%= link_to 'Cancel', accounts_path, class: 'btn' %>
+        <%= f.button :submit %>
+      </div>
+
+    <% end %>
+</div>
