@@ -1,12 +1,32 @@
 <div class="row">
     <%= simple_form_for(@account) do |f| %>
-      <%= f.error_notification %>
+  <% if @account.errors.any? %>
+    <div id="error explanation">
+      <h4>
+        <%= "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:" %>
+      </h4>
+      <ul>
+        <% @account.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
       <div class="row">
-        <%= f.input :name, wrapper_html: { class: 'col s12 l4' } %>
+        <div class="input-field col s12 l4">
+          <%= f.label :name, class: 'active' %>
+          <%= f.text_field :name, placeholder: "Enter an account name" %>
+        </div>
       </div>
+
       <div class="row">
-        <%= f.input :starting_balance, wrapper_html: { class: 'col s12 l4' } %>
+        <div class="input-field col s12 l4">
+          <%= f.label :starting_balance, class: 'active' %>
+          <%= f.number_field :starting_balance, placeholder: "Enter the starting balance" %>
+        </div>
       </div>
 
       <div class="row">
