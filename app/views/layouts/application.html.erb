@@ -19,7 +19,8 @@
     </div>
 
     <% flash.each do |message_type, message| %>
-      <%= javascript_tag "Materialize.toast('#{message}', 4000)" %>
+      <% puts #{message} %>
+      <%= javascript_tag "M.toast('#{message}', 4000)" %>
     <% end %>
 
   </body>

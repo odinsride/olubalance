@@ -1,27 +1,29 @@
-<nav class="cyan darken-4 z-depth-2" role="navigation">
-  <div class="nav-wrapper container">
+<div class="navbar-fixed">
+  <nav class="cyan darken-4 z-depth-2" role="navigation">
+    <div class="nav-wrapper container">
 
-    <%= link_to root_path, id: "logo-container", class: "brand-logo" do %>
-      <i class="material-icons">opacity</i>olubalance
-    <% end %>
-    
-    <ul class="right hide-on-med-and-down">
-      <li>
-        <%= link_to root_path do %>
-          Home
-        <% end %>
-      </li>
-    </ul>
+      <%= link_to root_path, id: "logo-container", class: "brand-logo" do %>
+        <i class="material-icons">opacity</i>olubalance
+      <% end %>
+      
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <%= link_to root_path do %>
+            Home
+          <% end %>
+        </li>
+      </ul>
 
-    <ul id="nav-mobile" class="sidenav">
-      <li>
-        <%= link_to root_path do %>
-          Home
-        <% end %>
-      </li>
-    </ul>
+      <ul id="nav-mobile" class="sidenav">
+        <li>
+          <%= link_to root_path do %>
+            Home
+          <% end %>
+        </li>
+      </ul>
 
-    <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
-  </div>
-</nav>
+    </div>
+  </nav>
+</div>

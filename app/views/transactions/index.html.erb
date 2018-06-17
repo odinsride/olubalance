@@ -1,11 +1,57 @@
-	<h2><%= @account.name %></h2>
-	<h5>Balance: <%= number_to_currency(@account.current_balance) %></h5>
-	<br />
-	<div class="row">
-		<div class="col-sm-12 text-right">
-			<%= link_to "Add Transaction", new_account_transaction_path, class: "btn btn-primary" %>
-		</div>	
+<div class="row">
+	<div class="col s12">
+	    <h4 class="cyan-text text-darken-3 ob-shadow left"><strong>Balance</strong></h4>
+
+		<%= link_to new_account_transaction_path, class: "btn waves-effect waves-light right" do %>
+	    	<i class="material-icons left">add</i>Transaction
+	    <% end %>
 	</div>
+
+	<div class="col s12">
+	    <h5 class="cyan-text text-darken-3 ob-shadow left"><strong><%= @account.name %></strong></h5>
+    	<h5 class="cyan-text text-darken-3 ob-shadow right">
+    		<strong><span class="hide-on-med-and-down">Balance: </span><%= number_to_currency(@account.current_balance) %></strong>
+    	</h5>
+	</div>
+</div>
+
+<div class="row hide-on-large-only">
+	<div class="col s12">
+		<ul class="collection">
+			<li class="collection-item teal lighten-5 teal-text text-darken-4"><strong>Transactions</strong></li>
+			<% @transactions.each do |transaction| %>
+				<%= link_to [transaction.account, transaction], class: "collection-item" do %>
+					<div class="row ob-no-bottom">
+						<div class="col s4 text-muted">
+							<small><%= transaction.trx_date.strftime('%m/%d/%y') %></small>
+						</div>
+						<div class="col s8 right-align text-muted">
+							<small>Balance <%= number_to_currency(transaction.running_balance) %></small>
+						</div>
+					</div>
+					<div class="row ob-no-bottom">
+						<div class="col s8">
+							<%= transaction.description %>
+							<% if transaction.attachment.exists? then %>
+								<i class="tiny text-muted material-icons">attach_file</i>
+							<% end %>
+						</div>
+						<div class="col s4 right-align">
+							<% if transaction.amount >= 0 then %>
+								<span class="green-text"><%= number_to_currency(transaction.amount) %></span>
+							<% else %>
+								<span class="red-text"><%= number_to_currency(transaction.amount.abs) %></span>
+							<% end %>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+</div>
+
+
+
 	<div class="row mt-2">
 		<div class="col-sm-12">
 			<table class="table table-sm table-hover">

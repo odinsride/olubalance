@@ -2,7 +2,7 @@
   <div class="col s12">
     <h5 class="cyan-text text-darken-3 ob-shadow left"><strong>Accounts</strong></h5>
     <%= link_to new_account_path, class: "btn waves-effect waves-light right" do %>
-      <i class="material-icons left">add</i>New Account
+      <i class="material-icons left">add</i>Account
     <% end %>
   </div>
 </div>
@@ -25,27 +25,3 @@
     </div>
     <% end %>
 </div>
-
-<div class="fixed-action-btn">
-
-</div>
-      
-<!--
-
-        <div class="card-header text-muted">
-          <strong>Account List</strong>
-        </div>
-    <div class="list-group">
-    <% @accounts.each do |account| %>
-      <%= link_to(account_transactions_path(account.id), class: "list-group-item list-group-item-action flex-column align-items-center") do %>
-        <div class="d-flex w-100 justify-content-between align-items-center">
-          <span><h2><strong><%= account.name %></strong></h2>
-                    <small>Account last updated on <%= account.updated_at.strftime('%b %d, %Y @ %I:%M %p') %></small></span>
-          <span><strong><span class="text-muted">Current Balance</span></strong><h2><span class="badge badge-secondary"><%= number_to_currency(account.current_balance) %></span></h2></span>
-        </div>
-      <% end %>
-    <% end %>
-    </div>
-  </div>
-  </div>
-</div> -->

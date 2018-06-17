@@ -19,18 +19,19 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'jquery-turbolinks'
 gem 'simple_form'
-gem 'bootstrap', '~> 4.0.0'
+#gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
+gem 'rails-ujs'
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem "paperclip", "~> 6.0.0"
 gem "aws-sdk"
 gem 'figaro'
-gem 'materialize-sass', '~> 1.0.0.rc1'
+gem 'materialize-sass', '~> 1.0.0-rc1'
 gem 'material_icons'
-gem 'materialize-form'
+#gem 'materialize-form'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
