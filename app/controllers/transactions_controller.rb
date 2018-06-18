@@ -5,7 +5,8 @@ class TransactionsController < ApplicationController
 
 	# Index action to render all transactions
 	def index
-		@transactions = @account.transactions.with_balance.desc.paginate(page: params[:page], per_page: 25)
+		@transactions = @account.transactions.with_balance.desc.paginate(page: params[:page], per_page: 12)
+		@custom_paginate_renderer = custom_paginate_renderer
 
 		respond_to do |format|
     		format.html # index.html.erb

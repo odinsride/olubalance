@@ -31,6 +31,7 @@ gem "aws-sdk"
 gem 'figaro'
 gem 'materialize-sass', '~> 1.0.0-rc1'
 gem 'material_icons'
+
 #gem 'materialize-form'
 
 # Use CoffeeScript for .coffee assets and views

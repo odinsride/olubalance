@@ -31,3 +31,7 @@ $(document).ready(function() {
 $(document).ajaxSuccess(function() {
   window.materializeForm.init()
 });
+
+$(document).ready(function(){
+  $('.tooltipped').tooltip();
+});

@@ -8,20 +8,38 @@
 </div>
 
 <div class="row">
-    <% @accounts.each do |account| %>
-      <div class="col s12 l4">
-      <%= link_to(account_transactions_path(account.id), class: "ob-linked-card") do %>
-        <div class="card darken-1 hoverable">
-          <div class="card-content">
-            <span class="card-title cyan-text text-darken-3 ob-shadow"><strong><%= account.name %></strong></span>
-            <small>Account last updated on <%= account.updated_at.strftime('%b %d, %Y @ %I:%M %p') %></small>
+  <% @accounts.each do |account| %>
+    <div class="col s12 l4">
+      <div class="card darken-1 hoverable">
+        <div class="card-content">
+          <div class="row ob-no-bottom valign-wrapper">
+            <%= link_to(account_transactions_path(account.id), class: "ob-linked-card") do %>
+              <div class="card-title col s12 teal-text text-darken-2 ob-shadow"><strong><%= account.name %></strong></div>
+            <% end %>
+
+            <div class="col s6 right-align">
+              <%= link_to edit_account_path(account), class: "tooltipped", :'data-position' => "top", :'data-tooltip' => "Edit Account" do %>
+                <i class="ob-icon-small yellow-text text-accent-1 ob-shadow material-icons">edit</i>
+              <% end %>
+              <%= link_to account, method: :delete, data: { confirm: 'Are you sure you want to delete the account?' }, class: "tooltipped", :'data-position' => "top", :'data-tooltip' => "Delete Account" do %>
+                <i class="ob-icon-small red-text text-accent-1 ob-shadow material-icons">delete</i>
+              <% end %>
+            </div>
           </div>
-          <div class="card-action">
-            <strong>Current Balance</strong><span class="right cyan-text text-darken-4 ob-shadow" style="" data-badge-caption=""><strong><%= number_to_currency(account.current_balance) %></strong></span>
+
+          <div class="row ob-no-bottom">
+            <div class="col 12"><small>Account last updated on <%= account.updated_at.strftime('%b %d, %Y @ %I:%M %p') %></small></div>
           </div>
 
         </div>
-      <% end %>
+
+        <div class="card-action">
+          <div class="row ob-no-bottom">
+            <div class="col s7 valign-wrapper"><i class="tiny material-icons teal-text text-darken-2">account_balance</i>&nbsp;<strong>Balance</strong></div>
+            <div class="col s5 teal-text text-darken-2 ob-shadow right-align" style="" data-badge-caption=""><strong><%= number_to_currency(account.current_balance) %></strong></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <% end %>
+  <% end %>
 </div>

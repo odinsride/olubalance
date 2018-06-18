@@ -15,13 +15,37 @@
 	</div>
 </div>
 
-<div class="row hide-on-large-only">
+<div class="row">
 	<div class="col s12">
 		<ul class="collection">
-			<li class="collection-item teal lighten-5 teal-text text-darken-4"><strong>Transactions</strong></li>
+			<!-- mobile header -->
+			<li class="collection-item teal lighten-5 teal-text text-darken-4 hide-on-large-only"><strong>Transactions</strong></li>
+			
+			<!-- desktop header -->
+			<li class="collection-item teal lighten-5 teal-text text-darken-4 hide-on-med-and-down">
+				<div class="row ob-no-bottom">
+					<div class="col s1 center-align">
+						<strong>Date</strong>
+					</div>
+					<div class="col s8 valign-wrapper">
+						<strong>Description</strong>
+					</div>
+					<div class="col s1 right-align">
+						<strong>Credit</strong>
+					</div>
+					<div class="col s1 right-align">
+						<strong>Debit</strong>
+					</div>
+					<div class="col s1 right-align">
+						<strong>Balance</strong>
+					</div>
+				</div>
+			</li>
+
 			<% @transactions.each do |transaction| %>
 				<%= link_to [transaction.account, transaction], class: "collection-item" do %>
-					<div class="row ob-no-bottom">
+					<!-- mobile view -->
+					<div class="row ob-no-bottom hide-on-large-only">
 						<div class="col s4 text-muted">
 							<small><%= transaction.trx_date.strftime('%m/%d/%y') %></small>
 						</div>
@@ -29,11 +53,11 @@
 							<small>Balance <%= number_to_currency(transaction.running_balance) %></small>
 						</div>
 					</div>
-					<div class="row ob-no-bottom">
-						<div class="col s8">
-							<%= transaction.description %>
+					<div class="row ob-no-bottom teal-text text-darken-2 hide-on-large-only">
+						<div class="col s8 valign-wrapper">
+							<strong><%= transaction.description %></strong>
 							<% if transaction.attachment.exists? then %>
-								<i class="tiny text-muted material-icons">attach_file</i>
+								<i class="tiny text-muted material-icons tooltipped" data-position="top" data-tooltip="Transaction has attachment">attach_file</i>
 							<% end %>
 						</div>
 						<div class="col s4 right-align">
@@ -44,47 +68,44 @@
 							<% end %>
 						</div>
 					</div>
+
+					<!-- desktop view -->
+					<div class="row ob-no-bottom hide-on-med-and-down valign-wrapper">
+						<div class="col s1 text-muted ob-right-border">
+							<%= transaction.trx_date.strftime('%m/%d/%Y') %>
+						</div>
+						<div class="col s8 valign-wrapper teal-text text-darken-2 ob-right-border">
+							<strong><%= transaction.description %></strong>
+							<% if transaction.attachment.exists? then %>
+								<i class="tiny text-muted material-icons tooltipped" data-position="top" data-tooltip="Transaction has attachment">attach_file</i>
+							<% end %>
+						</div>
+						<div class="col s1 right-align ob-right-border">
+							<% if transaction.amount >= 0 then %>
+								<span class="green-text"><%= number_to_currency(transaction.amount) %></span>
+							<% else %>
+								&nbsp;
+							<% end %>
+						</div>
+						<div class="col s1 right-align ob-right-border">
+							<% if transaction.amount < 0 then %>
+								<span class="red-text"><%= number_to_currency(transaction.amount.abs) %></span>
+							<% else %>
+								&nbsp;
+							<% end %>
+						</div>
+						<div class="col s1 right-align text-muted">
+							<%= number_to_currency(transaction.running_balance) %>
+						</div>
+					</div>
 				<% end %>
 			<% end %>
 		</ul>
 	</div>
 </div>
 
-
-
-	<div class="row mt-2">
-		<div class="col-sm-12">
-			<table class="table table-sm table-hover">
-				<thead>
-					<tr class="row m-0">
-						<th class="col-sm-1 text-center">#</th>
-						<th class="col-sm-2 text-center">Date</th>
-						<th class="col-sm-3">Description</th>
-						<th class="col-sm-2 text-right">Credit</th>
-						<th class="col-sm-2 text-right">Debit</th>
-						<th class="col-sm-2 text-right">Balance</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% @transactions.each do |transaction| %>
-						<tr class="row m-0">
-							<td class="col-sm-1 text-center"><%= link_to transaction.id, [transaction.account, transaction] %></td>
-							<td class="col-sm-2 text-center"><%= transaction.trx_date.strftime('%m/%d/%Y') %></td>
-							<td class="col-sm-3"><%= transaction.description %></td>
-							<td class="col-sm-2 text-right"><%= if transaction.amount >= 0 then number_to_currency(transaction.amount) end %></td>
-							<td class="col-sm-2 text-right"><%= if transaction.amount < 0 then "(" + number_to_currency(transaction.amount.abs) + ")" end %></td>
-							<td class="col-sm-2 text-right"><%= number_to_currency(transaction.running_balance) %></td>
-
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
-			<div class="text-center">
-				<%= will_paginate @transactions %>
-			</div>
-			<div class="text-center">
-				<%= link_to 'Edit Account', edit_account_path(@account), class: "btn btn-secondary btn-sm" %>
-				<%= link_to 'Delete Account', @account, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: 'Are you sure you want to delete the account?' } %>
-			</div>
-		</div>
+<div class="row">
+	<div class="col s12">
+		<%= will_paginate @transactions, renderer: @custom_paginate_renderer %>
 	</div>
+</div>

@@ -17,6 +17,7 @@
 
       <div class="row">
         <div class="input-field col s12 l4">
+          <i class="material-icons prefix teal-text text-darken-2">account_balance</i>
           <%= f.label :name, class: 'active' %>
           <%= f.text_field :name, placeholder: "Enter an account name" %>
         </div>
@@ -24,14 +25,19 @@
 
       <div class="row">
         <div class="input-field col s12 l4">
+          <i class="material-icons prefix teal-text text-darken-2">attach_money</i>
           <%= f.label :starting_balance, class: 'active' %>
           <%= f.number_field :starting_balance, placeholder: "Enter the starting balance" %>
         </div>
       </div>
 
-      <div class="row">
-        <%= link_to 'Cancel', accounts_path, class: 'btn' %>
-        <%= f.button :submit %>
+      <div class="row center-align">
+        <div class="col s12 l4">
+        <%= link_to 'Cancel', accounts_path, class: 'btn waves-effect waves-light' %>
+        <%= button_tag(type: 'submit', class: 'btn waves-effect waves-light') do %>
+          Create Account<i class="material-icons right">send</i>
+        <% end %>
+      </div>
       </div>
 
     <% end %>

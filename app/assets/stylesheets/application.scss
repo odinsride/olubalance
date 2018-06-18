@@ -43,3 +43,17 @@ $secondary-color: color("teal", "lighten-2") !default;
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
 }
+
+.ob-right-border {
+    border-right: 1px dotted #ccc;
+}
+
+.ob-icon-small {
+    font-size: 1.8rem;
+    -webkit-text-stroke: 1px #ccc;
+}
+
+.required abbr {
+    color: #00796b !important;
+    text-decoration: none;
+}
