@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
       def page_number(page)
         if page == current_page
-          "<li class=\"cyan darken-3 active\">"+link(page, page, rel: rel_value(page))+"</li>"
+          "<li class=\"ob-secondary z-depth-2 active\">"+link(page, page, rel: rel_value(page))+"</li>"
         else
           "<li class=\"waves-effect\">"+link(page, page, rel: rel_value(page))+"</li>"
         end
@@ -28,12 +28,12 @@ class ApplicationController < ActionController::Base
 
       def previous_page
         num = @collection.current_page > 1 && @collection.current_page - 1
-        previous_or_next_page(num, "<i class=\"material-icons\">chevron_left</i>")
+        previous_or_next_page(num, "<i class=\"material-icons ob-text-secondary\">chevron_left</i>")
       end
 
       def next_page
         num = @collection.current_page < total_pages && @collection.current_page + 1
-        previous_or_next_page(num, "<i class=\"material-icons\">chevron_right</i>")
+        previous_or_next_page(num, "<i class=\"material-icons ob-text-secondary\">chevron_right</i>")
       end
 
       def previous_or_next_page(page, text)

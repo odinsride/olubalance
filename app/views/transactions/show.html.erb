@@ -1,21 +1,23 @@
 <div class="row">
-  <div class="col s12">
-    <h5 class="cyan-text text-darken-3 ob-shadow left"><strong>Transaction Details</strong></h5>
-  </div>
-</div>
-
-<div class="row">
+	<div class="col s12">
+    	<p class="ob-text-secondary ob-shadow left ob-no-bottom">
+    		<%= link_to account_transactions_path(@transaction.account_id), class: 'ob-text-secondary valign-wrapper' do %>
+				<i class="material-icons ob-icon-medium">chevron_left</i>
+				<span class="">Back to Transactions</span>
+			<% end %>
+    	</p>
+  	</div>
 	<div class="col s12 l8 offset-l2 center-align">
 		<div class="card z-depth-2 left-align">
 		    <div class="card-content">
 		      <div class="row">
-		      	<div class="card-title col s8 ob-shadow ob-no-bottom"><%= @transaction.description %></div>
+		      	<div class="card-title col s8 ob-shadow ob-text-secondary ob-no-bottom"><strong><%= @transaction.description %></strong></div>
 		      	<div class="card-title col s4 ob-shadow right-align ob-no-bottom">
-	  				<% if @transaction.amount >= 0 then %>
+	  				<strong><% if @transaction.amount >= 0 then %>
 						<span class="green-text"><%= number_to_currency(@transaction.amount) %></span>
 					<% else %>
 						<span class="red-text"><%= number_to_currency(@transaction.amount.abs) %></span>
-					<% end %>
+					<% end %></strong>
 		      	</div>
 		      	<div class="col s12 ob-shadow text-muted right-align">
 		      		<%= @transaction.trx_date.strftime('%m/%d/%Y') %>
@@ -23,23 +25,23 @@
 		      </div>
 
 		      <div class="row">
-		     	<div class="col s12">
-		     		<blockquote><%= @transaction.memo %></blockquote>
+		     	<div class="col s12 valign-wrapper">
+		     		<i class="material-icons grey-text text-darken-1 small">event_note</i>&nbsp;<h6><%= @transaction.memo %></h6>
 		     	</div>
 		      </div>
 
 		      <% if @transaction.attachment.exists? then %>
 		      	<div class="row">
 		      		<div class="col s12">
-		      			<ul class="collection hoverable">
-		      				<li class="collection-item teal lighten-5 teal-text text-darken-4"><strong>Attachment</strong></li>
+		      			<ul class="collection z-depth-1">
+		      				<li class="collection-item ob-accent ob-text-secondary valign-wrapper"><i class="tiny material-icons">attach_file</i>&nbsp;<strong>Attachment</strong></li>
 		      				<li class="collection-item">
 		      					<div class="row ob-no-bottom valign-wrapper">
 		      						<div class="col s5 m3 l2">
-		      							<%= link_to image_tag(@transaction.attachment.url(:thumb)), @transaction.attachment.url, :target => '_blank' %>
+		      							<%= link_to image_tag(@transaction.attachment.url(:thumb), :class => 'z-depth-2 hoverable'), @transaction.attachment.url, :target => '_blank' %>
 		      						</div>
 		      						<div class="col s7 m9 l10">
-		      							<%= link_to @transaction.attachment_file_name, @transaction.attachment.url, :class => 'text-secondary', :target => '_blank' %>
+		      							<%= link_to @transaction.attachment_file_name, @transaction.attachment.url, :class => 'ob-text-secondary', :target => '_blank' %>
 		      							<br /><%= number_to_human_size(@transaction.attachment_file_size) %>
 		      						</div>
 		      					</div>

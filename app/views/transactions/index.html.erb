@@ -1,15 +1,19 @@
 <div class="row">
 	<div class="col s12">
-	    <h4 class="cyan-text text-darken-3 ob-shadow left"><strong>Balance</strong></h4>
-
-		<%= link_to new_account_transaction_path, class: "btn waves-effect waves-light right" do %>
+    	<p class="ob-text-secondary ob-shadow left ob-no-bottom">
+    		<%= link_to accounts_path, class: 'ob-text-secondary valign-wrapper' do %>
+				<i class="material-icons ob-icon-medium">chevron_left</i>
+				<span class="">Back to Accounts</span>
+			<% end %>
+    	</p>
+		<%= link_to new_account_transaction_path, class: "btn waves-effect waves-light right z-depth-2" do %>
 	    	<i class="material-icons left">add</i>Transaction
 	    <% end %>
 	</div>
 
 	<div class="col s12">
-	    <h5 class="cyan-text text-darken-3 ob-shadow left"><strong><%= @account.name %></strong></h5>
-    	<h5 class="cyan-text text-darken-3 ob-shadow right">
+	    <h5 class="ob-text-secondary ob-shadow left"><strong><%= @account.name %></strong></h5>
+    	<h5 class="ob-text-secondary ob-shadow right">
     		<strong><span class="hide-on-med-and-down">Balance: </span><%= number_to_currency(@account.current_balance) %></strong>
     	</h5>
 	</div>
@@ -17,12 +21,12 @@
 
 <div class="row">
 	<div class="col s12">
-		<ul class="collection">
+		<ul class="collection z-depth-2">
 			<!-- mobile header -->
-			<li class="collection-item teal lighten-5 teal-text text-darken-4 hide-on-large-only"><strong>Transactions</strong></li>
+			<li class="collection-item ob-accent ob-text-secondary hide-on-large-only"><strong>Transactions</strong></li>
 			
 			<!-- desktop header -->
-			<li class="collection-item teal lighten-5 teal-text text-darken-4 hide-on-med-and-down">
+			<li class="collection-item ob-accent ob-text-secondary hide-on-med-and-down">
 				<div class="row ob-no-bottom">
 					<div class="col s1 center-align">
 						<strong>Date</strong>
@@ -105,7 +109,7 @@
 </div>
 
 <div class="row">
-	<div class="col s12">
+	<div class="col s12 center-align">
 		<%= will_paginate @transactions, renderer: @custom_paginate_renderer %>
 	</div>
 </div>

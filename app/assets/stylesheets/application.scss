@@ -13,8 +13,8 @@
  */
 
 @import "materialize/components/color-variables";
-$primary-color: color("cyan", "darken-4") !default;
-$secondary-color: color("teal", "lighten-2") !default;
+$primary-color: color("teal", "lighten-3") !default;
+$secondary-color: color("teal", "darken-2") !default;
 @import "materialize";
 @import "material_icons";
 
@@ -50,10 +50,43 @@ $secondary-color: color("teal", "lighten-2") !default;
 
 .ob-icon-small {
     font-size: 1.8rem;
-    -webkit-text-stroke: 1px #ccc;
+    /*-webkit-text-stroke: 1px #ccc;*/
+}
+
+.ob-icon-medium {
+    font-size: 3rem;
 }
 
 .required abbr {
     color: #00796b !important;
     text-decoration: none;
+}
+
+.ob-text-primary {
+    color: #80cbc4 !important;
+}
+
+.ob-primary {
+    background-color: #80cbc4 !important;
+}
+
+.ob-text-secondary {
+    color: #00796b !important;
+}
+
+.ob-secondary {
+    background-color: #00796b !important;
+}
+
+.ob-accent {
+    background-color: #e0f2f1 !important;
+}
+
+.ob-gradient {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#008e76+0,69c1b9+100 */
+background: rgb(0,142,118); /* Old browsers */
+background: -moz-linear-gradient(left, rgba(0,142,118,1) 0%, rgba(105,193,185,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, rgba(0,142,118,1) 0%,rgba(105,193,185,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, rgba(0,142,118,1) 0%,rgba(105,193,185,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008e76', endColorstr='#69c1b9',GradientType=1 ); /* IE6-9 */
 }

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col s12">
-    <h5 class="cyan-text text-darken-3 ob-shadow left"><strong>Accounts</strong></h5>
-    <%= link_to new_account_path, class: "btn waves-effect waves-light right" do %>
+    <h5 class="ob-text-secondary ob-shadow left"><strong>Accounts</strong></h5>
+    <%= link_to new_account_path, class: "btn waves-effect waves-light right z-depth-2" do %>
       <i class="material-icons left">add</i>Account
     <% end %>
   </div>
@@ -14,12 +14,12 @@
         <div class="card-content">
           <div class="row ob-no-bottom valign-wrapper">
             <%= link_to(account_transactions_path(account.id), class: "ob-linked-card") do %>
-              <div class="card-title col s12 teal-text text-darken-2 ob-shadow"><strong><%= account.name %></strong></div>
+              <div class="card-title col s12 ob-text-secondary ob-shadow"><strong><%= account.name %></strong></div>
             <% end %>
 
             <div class="col s6 right-align">
               <%= link_to edit_account_path(account), class: "tooltipped", :'data-position' => "top", :'data-tooltip' => "Edit Account" do %>
-                <i class="ob-icon-small yellow-text text-accent-1 ob-shadow material-icons">edit</i>
+                <i class="ob-icon-small yellow-text text-darken-1 ob-shadow material-icons">edit</i>
               <% end %>
               <%= link_to account, method: :delete, data: { confirm: 'Are you sure you want to delete the account?' }, class: "tooltipped", :'data-position' => "top", :'data-tooltip' => "Delete Account" do %>
                 <i class="ob-icon-small red-text text-accent-1 ob-shadow material-icons">delete</i>
@@ -35,8 +35,8 @@
 
         <div class="card-action">
           <div class="row ob-no-bottom">
-            <div class="col s7 valign-wrapper"><i class="tiny material-icons teal-text text-darken-2">account_balance</i>&nbsp;<strong>Balance</strong></div>
-            <div class="col s5 teal-text text-darken-2 ob-shadow right-align" style="" data-badge-caption=""><strong><%= number_to_currency(account.current_balance) %></strong></div>
+            <div class="col s7 valign-wrapper"><i class="tiny material-icons ob-text-secondary">account_balance</i>&nbsp;<strong>Balance</strong></div>
+            <div class="col s5 ob-text-secondary ob-shadow right-align" style="" data-badge-caption=""><strong><%= number_to_currency(account.current_balance) %></strong></div>
           </div>
         </div>
       </div>
