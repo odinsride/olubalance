@@ -10,7 +10,7 @@
 <div class="row">
   <% @accounts.each do |account| %>
     <div class="col s12 l4">
-      <div class="card darken-1 hoverable">
+      <div class="card hoverable teal lighten-5 z-depth-2">
         <div class="card-content">
           <div class="row ob-no-bottom valign-wrapper">
             <%= link_to(account_transactions_path(account.id), class: "ob-linked-card") do %>
@@ -28,14 +28,14 @@
           </div>
 
           <div class="row ob-no-bottom">
-            <div class="col 12"><small>Account last updated on <%= account.updated_at.strftime('%b %d, %Y @ %I:%M %p') %></small></div>
+            <div class="col 12 ob-text-secondary"><small>Account last updated on <%= account.updated_at.strftime('%b %d, %Y @ %I:%M %p') %></small></div>
           </div>
 
         </div>
 
         <div class="card-action">
           <div class="row ob-no-bottom">
-            <div class="col s7 valign-wrapper"><i class="tiny material-icons ob-text-secondary">account_balance</i>&nbsp;<strong>Balance</strong></div>
+            <div class="col s7 valign-wrapper ob-text-secondary"><i class="tiny material-icons ob-text-secondary">account_balance</i>&nbsp;<strong>Balance</strong></div>
             <div class="col s5 ob-text-secondary ob-shadow right-align" style="" data-badge-caption=""><strong><%= number_to_currency(account.current_balance) %></strong></div>
           </div>
         </div>

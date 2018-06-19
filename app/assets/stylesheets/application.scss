@@ -13,8 +13,10 @@
  */
 
 @import "materialize/components/color-variables";
-$primary-color: color("teal", "lighten-3") !default;
-$secondary-color: color("teal", "darken-2") !default;
+/*$primary-color: color("teal", "lighten-2") !default;
+$secondary-color: color("teal", "darken-2") !default;*/
+$primary-color: color("teal", "darken-2") !default;
+$secondary-color: color("teal", "lighten-3") !default;
 @import "materialize";
 @import "material_icons";
 
@@ -62,6 +64,7 @@ $secondary-color: color("teal", "darken-2") !default;
     text-decoration: none;
 }
 
+
 .ob-text-primary {
     color: #80cbc4 !important;
 }
@@ -77,6 +80,24 @@ $secondary-color: color("teal", "darken-2") !default;
 .ob-secondary {
     background-color: #00796b !important;
 }
+
+/*
+.ob-text-secondary {
+    color: #80cbc4 !important;
+}
+
+.ob-secondary {
+    background-color: #80cbc4 !important;
+}
+
+.ob-text-primary {
+    color: #00796b !important;
+}
+
+.ob-primary {
+    background-color: #00796b !important;
+}
+*/
 
 .ob-accent {
     background-color: #e0f2f1 !important;
