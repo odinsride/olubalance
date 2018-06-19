@@ -10,7 +10,7 @@
 <div class="row">
   <% @accounts.each do |account| %>
     <div class="col s12 l4">
-      <div class="card hoverable teal lighten-5 z-depth-2">
+      <div class="card hoverable ob-primary z-depth-2">
         <div class="card-content">
           <div class="row ob-no-bottom valign-wrapper">
             <%= link_to(account_transactions_path(account.id), class: "ob-linked-card") do %>
