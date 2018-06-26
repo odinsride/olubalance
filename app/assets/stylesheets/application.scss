@@ -12,11 +12,16 @@
  *
  */
 
-@import "materialize/components/color-variables";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import "materialize/components/color";
 $primary-color: color("teal", "darken-2") !default;
 $secondary-color: color("teal", "lighten-3") !default;
 @import "materialize";
 @import "material_icons";
+
+body {
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+}
 
 .control-label {
     margin-right: 10px;

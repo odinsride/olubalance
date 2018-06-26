@@ -29,9 +29,9 @@ gem 'will_paginate', '~> 3.1.0'
 gem "paperclip", "~> 6.0.0"
 gem "aws-sdk"
 gem 'figaro'
-gem 'materialize-sass', '~> 1.0.0-rc1'
+gem 'materialize-sass', '~> 0.100.2'
 gem 'material_icons'
-gem 'materialize-form', :git => 'git://github.com/gemfarmer/materialize-form.git'
+gem 'materialize-form'
 gem 'slim', '~> 3.0', '>= 3.0.9'
 #gem 'materialize-form'
 
