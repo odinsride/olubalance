@@ -13,8 +13,6 @@
  */
 
 @import "materialize/components/color-variables";
-/*$primary-color: color("teal", "lighten-2") !default;
-$secondary-color: color("teal", "darken-2") !default;*/
 $primary-color: color("teal", "darken-2") !default;
 $secondary-color: color("teal", "lighten-3") !default;
 @import "materialize";
@@ -24,8 +22,25 @@ $secondary-color: color("teal", "lighten-3") !default;
     margin-right: 10px;
 }
 
+.card-action {
+    text-align: right;
+}
+
+.ob-account-card {
+    border-radius: 10px;
+}
+
+a.ob-text-primary.tooltipped {
+    margin-right: 0 !important;
+    margin-left: 12px !important;
+}
+
+.valign-fix {
+    justify-content: flex-end;
+}
+
 .text-muted { 
-    color: #494949;
+    color: #6c757d !important;
 }
 
 .ob-linked-card {
@@ -63,24 +78,6 @@ $secondary-color: color("teal", "lighten-3") !default;
     color: #00796b !important;
     text-decoration: none;
 }
-
-/*
-.ob-text-primary {
-    color: #80cbc4 !important;
-}
-
-.ob-primary {
-    background-color: #80cbc4 !important;
-}
-
-.ob-text-secondary {
-    color: #00796b !important;
-}
-
-.ob-secondary {
-    background-color: #00796b !important;
-}
-*/
 
 .ob-text-secondary {
     color: #80cbc4 !important;

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col s12">
-    	<p class="ob-text-secondary ob-shadow left ob-no-bottom">
-    		<%= link_to account_transactions_path(@transaction.account_id), class: 'ob-text-secondary valign-wrapper' do %>
+    	<p class="ob-text-primary ob-shadow left ob-no-bottom">
+    		<%= link_to account_transactions_path(@transaction.account_id), class: 'ob-text-primary valign-wrapper' do %>
 				<i class="material-icons ob-icon-medium">chevron_left</i>
 				<span class="">Back to Transactions</span>
 			<% end %>
@@ -11,7 +11,7 @@
 		<div class="card z-depth-2 left-align">
 		    <div class="card-content">
 		      <div class="row">
-		      	<div class="card-title col s8 ob-shadow ob-text-secondary ob-no-bottom"><strong><%= @transaction.description %></strong></div>
+		      	<div class="card-title col s8 ob-shadow ob-text-primary ob-no-bottom"><strong><%= @transaction.description %></strong></div>
 		      	<div class="card-title col s4 ob-shadow right-align ob-no-bottom">
 	  				<strong><% if @transaction.amount >= 0 then %>
 						<span class="green-text"><%= number_to_currency(@transaction.amount) %></span>
@@ -24,11 +24,13 @@
 		      	</div>
 		      </div>
 
+		      <% if @transaction.memo.present? %>
 		      <div class="row">
 		     	<div class="col s12 valign-wrapper">
 		     		<i class="material-icons grey-text text-darken-1 small">event_note</i>&nbsp;<h6><%= @transaction.memo %></h6>
 		     	</div>
 		      </div>
+		      <% end %>
 
 		      <% if @transaction.attachment.exists? then %>
 		      	<div class="row">

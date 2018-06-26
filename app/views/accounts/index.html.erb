@@ -10,36 +10,39 @@
 <div class="row">
   <% @accounts.each do |account| %>
     <div class="col s12 l4">
-      <div class="card hoverable z-depth-2">
+      <div class="card ob-account-card ob-card-gradient hoverable z-depth-2">
         <div class="card-content">
           <div class="row ob-no-bottom valign-wrapper">
             <%= link_to(account_transactions_path(account.id), class: "ob-linked-card") do %>
               <div class="card-title col s12 ob-text-primary ob-shadow"><strong><%= account.name %></strong></div>
             <% end %>
-
-            <div class="col s6 right-align">
-              <%= link_to edit_account_path(account), class: "tooltipped", :'data-position' => "top", :'data-tooltip' => "Edit Account" do %>
-                <i class="ob-icon-small yellow-text text-darken-1 ob-shadow material-icons">edit</i>
-              <% end %>
-              <%= link_to account, method: :delete, data: { confirm: 'Are you sure you want to delete the account?' }, class: "tooltipped", :'data-position' => "top", :'data-tooltip' => "Delete Account" do %>
-                <i class="ob-icon-small red-text text-accent-1 ob-shadow material-icons">delete</i>
-              <% end %>
-            </div>
+          </div>
+          
+          <div class="row ob-no-bottom">
+            <div class="col s12 right-align valign-wrapper valign-fix ob-text-primary"><i class="tiny material-icons">account_balance</i>&nbsp;<strong>Balance</strong></div>
           </div>
 
           <div class="row ob-no-bottom">
-            <div class="col 12 ob-text-primary"><small>Account last updated on <%= account.updated_at.strftime('%b %d, %Y @ %I:%M %p') %></small></div>
+            <div class="col s12 right-align text-muted" style="font-size: 22pt" data-badge-caption=""><%= number_to_currency(account.current_balance) %></div>
+          </div>
+
+          <div class="row ob-no-bottom">
+            <div class="col s12 right-align"><small>as of <%= account.updated_at.strftime('%b %d, %Y @ %I:%M %p') %></small></div>
           </div>
 
         </div>
 
         <div class="card-action">
-          <div class="row ob-no-bottom">
-            <div class="col s7 valign-wrapper ob-text-primary"><i class="tiny material-icons ob-text-primary">account_balance</i>&nbsp;<strong>Balance</strong></div>
-            <div class="col s5 ob-text-primary right-align" style="" data-badge-caption=""><strong><%= number_to_currency(account.current_balance) %></strong></div>
-          </div>
+              <%= link_to "Edit", edit_account_path(account), class: "ob-text-primary tooltipped", :'data-position' => "top", :'data-tooltip' => "Edit Account" %>
+              <%= link_to "Delete", account, method: :delete, data: { confirm: 'Are you sure you want to delete the account?' }, class: "ob-text-primary tooltipped", :'data-position' => "top", :'data-tooltip' => "Delete Account" %>
+
         </div>
       </div>
     </div>
   <% end %>
 </div>
+
+<!--                 <i class="tiny yellow-text text-darken-1 ob-shadow material-icons">edit</i>
+                  <i class="tiny red-text text-accent-1 ob-shadow material-icons">delete</i>
+
+-->

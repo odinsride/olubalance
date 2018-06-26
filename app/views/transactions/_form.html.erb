@@ -1,48 +1,58 @@
-<%= simple_form_for ([@transaction.account, @transaction]) do |f| %>
-	<% if @transaction.errors.any? %>
-		<div id="error explanation">
-			<h4>
-				<%= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:" %>
-			</h4>
-			<ul>
-				<% @transaction.errors.full_messages.each do |msg| %>
-					<li>
-						<%= msg %>
-					</li>
-				<% end %>
-			</ul>
+<div class="row">
+
+	<%= simple_form_for([@transaction.account, @transaction]) do |f| %>
+		<% if @transaction.errors.any? %>
+			<div id="error explanation">
+				<h4>
+					<%= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:" %>
+				</h4>
+				<ul>
+					<% @transaction.errors.full_messages.each do |msg| %>
+						<li>
+							<%= msg %>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<div class="row">
+			<div class="col s12 l4">
+				<%= f.check_box :trx_type, id: 'trx_type' %>
+							<%= f.label :trx_type, for: 'trx_type', id: 'trx_type' %>
+			</div>
+		</div>
+
+		<div class="row">
+			<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], wrapper_html: { class: 'm6 s12' }, :label => 'Transaction Type', :item_wrapper_tag => :div, :checked => @transaction.transaction_type, id: 'trx_type' %>
+		</div>
+		
+		<div class="form-group">
+			<%= f.input :trx_date, as: :date, html5: true, :label => 'Transaction Date', class: "form-control" %>
+		</div>
+
+		<div class="form-group">
+			<%= f.input :description, class: "form-control" %>
+		</div>
+
+		<div class="form-group">
+			<% if f.object.new_record? %>
+				<%= f.input :amount, class: "form-control"  %>
+			<% else %>
+				<%= f.input :amount, class: "form-control", :input_html => { :value => number_with_precision(f.object.amount.abs, precision: 2) } %>
+			<% end %>
+		</div>
+
+		<div class="form-group">
+			<%= f.input :memo, class: "form-control" %>
+		</div>
+
+		<div class="form-group">
+		    <%= f.input :attachment, as: :file %>
+		</div>
+
+		<div class="form-group">
+			<%= f.button :submit, class: "btn-primary" %>
 		</div>
 	<% end %>
-
-	<div class="form-group">
-		<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], class: "form-control", :label => 'Transaction Type', :item_wrapper_tag => :div, :checked => @transaction.transaction_type %>
-	</div>
-	
-	<div class="form-group">
-		<%= f.input :trx_date, as: :date, html5: true, :label => 'Transaction Date', class: "form-control" %>
-	</div>
-
-	<div class="form-group">
-		<%= f.input :description, class: "form-control" %>
-	</div>
-
-	<div class="form-group">
-		<% if f.object.new_record? %>
-			<%= f.input :amount, class: "form-control"  %>
-		<% else %>
-			<%= f.input :amount, class: "form-control", :input_html => { :value => number_with_precision(f.object.amount.abs, precision: 2) } %>
-		<% end %>
-	</div>
-
-	<div class="form-group">
-		<%= f.input :memo, class: "form-control" %>
-	</div>
-
-	<div class="form-group">
-	    <%= f.input :attachment, as: :file %>
-	</div>
-
-	<div class="form-group">
-		<%= f.button :submit, class: "btn-primary" %>
-	</div>
-<% end %>
+</div>

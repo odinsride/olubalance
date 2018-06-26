@@ -15,13 +15,27 @@
     <%= render "layouts/navbar" %>
 
     <div class="container">
-          <%= yield %>
+      <%= yield %>
     </div>
 
-    <% flash.each do |message_type, message| %>
-      <% puts #{message} %>
-      <%= javascript_tag "M.toast('#{message}', 4000)" %>
+
+<!-- 
+    <% if notice %>
+      <script type="text/javascript">
+        M.toast({html: '<%= notice %>'}, 4000)
+      </script>
     <% end %>
+    
+    <% if alert %>
+      <script type="text/javascript">
+        M.toast({html: '<%= alert %>'}, 4000)
+      </script>
+    <% end %>
+  -->
+
+  <% flash.each do |message_type, message| %>
+    <%= javascript_tag "M.toast({html: '#{message}'}, 4000)" %>
+<% end %>
 
   </body>
 

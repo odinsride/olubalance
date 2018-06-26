@@ -1,7 +1,7 @@
 /*
  * This file was added after finding incompatibilities between the materialize-sass 1.0.0-rc1 gem and materialize-form gem
  * The code here was adapted from materialize-form and altered to reflect class/object names in the latest version of materialize
- */
+ 
 
 window.materializeForm = {
   init: function() {
@@ -35,3 +35,4 @@ $(document).ajaxSuccess(function() {
 $(document).ready(function(){
   $('.tooltipped').tooltip();
 });
+*/
