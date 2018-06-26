@@ -13,17 +13,20 @@
 		      <div class="row">
 
 		      	<!-- Header --> 
-		      	<div class="card-title col s8 ob-shadow ob-text-primary ob-no-bottom"><strong><%= @transaction.description %></strong></div>
+		      	<div class="card-title col s8 ob-shadow ob-text-primary ob-no-bottom"><strong class="flow-text"><%= @transaction.description %></strong></div>
+
 		      	<div class="card-title col s4 ob-shadow right-align ob-no-bottom">
 	  				<strong><% if @transaction.amount >= 0 then %>
-						<span class="green-text"><%= number_to_currency(@transaction.amount) %></span>
+						<span class="green-text flow-text"><%= number_to_currency(@transaction.amount) %></span>
 					<% else %>
-						<span class="red-text"><%= number_to_currency(@transaction.amount.abs) %></span>
+						<span class="red-text flow-text"><%= number_to_currency(@transaction.amount.abs) %></span>
 					<% end %></strong>
 		      	</div>
+
 		      	<div class="col s12 ob-shadow text-muted right-align">
 		      		<%= @transaction.trx_date.strftime('%m/%d/%Y') %>
 		      	</div>
+		      	
 		      </div>
 
 		      <!-- Memo -->

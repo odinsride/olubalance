@@ -6,37 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
     <title>olubalance</title>
     <%= csrf_meta_tags %>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
 
-    <%= render "layouts/navbar" %>
+    <header>
+      <%= render "layouts/navbar" %>
+    </header>
 
-    <div class="container">
-      <%= yield %>
-    </div>
+    <main role="main">
 
+      <div class="container">
+        <%= yield %>
+      </div>
 
-<!-- 
-    <% if notice %>
-      <script type="text/javascript">
-        M.toast({html: '<%= notice %>'}, 4000)
-      </script>
-    <% end %>
-    
-    <% if alert %>
-      <script type="text/javascript">
-        M.toast({html: '<%= alert %>'}, 4000)
-      </script>
-    <% end %>
-  -->
+      <% flash.each do |message_type, message| %>
+        <%= javascript_tag "Materialize.toast('#{message}', 4000)" %>
+      <% end %>
 
-  <% flash.each do |message_type, message| %>
-    <%= javascript_tag "M.toast({html: '#{message}'}, 4000)" %>
-<% end %>
+    </main>
+
+    <%= render "layouts/footer" %>
 
   </body>
 

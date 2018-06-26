@@ -1,19 +1,19 @@
 <div class="row">
     <%= simple_form_for(@account) do |f| %>
-  <% if @account.errors.any? %>
-    <div id="error explanation">
-      <h4>
-        <%= "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:" %>
-      </h4>
-      <ul>
-        <% @account.errors.full_messages.each do |msg| %>
-          <li>
-            <%= msg %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <% if @account.errors.any? %>
+        <div id="error explanation">
+          <h4>
+            <%= "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:" %>
+          </h4>
+          <ul>
+            <% @account.errors.full_messages.each do |msg| %>
+              <li>
+                <%= msg %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
       <div class="row">
         <div class="input-field col s12 l4">
