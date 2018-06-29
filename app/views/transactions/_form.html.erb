@@ -18,7 +18,7 @@
 
 		<div class="row">
 			<!-- Transaction Date -->
-			<%= f.input :trx_date, as: :date, html5: true, :label => 'Transaction Date', wrapper_html: { class: 'l4 s7' }, input_html: { value: (@transaction.trx_date.present?) ? @transaction.trx_date.strftime('%d %B, %Y') : Time.now.strftime('%d %B, %Y') } %>
+			<%= f.input :trx_date, as: :date, html5: true, :label => 'Transaction Date', icon: 'date_range', wrapper_html: { class: 'l4 s7' }, input_html: { value: (@transaction.trx_date.present?) ? @transaction.trx_date.strftime('%d %B, %Y') : Time.now.strftime('%d %B, %Y') } %>
 			<!-- Transaction Type -->
 			<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], wrapper_html: { class: 'l2 s5' }, :label => 'Transaction Type', :item_wrapper_tag => :div, :checked => @transaction.transaction_type, id: 'trx_type' %>
 		</div>
@@ -26,19 +26,19 @@
 
 		<div class="row">
 			<!-- Description -->
-			<%= f.input :description, wrapper_html: { class: 'input-field l6 s12' } %>
+			<%= f.input :description, icon: 'description', wrapper_html: { class: 'input-field l6 s12' } %>
 		</div>
 
 		<div class="row">
 			<!-- Amount -->
-			<%= f.input :amount, wrapper_html: { class: 'input-field l2 s12' }, input_html: { :value => (@transaction.amount.present?) ? number_with_precision(f.object.amount.abs, precision: 2) : nil} %>
+			<%= f.input :amount, icon: 'attach_money', wrapper_html: { class: 'input-field l2 s12' }, input_html: { :value => (@transaction.amount.present?) ? number_with_precision(f.object.amount.abs, precision: 2) : nil} %>
 			<!-- Memo -->
-			<%= f.input :memo, hint: 'Add some notes about the transaction', wrapper_html: { class: 'input-field l4 s12' } %>
+			<%= f.input :memo, icon: 'note', hint: 'Add some notes about the transaction', wrapper_html: { class: 'input-field l4 s12' } %>
 		</div>
 
 		<div class="row">
 			<!-- Attachment -->
-			<%= f.input :attachment, hint: 'Upload a receipt or invoice', as: :file, wrapper_html: { class: 'l6 s12' } %>
+			<%= f.input :attachment, icon: 'attach_file', hint: 'Upload a receipt or invoice', as: :file, wrapper_html: { class: 'l6 s12' } %>
 		</div>
 
 		<!-- Buttons -->

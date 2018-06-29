@@ -13,6 +13,7 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
+    b.optional :icon, wrap_with: { tag: 'i', class: 'material-icons prefix ob-text-primary' }
     b.use :input
     b.use :label
     b.use :error, wrap_with: { tag: 'small', class: 'error-block red-text text-darken-1' }
@@ -68,7 +69,8 @@ SimpleForm.setup do |config|
   config.wrappers :materialize_file_input, tag: 'div', class: 'file-field input-field col', error_class: 'has-error' do |b|
     b.use :html5
 
-    b.wrapper tag: :div, class: 'btn' do |ba| 
+    b.wrapper tag: :div, class: 'btn' do |ba|
+      ba.optional :icon, wrap_with: { tag: 'i', class: 'material-icons left valign-wrapper' }
       ba.use :tag, tag: :span, text: :label_text
       ba.use :input
     end

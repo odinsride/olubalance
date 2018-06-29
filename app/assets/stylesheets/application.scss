@@ -14,9 +14,10 @@
 
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import "font-awesome";
 @import "materialize/components/color";
 $primary-color: color("teal", "darken-2") !default;
-$secondary-color: color("teal", "lighten-3") !default;
+$secondary-color: color("teal", "lighten-2") !default;
 @import "materialize";
 @import "material_icons";
 
@@ -53,14 +54,14 @@ html {
     margin-right: 10px;
 }
 
-.card-action {
-    text-align: right;
-}
-
 .required abbr {
     color: #00796b !important;
     text-decoration: none !important;
     border-bottom: none !important;
+}
+
+h5 {
+    margin-top: 30px;
 }
 
 /******************************************************
@@ -71,7 +72,19 @@ html {
     border-radius: 10px;
 }
 
+.ob-card-btn {
+    padding: 0 0.5rem !important;
+    margin-right: 0 !important;
+    margin-left: 15px;
+}
+
 a.ob-text-primary.tooltipped {
+    margin-right: 0 !important;
+    margin-left: 12px !important;
+}
+
+
+a.modal-trigger.ob-text-primary.tooltipped {
     margin-right: 0 !important;
     margin-left: 12px !important;
 }
@@ -84,13 +97,10 @@ a.ob-text-primary.tooltipped {
     color: #6c757d !important;
 }
 
-.ob-linked-card {
-    color: #494949;
-}
-
+/*
 .ob-shadow {
     text-shadow: 1px 1px 2px #ccc;
-}
+}*/
 
 .ob-no-top {
     padding-top: 0 !important;
@@ -116,11 +126,11 @@ a.ob-text-primary.tooltipped {
 }
 
 .ob-text-secondary {
-    color: #80cbc4 !important;
+    color: #4db6ac !important;
 }
 
 .ob-secondary {
-    background-color: #80cbc4 !important;
+    background-color: #4db6ac !important;
 }
 
 .ob-text-primary {

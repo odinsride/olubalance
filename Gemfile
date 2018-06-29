@@ -32,6 +32,7 @@ gem 'figaro'
 gem 'materialize-sass', '~> 0.100.2'
 gem 'material_icons'
 gem 'materialize-form'
+gem 'font-awesome-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

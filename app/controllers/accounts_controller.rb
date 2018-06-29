@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = current_user.accounts
+    @accounts = current_user.accounts.order("created_at ASC")
   end
 
   # GET /accounts/1

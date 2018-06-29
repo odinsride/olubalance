@@ -3,7 +3,7 @@
     	<p class="ob-text-primary ob-shadow left ob-no-bottom">
     		<%= link_to accounts_path, class: 'ob-text-primary valign-wrapper' do %>
 				<i class="material-icons ob-icon-medium">chevron_left</i>
-				<span class="">Back to Accounts</span>
+				<span class="">Accounts</span>
 			<% end %>
     	</p>
 		<%= link_to new_account_transaction_path, class: "btn waves-effect waves-light right z-depth-2" do %>
@@ -28,19 +28,19 @@
 			<!-- desktop header -->
 			<li class="collection-item ob-accent ob-text-primary hide-on-med-and-down">
 				<div class="row ob-no-bottom">
-					<div class="col s1 center-align">
+					<div class="col s2 xl2 center-align">
 						<strong>Date</strong>
 					</div>
-					<div class="col s8 valign-wrapper">
+					<div class="col s4 xl7 valign-wrapper">
 						<strong>Description</strong>
 					</div>
-					<div class="col s1 right-align">
+					<div class="col s2 xl1 right-align">
 						<strong>Credit</strong>
 					</div>
-					<div class="col s1 right-align">
+					<div class="col s2 xl1 right-align">
 						<strong>Debit</strong>
 					</div>
-					<div class="col s1 right-align">
+					<div class="col s2 xl1 right-align">
 						<strong>Balance</strong>
 					</div>
 				</div>
@@ -75,30 +75,30 @@
 
 					<!-- desktop view -->
 					<div class="row ob-no-bottom hide-on-med-and-down valign-wrapper">
-						<div class="col s1 text-muted ob-right-border">
+						<div class="col l2 xl2 text-muted ob-right-border center-align">
 							<%= transaction.trx_date.strftime('%m/%d/%Y') %>
 						</div>
-						<div class="col s8 valign-wrapper teal-text text-darken-2 ob-right-border">
+						<div class="col l4 xl7 valign-wrapper teal-text text-darken-2 ob-right-border">
 							<strong><%= transaction.description %></strong>
 							<% if transaction.attachment.exists? then %>
 								<i class="tiny text-muted material-icons tooltipped" data-position="top" data-tooltip="Transaction has attachment">attach_file</i>
 							<% end %>
 						</div>
-						<div class="col s1 right-align ob-right-border">
+						<div class="col l2 xl1 right-align ob-right-border">
 							<% if transaction.amount >= 0 then %>
 								<span class="green-text"><%= number_to_currency(transaction.amount) %></span>
 							<% else %>
 								&nbsp;
 							<% end %>
 						</div>
-						<div class="col s1 right-align ob-right-border">
+						<div class="col l2 xl1 right-align ob-right-border">
 							<% if transaction.amount < 0 then %>
 								<span class="red-text"><%= number_to_currency(transaction.amount.abs) %></span>
 							<% else %>
 								&nbsp;
 							<% end %>
 						</div>
-						<div class="col s1 right-align text-muted">
+						<div class="col l2 xl1 right-align text-muted">
 							<%= number_to_currency(transaction.running_balance) %>
 						</div>
 					</div>

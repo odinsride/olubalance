@@ -33,15 +33,15 @@
 
       <div class="row center-align">
         <div class="col s12 l4">
-        <%= link_to 'Cancel', accounts_path, class: 'btn waves-effect waves-light' %>
-        <%= button_tag(type: 'submit', class: 'btn waves-effect waves-light') do %>
-          <% if @account.new_record? then %>
-            Create Account
-          <% else %>
-            Update Account
-          <% end %><i class="material-icons right">send</i>
-        <% end %>
-      </div>
+          <%= link_to 'Cancel', accounts_path, class: 'btn waves-effect waves-light' %>
+          <%= button_tag(type: 'submit', class: 'btn waves-effect waves-light') do %>
+            <% if @account.new_record? then %>
+              Create Account
+            <% else %>
+              Update Account
+            <% end %><i class="material-icons right">send</i>
+          <% end %>
+        </div>
       </div>
 
     <% end %>
