@@ -28,12 +28,12 @@ class ApplicationController < ActionController::Base
 
       def previous_page
         num = @collection.current_page > 1 && @collection.current_page - 1
-        previous_or_next_page(num, "<i class=\"material-icons ob-text-secondary\">chevron_left</i>")
+        previous_or_next_page(num, "<i class=\"material-icons ob-text-primary\">chevron_left</i>")
       end
 
       def next_page
         num = @collection.current_page < total_pages && @collection.current_page + 1
-        previous_or_next_page(num, "<i class=\"material-icons ob-text-secondary\">chevron_right</i>")
+        previous_or_next_page(num, "<i class=\"material-icons ob-text-primary\">chevron_right</i>")
       end
 
       def previous_or_next_page(page, text)
