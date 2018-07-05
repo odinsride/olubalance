@@ -1,4 +1,27 @@
+<!-- Mobile Menu -->
+<ul class="side-nav" id="mobile-menu">
+  <% if !Rails.env.production? %>
+    <li>
+      <a href="#"><span class="red white-text" style="padding: 10px; border-radius: 50px"><%= Rails.env.upcase %></span></a>
+    </li>
+  <% end %>     
+
+  <% if user_signed_in? %>
+    <li><a class="dropdown-button" href="#!" data-activates="useraccount"><%= current_user.email %><i class="material-icons right">arrow_drop_down</i></a>
+  <% else %>
+    <li><%= link_to "Sign up", new_user_registration_path %></li>
+    <li><%= link_to "Login", new_user_session_path %></li>
+  <% end %>
+</ul>
+  
 <div class="navbar-fixed">
+
+  <!-- User Account Dropdown Structure -->
+  <ul id="useraccount" class="dropdown-content">
+    <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+    <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+  </ul>
+
   <nav class="z-depth-1" role="navigation">
     <div class="nav-wrapper container">
 
@@ -6,22 +29,22 @@
         <i class="material-icons hide-on-small-only">opacity</i><span class="flow-text valign-wrapper">olubalance</span>
       <% end %>
 
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      <!-- Mobile Menu Button -->
+      <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
       
       <ul class="right hide-on-med-and-down">
-        <li>
-          <%= link_to root_path do %>
-            Home
-          <% end %>
-        </li>
-      </ul>
+        <% if !Rails.env.production? %>
+          <li>
+            <a href="#"><span class="red white-text" style="padding: 10px; border-radius: 50px"><%= Rails.env.upcase %></span></a>
+          </li>
+        <% end %>     
 
-      <ul id="nav-mobile" class="side-nav">
-        <li>
-          <%= link_to root_path do %>
-            Home
-          <% end %>
-        </li>
+        <% if user_signed_in? %>
+          <li><a class="dropdown-button" href="#!" data-activates="useraccount"><%= current_user.email %><i class="material-icons right">arrow_drop_down</i></a>
+        <% else %>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+          <li><%= link_to "Login", new_user_session_path %></li>
+        <% end %>
       </ul>
 
     </div>

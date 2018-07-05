@@ -1,5 +1,7 @@
 <div class="row">
+
     <%= simple_form_for(@account) do |f| %>
+
       <% if @account.errors.any? %>
         <div id="error explanation">
           <h4>
@@ -16,7 +18,7 @@
       <% end %>
 
       <div class="row">
-        <div class="input-field col s12 l4">
+        <div class="input-field col s12 xl4 l6">
           <i class="material-icons prefix ob-text-primary">account_balance</i>
           <%= f.label :name, class: 'active' %>
           <%= f.text_field :name, placeholder: "Enter an account name" %>
@@ -24,7 +26,7 @@
       </div>
 
       <div class="row">
-        <div class="input-field col s12 l4">
+        <div class="input-field col s12 xl4 l6">
           <i class="material-icons prefix ob-text-primary">attach_money</i>
           <%= f.label :starting_balance, class: 'active' %>
           <%= f.number_field :starting_balance, placeholder: "Enter the starting balance" %>
@@ -32,7 +34,7 @@
       </div>
 
       <div class="row center-align">
-        <div class="col s12 l4">
+        <div class="col s12 xl4 l6">
           <%= link_to 'Cancel', accounts_path, class: 'btn waves-effect waves-light' %>
           <%= button_tag(type: 'submit', class: 'btn waves-effect waves-light') do %>
             <% if @account.new_record? then %>
