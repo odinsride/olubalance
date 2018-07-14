@@ -8,3 +8,6 @@ $(document).on('turbolinks:load', function() {
   $(".button-collapse").sideNav();
 });
 
+$(document).on('ready page:change', function() {
+  Waves.displayEffect();
+});
