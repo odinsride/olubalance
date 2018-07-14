@@ -29,7 +29,7 @@
         <div class="input-field col s12 xl4 l6">
           <i class="material-icons prefix ob-text-primary">attach_money</i>
           <%= f.label :starting_balance, class: 'active' %>
-          <%= f.number_field :starting_balance, placeholder: "Enter the starting balance" %>
+          <%= f.number_field :starting_balance, value: number_with_precision(f.object.starting_balance, precision: 2), step: 0.01, placeholder: "Enter the starting balance", readonly: (@account.new_record? ? false : true) %>
         </div>
       </div>
 
@@ -38,9 +38,9 @@
           <%= link_to 'Cancel', accounts_path, class: 'btn waves-effect waves-light' %>
           <%= button_tag(type: 'submit', class: 'btn waves-effect waves-light') do %>
             <% if @account.new_record? then %>
-              Create Account
+              Create
             <% else %>
-              Update Account
+              Update
             <% end %><i class="material-icons right">send</i>
           <% end %>
         </div>
