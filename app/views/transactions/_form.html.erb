@@ -33,12 +33,12 @@
 			<!-- Amount -->
 			<%= f.input :amount, icon: 'attach_money', wrapper_html: { class: 'input-field l2 s12' }, input_html: { :value => (@transaction.amount.present?) ? number_with_precision(f.object.amount.abs, precision: 2) : nil} %>
 			<!-- Memo -->
-			<%= f.input :memo, icon: 'note', hint: 'Add some notes about the transaction', wrapper_html: { class: 'input-field l4 s12' } %>
+			<%= f.input :memo, icon: 'note', wrapper_html: { class: 'input-field l4 s12' } %>
 		</div>
 
 		<div class="row">
 			<!-- Attachment -->
-			<%= f.input :attachment, icon: 'attach_file', hint: 'Upload a receipt or invoice', as: :file, wrapper_html: { class: 'l6 s12' } %>
+			<%= f.input :attachment, icon: 'attach_file', hint: 'Upload a receipt or invoice (PDF or Image Formats Only)', as: :file, wrapper_html: { class: 'l6 s12' } %>
 		</div>
 
 		<!-- Buttons -->
