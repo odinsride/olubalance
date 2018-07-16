@@ -17,8 +17,12 @@
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+  <div class="row">
+  	<div class="col l4 s12">
+		<%= button_tag(type: 'submit', class: 'btn waves-effect waves-light') do %>
+			Login
+		<% end %>
+    </div>
   </div>
 <% end %>
 
