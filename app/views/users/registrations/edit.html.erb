@@ -36,5 +36,17 @@
     </div>
   </div>
 <% end %>
+<br />
 
-<p>Unhappy? <%= link_to "Delete olubalance account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'ob-text-primary' %></p>
+<p><%= fa_icon "frown-o", class: 'ob-text-primary' %> Unhappy? <a class="modal-trigger ob-text-primary" href="#delete-ob-account">Delete olubalance account</a>
+
+<div id="delete-ob-account" class="modal">
+  <div class="modal-content ob-text-primary">
+    <h4>Delete Your olubalance Account?</h4>
+    <p>Are you sure you wish to delete your olubalance account? All of your saved accounts and transactions will be permanantly deleted by clicking <strong>Delete</strong> below. We're sad to see you go!</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat ob-text-primary">Cancel</a>
+    <%= link_to "Delete", registration_path(resource_name), method: :delete, class: "modal-action modal-close waves-effect waves-light btn-flat ob-text-primary", :'data-position' => "top", :'data-tooltip' => "Delete olubalance account" %>
+  </div>
+</div>

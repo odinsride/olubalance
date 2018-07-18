@@ -7,6 +7,24 @@
   </div>
 </div>
 
+<% if !@accounts.exists? then %>
+      <div class="row">
+        <div class="col s12 m8 offset-m2">
+          <div class="card ob-card-gradient ob-account-card">
+            <div class="card-content ob-text-primary">
+              <span class="card-title">Welcome to olubalance!</span>
+              <div class="row">
+                <br />
+                <div class="col s1"><i class="material-icons valign-wrapper">account_balance</i></div>
+                <div class="col s11">
+                It looks like you don't have any accounts added. To add an account, click the add account button at the top of the page :)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<% end %>
+
 <div class="row">
   <% @accounts.each do |account| %>
     <div class="col s12 m6 l6 xl4">
