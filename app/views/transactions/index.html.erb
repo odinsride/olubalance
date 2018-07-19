@@ -16,22 +16,22 @@
 <div class="row">
 	<div class="col s12">
 		<ul class="collection with-header">
-			<li class="collection-header ob-card-gradient">
-				<div class="row ob-no-bottom ob-text-primary">
+			<li class="collection-header ob-primary">
+				<div class="row ob-no-bottom white-text">
 					<div class="col s4">
-						<h4 class="flow-text"><%= @account.name %></h4>
+						<h4 class="flow-text valign-wrapper"><i class="material-icons" style="margin-right: 10px">account_balance</i><%= @account.name %></h4>
 					</div>
-					<div class="col s8 right-align <%= if @account.current_balance < 0 then 'red-text' end %>">
+					<div class="col s8 right-align <%= if @account.current_balance < 0 then 'red-text text-lighten-1' end %>">
 						<h4 class="flow-text"><%= number_to_currency(@account.current_balance) %></h4>
 					</div>
 				</div>
 			</li>
 
 			<!-- mobile header -->
-			<li class="collection-item ob-primary white-text hide-on-large-only"><strong>Transactions</strong></li>
+			<li class="collection-item ob-secondary white-text hide-on-large-only"><strong>Transactions</strong></li>
 			
 			<!-- desktop header -->
-			<li class="collection-item ob-primary white-text hide-on-med-and-down">
+			<li class="collection-item ob-secondary white-text hide-on-med-and-down">
 				<div class="row ob-no-bottom ob-transaction-header">
 					<div class="col s2 l2 xl2 center-align ob-right-border">
 						Date
