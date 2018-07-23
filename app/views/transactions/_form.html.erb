@@ -45,7 +45,7 @@
 		<div class="row center-align">
 			<div class="col s12 l6">
 				<%= link_to 'Cancel', account_transactions_path, class: 'btn waves-effect waves-light' %>
-				<%= button_tag(type: 'submit', class: 'btn waves-effect waves-light') do %>
+				<%= button_tag(type: 'submit', class: 'btn waves-effect waves-light', id: 'submit') do %>
 					<% if @transaction.new_record? then %>
 						Create
 					<% else %>

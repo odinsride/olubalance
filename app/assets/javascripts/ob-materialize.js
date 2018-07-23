@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 $(document).on('turbolinks:load', function() {
-  $(".dropdown-button").dropdown({ hover: true });
+  $(".dropdown-button").dropdown({ hover: true, belowOrigin: true });
   $(".button-collapse").sideNav();
 });
 

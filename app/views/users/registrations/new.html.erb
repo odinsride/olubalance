@@ -8,7 +8,12 @@
   <%= f.error_notification %>
 
   <div class="row">
-    <%= f.input :email, required: true, icon: 'email', autofocus: true, wrapper_html: { class: "input-field l6 s12" } %>
+    <%= f.input :first_name, required: true, icon: 'person', autofocus: true, wrapper_html: { class: "input-field l3 s12" } %>
+    <%= f.input :last_name, required: true, icon: 'none', wrapper_html: { class: "input-field l3 s12" } %>
+  </div>
+
+  <div class="row">
+    <%= f.input :email, required: true, icon: 'email', wrapper_html: { class: "input-field l6 s12" } %>
   </div>
 
   <div class="row">
