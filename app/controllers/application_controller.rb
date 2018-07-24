@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
 
   before_action :assign_navbar_content
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def assign_navbar_content
   	if user_signed_in?
@@ -43,7 +44,14 @@ class ApplicationController < ActionController::Base
           "<li class=\"waves-effect\">"+text+"</li>"
         end
       end
+    end
   end
-end
 
+  protected
+
+    def configure_permitted_parameters
+               devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password)}
+               devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :email, :password, :current_password)}
+    end
+    
 end

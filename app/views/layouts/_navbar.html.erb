@@ -10,7 +10,8 @@
     <% end %> 
     <div class="row">
       <div class="col s12 center-align">
-      <h3 class="white-text">olubalance</h3>
+      <!--<h3 class="white-text">olubalance</h3>-->
+      <%= image_tag("logo.png", width: '50%') %>
       <% if user_signed_in? %>
         <span class="btn-flat white-text"><%= current_user.email %></span>
       <% end %>
@@ -39,13 +40,26 @@
   <nav class="z-depth-1" role="navigation">
     <div class="nav-wrapper container">
 
-      <%= link_to root_path, id: "logo-container", class: "brand-logo" do %>
-        <i class="material-icons hide-on-small-only">opacity</i><span class="flow-text valign-wrapper">olubalance</span>
+      <!-- Logos -->
+      <!-- Desktop Logo -->
+      <%= link_to root_path, id: "logo-container", class: "brand-logo hide-on-med-and-down" do %>
+        <%= image_tag("logo.png", width: '21%') %>
+      <% end %>
+
+      <!-- Tablet Logo -->
+      <%= link_to root_path, id: "logo-container", class: "brand-logo center hide-on-large-only hide-on-small-only" do %>
+        <%= image_tag("logo.png", width: '45%') %>
+      <% end %>
+
+      <!-- Mobile Logo -->
+      <%= link_to root_path, id: "logo-container", class: "brand-logo center hide-on-large-only hide-on-med-only" do %>
+        <%= image_tag("logo.png", width: '68%') %>
       <% end %>
 
       <!-- Mobile Menu Button -->
       <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
       
+      <!-- Desktop Menu -->
       <ul class="right hide-on-med-and-down">
         <% if !Rails.env.production? %>
           <li>
