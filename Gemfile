@@ -20,13 +20,19 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'simple_form'
-gem 'bootstrap', '~> 4.0.0'
+#gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
+gem 'rails-ujs'
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem "paperclip", "~> 6.0.0"
 gem "aws-sdk"
 gem 'figaro'
+gem 'materialize-sass', '~> 0.100.2'
+gem 'material_icons'
+gem 'materialize-form'
+gem 'font-awesome-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -52,7 +58,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
+  #gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

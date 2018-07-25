@@ -1,23 +1,53 @@
-<style type="text/css">
-   body { background: #222222 !important; color: white;} /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
-</style>
-<div class="container text-center">
-	<h1><strong>olubalance</strong></h1>
-	<h3 style="color: #a4a4a4">olubalance is a simple application for keeping track of your personal finances.</h3><br />
-	<h5>Follow us on GitHub!<br />
-	<a class="github-button" href="https://github.com/odinsride/olubalance/subscription" data-icon="octicon-eye" aria-label="Watch odinsride/olubalance on GitHub">Watch olubalance</a></h5>
-	<div class="row mt-5">
-		<div class="col-sm-6">
-			<%= image_tag "olubalance_accounts.png", style: "max-height: 263px; box-shadow: 2px 4px 5px grey" %>
-		</div>
-		<div class="col-sm-6">
-			<%= image_tag "olubalance_transactions.png", style: "max-width: 470px; box-shadow: 2px 4px 5px grey" %>
-		</div>
-	</div>
-	<div class="mt-5">
-		<%= link_to "New User?", new_user_registration_path, class: "btn btn-warning" %>
-		<%= link_to "Login", new_user_session_path, class: "btn btn-success" %>
-	</div>
-</div>
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+ <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center ob-text-primary">olubalance</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">A personal finance tool designed to help balance and reconcile your accounts</h5>
+      </div>
+      <div class="row center">
+		<%= link_to "New User?", new_user_registration_path, class: "waves-effect waves-light btn" %>
+		<%= link_to "Login", new_user_session_path, class: "btn waves-effect waves-light" %>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center ob-text-secondary"><i class="material-icons small">important_devices</i></h2>
+            <h5 class="center">Balance Your Accounts</h5>
+
+            <p class="light">olubalance functions as a web-based replacement for balancing your accounts.  Older generations refer to this as "balancing your checkbook".  olubalance brings this concept to the modern age with a responsive mobile interface, the ability to attach receipts and statements to your accounts and transactions, and more!</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center ob-text-secondary"><i class="material-icons small">attach_money</i></h2>
+            <h5 class="center">Always Know Your $</h5>
+
+            <p class="light">Take control of your finances by always knowing your current balance. Online banking can leave you with surprises such as charges that are processed days after-the-fact.  By using olubalance to track your spending, you will always know how much money you have and can avoid overdraft fees from those pesky unprocessed charges.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center ob-text-secondary"><i class="material-icons small">account_balance</i></h2>
+            <h5 class="center">You Have Control</h5>
+
+            <p class="light">Other personal finance tools require providing your bank account logins to a third party in order to sync your transactions. With olubalance, we are trying to solve a different problem, and that is to NOT rely on the data from your financial institutions.  You have complete control to enter your transactions as you would write them in a check register.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+  </div>

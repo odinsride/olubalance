@@ -1,44 +1,120 @@
-	<h2><%= @account.name %></h2>
-	<h5>Balance: <%= number_to_currency(@account.current_balance) %></h5>
-	<br />
-	<div class="row">
-		<div class="col-sm-12 text-right">
-			<%= link_to "Add Transaction", new_account_transaction_path, class: "btn btn-primary" %>
-		</div>	
+<div class="row">
+	<div class="col s12">
+    	<p class="ob-text-primary ob-shadow left ob-no-bottom">
+    		<%= link_to accounts_path, class: 'ob-text-primary valign-wrapper' do %>
+				<i class="material-icons ob-icon-medium">chevron_left</i>
+				<span class="">Accounts</span>
+			<% end %>
+    	</p>
+		<%= link_to new_account_transaction_path, class: "btn waves-effect waves-light right z-depth-2" do %>
+	    	<i class="material-icons left">add</i>Transaction
+	    <% end %>
 	</div>
-	<div class="row mt-2">
-		<div class="col-sm-12">
-			<table class="table table-sm table-hover">
-				<thead>
-					<tr class="row m-0">
-						<th class="col-sm-1 text-center">#</th>
-						<th class="col-sm-2 text-center">Date</th>
-						<th class="col-sm-3">Description</th>
-						<th class="col-sm-2 text-right">Credit</th>
-						<th class="col-sm-2 text-right">Debit</th>
-						<th class="col-sm-2 text-right">Balance</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% @transactions.each do |transaction| %>
-						<tr class="row m-0">
-							<td class="col-sm-1 text-center"><%= link_to transaction.id, [transaction.account, transaction] %></td>
-							<td class="col-sm-2 text-center"><%= transaction.trx_date.strftime('%m/%d/%Y') %></td>
-							<td class="col-sm-3"><%= transaction.description %></td>
-							<td class="col-sm-2 text-right"><%= if transaction.amount >= 0 then number_to_currency(transaction.amount) end %></td>
-							<td class="col-sm-2 text-right"><%= if transaction.amount < 0 then "(" + number_to_currency(transaction.amount.abs) + ")" end %></td>
-							<td class="col-sm-2 text-right"><%= number_to_currency(transaction.running_balance) %></td>
 
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
-			<div class="text-center">
-				<%= will_paginate @transactions %>
-			</div>
-			<div class="text-center">
-				<%= link_to 'Edit Account', edit_account_path(@account), class: "btn btn-secondary btn-sm" %>
-				<%= link_to 'Delete Account', @account, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: 'Are you sure you want to delete the account?' } %>
-			</div>
-		</div>
+</div>
+
+<div class="row">
+	<div class="col s12">
+		<ul class="collection with-header">
+			<li class="collection-header ob-primary">
+				<div class="row ob-no-bottom white-text">
+					<div class="col s4">
+						<h4 class="flow-text valign-wrapper"><i class="material-icons" style="margin-right: 10px">account_balance</i><%= @account.name %></h4>
+					</div>
+					<div class="col s8 right-align <%= if @account.current_balance < 0 then 'red-text text-lighten-1' end %>">
+						<h4 class="flow-text"><%= number_to_currency(@account.current_balance) %></h4>
+					</div>
+				</div>
+			</li>
+
+			<!-- mobile header -->
+			<li class="collection-item ob-secondary white-text hide-on-large-only"><strong>Transactions</strong></li>
+			
+			<!-- desktop header -->
+			<li class="collection-item ob-secondary white-text hide-on-med-and-down">
+				<div class="row ob-no-bottom ob-transaction-header">
+					<div class="col s2 l2 xl2 center-align ob-right-border">
+						Date
+					</div>
+					<div class="col s4 l4 xl7 valign-wrapper ob-right-border">
+						Description
+					</div>
+					<div class="col s2 l2 xl1 right-align ob-right-border">
+						Credit
+					</div>
+					<div class="col s2 l2 xl1 right-align ob-right-border">
+						Debit
+					</div>
+					<div class="col s2 l2 xl1 right-align">
+						Balance
+					</div>
+				</div>
+			</li>
+
+			<% @transactions.each do |transaction| %>
+				<%= link_to [transaction.account, transaction], class: "collection-item" do %>
+					<!-- mobile view -->
+					<div class="row ob-no-bottom hide-on-large-only">
+						<div class="col s4 text-muted">
+							<small><%= transaction.trx_date.strftime('%m/%d/%y') %></small>
+						</div>
+						<div class="col s8 right-align text-muted">
+							<small>Balance <%= number_to_currency(transaction.running_balance) %></small>
+						</div>
+					</div>
+					<div class="row ob-no-bottom ob-text-primary hide-on-large-only">
+						<div class="col s8 valign-wrapper">
+							<strong><%= transaction.description %></strong>
+							<% if transaction.attachment.exists? then %>
+								<i class="tiny text-muted material-icons tooltipped" data-position="top" data-tooltip="Transaction has attachment">attach_file</i>
+							<% end %>
+						</div>
+						<div class="col s4 right-align">
+							<% if transaction.amount >= 0 then %>
+								<span class="green-text"><%= number_to_currency(transaction.amount) %></span>
+							<% else %>
+								<span class="red-text"><%= number_to_currency(transaction.amount.abs) %></span>
+							<% end %>
+						</div>
+					</div>
+
+					<!-- desktop view -->
+					<div class="row ob-no-bottom hide-on-med-and-down valign-wrapper">
+						<div class="col l2 xl2 text-muted ob-right-border center-align">
+							<%= transaction.trx_date.strftime('%m/%d/%Y') %>
+						</div>
+						<div class="col l4 xl7 valign-wrapper ob-text-primary ob-right-border">
+							<strong><%= transaction.description %></strong>
+							<% if transaction.attachment.exists? then %>
+								<i class="tiny text-muted material-icons tooltipped" data-position="top" data-tooltip="Transaction has attachment">attach_file</i>
+							<% end %>
+						</div>
+						<div class="col l2 xl1 right-align ob-right-border">
+							<% if transaction.amount >= 0 then %>
+								<span class="green-text"><%= number_to_currency(transaction.amount) %></span>
+							<% else %>
+								&nbsp;
+							<% end %>
+						</div>
+						<div class="col l2 xl1 right-align ob-right-border">
+							<% if transaction.amount < 0 then %>
+								<span class="red-text"><%= number_to_currency(transaction.amount.abs) %></span>
+							<% else %>
+								&nbsp;
+							<% end %>
+						</div>
+						<div class="col l2 xl1 right-align text-muted">
+							<%= number_to_currency(transaction.running_balance) %>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+		</ul>
 	</div>
+</div>
+
+<div class="row">
+	<div class="col s12 center-align">
+		<%= will_paginate @transactions, inner_window: 2, outer_window: 1, renderer: @custom_paginate_renderer %>
+	</div>
+</div>

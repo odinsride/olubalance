@@ -1,0 +1,5 @@
+= simple_form_for([@transaction.account, @transaction]) do |f|
+  .row
+    = f.input :trx_type, as: :radio_buttons, wrapper_html: { class: 'm6 s12' }
+
+  = f.button :submit
