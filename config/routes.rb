@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'static_pages/releasenotes'
 
   devise_for :users
   resources :accounts do
