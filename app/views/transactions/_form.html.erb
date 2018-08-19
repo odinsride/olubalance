@@ -18,7 +18,14 @@
 
 		<div class="row">
 			<!-- Transaction Date -->
-			<%= f.input :trx_date, as: :date, html5: true, :label => 'Transaction Date', icon: 'date_range', wrapper_html: { class: 'l4 s7' }, input_html: { value: (@transaction.trx_date.present?) ? @transaction.trx_date.strftime('%d %B, %Y') : Time.now.strftime('%d %B, %Y') } %>
+			<!--<%= f.input :trx_date, as: :date, html5: true, :label => 'Transaction Date', icon: 'date_range', class: 'datepicker', wrapper_html: { class: 'l4 s7' }, input_html: { value: (@transaction.trx_date.present?) ? @transaction.trx_date.strftime('%d %B, %Y') : Time.now.strftime('%d %B, %Y') } %>-->
+
+        	<div class="input-field col l4 s7">
+				<i class="material-icons prefix ob-text-primary">date_range</i>
+				<%= f.text_field :trx_date, class:"datepicker" %>
+				<%= f.label :trx_date, :label => 'Transaction Date' %>
+			</div>
+			
 			<!-- Transaction Type -->
 			<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], wrapper_html: { class: 'l2 s5' }, :label => 'Transaction Type', :item_wrapper_tag => :div, :checked => @transaction.transaction_type, id: 'trx_type' %>
 		</div>
@@ -56,4 +63,12 @@
 		</div>
 
 	<% end %>
+
+	<script type="text/javascript">
+$('.datepicker').pickadate({
+  selectMonths: true, // Creates a dropdown to control month
+  selectYears: 15 // Creates a dropdown of 15 years to control year
+});
+</script>
+
 </div>
