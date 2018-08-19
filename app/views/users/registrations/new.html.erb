@@ -17,6 +17,10 @@
   </div>
 
   <div class="row">
+      <%= f.input :timezone, as: :time_zone, required: true, icon: 'access_time', selected: '(GMT-05:00) Eastern Time (US & Canada)', wrapper_html: { class: "input-field l6 s12" } %>
+  </div>
+
+  <div class="row">
     <%= f.input :password, icon: 'lock', required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), wrapper_html: {class: "input-field l6 s12" } %>
   </div>
 
