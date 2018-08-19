@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.1.3] - 2018-08-19
+### Fixed
+- Fixed issue with local user Time Zone. Users are now required to set their local timezone, and all dates within the application front end will reflect this timezone setting.
+
 ## [v1.1.2] - 2018-08-19
 ### Fixed
 - Fixed issue with Transaction datepicker not loading
@@ -48,7 +52,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.1.3...HEAD
+[v1.1.3]: https://github.com/odinsride/olubalance/compare/v1.1.2...v1.1.3
+[v1.1.2]: https://github.com/odinsride/olubalance/compare/v1.1.1...v1.1.2
 [v1.1.1]: https://github.com/odinsride/olubalance/compare/v1.1.0...v1.1.1
 [v1.1.0]: https://github.com/odinsride/olubalance/compare/v1.0.2...v1.1.0
 [v1.0.2]: https://github.com/odinsride/olubalance/compare/v1.0.1...v1.0.2
