@@ -21,6 +21,10 @@
   </div>
 
   <div class="row">
+      <%= f.input :timezone, as: :time_zone, required: true, icon: 'access_time', wrapper_html: { class: "input-field l6 s12" } %>
+  </div>
+
+  <div class="row">
     <%= f.input :password, autocomplete: "off", icon: 'lock', required: false, hint: "leave it blank if you don't want to change it", wrapper_html: {class: "input-field l6 s12" } %>
   </div>
 
@@ -31,6 +35,7 @@
   <div class="row">
     <%= f.input :current_password, icon: 'lock', required: true, hint: "we need your current password to confirm your changes", wrapper_html: {class: "input-field l6 s12" } %>
   </div>
+
 
   <div class="row">
     <div class="col l4 s12">

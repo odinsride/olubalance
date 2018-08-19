@@ -6,6 +6,7 @@ $(document).on('turbolinks:load', function() {
 $(document).on('turbolinks:load', function() {
   $(".dropdown-button").dropdown({ hover: true, belowOrigin: true });
   $(".button-collapse").sideNav();
+  $('select').material_select();
 });
 
 $(document).on('ready page:change', function() {
