@@ -20,7 +20,7 @@
 			<!-- Transaction Date -->
         	<div class="input-field col l4 s7">
 				<i class="material-icons prefix ob-text-primary">date_range</i>
-				<%= f.text_field :trx_date, class:"datepicker", value: (@transaction.trx_date.present?) ? @transaction.trx_date.strftime('%d %B, %Y') : Time.now.strftime('%d %B, %Y') %>
+				<%= f.text_field :trx_date, class:"datepicker", value: (@transaction.trx_date.present?) ? @transaction.trx_date.strftime('%d %B, %Y') : Time.current.strftime('%d %B, %Y') %>
 				<%= f.label :trx_date, :label => 'Transaction Date' %>
 			</div>
 
