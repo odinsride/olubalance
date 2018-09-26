@@ -4,6 +4,8 @@ class Account < ApplicationRecord
 
 	validates :name, presence: true, length: { maximum: 50, minimum: 2 }
 	validates :starting_balance, presence: true
+	validates :last_four, length: { maximum: 4 }
+	
 	#validates_associated :transactions
 
 	after_create :create_initial_transaction

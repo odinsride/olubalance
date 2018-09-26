@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
 
   devise_for :users
+
+  get 'accounts/inactive' => 'accounts#inactive'
   resources :accounts do
   	resources :transactions
+
+  	member do
+        get :deactivate
+        get :activate
+    end
   end
   
   authenticated do

@@ -1,9 +1,12 @@
 <div class="row">
   <div class="col s12">
-    <h5 class="ob-text-primary ob-shadow left"><strong>Accounts</strong></h5>
-    <%= link_to new_account_path, class: "btn waves-effect waves-light right z-depth-2" do %>
-      <i class="material-icons left">add</i>Account
-    <% end %>
+    <h5 class="ob-text-primary ob-shadow left"><strong>Inactive Accounts</strong></h5>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <h6>Accounts listed here are for historical purposes only. If you wish to view the transactions of an inactive account, you must first reactivate it.</h6>
   </div>
 </div>
 
@@ -17,7 +20,7 @@
                 <br />
                 <div class="col s1"><i class="material-icons valign-wrapper">account_balance</i></div>
                 <div class="col s11">
-                It looks like you don't have any accounts added. To add an account, click the add account button at the top of the page :)</div>
+                You have no inactive accounts :)</div>
               </div>
             </div>
           </div>
@@ -29,7 +32,6 @@
   <% @accounts.each do |account| %>
     <div class="col s12 m6 l6 xl4">
       <div class="card ob-account-card ob-card-gradient hoverable z-depth-2">
-        <%= link_to(account_transactions_path(account.id), class: "") do %>
           <div class="card-content">
             <div class="row ob-no-bottom valign-wrapper">
               <div class="card-title col s12 ob-text-primary ob-shadow"><strong><%= account.name %><% if account.last_four.present? then %> ( ... <%= account.last_four %>)<% end %></strong></div>
@@ -48,10 +50,9 @@
             </div>
 
           </div>
-        <% end %>
 
         <div class="card-action right-align">
-              <%= link_to "Edit", edit_account_path(account), class: "ob-text-primary tooltipped", :'data-position' => "top", :'data-tooltip' => "Edit Account" %>
+              <%= link_to "Reactivate", activate_account_path(account), class: "ob-text-primary tooltipped", :'data-position' => "top", :'data-tooltip' => "Reactivate Account" %>
               <a class="modal-trigger ob-text-primary tooltipped" data-position="top", data-tooltip="Delete Account" href="#delete-account">Delete</a>
         </div>
       </div>
@@ -60,7 +61,7 @@
               <div id="delete-account" class="modal">
                 <div class="modal-content ob-text-primary">
                   <h4>Delete <%= account.name %>?</h4>
-                  <p>Are you sure you wish to delete this account?</p>
+                  <p>Are you sure you wish to delete this account? All transactions will be lost!</p>
                 </div>
                 <div class="modal-footer">
                   <a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat ob-text-primary">Cancel</a>

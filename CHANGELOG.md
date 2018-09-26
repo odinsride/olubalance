@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] changes
 
 ## [v1.2.0] - 2018-10-06
+### Added
+- Accounts can be deactivated, which hides them from the main account list.  Inactive accounts can be found from the user menu and reactivated at any time.  This provides a non-destructive method of archiving an account for historical purposes.
+- A new field has been added to allow storing the last 4 digits of the account number along with an account.  This can be helpful for quickly identifying an account by number.
+
 ### Changed
 - Ruby version updated to 2.5.1
 - Rails version updated to 5.2.1

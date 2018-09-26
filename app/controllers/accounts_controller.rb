@@ -5,7 +5,11 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = current_user.accounts.order("created_at ASC")
+    @accounts = current_user.accounts.where(active: true).order("created_at ASC")
+  end
+
+  def inactive
+    @accounts = current_user.accounts.where(active: false).order("created_at ASC")
   end
 
   # GET /accounts/1
@@ -62,6 +66,38 @@ class AccountsController < ApplicationController
     end
   end
 
+  # Sets account active field to false
+  def deactivate
+    @account = current_user.accounts.find(params[:id])
+    @account.active = false
+
+    respond_to do |format|
+      if @account.save
+        format.html { redirect_to accounts_path, notice: 'Account was deactivated.' }
+        format.json { render :show, location: @account }
+      else
+        format.html { render :show }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # Sets account active field to true
+  def activate
+    @account = current_user.accounts.find(params[:id])
+    @account.active = true
+
+    respond_to do |format|
+      if @account.save
+        format.html { redirect_to accounts_path, notice: 'Account was activated.' }
+        format.json { render :show, location: @account }
+      else
+        format.html { render :show }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
@@ -70,6 +106,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:name, :starting_balance, :current_balance, :user_id)
+      params.require(:account).permit(:name, :starting_balance, :current_balance, :last_four, :active, :user_id)
     end
 end
