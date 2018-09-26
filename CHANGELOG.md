@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.2.0] - 2018-10-06
+### Changed
+- Ruby version updated to 2.5.1
+- Rails version updated to 5.2.1
+
+#### Gem Changes
+- sass-rails gem replaced with sassc-rails
+- pg gem updated to 1.1.3
+- puma gem updated to 3.12.0
+- aws-sdk gem replaced with aws-sdk-s3
+
 ## [v1.1.3] - 2018-08-19
 ### Fixed
 - Fixed issue with local user Time Zone. Users are now required to set their local timezone, and all dates within the application front end will reflect this timezone setting.
@@ -52,7 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.1.3...HEAD
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.2.0...HEAD
+[v1.2.0]: https://github.com/odinsride/olubalance/compare/v1.1.3...v1.2.0
 [v1.1.3]: https://github.com/odinsride/olubalance/compare/v1.1.2...v1.1.3
 [v1.1.2]: https://github.com/odinsride/olubalance/compare/v1.1.1...v1.1.2
 [v1.1.1]: https://github.com/odinsride/olubalance/compare/v1.1.0...v1.1.1

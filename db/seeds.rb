@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user = User.create!(:email => 'john@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
+user = User.create!(:email => 'john@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret', :first_name => 'John', :last_name => 'Smith', :timezone => 'Eastern Time (US & Canada)')
 
 Account.create!(name: 'PNC',   starting_balance: 50000, user_id: 1)
 Account.create!(name: 'Chase', starting_balance: 1500, user_id: 1)
