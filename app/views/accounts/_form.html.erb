@@ -57,6 +57,7 @@
         </div>
       </div>
 
+          <% if !@account.new_record? then %>
               <div id="deactivate-account" class="modal">
                 <div class="modal-content ob-text-primary">
                   <h4>Deactivate <%= account.name %>?</h4>
@@ -67,6 +68,7 @@
                   <%= link_to "Deactivate", deactivate_account_path(@account), class: "modal-action modal-close waves-effect waves-light btn-flat ob-text-primary", :'data-position' => "top", :'data-tooltip' => "Deactivate Account" %>
                 </div>
               </div>
+            <% end %>
 
     <% end %>
 </div>
