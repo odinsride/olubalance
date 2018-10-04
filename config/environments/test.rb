@@ -51,5 +51,4 @@ Rails.application.configure do
       s3_host_name: ENV['S3_HOST_NAME']
     }
   }
-
 end

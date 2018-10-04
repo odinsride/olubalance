@@ -1,6 +1,8 @@
 class AddFieldsToAccount < ActiveRecord::Migration[5.2]
-  def change
-    add_column :accounts, :last_four, :integer
-    add_column :accounts, :active, :boolean, default: true
+  def up
+    change_table :accounts, bulk: true do |t|
+      t.integer :last_four
+      t.boolean :active, default: true
+    end
   end
 end
