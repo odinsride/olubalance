@@ -1,6 +1,8 @@
 class AddMemoAndRunningBalanceToTransactions < ActiveRecord::Migration[5.1]
-  def change
-  	add_column :transactions, :memo, :string
-  	add_column :transactions, :running_balance, :decimal
+  def up
+    change_table :transactions, bulk: true do |t|
+      t.string  :memo
+      t.decimal :running_balance
+    end
   end
 end

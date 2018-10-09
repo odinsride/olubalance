@@ -10,5 +10,4 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     get static_pages_releasenotes_url
     assert_response :success
   end
-
 end
