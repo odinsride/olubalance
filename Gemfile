@@ -8,6 +8,7 @@ end
 gem 'aws-sdk-s3'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'draper'
 gem 'figaro'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.5'

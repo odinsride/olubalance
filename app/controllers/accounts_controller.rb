@@ -6,6 +6,7 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     @accounts = current_user.accounts.where(active: true).order('created_at ASC')
+    @accounts = @accounts.decorate
   end
 
   def inactive
