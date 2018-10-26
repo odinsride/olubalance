@@ -1,0 +1,10 @@
+  <div id="delete-account<%= account.id %>" class="modal">
+    <div class="modal-content ob-text-primary">
+      <h4>Delete <%= account.account_name %>?</h4>
+      <p>Are you sure you wish to delete this account?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat ob-text-primary">Cancel</a>
+      <%= link_to "Delete", account, method: :delete, class: "modal-action modal-close waves-effect waves-light btn-flat ob-text-primary", :'data-position' => "top", :'data-tooltip' => "Delete Account" %>
+    </div>
+  </div>

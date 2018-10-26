@@ -1,9 +1,10 @@
+  <!-- Account Card -->
   <div class="col s12 m6 l6 xl4">
     <div class="card ob-account-card ob-card-gradient hoverable z-depth-2">
-      <%= link_to(account_transactions_path(account.id), class: "") do %>
+      <%= link_to(account_transactions_path(account.id)) do %>
         <div class="card-content">
           <div class="row ob-no-bottom valign-wrapper">
-            <div class="card-title col s12 ob-text-primary ob-shadow"><strong><%= account.name %><%= account.last_four_formatted %></strong></div>
+            <div class="card-title col s12 ob-text-primary ob-shadow"><strong><%= account.account_name %></strong></div>
           </div>
           
           <div class="row ob-no-bottom">
@@ -11,11 +12,11 @@
           </div>
 
           <div class="row ob-no-bottom">
-            <div class="col s12 right-align <%= if account.current_balance >= 0 then 'text-muted' else 'red-text' end %>" style="font-size: 22pt" data-badge-caption=""><%= number_to_currency(account.current_balance) %></div>
+            <div class="col s12 right-align <%= account.balance_class %>" style="font-size: 22pt" data-badge-caption=""><%= account.current_balance_display %></div>
           </div>
 
           <div class="row ob-no-bottom">
-            <div class="col s12 right-align text-muted"><small>as of <%= account.updated_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z') %></small></div>
+            <div class="col s12 right-align text-muted"><small>as of <%= account.updated_at_display %></small></div>
           </div>
 
         </div>
@@ -28,13 +29,5 @@
     </div>
   </div>
 
-  <div id="delete-account<%= account.id %>" class="modal">
-    <div class="modal-content ob-text-primary">
-      <h4>Delete <%= account.name %>?</h4>
-      <p>Are you sure you wish to delete this account?</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat ob-text-primary">Cancel</a>
-      <%= link_to "Delete", account, method: :delete, class: "modal-action modal-close waves-effect waves-light btn-flat ob-text-primary", :'data-position' => "top", :'data-tooltip' => "Delete Account" %>
-    </div>
-  </div>
+  <!-- Render code for Delete Modal -->
+  <%= render partial: "deletemodal", locals: { account: account } %>

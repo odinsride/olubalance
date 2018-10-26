@@ -1,8 +1,8 @@
 <%= render partial: "shared/pagetitle", locals: { page_model: "account", description: "Accounts" } %>
 
 <!-- Render the message if no accounts exist -->
-<%= render partial: "accounts/noaccounts", locals: { description: "It looks like you don't have any accounts added. To add an account, click the add account button at the top of the page :)" } %>
+<%= render partial: "noaccounts", locals: { description: Constants::NO_ACCOUNT_DESC } if @accounts.empty? %>
 
 <div class="row" id="accounts">
-  <%= render partial: "accounts/account", collection: @accounts %>
+  <%= render partial: "account", collection: @accounts %>
 </div>

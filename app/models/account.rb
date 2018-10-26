@@ -7,8 +7,6 @@ class Account < ApplicationRecord
   validates :starting_balance, presence: true
   validates :last_four, length: { maximum: 4 }
 
-  # validates_associated :transactions
-
   after_create :create_initial_transaction
 
   def create_initial_transaction
