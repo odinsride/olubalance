@@ -1,0 +1,30 @@
+<!-- Inactive account card -->
+<div class="col s12 m6 l6 xl4">
+  <div class="card ob-account-card ob-card-gradient hoverable z-depth-2">
+    <div class="card-content">
+      <div class="row ob-no-bottom valign-wrapper">
+        <div class="card-title col s12 ob-text-primary ob-shadow"><strong><%= inactiveaccount.account_name %></strong></div>
+      </div>
+
+      <div class="row ob-no-bottom">
+        <div class="col s12 right-align valign-wrapper valign-fix ob-text-primary"><i class="tiny material-icons">account_balance</i>&nbsp;<strong>Balance</strong></div>
+      </div>
+
+      <div class="row ob-no-bottom">
+        <div class="col s12 right-align <%= inactiveaccount.balance_class %>" style="font-size: 22pt" data-badge-caption=""><%= inactiveaccount.current_balance_display %></div>
+      </div>
+
+      <div class="row ob-no-bottom">
+        <div class="col s12 right-align text-muted"><small>as of <%= inactiveaccount.updated_at_display %></small></div>
+      </div>
+    </div>
+
+    <div class="card-action right-align">
+      <%= link_to "Reactivate", activate_account_path(inactiveaccount), class: "ob-text-primary tooltipped", :'data-position' => "top", :'data-tooltip' => "Reactivate Account" %>
+      <a class="modal-trigger ob-text-primary tooltipped" data-position="top", data-tooltip="Delete Account" href="#delete-account">Delete</a>
+    </div>
+  </div>
+</div>
+
+<!-- Render code for Delete Modal -->
+<%= render partial: "deletemodal", locals: { account: inactiveaccount } %>

@@ -10,7 +10,8 @@ class AccountsController < ApplicationController
   end
 
   def inactive
-    @accounts = current_user.accounts.where(active: false).order('created_at ASC')
+    @inactiveaccounts = current_user.accounts.where(active: false).order('created_at ASC')
+    @inactiveaccounts = @inactiveaccounts.decorate
   end
 
   # GET /accounts/1
