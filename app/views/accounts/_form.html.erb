@@ -28,8 +28,8 @@
       <div class="row">
         <div class="input-field col s12 xl4 l6">
           <i class="material-icons prefix ob-text-primary">looks_4</i>
-          <%= f.label :last_four, class: 'active', label: "Last Four Digits of Account Number (optional)" %>
-          <%= f.text_field :last_four, placeholder: "Last Four Digits of Account Number" %>
+          <%= f.label :last_four, class: 'active', label: "Last Four Digits of Account Number" %>
+          <%= f.text_field :last_four, placeholder: "1234" %>
         </div>
       </div>
 
@@ -51,24 +51,7 @@
               Update
             <% end %><i class="material-icons right">send</i>
           <% end %>
-          <% if !@account.new_record? then %><br /><br />
-            <a href="#deactivate-account" class="modal-trigger btn waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Marks account as inactive. Click for more details">Deactivate<i class="material-icons right">cancel</i></a>
-          <% end %>
         </div>
       </div>
-
-          <% if !@account.new_record? then %>
-              <div id="deactivate-account" class="modal">
-                <div class="modal-content ob-text-primary">
-                  <h4>Deactivate <%= account.name %>?</h4>
-                  <p>Deactivating an account hides it from your account list, while keeping all transaction history for record keeping purposes. Inactive accounts can be found from the user menu and reactivated at any time.  This is a non-destructive way of archiving an account.</p>
-                </div>
-                <div class="modal-footer">
-                  <a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat ob-text-primary">Cancel</a>
-                  <%= link_to "Deactivate", deactivate_account_path(@account), class: "modal-action modal-close waves-effect waves-light btn-flat ob-text-primary", :'data-position' => "top", :'data-tooltip' => "Deactivate Account" %>
-                </div>
-              </div>
-            <% end %>
-
     <% end %>
 </div>

@@ -4,7 +4,7 @@
       <%= link_to(account_transactions_path(account.id)) do %>
         <div class="card-content">
           <div class="row ob-no-bottom valign-wrapper">
-            <div class="card-title col s12 ob-text-primary ob-shadow"><strong><%= account.account_name %></strong></div>
+            <div class="card-title col s12 ob-text-primary ob-shadow"><strong><%= account.name %></strong></div>
           </div>
           
           <div class="row ob-no-bottom">
@@ -23,11 +23,12 @@
       <% end %>
 
       <div class="card-action right-align">
+            <span class="pull-left text-muted"><%= account.last_four_display %></span>
             <%= link_to "Edit", edit_account_path(account), class: "ob-text-primary tooltipped", :'data-position' => "top", :'data-tooltip' => "Edit Account" %>
-            <a class="modal-trigger ob-text-primary tooltipped" data-position="top", data-tooltip="Delete Account" href="#delete-account<%= account.id %>">Delete</a>
+            <a class="modal-trigger ob-text-primary tooltipped" data-position="top", data-tooltip="Deactivate Account" href="#deactivate-account<%= account.id %>">Deactivate</a>
       </div>
     </div>
   </div>
 
-  <!-- Render code for Delete Modal -->
-  <%= render partial: "deletemodal", locals: { account: account } %>
+  <!-- Render code for Deactivate Modal -->
+  <%= render partial: "deactivatemodal", locals: { account: account } %>

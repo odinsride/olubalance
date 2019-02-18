@@ -8,6 +8,10 @@ class AccountDecorator < Draper::Decorator
     last_four.present? ? name + ' ( ... ' + last_four.to_s + ')' : name
   end
 
+  def last_four_display
+    last_four.present? ? 'xx' + last_four.to_s : nil
+  end
+
   def current_balance_display
     number_to_currency(current_balance)
   end

@@ -21,10 +21,6 @@
 
     <div class="card-action right-align">
       <%= link_to "Reactivate", activate_account_path(inactiveaccount), class: "ob-text-primary tooltipped", :'data-position' => "top", :'data-tooltip' => "Reactivate Account" %>
-      <a class="modal-trigger ob-text-primary tooltipped" data-position="top", data-tooltip="Delete Account" href="#delete-account">Delete</a>
     </div>
   </div>
 </div>
-
-<!-- Render code for Delete Modal -->
-<%= render partial: "deletemodal", locals: { account: inactiveaccount } %>
