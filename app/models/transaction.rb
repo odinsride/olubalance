@@ -42,6 +42,8 @@ class Transaction < ApplicationRecord
   validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :memo, length: { maximum: 500 }
 
+  before_post_process :rename_file
+
   before_save :convert_amount
   after_create :update_account_balance_new
   after_update :update_account_balance_edit
@@ -79,5 +81,11 @@ class Transaction < ApplicationRecord
     @account = Account.find(account_id)
     # Rails 5.2 - amount_was is still valid in after_destroy callbacks
     @account.update(current_balance: @account.current_balance - amount_was)
+  end
+
+  def rename_file
+    extension = File.extname(attachment_file_name).downcase
+    file_description = description.squish.tr(' ', '_')
+    attachment.instance_write :file_name, "#{id}_#{file_description}_#{trx_date}#{extension}"
   end
 end

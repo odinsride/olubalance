@@ -8,10 +8,10 @@ class TransactionsController < ApplicationController
     @transactions = @account.transactions.with_balance.desc.paginate(page: params[:page], per_page: 12)
     @custom_paginate_renderer = custom_paginate_renderer
 
-    @search = params["search"]
+    @search = params['search']
     if @search.present?
-      @description = @search["description"]
-      @transactions = @transactions.where("description ILIKE ?", "%#{@description}%")
+      @description = @search['description']
+      @transactions = @transactions.where('description ILIKE ?', "%#{@description}%")
     end
 
     respond_to do |format|
