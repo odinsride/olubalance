@@ -5,7 +5,11 @@ class TransactionsController < ApplicationController
 
   # Index action to render all transactions
   def index
-    @transactions = @account.transactions.with_balance.desc.paginate(page: params[:page], per_page: 12)
+    if params[:page]
+      session[:trx_index_page] = params[:page]
+    end
+
+    @transactions = @account.transactions.with_balance.desc.paginate(page: session[:trx_index_page], per_page: 12)
     @custom_paginate_renderer = custom_paginate_renderer
 
     @search = params['search']
@@ -83,7 +87,7 @@ class TransactionsController < ApplicationController
 
   def transaction_params
     params.require(:transaction) \
-          .permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :attachment_file_name)
+          .permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :attachment_file_name, :page)
   end
 
   def find_account

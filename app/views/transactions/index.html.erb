@@ -63,7 +63,7 @@
 			</li>
 
 			<% @transactions.each do |transaction| %>
-				<%= link_to [transaction.account, transaction], class: "collection-item" do %>
+				<%= link_to account_transaction_path(id: transaction.id), class: "collection-item" do %>
 					<!-- mobile view -->
 					<div class="row ob-no-bottom hide-on-large-only">
 						<div class="col s4 text-muted">
