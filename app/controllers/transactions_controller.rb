@@ -23,6 +23,9 @@ class TransactionsController < ApplicationController
   # New action for creating transaction
   def new
     @transaction = @account.transactions.build
+    @descriptions = @account.transactions.where('description != ?',"Starting Balance").order('description').uniq.pluck(:description)
+
+    @autocomplete = @descriptions.to_json
 
     respond_to do |format|
       format.html # new.html.erb
