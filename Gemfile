@@ -32,6 +32,7 @@ gem 'will_paginate', '~> 3.1.0'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara', '~> 2.13'
+  gem 'faker'
   gem 'selenium-webdriver'
 end
 
@@ -40,6 +41,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop', require: false
+  gem 'solargraph'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

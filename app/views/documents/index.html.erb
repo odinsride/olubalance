@@ -1,0 +1,112 @@
+<div class="row">
+	<div class="col s12">
+    	<p class="ob-text-primary ob-shadow left ob-no-bottom">
+    		<%= link_to accounts_path, class: 'ob-text-primary valign-wrapper' do %>
+				<i class="material-icons ob-icon-medium">chevron_left</i>
+				<span class="">Accounts</span>
+			<% end %>
+    	</p>
+		<%= link_to new_account_document_path, class: "btn waves-effect waves-light right z-depth-2" do %>
+	    	<i class="material-icons left">add</i>Document
+	    <% end %>
+	</div>
+</div>
+
+<ul class="collection with-header">
+	<li class="collection-header ob-primary">
+		<div class="row ob-no-bottom white-text">
+			<div class="col s12">
+				<h4 class="flow-text valign-wrapper"><i class="material-icons" style="margin-right: 10px">insert_drive_file</i>Documents for <%= @account.name %></h4>
+			</div>
+		</div>
+	</li>
+
+	<% @documents.each do |document| %>
+		<li class="collection-item">
+			<div class="row ob-no-bottom">
+				<div class="col s4 l2 xl2 center-align">
+					<%= link_to image_tag(document.file.url(:thumb), :class => 'rectangle z-depth-2'), document.file.url, :target => '_blank' %>
+				</div>
+				<div class="col s7 l6 xl6">
+				<span class="title"><%= link_to document.file_file_name, document.file.url, :class => 'ob-text-primary', :target => '_blank' %></span><br />
+				<small>Document Date: <%= document.document_date.strftime('%m/%d/%Y') %><br />
+				<%= number_to_human_size(document.file_file_size) %> | <%= document.file_content_type %></small>
+			</div>
+			<%= link_to account_document_path(id: document.id), method: :delete, class: "secondary-content" do %>
+				<i class="material-icons">delete</i>
+			<% end %>
+		</li>
+	<% end %>
+</ul>
+
+<div class="row">
+	<div class="col s12">
+		<ul class="collection with-header">
+			<li class="collection-header ob-primary">
+				<div class="row ob-no-bottom white-text">
+					<div class="col s12">
+						<h4 class="flow-text valign-wrapper"><i class="material-icons" style="margin-right: 10px">insert_drive_file</i>Documents for <%= @account.name %></h4>
+					</div>
+				</div>
+			</li>
+
+			<!-- mobile header -->
+			<li class="collection-item ob-secondary white-text hide-on-large-only"><strong>Documents</strong></li>
+			
+			<!-- desktop header -->
+			<li class="collection-item ob-secondary white-text hide-on-med-and-down">
+				<div class="row ob-no-bottom ob-transaction-header">
+					<div class="col s2 l2 xl2 center-align ob-right-border">
+						Document Date
+					</div>
+					<div class="col s4 l4 xl7 valign-wrapper ob-right-border">
+						File Name
+					</div>
+					<div class="col s2 l2 xl1 right-align ob-right-border">
+						Credit
+					</div>
+					<div class="col s2 l2 xl1 right-align ob-right-border">
+						Debit
+					</div>
+					<div class="col s2 l2 xl1 right-align">
+						Balance
+					</div>
+				</div>
+			</li>
+
+			<% @documents.each do |document| %>
+				<div class="collection-item">
+					<!-- mobile view -->
+					<div class="row ob-no-bottom hide-on-large-only">
+						<div class="col s4 text-muted">
+							<small><%= document.document_date.strftime('%m/%d/%y') %></small>
+						</div>
+					</div>
+					<div class="row ob-no-bottom ob-text-primary hide-on-large-only">
+						<div class="col s8 valign-wrapper">
+							<strong><%= document.file_file_name %></strong>
+						</div>
+					</div>
+
+					<!-- desktop view -->
+					<div class="row ob-no-bottom hide-on-med-and-down valign-wrapper">
+						<div class="col l2 xl2 text-muted ob-right-border center-align">
+							<%= document.document_date.strftime('%m/%d/%Y') %>
+						</div>
+						<div class="col l4 xl7 valign-wrapper ob-text-primary ob-right-border">
+							<%= link_to document.file_file_name, document.file.url, :class => 'ob-text-primary', :target => '_blank' %>
+						</div>
+						<div class="col l2 xl1 right-align ob-right-border">
+							
+						</div>
+						<div class="col l2 xl1 right-align ob-right-border">
+							
+						</div>
+						<div class="col l2 xl1 right-align text-muted">
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</ul>
+	</div>
+</div>

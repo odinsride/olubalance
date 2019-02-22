@@ -50,6 +50,8 @@ class TransactionsController < ApplicationController
 
   # Edit action retrieves the transaction and renders the edit page
   def edit
+    @descriptions = @account.transactions.where('description != ?',"Starting Balance").order('description').uniq.pluck(:description)
+    @autocomplete = @descriptions.to_json    
   end
 
   # Update action updates the transaction with the new information
