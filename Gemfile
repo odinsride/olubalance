@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.5.0'
+
 gem 'aws-sdk-s3'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
