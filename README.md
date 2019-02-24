@@ -1,5 +1,7 @@
 # olubalance
 
+### v1.2.0 is be the final feature release of olubalance as a pure Rails app. Going forward, olubalance will function as Rails API with a Vue.js frontend. This repository will only be updated for bugfixes and maintenance until the new version is released.
+
 Dependencies
 ------
 

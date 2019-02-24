@@ -6,20 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
-## [v1.2.0] - 2018-10-06
+## [v1.2.0] - 2018-02-24
+
 ### Added
 - Accounts can be deactivated, which hides them from the main account list.  Inactive accounts can be found from the user menu and reactivated at any time.  This provides a non-destructive method of archiving an account for historical purposes.
 - A new field has been added to allow storing the last 4 digits of the account number along with an account.  This can be helpful for quickly identifying an account by number.
 
 ### Changed
 - Ruby version updated to 2.5.1
-- Rails version updated to 5.2.1
+- Rails version updated to 5.2.2
 
 #### Gem Changes
 - sass-rails gem replaced with sassc-rails
 - pg gem updated to 1.1.3
 - puma gem updated to 3.12.0
 - aws-sdk gem replaced with aws-sdk-s3
+
+[v1.2.0] will be the final feature release of olubalance as a pure Rails app. Going forward, olubalance will function as Rails API with a Vue.js frontend.
 
 ## [v1.1.3] - 2018-08-19
 ### Fixed
