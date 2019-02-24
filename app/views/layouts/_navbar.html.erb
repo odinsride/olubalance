@@ -1,38 +1,8 @@
-<!-- Mobile Menu -->
-<ul class="side-nav" id="mobile-menu">
-  <li class="ob-sidenav-header ob-primary">
-    <% if !Rails.env.production? %>
-      <div class="row">
-        <div class="col s12 center-align">
-          <a href="#"><span class="red white-text" style="padding: 10px; border-radius: 50px"><%= Rails.env.upcase %></span></a>
-        </div>
-      </div>
-    <% end %> 
-    <div class="row">
-      <div class="col s12 center-align">
-      <!--<h3 class="white-text">olubalance</h3>-->
-      <%= image_tag("logo.png", width: '50%') %>
-      <% if user_signed_in? %>
-        <span class="btn-flat white-text"><%= current_user.email %></span>
-      <% end %>
-    </div>
-    </div>
+<%= render "layouts/mobilenav" %>
 
-  </li>
-
-  <% if user_signed_in? %>
-    <li><%= link_to edit_user_registration_path, class: "ob-text-primary" do %><i class="material-icons ob-text-primary">settings</i>Settings<% end %></li>
-    <li><%= link_to destroy_user_session_path, class: "ob-text-primary", method: :delete do %><i class="material-icons ob-text-primary">exit_to_app</i>Logout<% end %></li>
-  <% else %>
-    <li><%= link_to new_user_registration_path, class: "ob-text-primary" do %><%= fa_icon "user-plus", class: "ob-text-primary", style: "margin: 0 12px 0 0" %> Sign Up <% end %></li>
-    <li><%= link_to new_user_session_path, class: "ob-text-primary" do %><%= fa_icon "sign-in", class: "ob-text-primary", style: "margin: 0 12px 0 0" %> Login<% end %></li>
-  <% end %>
-</ul>
-
-<!-- User Account Dropdown Structure -->
+<!-- User dropdown links -->
 <ul id="useraccount" class="dropdown-content">
-  <li><%= link_to edit_user_registration_path, class: "ob-text-primary" do %><i class="material-icons ob-text-primary">settings</i>Settings<% end %></li>
-  <li><%= link_to destroy_user_session_path, class: "ob-text-primary", method: :delete do %><i class="material-icons ob-text-primary">exit_to_app</i>Logout<% end %></li>
+  <%= render "layouts/userlinks" %>
 </ul>
 
 <div class="navbar-fixed">
@@ -40,39 +10,18 @@
   <nav class="z-depth-1" role="navigation">
     <div class="nav-wrapper container">
 
-      <!-- Logos -->
-      <!-- Desktop Logo -->
-      <%= link_to root_path, id: "logo-container", class: "brand-logo hide-on-med-and-down" do %>
-        <%= image_tag("logo.png", width: '21%') %>
-      <% end %>
-
-      <!-- Tablet Logo -->
-      <%= link_to root_path, id: "logo-container", class: "brand-logo center hide-on-large-only hide-on-small-only" do %>
-        <%= image_tag("logo.png", width: '45%') %>
-      <% end %>
-
-      <!-- Mobile Logo -->
-      <%= link_to root_path, id: "logo-container", class: "brand-logo center hide-on-large-only hide-on-med-only" do %>
-        <%= image_tag("logo.png", width: '68%') %>
-      <% end %>
+      <%= render "layouts/logo" %>
 
       <!-- Mobile Menu Button -->
       <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
       
       <!-- Desktop Menu -->
       <ul class="right hide-on-med-and-down">
-        <% if !Rails.env.production? %>
-          <li>
-            <a href="#"><span class="red white-text" style="padding: 10px; border-radius: 50px"><%= Rails.env.upcase %></span></a>
-          </li>
-        <% end %>     
 
-        <% if user_signed_in? %>
-          <li><a class="dropdown-button" href="#!" data-activates="useraccount"><%= current_user.email %><i class="material-icons right">arrow_drop_down</i></a>
-        <% else %>
-          <li><%= link_to "Sign up", new_user_registration_path %></li>
-          <li><%= link_to "Login", new_user_session_path %></li>
-        <% end %>
+        <%= render "layouts/env" if !Rails.env.production? %>  
+        <%= render "layouts/navlinks" if user_signed_in? %>
+        <%= render "layouts/guestlinks" if !user_signed_in? %>
+
       </ul>
 
     </div>

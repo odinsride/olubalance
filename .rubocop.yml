@@ -1,0 +1,51 @@
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - test/**/*
+
+Rails:
+  Enabled: true
+
+Metrics:
+  Exclude:
+    - db/migrate/*.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/*.rb
+    - config/initializers/simple_form_materialize.rb
+
+# Commonly used screens these days easily fit more than 80 characters.
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - db/seeds.rb
+    - config/initializers/devise.rb
+    - config/initializers/simple_form_materialize.rb
+
+# Too short methods lead to extraction of single-use methods, which can make
+# the code easier to read (by naming things), but can also clutter the class
+Metrics/MethodLength: 
+  Max: 20
+
+# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+Metrics/ClassLength:
+  Max: 1500
+
+Rails/OutputSafety:
+  Exclude: 
+    - config/initializers/simple_form_materialize/icon_component.rb
+
+Style/Documentation:
+  Include:
+    - app/models/**/*
+    - lib/**/*
+
+# I don't see a benefit to forcing empty methods onto one line
+Style/EmptyMethod:
+  Exclude:
+    - app/**/*
+
+Style/MixinUsage:
+  Exclude:
+    - bin/**/*

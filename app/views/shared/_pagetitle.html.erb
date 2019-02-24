@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col s12">
+    <h5 class="ob-text-primary ob-shadow left"><strong><%= description %></strong></h5>
+    <% if controller.controller_name == page_model.pluralize && controller.action_name == 'index' %>
+      <%= link_to eval("new_#{page_model}_path"), class: "btn waves-effect waves-light right z-depth-2" do %>
+        <i class="material-icons left">add</i><%= page_model %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

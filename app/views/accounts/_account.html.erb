@@ -1,0 +1,34 @@
+  <!-- Account Card -->
+  <div class="col s12 m6 l6 xl4">
+    <div class="card small ob-account-card ob-card-gradient hoverable z-depth-2">
+      <%= link_to(account_transactions_path(account.id)) do %>
+        <div class="card-content">
+          <div class="row ob-no-bottom valign-wrapper">
+            <div class="card-title col s12 ob-text-primary ob-shadow truncate"><strong><%= account.name %></strong></div>
+          </div>
+          
+          <div class="row ob-no-bottom" style="margin-top: 20px">
+            <div class="col s12 right-align valign-wrapper valign-fix ob-text-primary"><i class="tiny material-icons">account_balance</i>&nbsp;<strong>Balance</strong></div>
+          </div>
+
+          <div class="row ob-no-bottom">
+            <div class="col s12 right-align <%= account.balance_class %>" style="font-size: 22pt" data-badge-caption=""><%= account.current_balance_display %></div>
+          </div>
+
+          <div class="row ob-no-bottom">
+            <div class="col s12 right-align text-muted"><small>as of <%= account.updated_at_display %></small></div>
+          </div>
+
+        </div>
+      <% end %>
+
+      <div class="card-action right-align">
+            <span class="pull-left text-muted"><%= account.last_four_display %></span>
+            <%= link_to "Edit", edit_account_path(account), class: "ob-text-primary tooltipped", :'data-position' => "top", :'data-tooltip' => "Edit Account" %>
+            <a class="modal-trigger ob-text-primary tooltipped" data-position="top", data-tooltip="Deactivate Account" href="#deactivate-account<%= account.id %>">Deactivate</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Render code for Deactivate Modal -->
+  <%= render partial: "deactivatemodal", locals: { account: account } %>

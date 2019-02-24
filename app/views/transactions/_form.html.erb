@@ -31,7 +31,7 @@
 
 		<div class="row">
 			<!-- Description -->
-			<%= f.input :description, icon: 'description', wrapper_html: { class: 'input-field l6 s12' } %>
+			<%= f.input :description, icon: 'description', wrapper_html: { class: 'input-field l6 s12' }, input_html: { class: 'autocomplete' } %>
 		</div>
 
 		<div class="row">
@@ -67,6 +67,26 @@ $('.datepicker').pickadate({
   selectMonths: true, // Creates a dropdown to control month
   selectYears: 15 // Creates a dropdown of 15 years to control year
 });
+
+$(document).on('turbolinks:load', function() {
+
+	var autoCompleteData = $.parseJSON("<%== j @autocomplete %>");
+	var data = {};
+	var i = 0;
+	for (i = 0; i < autoCompleteData.length; i++) {
+		data[autoCompleteData[i]] = null;
+	}
+
+  $('input.autocomplete').autocomplete({
+		data: data,
+    limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+    onAutocomplete: function(val) {
+      // Callback function when value is autcompleted.
+    },
+    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+  });
+});
+
 </script>
 
 </div>

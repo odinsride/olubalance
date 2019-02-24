@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
-
   devise_for :users
-  resources :accounts do
-  	resources :transactions
-  end
+  get 'accounts/inactive' => 'accounts#inactive'
   
-  authenticated do
-  	root to: "accounts#index"
+  resources :accounts do
+    resources :transactions
+    resources :documents
+
+    member do
+      get :deactivate
+      get :activate
+    end
   end
 
-  root to: "static_pages#home"
+  authenticated do
+    root to: 'accounts#index'
+  end
+
+  root to: 'static_pages#home'
 end

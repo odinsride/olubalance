@@ -27,6 +27,14 @@
 
       <div class="row">
         <div class="input-field col s12 xl4 l6">
+          <i class="material-icons prefix ob-text-primary">looks_4</i>
+          <%= f.label :last_four, class: 'active', label: "Last Four Digits of Account Number" %>
+          <%= f.text_field :last_four, placeholder: "1234" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12 xl4 l6">
           <i class="material-icons prefix ob-text-primary">attach_money</i>
           <%= f.label :starting_balance, class: 'active' %>
           <%= f.number_field :starting_balance, value: number_with_precision(f.object.starting_balance, precision: 2), step: 0.01, placeholder: "Enter the starting balance", readonly: (@account.new_record? ? false : true) %>
@@ -45,6 +53,5 @@
           <% end %>
         </div>
       </div>
-
     <% end %>
 </div>
