@@ -17,6 +17,11 @@
 	<% end %>
 
 	<div class="row">
+		<!-- document Type -->
+		<%= f.input :document_type, as: :radio_buttons, collection: Document::DOC_TYPES, icon: 'date_range' %>
+	</div>
+
+	<div class="row">
 		<!-- document Date -->
 		<div class="input-field col l4 s7">
 			<i class="material-icons prefix ob-text-primary">date_range</i>

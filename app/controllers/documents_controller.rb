@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
 
   # Index action to render all documents
   def index
-    @documents = @account.documents
+    @documents = @account.documents.desc
 
     respond_to do |format|
       format.html # index.html.erb
@@ -51,14 +51,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # The show action renders the individual document after retrieving the the id
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml { render xml: @document }
-    end
-  end
-
   # The destroy action removes the document permanently from the database
   def destroy
     @document.destroy
@@ -73,7 +65,7 @@ class DocumentsController < ApplicationController
 
   def document_params
     params.require(:document) \
-          .permit(:document_date, :file, :file_file_name)
+          .permit(:document_date, :document_type, :file, :file_file_name)
   end
 
   def find_account

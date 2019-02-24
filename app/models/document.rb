@@ -3,6 +3,8 @@
 class Document < ApplicationRecord
   belongs_to :account, optional: true
 
+  DOC_TYPES = [['Statement', 'statement'], ['Terms and Conditions', 'terms'], ['Other', 'other']]
+
   has_attached_file :file,
                     # In order to determine the styles of the image we want to save
                     # e.g. a small style copy of the image, plus a large style copy
@@ -32,11 +34,13 @@ class Document < ApplicationRecord
 
   before_post_process :rename_file
 
+  scope :desc, -> { order('document_date DESC, id DESC') }
+
   private
 
   def rename_file
     extension = File.extname(file_file_name).downcase
-    file.instance_write :file_name, "#{id}_#{document_date.strftime('%Y-%m-%d')}#{extension}"
+    file.instance_write :file_name, "#{document_date.strftime('%Y-%m-%d')}_#{document_type.titleize}#{extension}"
   end
 
 end
