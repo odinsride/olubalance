@@ -9,16 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v1.2.0] - 2018-02-24
 
 ### Added
-- Accounts can be deactivated, which hides them from the main account list.  Inactive accounts can be found from the user menu and reactivated at any time.  This provides a non-destructive method of archiving an account for historical purposes.
+- Accounts can be deactivated, which hides them from the main account list.  Inactive accounts can be found from the user menu and reactivated at any time.  This provides a non-destructive method of archiving an account for historical purposes. Deleting accounts is no longer possible from the UI.
 - A new field has been added to allow storing the last 4 digits of the account number along with an account.  This can be helpful for quickly identifying an account by number.
+- Transaction search based on the description field has been added.
+- Account-level attachments have been added. An account may have many attachments. This is useful for storing account statements and correspondence in one location.
+- Transaction autocomplete has been enabled in the description field. Autocomplete sources from a unique list of all transaction descriptions for the particular account.
 
 ### Changed
+- Attachments for transactions are now renamed at upload to be formatted as `(trx_id)_(description)_(trx_date).(extension)`
+- Attachment links will direct to an https URL
 - Ruby version updated to 2.5.1
 - Rails version updated to 5.2.2
 
+### Fixed
+- Account deletion removed, but deactivation will now deactivate the proper account.
+- When editing a transaction on page N of the transaction list, after clicking update or cancel you will now be redirected back to page N instead of page 1.
+- Account name should display better from the transaction list on mobile.
+
 #### Gem Changes
 - sass-rails gem replaced with sassc-rails
-- pg gem updated to 1.1.3
+- pg gem updated to 1.1.4
 - puma gem updated to 3.12.0
 - aws-sdk gem replaced with aws-sdk-s3
 
