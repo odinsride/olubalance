@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_135959) do
+ActiveRecord::Schema.define(version: 2019_02_24_144732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(version: 2018_10_09_135959) do
     t.integer "last_four"
     t.boolean "active", default: true
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.bigint "account_id"
+    t.datetime "document_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_file_name"
+    t.string "file_content_type"
+    t.integer "file_file_size"
+    t.datetime "file_updated_at"
+    t.string "document_type"
+    t.index ["account_id"], name: "index_documents_on_account_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -63,5 +76,6 @@ ActiveRecord::Schema.define(version: 2018_10_09_135959) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "documents", "accounts"
   add_foreign_key "transactions", "accounts"
 end

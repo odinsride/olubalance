@@ -2,6 +2,7 @@
 class Account < ApplicationRecord
   belongs_to :user
   has_many :transactions, dependent: :destroy
+  has_many :documents
 
   validates :name, presence: true, length: { maximum: 50, minimum: 2 }
   validates :starting_balance, presence: true

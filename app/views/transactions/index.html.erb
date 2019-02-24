@@ -29,10 +29,15 @@
 		<ul class="collection with-header">
 			<li class="collection-header ob-primary">
 				<div class="row ob-no-bottom white-text">
-					<div class="col s4">
-						<h4 class="flow-text valign-wrapper"><i class="material-icons" style="margin-right: 10px">account_balance</i><%= @account.name %></h4>
+					<div class="col s8">
+						<h4 class="flow-text valign-wrapper">
+							<i class="material-icons" style="margin-right: 10px">account_balance</i><%= @account.name %> | 
+							<%= link_to account_documents_path(@account.id), class: "tooltipped valign-wrapper", data: { tooltip: "Account Documents" } do %>
+								<i class="material-icons white-text" style="margin-left: 5px">attach_file</i>
+							<% end %>
+						</h4>
 					</div>
-					<div class="col s8 right-align <%= if @account.current_balance < 0 then 'red-text text-lighten-1' end %>">
+					<div class="col s4 right-align <%= if @account.current_balance < 0 then 'red-text text-lighten-1' end %>">
 						<h4 class="flow-text"><%= number_to_currency(@account.current_balance) %></h4>
 					</div>
 				</div>

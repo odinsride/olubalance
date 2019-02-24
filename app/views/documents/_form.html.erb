@@ -1,0 +1,61 @@
+<div class="row">
+
+	<%= simple_form_for([@document.account, @document]) do |f| %>
+	<% if @document.errors.any? %>
+	<div id="error explanation">
+		<h4>
+			<%= "#{pluralize(@document.errors.count, "error")} prohibited this document from being saved:" %>
+		</h4>
+		<ul>
+			<% @document.errors.full_messages.each do |msg| %>
+			<li>
+				<%= msg %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+
+	<div class="row">
+		<!-- document Type -->
+		<%= f.input :document_type, as: :radio_buttons, collection: Document::DOC_TYPES, icon: 'date_range' %>
+	</div>
+
+	<div class="row">
+		<!-- document Date -->
+		<div class="input-field col l4 s7">
+			<i class="material-icons prefix ob-text-primary">date_range</i>
+			<%= f.text_field :document_date, class:"datepicker", value: (@document.document_date.present?) ? @document.document_date.strftime('%d %B, %Y') : Time.current.strftime('%d %B, %Y') %>
+			<%= f.label :document_date, :label => 'Document Date' %>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- File -->
+		<%= f.input :file, icon: 'attach_file', hint: 'Upload a statement or other account document (PDF or Image Formats Only)', as: :file, wrapper_html: { class: 'l6 s12' } %>
+	</div>
+
+	<!-- Buttons -->
+	<div class="row center-align">
+		<div class="col s12 l6">
+			<%= link_to 'Cancel', account_documents_path, class: 'btn waves-effect waves-light' %>
+			<%= button_tag(type: 'submit', class: 'btn waves-effect waves-light', id: 'submit') do %>
+			<% if @document.new_record? then %>
+			Create
+			<% else %>
+			Update
+			<% end %><i class="material-icons right">send</i>
+			<% end %>
+		</div>
+	</div>
+
+	<% end %>
+
+	<script type="text/javascript">
+		$('.datepicker').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 15 // Creates a dropdown of 15 years to control year
+		});
+	</script>
+
+</div>
