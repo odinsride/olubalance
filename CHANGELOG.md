@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
-## [v1.2.0] - 2018-02-24
+## [v1.2.1] - 2019-02-24
+
+### Fixed
+- Transaction attachments were not receiving the transaction ID in the filename. This has been corrected.
+- Downgraded bundler to 1.16.2 due to deployment errors
+
+## [v1.2.0] - 2019-02-24
 
 ### Added
 - Accounts can be deactivated, which hides them from the main account list.  Inactive accounts can be found from the user menu and reactivated at any time.  This provides a non-destructive method of archiving an account for historical purposes. Deleting accounts is no longer possible from the UI.
@@ -81,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 [Unreleased]: https://github.com/odinsride/olubalance/compare/v1.2.0...HEAD
+[v1.2.1]: https://github.com/odinsride/olubalance/compare/v1.2.0...v1.2.1
 [v1.2.0]: https://github.com/odinsride/olubalance/compare/v1.1.3...v1.2.0
 [v1.1.3]: https://github.com/odinsride/olubalance/compare/v1.1.2...v1.1.3
 [v1.1.2]: https://github.com/odinsride/olubalance/compare/v1.1.1...v1.1.2
