@@ -86,6 +86,6 @@ class Transaction < ApplicationRecord
   def rename_file
     extension = File.extname(attachment_file_name).downcase
     file_description = description.squish.tr(' ', '_')
-    attachment.instance_write :file_name, "#{id}_#{file_description}_#{trx_date}#{extension}"
+    attachment.instance_write :file_name, "#{self.id}_#{file_description}_#{trx_date}#{extension}"
   end
 end
