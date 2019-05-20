@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.2.2] - 2019-05-19
+
+### Fixed
+- User registration issues have been fixed (#35)
+- Transaction attachments will now be renamed to `{{trx_date}}_{{description}}.{{extension}}`
+
 ## [v1.2.1] - 2019-02-24
 
 ### Fixed
@@ -86,7 +92,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.2.2...HEAD
+[v1.2.2]: https://github.com/odinsride/olubalance/compare/v1.2.1...v1.2.2
 [v1.2.1]: https://github.com/odinsride/olubalance/compare/v1.2.0...v1.2.1
 [v1.2.0]: https://github.com/odinsride/olubalance/compare/v1.1.3...v1.2.0
 [v1.1.3]: https://github.com/odinsride/olubalance/compare/v1.1.2...v1.1.3
