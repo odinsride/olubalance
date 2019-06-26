@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
   get 'accounts/inactive' => 'accounts#inactive'
-  
+
   resources :accounts do
     resources :transactions
     resources :documents

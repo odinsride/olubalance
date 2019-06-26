@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A running balance which is contained in a DB view. Belongs to one transaction.
 class TransactionBalance < ApplicationRecord
   self.primary_key = 'transaction_id'
