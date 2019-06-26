@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.2.3] - 2019-06-25
+
+### Changed
+- Ruby version updated to 2.6.3
+- Rails version updated to 5.2.3
+- Other gems updated
+
+### Removed
+- Removed Account Documents attachment type. This is not a well known or used feature, so it will be reintroduced at a later time.
+
 ## [v1.2.2] - 2019-05-19
 
 ### Fixed
