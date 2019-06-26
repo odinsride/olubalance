@@ -16,7 +16,7 @@ Metrics/LineLength:
 
 # Relax the Assignment Branch Condition rule a bit
 Metrics/AbcSize:
-  Max: 24
+  Max: 40
 
 # Too short methods lead to extraction of single-use methods, which can make
 # the code easier to read (by naming things), but can also clutter the class

@@ -57,16 +57,18 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  # Paperclip settings
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_credentials: {
-      bucket: ENV['S3_BUCKET_NAME_DEV'],
-      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-      s3_region: ENV['S3_REGION'],
-      s3_host_name: ENV['S3_HOST_NAME']
-    },
-    s3_protocol: 'https'
-  }
+  config.active_storage.service = :amazondev
+
+  # # Paperclip settings
+  # config.paperclip_defaults = {
+  #   storage: :s3,
+  #   s3_credentials: {
+  #     bucket: ENV['S3_BUCKET_NAME_DEV'],
+  #     access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+  #     secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+  #     s3_region: ENV['S3_REGION'],
+  #     s3_host_name: ENV['S3_HOST_NAME']
+  #   },
+  #   s3_protocol: 'https'
+  # }
 end

@@ -39,7 +39,7 @@
 		      <% end %>
 
 		      <!-- Attachment -->
-		      <% if @transaction.attachment.exists? then %>
+		      <% if @transaction.attachment.attached? then %>
 		      	<div class="row">
 		      		<div class="col s12">
 		      			<ul class="collection z-depth-1">
@@ -47,11 +47,11 @@
 		      				<li class="collection-item">
 		      					<div class="row ob-no-bottom valign-wrapper">
 		      						<div class="col s5 m3 l3 center-align">
-		      							<%= link_to image_tag(@transaction.attachment.url(:thumb), :class => 'z-depth-2 hoverable'), @transaction.attachment.url, :target => '_blank' %>
+		      							<%= link_to image_tag(@transaction.attachment.variant(resize: "100x100"), :class => 'z-depth-2 hoverable'), url_for(@transaction.attachment), :target => '_blank' %>
 		      						</div>
 		      						<div class="col s7 m9 l9 xl10">
-		      							<%= link_to @transaction.attachment_file_name, @transaction.attachment.url, :class => 'ob-text-primary', :target => '_blank' %>
-		      							<br /><%= number_to_human_size(@transaction.attachment_file_size) %>
+		      							<%= link_to @transaction.attachment.filename, url_for(@transaction.attachment), :class => 'ob-text-primary', :target => '_blank' %>
+		      							<br /><%= number_to_human_size(@transaction.attachment.byte_size) %>
 		      						</div>
 		      					</div>
 		      				</li>

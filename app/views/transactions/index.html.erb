@@ -78,7 +78,7 @@
 					<div class="row ob-no-bottom ob-text-primary hide-on-large-only">
 						<div class="col s8 valign-wrapper">
 							<strong><%= transaction.description %></strong>
-							<% if transaction.attachment.exists? then %>
+							<% if transaction.attachment.attached? then %>
 								<i class="tiny text-muted material-icons tooltipped" data-position="top" data-tooltip="Transaction has attachment">attach_file</i>
 							<% end %>
 						</div>
@@ -98,7 +98,7 @@
 						</div>
 						<div class="col l4 xl7 valign-wrapper ob-text-primary ob-right-border">
 							<strong><%= transaction.description %></strong>
-							<% if transaction.attachment.exists? then %>
+							<% if transaction.attachment.attached? then %>
 								<i class="tiny text-muted material-icons tooltipped" data-position="top" data-tooltip="Transaction has attachment">attach_file</i>
 							<% end %>
 						</div>

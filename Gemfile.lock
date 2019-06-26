@@ -162,6 +162,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.0331)
     mimemagic (0.3.3)
+    mini_magick (4.9.3)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
@@ -338,6 +339,7 @@ DEPENDENCIES
   material_icons
   materialize-form
   materialize-sass (~> 0.100.2)
+  mini_magick
   paperclip (~> 6.0.0)
   pg (~> 1.1.4)
   puma (~> 3.12.0)
