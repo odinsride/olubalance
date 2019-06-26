@@ -5,32 +5,34 @@ class Transaction < ApplicationRecord
   belongs_to :account
   has_one :transaction_balance, dependent: :destroy
 
-  has_attached_file :attachment,
-                    # In order to determine the styles of the image we want to save
-                    # e.g. a small style copy of the image, plus a large style copy
-                    # of the image, call the check_file_type method
-                    styles: { large: ['1000x1000>', :png], medium: ['300x300>', :png], thumb: ['100x100>', :png] }
+  has_one_attached :attachment
+  
+  # has_attached_file :attachment,
+  #                   # In order to determine the styles of the image we want to save
+  #                   # e.g. a small style copy of the image, plus a large style copy
+  #                   # of the image, call the check_file_type method
+  #                   styles: { large: ['1000x1000>', :png], medium: ['300x300>', :png], thumb: ['100x100>', :png] }
 
-  # Validate that we accept the type of file the user is uploading
-  # by explicitly listing the mimetypes we are willing to accept
-  validates_attachment_content_type :attachment,
-                                    content_type: [
-                                      'image/jpg',
-                                      'image/jpeg',
-                                      'image/png',
-                                      'image/gif',
-                                      'application/pdf',
+  # # Validate that we accept the type of file the user is uploading
+  # # by explicitly listing the mimetypes we are willing to accept
+  # validates_attachment_content_type :attachment,
+  #                                   content_type: [
+  #                                     'image/jpg',
+  #                                     'image/jpeg',
+  #                                     'image/png',
+  #                                     'image/gif',
+  #                                     'application/pdf',
 
-                                      'file/txt',
-                                      'text/plain',
+  #                                     'file/txt',
+  #                                     'text/plain',
 
-                                      'application/doc',
-                                      'application/msword',
+  #                                     'application/doc',
+  #                                     'application/msword',
 
-                                      'application/vnd.ms-excel',
-                                      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-                                    ],
-                                    message: 'Sorry! We do not accept the attached file type'
+  #                                     'application/vnd.ms-excel',
+  #                                     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  #                                   ],
+  #                                   message: 'Sorry! We do not accept the attached file type'
 
   # Link running_balance to view
   delegate :running_balance, to: :transaction_balance
@@ -44,7 +46,7 @@ class Transaction < ApplicationRecord
   validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :memo, length: { maximum: 500 }
 
-  before_post_process :rename_file
+  # before_post_process :rename_file
 
   before_save :convert_amount
   after_create :update_account_balance_new
@@ -85,9 +87,9 @@ class Transaction < ApplicationRecord
     @account.update(current_balance: @account.current_balance - amount_was)
   end
 
-  def rename_file
-    extension = File.extname(attachment_file_name).downcase
-    file_description = description.squish.tr(' ', '_')
-    attachment.instance_write :file_name, "#{trx_date}_#{file_description}#{extension}"
-  end
+  # def rename_file
+  #   extension = File.extname(attachment_file_name).downcase
+  #   file_description = description.squish.tr(' ', '_')
+  #   attachment.instance_write :file_name, "#{trx_date}_#{file_description}#{extension}"
+  # end
 end
