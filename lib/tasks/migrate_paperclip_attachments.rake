@@ -43,9 +43,9 @@ def migrate_attachment(attachment, model)
     content_type = instance.send("#{attachment}_content_type")
     original = CGI.unescape(filename.gsub(extension, "_original#{extension}"))
 
-    puts '  [' + model.name + ' (ID: ' +
-         instance_id.to_s + ')] ' \
-         'Copying to ActiveStorage location: ' + original
+    # puts '  [' + model.name + ' (ID: ' +
+    #      instance_id.to_s + ')] ' \
+    #      'Copying to ActiveStorage location: ' + original
 
     # Paperclip stores attachments in a directory structure such as:
     # 000/000/001 = Instance ID 1
@@ -57,14 +57,14 @@ def migrate_attachment(attachment, model)
 
     # Build the S3 URL
     url = "https://#{bucket}.s3.#{region}.amazonaws.com/#{model.name.downcase.pluralize}/#{attachment.pluralize}/#{instance_path}/original/#{filename}"
-    # puts '    ' + url
+    puts '    ' + url
 
     # Copy the original Paperclip attachment to its new ActiveStorage location
     # For debugging/testing purposes, comment out this section and print the URL to log to verify the correctness
-    instance.send(attachment.to_sym).attach(
-      io: open(url),
-      filename: filename,
-      content_type: content_type
-    )
+    # instance.send(attachment.to_sym).attach(
+    #   io: open(url),
+    #   filename: filename,
+    #   content_type: content_type
+    # )
   end
 end
