@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.3.0] - 2019-06-25
+
+### Changed
+- Migration of code and attachment objects from Paperclip to ActiveStorage
+
 ## [v1.2.3] - 2019-06-25
 
 ### Changed
