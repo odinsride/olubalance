@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_account
@@ -5,9 +7,7 @@ class TransactionsController < ApplicationController
 
   # Index action to render all transactions
   def index
-    if params[:page]
-      session[:trx_index_page] = params[:page]
-    end
+    session[:trx_index_page] = params[:page] if params[:page]
 
     @transactions = @account.transactions.with_balance.desc.paginate(page: session[:trx_index_page], per_page: 12)
     @custom_paginate_renderer = custom_paginate_renderer
@@ -27,7 +27,8 @@ class TransactionsController < ApplicationController
   # New action for creating transaction
   def new
     @transaction = @account.transactions.build
-    @descriptions = @account.transactions.where('description != ?',"Starting Balance").order('description').uniq.pluck(:description)
+    @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
+                            .order('description').uniq.pluck(:description)
 
     @autocomplete = @descriptions.to_json
 
@@ -50,8 +51,9 @@ class TransactionsController < ApplicationController
 
   # Edit action retrieves the transaction and renders the edit page
   def edit
-    @descriptions = @account.transactions.where('description != ?',"Starting Balance").order('description').uniq.pluck(:description)
-    @autocomplete = @descriptions.to_json    
+    @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
+                            .order('description').uniq.pluck(:description)
+    @autocomplete = @descriptions.to_json
   end
 
   # Update action updates the transaction with the new information

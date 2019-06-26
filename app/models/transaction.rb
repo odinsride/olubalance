@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A transaction record which belongs to one account. Can have one attached file
 class Transaction < ApplicationRecord
   belongs_to :account

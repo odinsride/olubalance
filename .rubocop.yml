@@ -1,27 +1,22 @@
 AllCops:
+  DisplayCopNames: true
   Exclude:
-    - db/schema.rb
+    - db/**/*
+    - script/**/*
+    - bin/**/*
+    - tmp/**/*
+    - config/initializers/**/*
+    - config/environments/**/*
+    - config/application.rb
     - test/**/*
-
-Rails:
-  Enabled: true
-
-Metrics:
-  Exclude:
-    - db/migrate/*.rb
-
-Metrics/BlockLength:
-  Exclude:
-    - config/environments/*.rb
-    - config/initializers/simple_form_materialize.rb
 
 # Commonly used screens these days easily fit more than 80 characters.
 Metrics/LineLength:
   Max: 120
-  Exclude:
-    - db/seeds.rb
-    - config/initializers/devise.rb
-    - config/initializers/simple_form_materialize.rb
+
+# Relax the Assignment Branch Condition rule a bit
+Metrics/AbcSize:
+  Max: 24
 
 # Too short methods lead to extraction of single-use methods, which can make
 # the code easier to read (by naming things), but can also clutter the class
@@ -32,10 +27,6 @@ Metrics/MethodLength:
 Metrics/ClassLength:
   Max: 1500
 
-Rails/OutputSafety:
-  Exclude: 
-    - config/initializers/simple_form_materialize/icon_component.rb
-
 Style/Documentation:
   Include:
     - app/models/**/*
@@ -45,7 +36,3 @@ Style/Documentation:
 Style/EmptyMethod:
   Exclude:
     - app/**/*
-
-Style/MixinUsage:
-  Exclude:
-    - bin/**/*
