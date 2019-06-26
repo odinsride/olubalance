@@ -37,12 +37,34 @@ Account.create!(
   user_id: 1
 )
 
-100.times do
+5.times do
   Transaction.create!(
-    trx_date: Faker::Date.forward(30),
+    trx_date: Faker::Date.between(10.days.from_now, 15.days.from_now),
     description: Faker::Name.name,
     amount: Faker::Number.between(0.01, 150.00).to_f.round(2),
     trx_type: trx_type.sample,
+    attachment: File.new(Rails.root.join('app/assets/images/logo.png')),
+    account_id: 1
+  )
+end
+
+1000.times do
+  Transaction.create!(
+    trx_date: Faker::Date.forward(10),
+    description: Faker::Name.name,
+    amount: Faker::Number.between(0.01, 150.00).to_f.round(2),
+    trx_type: trx_type.sample,
+    account_id: 1
+  )
+end
+
+5.times do
+  Transaction.create!(
+    trx_date: Faker::Date.between(10.days.from_now, 15.days.from_now),
+    description: Faker::Name.name,
+    amount: Faker::Number.between(0.01, 150.00).to_f.round(2),
+    trx_type: trx_type.sample,
+    attachment: File.new(Rails.root.join('app/assets/images/logo.png')),
     account_id: 1
   )
 end
