@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccountDecorator < Draper::Decorator
   decorates_finders
   decorates_association :user

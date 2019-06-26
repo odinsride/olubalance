@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # A document belongs to one account. An account may have many documents. Useful for storing
 # statements or correspondence regarding the account.
 class Document < ApplicationRecord
   belongs_to :account, optional: true
 
-  DOC_TYPES = [['Statement', 'statement'], ['Terms and Conditions', 'terms'], ['Other', 'other']]
+  DOC_TYPES = [%w[Statement statement], ['Terms and Conditions', 'terms'], %w[Other other]].freeze
 
   has_attached_file :file,
                     # In order to determine the styles of the image we want to save
@@ -42,5 +44,4 @@ class Document < ApplicationRecord
     extension = File.extname(file_file_name).downcase
     file.instance_write :file_name, "#{document_date.strftime('%Y-%m-%d')}_#{document_type.titleize}#{extension}"
   end
-
 end
