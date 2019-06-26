@@ -6,7 +6,7 @@ class Transaction < ApplicationRecord
   has_one :transaction_balance, dependent: :destroy
 
   has_one_attached :attachment
-  
+
   # has_attached_file :attachment,
   #                   # In order to determine the styles of the image we want to save
   #                   # e.g. a small style copy of the image, plus a large style copy

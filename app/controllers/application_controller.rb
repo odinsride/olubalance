@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   # disabling rubocop until I have time since this was copied from the interweb
-  def custom_paginate_renderer # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def custom_paginate_renderer # rubocop:disable Metrics/MethodLength
     # Return nice pagination for materialize
     Class.new(WillPaginate::ActionView::LinkRenderer) do
       def container_attributes
