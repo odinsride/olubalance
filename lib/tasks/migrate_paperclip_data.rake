@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/tasks/migrate_paperclip_data.rake
 require 'open-uri'
 

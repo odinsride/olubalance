@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.3.2] - 2019-06-27
+
+### Fixed
+- Updated Paperclip attachment migration rake task to handle errors and report them for manual clean-up
+- Updated Transaction show view to display a generic file icon for non-image attachments, since extra effort is required to generate thumbnails for those with ActiveStorage.
+
 ## [v1.3.0] - 2019-06-25
 
 ### Changed
@@ -107,7 +113,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.2.2...HEAD
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.3.2...HEAD
+[v1.3.2]: https://github.com/odinsride/olubalance/compare/v1.3.0...v1.3.2
+[v1.3.0]: https://github.com/odinsride/olubalance/compare/v1.2.2...v1.3.0
 [v1.2.2]: https://github.com/odinsride/olubalance/compare/v1.2.1...v1.2.2
 [v1.2.1]: https://github.com/odinsride/olubalance/compare/v1.2.0...v1.2.1
 [v1.2.0]: https://github.com/odinsride/olubalance/compare/v1.1.3...v1.2.0
