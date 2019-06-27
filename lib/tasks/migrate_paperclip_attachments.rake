@@ -30,6 +30,7 @@ namespace :migrate_paperclip do
 
       next if errs.empty?
 
+      # Display records that have errors
       puts ''
       puts 'Errored attachments:'
       puts ''
@@ -37,9 +38,11 @@ namespace :migrate_paperclip do
       errs.each do |err|
         puts err
       end
-      
+
+      # Display list of errored attachment IDs
       puts ''
-      puts err_ids
+      puts 'Errored attachments list of IDs (use for SQL statements)'
+      puts err_ids.join(',')
       puts ''
     end
   end
@@ -85,6 +88,7 @@ def migrate_attachment(attachment, model, errs, err_ids)
         content_type: content_type
       )
     rescue StandardError => e
+      puts '    ... error! ...'
       errs.push("[#{model.name}][#{attachment}] - #{instance_id} - #{e}")
       err_ids.push(instance_id)
     end
