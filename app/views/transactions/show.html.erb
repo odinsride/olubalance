@@ -47,7 +47,11 @@
 		      				<li class="collection-item">
 		      					<div class="row ob-no-bottom valign-wrapper">
 		      						<div class="col s5 m3 l3 center-align">
-		      							<%= link_to image_tag(@transaction.attachment.variant(resize: "100x100"), :class => 'z-depth-2 hoverable'), url_for(@transaction.attachment), :target => '_blank' %>
+		      							<% if @transaction.attachment.variable? %>
+                          <%= link_to image_tag(@transaction.attachment.variant(resize: "100x100"), :class => 'z-depth-2 hoverable'), url_for(@transaction.attachment), :target => '_blank' %>
+                        <% else %>
+                          <%= link_to (fa_icon "file-text 3x", class: 'ob-text-primary'), url_for(@transaction.attachment), :target => "_blank" %>
+                        <% end %>
 		      						</div>
 		      						<div class="col s7 m9 l9 xl10">
 		      							<%= link_to @transaction.attachment.filename, url_for(@transaction.attachment), :class => 'ob-text-primary', :target => '_blank' %>
