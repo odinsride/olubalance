@@ -30,6 +30,6 @@ RSpec.describe Account, type: :model do
     end
   end
 
-  it { is_expected.to belong_to(:user) }
-  it { is_expected.to have_many(:transactions) }
+  it { should belong_to(:user) }
+  it { should have_many(:transactions) }
 end

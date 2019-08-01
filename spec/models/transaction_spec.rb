@@ -61,6 +61,6 @@ RSpec.describe Transaction, type: :model do
     end
   end
 
-  it { is_expected.to belong_to(:account) }
+  it { should belong_to(:account) }
   # it { is_expected.to have_one(:transaction_balance) }
 end
