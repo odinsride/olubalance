@@ -56,10 +56,6 @@ ActiveRecord::Schema.define(version: 2019_06_26_011950) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "memo"
-    t.string "attachment_file_name"
-    t.string "attachment_content_type"
-    t.integer "attachment_file_size"
-    t.datetime "attachment_updated_at"
     t.index ["account_id"], name: "index_transactions_on_account_id"
   end
 
