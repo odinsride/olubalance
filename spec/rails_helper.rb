@@ -28,6 +28,9 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 
+  # Include Devise helpers
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.strategy = :transaction
