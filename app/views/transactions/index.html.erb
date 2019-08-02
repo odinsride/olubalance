@@ -31,7 +31,7 @@
 				<div class="row ob-no-bottom white-text">
 					<div class="col s8">
 						<h4 class="flow-text valign-wrapper">
-							<i class="material-icons" style="margin-right: 10px">account_balance</i><%= @account.name %> 
+							<i class="material-icons" style="margin-right: 10px">account_balance</i><%= @account.name %>
 						</h4>
 					</div>
 					<div class="col s4 right-align <%= if @account.current_balance < 0 then 'red-text text-lighten-1' end %>">
@@ -42,7 +42,7 @@
 
 			<!-- mobile header -->
 			<li class="collection-item ob-secondary white-text hide-on-large-only"><strong>Transactions</strong></li>
-			
+
 			<!-- desktop header -->
 			<li class="collection-item ob-secondary white-text hide-on-med-and-down">
 				<div class="row ob-no-bottom ob-transaction-header">
@@ -69,7 +69,7 @@
 					<!-- mobile view -->
 					<div class="row ob-no-bottom hide-on-large-only">
 						<div class="col s4 text-muted">
-							<small><%= transaction.trx_date.strftime('%m/%d/%y') %></small>
+							<small><%= transaction.pending ? 'PENDING' : transaction.trx_date.strftime('%m/%d/%y') %></small>
 						</div>
 						<div class="col s8 right-align text-muted">
 							<small>Balance <%= number_to_currency(transaction.running_balance) %></small>
@@ -94,7 +94,10 @@
 					<!-- desktop view -->
 					<div class="row ob-no-bottom hide-on-med-and-down valign-wrapper">
 						<div class="col l2 xl2 text-muted ob-right-border center-align">
-							<%= transaction.trx_date.strftime('%m/%d/%Y') %>
+							<%= transaction.pending ? 'PENDING' : transaction.trx_date.strftime('%m/%d/%Y') %>
+							<% if transaction.pending %>
+								<br/><span style="font-size: 0.7em">(<%= transaction.trx_date.strftime('%m/%d/%Y') %>)</span>
+							<% end %>
 						</div>
 						<div class="col l4 xl7 valign-wrapper ob-text-primary ob-right-border">
 							<strong><%= transaction.description %></strong>

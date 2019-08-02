@@ -46,6 +46,13 @@
 			<%= f.input :attachment, icon: 'attach_file', hint: 'Upload a receipt or invoice (PDF or Image Formats Only)', as: :file, wrapper_html: { class: 'l6 s12' } %>
 		</div>
 
+		<% if @transaction.description != 'Starting Balance' %>
+			<div class="row">
+				<!-- Pending -->
+				<%= f.input :pending, wrapper_html: { class: 'l6 s12 center-align' } %>
+			</div>
+		<% end %>
+
 		<!-- Buttons -->
 		<div class="row center-align">
 			<div class="col s12 l6">

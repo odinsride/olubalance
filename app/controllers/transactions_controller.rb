@@ -91,7 +91,7 @@ class TransactionsController < ApplicationController
 
   def transaction_params
     params.require(:transaction) \
-          .permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :page)
+          .permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :page, :pending)
   end
 
   def find_account
