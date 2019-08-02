@@ -32,16 +32,16 @@ end
 
 Account.create!(
   name: Faker::Bank.unique.name.titlecase,
-  last_four: Faker::Number.number(4).to_i,
+  last_four: Faker::Number.number(digits: 4).to_i,
   starting_balance: 3000.00,
   user_id: 1
 )
 
 5.times do
   Transaction.create!(
-    trx_date: Faker::Date.between(10.days.from_now, 15.days.from_now),
+    trx_date: Faker::Date.between(from: 10.days.from_now, to: 15.days.from_now),
     description: Faker::Name.name,
-    amount: Faker::Number.between(0.01, 150.00).to_f.round(2),
+    amount: Faker::Number.between(from: 0.01, to: 150.00).to_f.round(2),
     trx_type: trx_type.sample,
     attachment: File.new(Rails.root.join('app/assets/images/logo.png')),
     account_id: 1
@@ -50,9 +50,9 @@ end
 
 1000.times do
   Transaction.create!(
-    trx_date: Faker::Date.forward(10),
+    trx_date: Faker::Date.forward(days: 10),
     description: Faker::Name.name,
-    amount: Faker::Number.between(0.01, 150.00).to_f.round(2),
+    amount: Faker::Number.between(from: 0.01, to: 150.00).to_f.round(2),
     trx_type: trx_type.sample,
     account_id: 1
   )
@@ -60,9 +60,9 @@ end
 
 5.times do
   Transaction.create!(
-    trx_date: Faker::Date.between(10.days.from_now, 15.days.from_now),
+    trx_date: Faker::Date.between(from: 10.days.from_now, to: 15.days.from_now),
     description: Faker::Name.name,
-    amount: Faker::Number.between(0.01, 150.00).to_f.round(2),
+    amount: Faker::Number.between(from: 0.01, to: 150.00).to_f.round(2),
     trx_type: trx_type.sample,
     attachment: File.new(Rails.root.join('app/assets/images/logo.png')),
     account_id: 1
@@ -72,17 +72,17 @@ end
 20.times do
   accounts << Account.create!(
     name: Faker::Bank.unique.name.titlecase,
-    last_four: Faker::Number.number(4).to_i,
-    starting_balance: Faker::Number.between(1500.00, 9000.00).to_f.round(2),
+    last_four: Faker::Number.number(digits: 4).to_i,
+    starting_balance: Faker::Number.between(from: 1500.00, to: 9000.00).to_f.round(2),
     user: users.sample
   )
 end
 
 2000.times do
   transactions << Transaction.create!(
-    trx_date: Faker::Date.forward(30),
+    trx_date: Faker::Date.forward(days: 30),
     description: Faker::Name.name,
-    amount: Faker::Number.between(0.01, 250.00).to_f.round(2),
+    amount: Faker::Number.between(from: 0.01, to: 250.00).to_f.round(2),
     trx_type: trx_type.sample,
     account: accounts.sample
   )

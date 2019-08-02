@@ -27,7 +27,7 @@
 			<!-- Transaction Type -->
 			<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], wrapper_html: { class: 'l2 s5' }, :label => 'Transaction Type', :item_wrapper_tag => :div, :checked => @transaction.transaction_type, id: 'trx_type' %>
 		</div>
-		
+
 
 		<div class="row">
 			<!-- Description -->
