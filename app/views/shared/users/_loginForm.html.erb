@@ -1,0 +1,32 @@
+<h3 class="subtitle is-3 has-text-link">Login to olubalance</h3>
+<%= form_for(:user, url: session_path(:user)) do |f| %>
+  <div class="field">
+    <label class="label has-text-grey">Email Address</label>
+    <div class="control has-icons-left">
+      <%= f.text_field :email, class: "input is-primary",
+                                          placeholder: "john@gmail.com" %>
+      <span class="icon is-small is-left">
+        <i class="fa fa-envelope"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label has-text-grey">Password</label>
+    <div class="control has-icons-left">
+      <%= f.password_field :password, class: "input is-primary",
+                                                  placeholder: "Password" %>
+      <span class="icon is-small is-left">
+        <i class="fa fa-lock"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">
+    </label>
+    <div class="control">
+      <%= f.button '<span class="icon"><i class="fa fa-sign-in"></i></span><span>Login</span>'.html_safe, class: "button is-primary" %>
+    </div>
+  </div>
+<% end %>

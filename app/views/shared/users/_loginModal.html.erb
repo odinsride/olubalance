@@ -1,0 +1,23 @@
+<a class="button is-primary modal-button"
+   data-target="login-form">
+  <span class="icon">
+    <i class="fa fa-sign-in"></i>
+  </span>
+  <span>Login</span>
+</a>
+
+<div class="modal" id="login-form">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+
+    <div class="card ob-modal-form">
+      <div class="card-content">
+        <div class="content">
+          <%= render "shared/users/loginForm" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>

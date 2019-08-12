@@ -10,6 +10,14 @@ class AccountDecorator < Draper::Decorator
     last_four.present? ? name + ' ( ... ' + last_four.to_s + ')' : name
   end
 
+  def account_card_title
+    name.length > Account::DISPLAY_NAME_LIMIT ? name[0..Account::DISPLAY_NAME_LIMIT] + "... " : name
+  end
+
+  def tooltip_class
+    name.length > Account::DISPLAY_NAME_LIMIT ? 'tooltip' : nil
+  end
+
   def last_four_display
     last_four.present? ? 'xx' + last_four.to_s : nil
   end

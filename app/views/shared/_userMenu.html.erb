@@ -1,0 +1,27 @@
+<div class="navbar-item has-dropdown is-hoverable">
+  <a class="navbar-link has-text-grey-dark">
+    <span><%= current_user.full_name %></span>
+  </a>
+
+  <div class="navbar-dropdown ob-main-menu">
+    <div class="navbar-item">
+      <%= render "shared/userDetails" %>
+    </div>
+
+    <hr class="navbar-divider"/>
+
+    <a class="navbar-item">
+      <span class="icon has-text-link is-medium">
+        <i class="fa fa-cog"></i>
+      </span>
+      Settings
+    </a>
+
+    <%= link_to destroy_user_session_path, class: "navbar-item", method: :delete do%>
+      <span class="icon has-text-link is-medium">
+        <i class="fa fa-sign-out"></i>
+      </span>
+      Logout
+    <% end %>
+  </div>
+</div>

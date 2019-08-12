@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   before_action :assign_navbar_content
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def current_user
+    UserDecorator.decorate(super) unless super.nil?
+  end
+
   def assign_navbar_content
     @navbar_accounts = current_user.accounts if user_signed_in?
   end

@@ -1,0 +1,28 @@
+<div class="column is-3-widescreen is-4-tablet">
+  <div class="card has-equal-height">
+    <header class="card-header has-background-primary <%= account.tooltip_class %>" data-tooltip="<%= account.name %>">
+      <h6 class="title is-6 card-header-title has-text-white">
+        <%= account.account_card_title %>
+      </h6>
+    </header>
+    <div class="card-content">
+      <div class="content has-text-right ">
+        <p class="title is-6 has-text-primary">
+          <span class="icon">
+            <i class="fa fa-fw fa-bank"></i>
+          </span>
+          Balance
+        </p>
+        <p class="subtitle is-3 has-text-grey">
+          <%= account.current_balance_display %>
+          <div class="is-size-7 has-text-grey-light" style="margin-top: -1.9rem">as of <%= account.updated_at_display %></div>
+        </p>
+      </div>
+    </div>
+    <footer class="card-footer">
+      <span class="card-footer-item has-text-weight-medium has-text-grey-light"><%= account.last_four_display %></span>
+      <a href="#" class="card-footer-item has-text-weight-medium">Edit</a>
+      <a href="#" class="card-footer-item has-text-weight-medium">Deactivate</a>
+    </footer>
+  </div>
+</div>

@@ -12,184 +12,90 @@
  *
  */
 
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "font-awesome";
-@import "materialize/components/color";
-$primary-color: color("teal", "darken-2") !default;
-$secondary-color: color("teal", "lighten-2") !default;
-@import "materialize";
-@import "material_icons";
+$primary: #4db6ac;
+$link: #00796b;
 
+// Import Bulma Core
+@import "./bulma-0.7.5/bulma.sass";
 
-/******************************************************
- * Materialize Overrides 
- */
+// Import Bulma Extensions
+@import "./bulma-0.7.5/sass/extensions/_all";
 
-body {
+// Import Custom Card CSS
+@import "./card.scss";
+
+// nav {
+//     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+// }
+
+.button,
+a.dropdown-item {
+    font-weight: bold;
+}
+
+h6.title {
+    i {
+        margin-right: 10px;
+    }
+}
+
+a.navbar-item,
+a.navbar-link {
+    font-weight: bold;
+
+    i {
+        margin-right: 10px;
+    }
+}
+
+.card {
+    min-height: 200px;
+    border-radius: 10px;
+
+    /* Olubalance Card Gradient */
+    /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, rgb(255, 255, 255) 0%, rgb(224, 242, 241) 100%);
+    /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, rgb(255, 255, 255) 0%, rgb(224, 242, 241) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(224, 242, 241) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e0f2f1', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+
+    box-shadow: 0px 2px 2px 0px #acacac;
+    transition: box-shadow .1s ease-in-out;
+
+    &:hover {
+        box-shadow: 0px 5px 6px 1px #acacac;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0;
+    }
+  }
+
+.navbar-menu {
+    padding-left: 50px;
+}
+
+// Override max height for logo
+.navbar-item img {
+    max-height: 2.25rem;
+}
+
+// Make cards equal height
+.has-equal-height {
+    height: 100%;
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
 }
 
-main {
-    flex: 1 0 auto;
+.ob-modal-form {
+    border-radius: 5px;
 }
 
-html {
-    font-family: Ubuntu, Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Cantarell, "Helvetica Neue", sans-serif;
-}
-
-.page-footer {
-    padding-top: 0;
-}
-
-.help-block {
-    color: #6c757d !important;
-    font-style: italic;
-    font-size: .8em;
-}
-
-.control-label {
-    margin-right: 10px;
-}
-
-.required abbr {
-    color: #00796b !important;
-    text-decoration: none !important;
-    border-bottom: none !important;
-}
-
-// FIX SIDENAV SPACING
-.side-nav li>a {
-  padding: 0 16px;
-}
-//FIX SIDEBAR DIVIDERS
-.side-nav .divider {
-  margin:0;
-  height:8px;
-  border-bottom:1px solid #e0e0e0;
-  background-color: transparent;
-}
-
-.card.small {
-    height: 250px;
-}
-
-h5 {
-    margin-top: 30px;
-}
-
-/******************************************************
- * olubalance styles 
- */
-
-.ob-sidenav-header {
-    background-size: cover;
-    margin-bottom: 0px;
-    padding: 15px 0 0 15px;
-      .row {
-        margin-bottom: 0;
-      }
-}
-
-.ob-account-card {
-    border-radius: 10px;
-}
-
-.ob-card-btn {
-    padding: 0 0.5rem !important;
-    margin-right: 0 !important;
-    margin-left: 15px;
-}
-
-a.ob-text-primary.tooltipped {
-    margin-right: 0 !important;
-    margin-left: 12px !important;
-}
-
-
-a.modal-trigger.ob-text-primary.tooltipped {
-    margin-right: 0 !important;
-    margin-left: 12px !important;
-}
-
-.valign-fix {
-    justify-content: flex-end;
-}
-
-.text-muted { 
-    color: #6c757d !important;
-}
-
-/*
-.ob-shadow {
-    text-shadow: 1px 1px 2px #ccc;
-}*/
-
-.ob-no-top {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-}
-
-.ob-no-bottom {
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.ob-transaction-header {
-    font-weight: bold !important;
-}
-
-.ob-right-border {
-    border-right: 1px dotted #ccc;
-}
-
-.ob-icon-small {
-    font-size: 1.8rem;
-    /*-webkit-text-stroke: 1px #ccc;*/
-}
-
-.ob-icon-medium {
-    font-size: 3rem;
-}
-
-.ob-text-secondary {
-    color: #4db6ac !important;
-}
-
-.ob-secondary {
-    background-color: #4db6ac !important;
-}
-
-.ob-text-primary {
-    color: #00796b !important;
-}
-
-.ob-primary {
-    background-color: #00796b !important;
-}
-
-
-.ob-accent {
-    background-color: #e0f2f1 !important;
-}
-
-
-.ob-gradient {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#008e76+0,69c1b9+100 */
-    background: rgb(0,142,118); /* Old browsers */
-    background: -moz-linear-gradient(left, rgba(0,142,118,1) 0%, rgba(105,193,185,1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(0,142,118,1) 0%,rgba(105,193,185,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(0,142,118,1) 0%,rgba(105,193,185,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008e76', endColorstr='#69c1b9',GradientType=1 ); /* IE6-9 */
-}
-
-.ob-card-gradient {
-   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e0f2f1+0,ffffff+100 */
-background: rgb(224,242,241); /* Old browsers */
-background: -moz-linear-gradient(top, rgba(224,242,241,1) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(224,242,241,1) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(224,242,241,1) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0f2f1', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+.ob-main-menu {
+    width: 18rem;
 }

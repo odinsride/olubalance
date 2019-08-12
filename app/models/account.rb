@@ -8,6 +8,9 @@ class Account < ApplicationRecord
 
   NO_INACTIVE_DESC = 'You have no inactive accounts :)'
 
+  DISPLAY_NAME_LIMIT = 30
+
+
   belongs_to :user
   has_many :transactions, dependent: :delete_all
 
