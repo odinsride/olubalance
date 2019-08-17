@@ -54,6 +54,10 @@
     </section>
 
     <%= javascript_include_tag 'bulma' %>
+
+        <% flash.each do |message_type, message| %>
+      <%= javascript_tag "bulmaToast.toast({ message: '#{message}' });" %>
+    <% end %>
   </body>
 
 </html>

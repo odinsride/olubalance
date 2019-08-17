@@ -1,6 +1,8 @@
 <div class="column is-3-widescreen is-4-tablet">
   <div class="card has-equal-height">
-    <header class="card-header has-background-primary <%= account.tooltip_class %>" data-tooltip="<%= account.name %>">
+    <header class="card-header has-background-primary <%= class_string(tooltip: account.name_too_long) %>"
+            data-tooltip="<%= account.name %>"
+    >
       <h6 class="title is-6 card-header-title has-text-white">
         <%= account.account_card_title %>
       </h6>
@@ -13,9 +15,9 @@
           </span>
           Balance
         </p>
-        <p class="subtitle is-3 has-text-grey">
+        <p class="subtitle is-2 <%= account.balance_color %>">
           <%= account.current_balance_display %>
-          <div class="is-size-7 has-text-grey-light" style="margin-top: -1.9rem">as of <%= account.updated_at_display %></div>
+          <div class="is-size-7 has-text-grey-light ob-last-updated">as of <%= account.updated_at_display %></div>
         </p>
       </div>
     </div>

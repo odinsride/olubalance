@@ -10,7 +10,6 @@ class Account < ApplicationRecord
 
   DISPLAY_NAME_LIMIT = 30
 
-
   belongs_to :user
   has_many :transactions, dependent: :delete_all
 

@@ -49,9 +49,8 @@ a.navbar-link {
     }
 }
 
-.card {
+.column > .card {
     min-height: 200px;
-    border-radius: 10px;
 
     /* Olubalance Card Gradient */
     /* Old browsers */
@@ -69,10 +68,6 @@ a.navbar-link {
 
     &:hover {
         box-shadow: 0px 5px 6px 1px #acacac;
-    }
-
-    .card-header {
-        border-radius: 10px 10px 0 0;
     }
   }
 
@@ -92,10 +87,14 @@ a.navbar-link {
     flex-direction: column;
 }
 
-.ob-modal-form {
+.ob-modal-card {
     border-radius: 5px;
 }
 
 .ob-main-menu {
     width: 18rem;
+}
+
+.ob-last-updated {
+    margin-top: -2.5rem
 }

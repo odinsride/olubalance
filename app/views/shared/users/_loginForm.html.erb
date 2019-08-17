@@ -1,5 +1,5 @@
 <h3 class="subtitle is-3 has-text-link">Login to olubalance</h3>
-<%= form_for(:user, url: session_path(:user)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), remote: true) do |f| %>
   <div class="field">
     <label class="label has-text-grey">Email Address</label>
     <div class="control has-icons-left">
