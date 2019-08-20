@@ -1,10 +1,10 @@
 <h3 class="subtitle is-3 has-text-link">Login to olubalance</h3>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), remote: true) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <label class="label has-text-grey">Email Address</label>
     <div class="control has-icons-left">
       <%= f.text_field :email, class: "input is-primary",
-                                          placeholder: "john@gmail.com" %>
+                               placeholder: "john@gmail.com" %>
       <span class="icon is-small is-left">
         <i class="fa fa-envelope"></i>
       </span>
@@ -15,7 +15,7 @@
     <label class="label has-text-grey">Password</label>
     <div class="control has-icons-left">
       <%= f.password_field :password, class: "input is-primary",
-                                                  placeholder: "Password" %>
+                                      placeholder: "Password" %>
       <span class="icon is-small is-left">
         <i class="fa fa-lock"></i>
       </span>
@@ -30,3 +30,4 @@
     </div>
   </div>
 <% end %>
+<% render "devise/shared/links" %>

@@ -51,13 +51,16 @@
       <div class="container">
         <%= yield %>
       </div>
-    </section>
 
-    <%= javascript_include_tag 'bulma' %>
+      <%= javascript_include_tag 'bulma' %>
 
         <% flash.each do |message_type, message| %>
-      <%= javascript_tag "bulmaToast.toast({ message: '#{message}' });" %>
+      <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
+                                             position: 'top-center',
+                                             type: 'is-danger',
+                                             animate: { in: 'fadeIn', out: 'fadeOut' } });" %>
     <% end %>
+    </section>
   </body>
 
 </html>

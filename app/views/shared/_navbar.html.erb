@@ -1,8 +1,8 @@
 <nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main-navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="#">
+    <%= link_to root_path, class: "navbar-item" do %>
       <%= image_tag("logo.png") %>
-    </a>
+    <% end %>
     <a
       role="button"
       class="navbar-burger burger"
