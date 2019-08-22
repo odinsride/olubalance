@@ -57,8 +57,9 @@
         <% flash.each do |message_type, message| %>
       <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
                                              position: 'top-center',
-                                             type: 'is-danger',
-                                             animate: { in: 'fadeIn', out: 'fadeOut' } });" %>
+                                             type: 'is-#{message_type}',
+                                             animate: { in: 'fadeIn', out: 'fadeOut' },
+                                             duration: 2500 });" %>
     <% end %>
     </section>
   </body>
