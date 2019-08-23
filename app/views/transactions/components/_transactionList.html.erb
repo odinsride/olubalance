@@ -1,6 +1,14 @@
-<tr>
-  <th><%= transaction.trx_date %></th>
-  <td><%= transaction.description %></td>
-  <td><%= transaction.amount %></td>
-  <td><%= transaction.running_balance %></td>
-</tr>
+<table class="table is-hoverable is-fullwidth ob-transactions">
+  <thead>
+    <th colspan=4 class="ob-transaction-phead">Test</th>
+  </thead>
+  <thead>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Balance</th>
+  </thead>
+  <tbody>
+    <%= render partial: "transactions/components/transactionLine", collection: @transactions, as: :transaction %>
+  </tbody>
+</table>

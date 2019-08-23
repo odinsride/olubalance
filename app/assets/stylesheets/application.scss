@@ -15,6 +15,10 @@
 @import "font-awesome";
 $primary: #4db6ac;
 $link: #00796b;
+$white-ter: hsl(0,0%,96%);
+
+$table-head-background-color: $primary;
+$table-head-cell-color: $white-ter;
 
 // Import Bulma Core
 @import "./bulma-0.7.5/bulma.sass";
@@ -80,5 +84,9 @@ a.navbar-link {
 }
 
 .ob-last-updated {
-    margin-top: -2.5rem
+    margin-top: -2.5rem;
+}
+
+.ob-transaction-phead {
+    background-color: $link;
 }

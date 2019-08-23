@@ -1,8 +1,2 @@
 <%= render partial: "transactions/components/transactionLevel" %>
-<div class="columns is-multiline" id="accounts">
-  <table class="table is-fullwidth is-hoverable">
-    <tbody>
-      <%= render partial: "transactions/components/transactionList", collection: @transactions, as: :transaction %>
-    </tbody>
-  </table>
-</div>
+<%= render partial: "transactions/components/transactionList" %>
