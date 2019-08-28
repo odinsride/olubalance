@@ -1,0 +1,26 @@
+table.ob-table {
+  font-size: 0.9em;
+  border-collapse: none;
+  border: 1px dotted #ccc;
+
+  th.ob-table-phead {
+    // height: 4em;
+    background-color: $link;
+  }
+  th {
+    font-size: 1.1em;
+  }
+
+  td {
+    border-bottom: 1px dotted #ccc;
+  }
+
+  td, th {
+    padding: 0.80em 1.0em;
+
+    .ob-cell-content {
+      padding-right: 1.0em;
+      border-right: 1px dotted #ccc;
+    }
+  }
+}

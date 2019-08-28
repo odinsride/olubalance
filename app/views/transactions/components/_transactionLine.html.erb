@@ -1,6 +1,31 @@
 <tr>
-  <th><%= transaction.trx_date %></th>
-  <td><%= transaction.description %></td>
-  <td><%= transaction.amount %></td>
-  <td><%= transaction.running_balance %></td>
+  <td class="has-text-centered">
+    <div class="ob-cell-content">
+      <%= transaction.trx_date %>
+    </div>
+  </td>
+
+  <td>
+    <div class="ob-cell-content">
+      <%= transaction.description %>
+    </div>
+  </td>
+
+  <td class="has-text-right">
+    <div class="ob-cell-content <%= transaction.amount_color %>">
+      <%= transaction.credit %>
+    </div>
+  </td>
+
+  <td class="has-text-right <%= transaction.amount_color %>">
+    <div class="ob-cell-content">
+      <%= transaction.debit %>
+    </div>
+  </td>
+
+  <td class="has-text-right">
+    <div>
+      <%= transaction.running_balance_display %>
+    </div>
+  </td>
 </tr>

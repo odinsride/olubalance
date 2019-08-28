@@ -19,6 +19,7 @@ $white-ter: hsl(0,0%,96%);
 
 $table-head-background-color: $primary;
 $table-head-cell-color: $white-ter;
+$table-color: hsl(0,0%,35%);
 
 // Import Bulma Core
 @import "./bulma-0.7.5/bulma.sass";
@@ -34,6 +35,9 @@ $table-head-cell-color: $white-ter;
 
 // Import Custom Card CSS
 @import "./card";
+
+// Import Custom Table CSS
+@import "./table";
 
 // nav {
 //     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
@@ -87,6 +91,6 @@ a.navbar-link {
     margin-top: -2.5rem;
 }
 
-.ob-transaction-phead {
-    background-color: $link;
+.has-text-shadow {
+    text-shadow: 1px 1px 10px #acacac;
 }

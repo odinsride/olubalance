@@ -10,6 +10,7 @@ class TransactionsController < ApplicationController
     session[:trx_index_page] = params[:page] if params[:page]
 
     @transactions = @account.transactions.with_balance.desc.paginate(page: session[:trx_index_page], per_page: 12)
+    @transactions = @transactions.decorate
     @custom_paginate_renderer = custom_paginate_renderer
 
     @search = params['search']
