@@ -14,12 +14,23 @@
 
   box-shadow: 0px 2px 2px 0px #acacac;
   transition: box-shadow .1s ease-in-out;
+  border-radius: 5px;
 
   &:hover {
       box-shadow: 0px 5px 6px 1px #acacac;
   }
-}
 
-.card-header-title {
-  text-shadow: 1px 1px 10px #acacac;
+  .card-header {
+    border-radius: 5px 5px 0 0;
+
+    .card-header-title {
+      text-shadow: 1px 1px 10px #acacac;
+    }
+  }
+
+  .card-footer {
+    .card-footer-item {
+      font-size: 0.85em;
+    }
+  }
 }

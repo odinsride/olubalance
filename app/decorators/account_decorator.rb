@@ -3,6 +3,7 @@
 class AccountDecorator < Draper::Decorator
   decorates_finders
   decorates_association :user
+  decorates_association :transaction
   delegate_all
   include Draper::LazyHelpers
 

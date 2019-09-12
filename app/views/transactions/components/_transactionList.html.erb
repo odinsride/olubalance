@@ -17,35 +17,44 @@
 
         <!-- Right side -->
         <div class="level-right">
-
+          <div class="level-item">
+            <p class="title is-5 has-text-white">
+              <%= @account.current_balance_display %>
+            </p>
+          </div>
         </div>
       </nav>
     </th>
   </thead>
   <thead>
-    <th class="has-text-centered">
+    <th class="has-text-centered is-hidden-mobile">
       <div class="ob-cell-content">
         Date
       </div>
     </th>
-    <th>
+    <th class="is-hidden-mobile">
       <div class="ob-cell-content">
         Description
       </div>
     </th>
-    <th class="has-text-right">
+    <th class="has-text-right is-hidden-mobile">
       <div class="ob-cell-content">
         Credit
       </div>
     </th>
-    <th class="has-text-right">
+    <th class="has-text-right is-hidden-mobile">
       <div class="ob-cell-content">
         Debit
       </div>
     </th>
-    <th class="has-text-right">
+    <th class="has-text-right is-hidden-mobile">
       <div>
         Balance
+      </div>
+    </th>
+    <th class="is-hidden-tablet">
+      <div>
+        Transactions
       </div>
     </th>
   </thead>

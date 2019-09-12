@@ -1,31 +1,60 @@
 <tr>
-  <td class="has-text-centered">
+  <td class="has-text-centered is-hidden-mobile">
     <div class="ob-cell-content">
-      <%= transaction.trx_date %>
+      <%= transaction.trx_date_decorated %>
     </div>
   </td>
 
-  <td>
+  <td class="is-hidden-mobile">
     <div class="ob-cell-content">
       <%= transaction.description %>
     </div>
   </td>
 
-  <td class="has-text-right">
+  <td class="has-text-right is-hidden-mobile">
     <div class="ob-cell-content <%= transaction.amount_color %>">
       <%= transaction.credit %>
     </div>
   </td>
 
-  <td class="has-text-right <%= transaction.amount_color %>">
-    <div class="ob-cell-content">
+  <td class="has-text-right is-hidden-mobile">
+    <div class="ob-cell-content <%= transaction.amount_color %>">
       <%= transaction.debit %>
     </div>
   </td>
 
-  <td class="has-text-right">
+  <td class="has-text-right is-hidden-mobile">
     <div>
       <%= transaction.running_balance_display %>
+    </div>
+  </td>
+
+  <!-- Mobile Row -->
+  <td class="is-hidden-tablet">
+    <div class="level ob-mobile-level is-mobile has-text-grey is-size-7">
+      <div class="level-left">
+        <div class="level-item">
+          <%= transaction.trx_date_decorated %>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          Balance <%= transaction.running_balance_display %>
+        </div>
+      </div>
+    </div>
+
+    <div class="level ob-mobile-level is-mobile">
+      <div class="level-left">
+        <div class="level-item">
+          <%= transaction.description %>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item <%= transaction.amount_color %>">
+          <%= transaction.amount_decorated %>
+        </div>
+      </div>
     </div>
   </td>
 </tr>

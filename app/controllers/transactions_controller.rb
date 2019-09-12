@@ -96,7 +96,7 @@ class TransactionsController < ApplicationController
   end
 
   def find_account
-    @account = current_user.accounts.find(params[:account_id])
+    @account = current_user.accounts.find(params[:account_id]).decorate
     respond_to do |format|
       if !@account.active?
         format.html { redirect_to accounts_inactive_path, notice: 'Account is inactive' }

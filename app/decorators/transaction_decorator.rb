@@ -14,11 +14,23 @@ class TransactionDecorator < Draper::Decorator
     amount.positive? ? number_to_currency(amount) : '&nbsp;'.html_safe
   end
 
+  def amount_decorated
+    amount.negative? ? number_to_currency(amount.abs) : number_to_currency(amount)
+  end
+
   def amount_color
     amount.negative? ? 'has-text-danger' : 'has-text-success'
   end
 
   def running_balance_display
     number_to_currency(running_balance)
+  end
+
+  def trx_date_decorated
+    transaction.pending ? 'PENDING' : trx_date_formatted
+  end
+
+  def trx_date_formatted
+    trx_date.in_time_zone(current_user.timezone).strftime('%m/%d/%Y')
   end
 end

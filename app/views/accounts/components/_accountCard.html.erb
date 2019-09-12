@@ -1,4 +1,4 @@
-<div class="column is-3-widescreen is-4-tablet">
+<div class="column is-3-widescreen is-6-tablet">
   <div class="card has-equal-height animated fadeIn">
     <header class="card-header has-background-primary <%= class_string(tooltip: account.name_too_long) %>"
             data-tooltip="<%= account.name %>"
@@ -22,9 +22,9 @@
       </div>
     </div>
     <footer class="card-footer">
-      <span class="card-footer-item has-text-weight-medium has-text-grey-light"><%= account.last_four_display %></span>
-      <a href="#" class="card-footer-item has-text-weight-medium">Edit</a>
-      <a href="#" class="card-footer-item has-text-weight-medium">Deactivate</a>
+      <span class="card-footer-item has-text-weight-medium has-text-grey"><%= account.last_four_display %></span>
+      <a href="#" class="card-footer-item has-text-weight-bold">Edit</a>
+      <a href="#" class="card-footer-item has-text-weight-bold">Deactivate</a>
     </footer>
   </div>
 </div>
