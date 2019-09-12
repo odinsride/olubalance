@@ -18,5 +18,8 @@ module Olubalance
 
     # Enforce javascript engine (not coffeescript)
     config.generators.javascript_engine = :js
+
+    # Fonts path
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

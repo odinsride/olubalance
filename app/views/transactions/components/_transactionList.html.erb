@@ -2,10 +2,17 @@
   <thead>
     <th colspan=5 class="ob-table-phead">
       <!-- Main container -->
-      <nav class="level">
+      <div class="level">
         <!-- Left side -->
-        <div class="level-left subtitle is-5 has-text-white has-text-shadow">
-          <%= @account.name %>
+        <div class="level-left">
+          <div class="level-item">
+            <p class="title is-5 has-text-white">
+              <span class="icon is-medium ob-icon-rpad">
+                <i class="fas fa-lg fa-piggy-bank"></i>
+              </span>
+              <%= @account.name %>
+            </p>
+          </div>
         </div>
 
         <!-- Right side -->
@@ -13,8 +20,6 @@
 
         </div>
       </nav>
-      <div class="subtitle is-4 has-text-white">
-      </div>
     </th>
   </thead>
   <thead>

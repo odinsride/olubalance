@@ -12,7 +12,30 @@
  *
  */
 
-@import "font-awesome";
+// Define custom font
+@font-face {
+    font-family: 'Muli-Regular';
+    src:font-url('Muli/Muli-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Muli-Bold';
+    src:font-url('Muli/Muli-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Muli-SemiBold';
+    src:font-url('Muli/Muli-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+// Set Bulma Variables
+$family-primary: 'Muli-Regular';
 $primary: #4db6ac;
 $link: #00796b;
 $white-ter: hsl(0,0%,96%);
@@ -26,6 +49,11 @@ $table-color: hsl(0,0%,35%);
 
 // Import Bulma Extensions
 @import "./bulma-0.7.5/sass/extensions/_all";
+
+// Import Font Awesome
+$fa-font-path: "./fontawesome/webfonts";
+@import "./fontawesome/scss/fontawesome.scss";
+@import "./fontawesome/scss/solid.scss";
 
 // Import Animate.css
 @import "./animate.css/animate.css";
@@ -57,10 +85,6 @@ h6.title {
 a.navbar-item,
 a.navbar-link {
     font-weight: bold;
-
-    i {
-        margin-right: 10px;
-    }
 }
 
 .navbar-menu {
@@ -77,6 +101,12 @@ a.navbar-link {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.ob-icon-rpad {
+    i {
+        margin-right: 10px;
+    }
 }
 
 .ob-modal-card {
