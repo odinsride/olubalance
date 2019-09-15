@@ -6,7 +6,7 @@
       <%= f.text_field :email, class: "input is-primary",
                                placeholder: "john@gmail.com" %>
       <span class="icon is-small is-left">
-        <i class="fa fa-envelope"></i>
+        <i class="fas fa-envelope"></i>
       </span>
     </div>
   </div>
@@ -17,17 +17,15 @@
       <%= f.password_field :password, class: "input is-primary",
                                       placeholder: "Password" %>
       <span class="icon is-small is-left">
-        <i class="fa fa-lock"></i>
+        <i class="fas fa-lock"></i>
       </span>
     </div>
   </div>
 
-  <div class="field">
-    <label class="label">
-    </label>
+  <div class="field mt-25">
     <div class="control">
-      <%= f.button '<span class="icon"><i class="fa fa-sign-in"></i></span><span>Login</span>'.html_safe, class: "button is-primary" %>
+      <%= f.button '<span class="icon"><i class="fas fa-sign-in-alt"></i></span><span>Login</span>'.html_safe, class: "button is-link" %>
     </div>
   </div>
 <% end %>
-<% render "devise/shared/links" %>
+<%= render partial: "devise/shared/links" %>

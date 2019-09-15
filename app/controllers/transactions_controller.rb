@@ -27,7 +27,7 @@ class TransactionsController < ApplicationController
 
   # New action for creating transaction
   def new
-    @transaction = @account.transactions.build
+    @transaction = @account.transactions.build.decorate
     @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
                             .order('description').uniq.pluck(:description)
 
@@ -41,7 +41,7 @@ class TransactionsController < ApplicationController
 
   # Create action saves the trasaction into database
   def create
-    @transaction = @account.transactions.build(transaction_params)
+    @transaction = @account.transactions.build(transaction_params).decorate
 
     if @transaction.save
       redirect_to account_transactions_path, notice: 'Transaction was successfully created.'

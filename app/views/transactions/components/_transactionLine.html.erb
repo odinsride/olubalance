@@ -1,6 +1,6 @@
 <tr>
   <td class="has-text-centered is-hidden-mobile">
-    <div class="ob-cell-content">
+    <div class="ob-cell-content has-text-grey">
       <%= transaction.trx_date_decorated %>
     </div>
   </td>
@@ -24,26 +24,13 @@
   </td>
 
   <td class="has-text-right is-hidden-mobile">
-    <div>
+    <div class="has-text-weight-semibold has-text-grey">
       <%= transaction.running_balance_display %>
     </div>
   </td>
 
   <!-- Mobile Row -->
   <td class="is-hidden-tablet">
-    <div class="level ob-mobile-level is-mobile has-text-grey is-size-7">
-      <div class="level-left">
-        <div class="level-item">
-          <%= transaction.trx_date_decorated %>
-        </div>
-      </div>
-      <div class="level-right">
-        <div class="level-item">
-          Balance <%= transaction.running_balance_display %>
-        </div>
-      </div>
-    </div>
-
     <div class="level ob-mobile-level is-mobile">
       <div class="level-left">
         <div class="level-item">
@@ -56,5 +43,20 @@
         </div>
       </div>
     </div>
+
+    <div class="level ob-mobile-level is-mobile has-text-grey is-size-7">
+      <div class="level-left">
+        <div class="level-item">
+          <%= transaction.trx_date_decorated %>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item ">
+          Balance <%= transaction.running_balance_display %>
+        </div>
+      </div>
+    </div>
+
+
   </td>
 </tr>

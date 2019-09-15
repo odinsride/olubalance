@@ -26,6 +26,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'bulma' %>
+    <%= javascript_include_tag 'bulma-calendar' %>
   </head>
 
   <body>
@@ -43,25 +45,33 @@
     #
     #########################################################################-->
 
-    <header>
-      <%= render "shared/navbar" %>
-    </header>
+    <div id="app">
+      <header>
+        <%= render "shared/navbar" %>
+      </header>
 
-    <section class="section">
-      <div class="container">
-        <%= yield %>
-      </div>
+      <main class="olubalance">
+        <section class="section">
+          <div class="container">
+            <%= yield %>
+          </div>
 
-      <%= javascript_include_tag 'bulma' %>
 
-        <% flash.each do |message_type, message| %>
-      <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
-                                             position: 'top-center',
-                                             type: 'is-#{message_type}',
-                                             animate: { in: 'fadeIn', out: 'fadeOut' },
-                                             duration: 2500 });" %>
-    <% end %>
-    </section>
+
+          <% flash.each do |message_type, message| %>
+            <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
+                                                  position: 'top-center',
+                                                  type: 'is-#{message_type}',
+                                                  animate: { in: 'fadeIn', out: 'fadeOut' },
+                                                  duration: 2500 });" %>
+          <% end %>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <%= render "shared/footer" %>
+      </footer>
+    </div>
   </body>
 
 </html>

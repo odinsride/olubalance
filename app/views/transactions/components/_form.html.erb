@@ -1,0 +1,148 @@
+<h4 class="title is-4 has-text-link">New Transaction</h4>
+<h6 class="subtitle is-7 has-text-grey has-text-weight-semibold"><%= @account.account_name_balance %></h6>
+<%= form_for([@transaction.account, @transaction]) do |f| %>
+  <% if @transaction.errors.any? %>
+    <article id="error explanation" class="message is-danger">
+      <div class="message-header">
+        Something went wrong!
+      </div>
+      <div class="message-body content">
+        Please correct the following <span class="has-text-weight-bold"><%= pluralize(@transaction.errors.count, "error") %></span>:
+        <ul>
+          <% @transaction.errors.full_messages.each do |msg | %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <div class="columns">
+    <!-- Datepicker -->
+    <div class="column">
+      <div class="field">
+        <label class="label has-text-grey">Date</label>
+        <div class="control">
+          <%= f.text_field :trx_date, id: "trx_date",
+                                      class: "input is-primary",
+                                      type: "date",
+                                      value: @transaction.trx_date_form_value %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fields -->
+    <div class="column">
+
+      <!-- Transaction Type -->
+      <div class="field">
+        <div class="control">
+          <label class="label has-text-grey">Type</label>
+          <label class="radio has-text-grey">
+            <%= f.radio_button :trx_type, 'credit' %>
+            Credit
+          </label>
+          <label class="radio has-text-grey">
+            <%= f.radio_button :trx_type, 'debit' %>
+            Debit
+          </label>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="field">
+        <label class="label has-text-grey">Description</label>
+        <div class="control has-icons-left">
+          <%= f.text_field :description, class: "input is-primary",
+                                         placeholder: "Description" %>
+          <span class="icon is-small is-left has-text-primary">
+            <i class="fas fa-file-alt"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Amount -->
+      <div class="field">
+        <label class="label has-text-grey">Amount</label>
+        <div class="control has-icons-left">
+          <%= f.text_field :amount, class: "input is-primary",
+                                  placeholder: "Amount" %>
+          <span class="icon is-small is-left has-text-primary">
+            <i class="fas fa-dollar-sign"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Memo -->
+      <div class="field">
+        <label class="label has-text-grey">Memo</label>
+        <div class="control has-icons-left">
+          <%= f.text_field :memo, class: "input is-primary",
+                                  placeholder: "Memo" %>
+          <span class="icon is-small is-left has-text-primary">
+            <i class="fas fa-file-invoice-dollar"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Attachment -->
+      <label class="label has-text-grey">Receipt</label>
+      <div class="file has-name is-fullwidth">
+        <label class="file-label">
+          <%= f.file_field :attachment, id: "upload", class: "file-input is-primary" %>
+          <span class="file-cta has-background-primary">
+            <span class="file-icon has-text-white">
+              <i class="fas fa-upload"></i>
+            </span>
+          </span>
+          <span id="filename" class="file-name">
+            Add receipt ...
+          </span>
+        </label>
+      </div>
+    </div>
+
+  </div> <!-- /columns -->
+
+
+  <!-- Pending -->
+  <% if @transaction.description != 'Starting Balance' %>
+    <div class="field">
+      <label class="checkbox has-text-grey">
+        <%= f.check_box :pending %>
+        Pending?
+      </label>
+    </div>
+  <% end %>
+
+  <div class="field mt-25">
+    <div class="control">
+      <%= f.button '<span class="icon"><i class="fas fa-plus"></i></span><span>Create</span>'.html_safe,
+          type: 'submit',
+          class: "button is-link" %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  // Initialize all input of type date
+  var calendar = bulmaCalendar.attach('#trx_date', {
+    dateFormat: 'YYYY-MM-DDTHH:mm:ss',
+    displayMode: 'inline',
+    startDate: '<%= @transaction.trx_date_form_value %>'
+  });
+
+  // When an attachment file is selected, set the file-name field
+  document.getElementById('upload').onchange = uploadOnChange;
+
+  function uploadOnChange() {
+    var filename = this.value;
+    var lastIndex = filename.lastIndexOf("\\");
+    if (lastIndex >= 0) {
+      filename = filename.substring(lastIndex + 1);
+    }
+    document.getElementById('filename').innerHTML = filename;
+  }
+</script>

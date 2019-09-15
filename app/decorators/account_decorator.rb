@@ -32,6 +32,11 @@ class AccountDecorator < Draper::Decorator
     number_to_currency(current_balance)
   end
 
+  # Display the account name with current balance
+  def account_name_balance
+    name + ' (' + current_balance_display + ')'
+  end
+
   # Display the descriptive last updated at date for the account
   def updated_at_display
     updated_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')

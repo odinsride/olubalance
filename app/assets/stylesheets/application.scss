@@ -44,11 +44,41 @@ $table-head-background-color: $primary;
 $table-head-cell-color: $white-ter;
 $table-color: hsl(0,0%,35%);
 
+$modal-background-background-color: rgba(0, 0, 0, 0.5);
+
 // Import Bulma Core
 @import "./bulma-0.7.5/bulma.sass";
 
 // Import Bulma Extensions
 @import "./bulma-0.7.5/sass/extensions/_all";
+
+// Override datetimepicker z-index
+.datetimepicker {
+    z-index: 99;
+}
+
+.datetimepicker-dummy {
+    .datetimepicker-dummy-wrapper {
+        border: 1px solid $primary;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1)
+    }
+}
+
+// Create spacing helpers
+$sizes: (0,10,15,20,25,30,50);
+$positions: ('top','left','bottom','right');
+
+@each $size in $sizes {
+  @each $position in $positions {
+    .m#{str-slice($position, 0, 1)}-#{$size} {
+      margin-#{$position}: $size + px;
+    }
+    .p#{str-slice($position, 0, 1)}-#{$size} {
+      padding-#{$position}: $size + px;
+    }
+  }
+}
 
 // Import Font Awesome
 $fa-font-path: "./fontawesome/webfonts";
@@ -70,6 +100,19 @@ $fa-font-path: "./fontawesome/webfonts";
 // nav {
 //     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
 // }
+
+// Sticky Footer
+#app {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+    .olubalance {
+        flex: 1;
+    }
+}
+// End Sticky Footer
+
 .button.is-small {
     border-radius: 5px;
 }
@@ -104,6 +147,16 @@ a.navbar-link {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+// Override file-icon margin
+.file-icon {
+    margin-right: 0;
+}
+
+// Override file-cta and file-name border color
+.file-cta, .file-name {
+    border-color: $primary;
 }
 
 .ob-icon-rpad {

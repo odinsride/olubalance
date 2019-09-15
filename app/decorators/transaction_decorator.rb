@@ -33,4 +33,8 @@ class TransactionDecorator < Draper::Decorator
   def trx_date_formatted
     trx_date.in_time_zone(current_user.timezone).strftime('%m/%d/%Y')
   end
+
+  def trx_date_form_value
+    trx_date.present? ? trx_date_formatted : Time.current.strftime('%m/%d/%Y')
+  end
 end

@@ -1,26 +1,29 @@
 <div class="column is-3-widescreen is-6-tablet">
-  <div class="card has-equal-height animated fadeIn">
-    <header class="card-header has-background-primary <%= class_string(tooltip: account.name_too_long) %>"
-            data-tooltip="<%= account.name %>"
-    >
-      <h6 class="title is-6 card-header-title has-text-white">
-        <%= account.account_card_title %>
-      </h6>
-    </header>
-    <div class="card-content">
-      <div class="content has-text-right ">
-        <p class="title is-6 has-text-primary">
-          <span class="icon">
-            <i class="fas fa-piggy-bank"></i>
-          </span>
-          Balance
-        </p>
-        <p class="subtitle is-2 <%= account.balance_color %>">
-          <%= account.current_balance_display %>
-          <div class="is-size-7 has-text-grey-light ob-last-updated">as of <%= account.updated_at_display %></div>
-        </p>
+  <div class="card has-equal-height">
+    <%= link_to(account_transactions_path(account.id)) do %>
+      <header class="card-header has-background-primary <%= class_string(tooltip: account.name_too_long) %>"
+              data-tooltip="<%= account.name %>"
+      >
+        <h6 class="title is-6 card-header-title has-text-white">
+          <%= account.account_card_title %>
+        </h6>
+      </header>
+      <div class="card-content">
+        <div class="content has-text-right ">
+          <p class="title is-6 has-text-link">
+            <span class="icon has-text-primary">
+              <i class="fas fa-piggy-bank"></i>
+            </span>
+            Balance
+          </p>
+          <p class="subtitle is-2 <%= account.balance_color %>">
+            <%= account.current_balance_display %>
+            <div class="is-size-7 has-text-grey-light ob-last-updated">as of <%= account.updated_at_display %></div>
+          </p>
+        </div>
       </div>
-    </div>
+    <% end %>
+
     <footer class="card-footer">
       <span class="card-footer-item has-text-weight-medium has-text-grey"><%= account.last_four_display %></span>
       <a href="#" class="card-footer-item has-text-weight-bold">Edit</a>
