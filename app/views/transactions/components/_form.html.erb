@@ -21,7 +21,7 @@
 
   <div class="columns">
     <!-- Datepicker -->
-    <div class="column">
+    <div class="column is-hidden-mobile">
       <div class="field">
         <label class="label has-text-grey">Date</label>
         <div class="control">
@@ -44,6 +44,17 @@
             <label for="creditType" class="">Credit</label>
             <%= f.radio_button :trx_type, 'debit', id: 'debitType', class: 'is-checkradio is-danger' %>
             <label for="debitType" class="">Debit</label>
+        </div>
+      </div>
+
+      <!-- Datepicker Mobile -->
+      <div class="field is-hidden-tablet">
+        <label class="label has-text-grey">Date</label>
+        <div class="control">
+          <%= f.text_field :trx_date, id: "trx_date_mobile",
+                                      class: "input is-primary",
+                                      type: "date",
+                                      value: @transaction.trx_date_form_value %>
         </div>
       </div>
 
@@ -105,17 +116,24 @@
 
   <!-- Pending -->
   <% if @transaction.description != 'Starting Balance' %>
-    <div class="field">
+    <div class="field is-grouped is-grouped-centered">
       <%= f.check_box :pending, id: "pending", class: "is-checkradio is-circle is-primary" %>
-      <label for="pending">Pending?</label>
+      <label class="label has-text-grey"
+             for="pending">
+        <span class="tooltip is-tooltip-top is-tooltip-multiline"
+              data-tooltip="If this transaction has not yet posted, checking this box will make it appear at the top of your transactions list."
+        >
+          Pending?
+        </span>
+      </label>
     </div>
   <% end %>
 
-  <div class="field mt-25">
+  <div class="field is-grouped is-grouped-centered">
     <div class="control">
-      <%= f.button '<span class="icon"><i class="fas fa-plus"></i></span><span>Create</span>'.html_safe,
+      <%= f.button '<span class="icon"><i class="fas fa-plus-circle"></i></span><span>Create</span>'.html_safe,
           type: 'submit',
-          class: "button is-link" %>
+          class: "button is-primary" %>
     </div>
   </div>
 <% end %>
@@ -123,10 +141,17 @@
 <script>
   // Initialize all input of type date
   var calendar = bulmaCalendar.attach('#trx_date', {
-    dateFormat: 'YYYY-MM-DDTHH:mm:ss',
+    dateFormat: 'YYYY-MM-DD',
     displayMode: 'inline',
     startDate: '<%= @transaction.trx_date_form_value %>'
   });
+
+  // The mobile calendar will be shown in a different position
+  var calendarMobile = bulmaCalendar.attach('#trx_date_mobile', {
+    dateFormat: 'YYYY-MM-DD',
+    displayMode: 'inline',
+    startDate: '<%= @transaction.trx_date_form_value %>'
+  })
 
   // When an attachment file is selected, set the file-name field
   document.getElementById('upload').onchange = uploadOnChange;

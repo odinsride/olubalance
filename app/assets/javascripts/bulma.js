@@ -1,11 +1,9 @@
 // Functions
-
 function getAll(selector) {
   return Array.prototype.slice.call(document.querySelectorAll(selector), 0);
 }
 
 // Modals
-
 var rootEl = document.documentElement;
 var $modals = getAll('.modal');
 var $modalButtons = getAll('.modal-button');
@@ -51,7 +49,6 @@ document.addEventListener('keydown', function (event) {
 
 
 // Dropdowns
-
 var $dropdowns = getAll('.dropdown:not(.is-hoverable)');
 
 if ($dropdowns.length > 0) {
@@ -82,7 +79,6 @@ document.addEventListener('turbolinks:load', () => {
   // Check if there are any navbar burgers
   if ($navbarBurgers.length > 0) {
 
-    console.log("Found navbarBurgers!");
     // Add a click event on each of them
     $navbarBurgers.forEach( el => {
       el.addEventListener('click', () => {
