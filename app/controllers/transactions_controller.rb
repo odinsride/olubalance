@@ -72,6 +72,8 @@ class TransactionsController < ApplicationController
 
   # The show action renders the individual transaction after retrieving the the id
   def show
+    @transaction = @transaction.decorate
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml { render xml: @transaction }

@@ -1,6 +1,64 @@
 <div class="columns">
   <div class="column is-6-desktop is-offset-3-desktop">
-    <h4 class="title is-4 has-text-link"><%= @transaction.description %></h4>
+    <h4 class="title is-4 has-text-link">Transaction Details</h4>
     <h6 class="subtitle is-7 has-text-grey has-text-weight-semibold"><%= @account.account_name_balance %></h6>
+
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <header class="card-header has-background-primary">
+            <p class="card-header-title has-text-white">
+              <%= @transaction.description %>
+            </p>
+            <p class="card-header-icon has-text-white has-text-weight-bold">
+              <%= @transaction.trx_date_formatted %>
+            </p>
+          </header>
+
+          <div class="card-content">
+            <div class="content">
+              <div class="columns is-multiline">
+
+                <div class="column is-full has-text-centered-mobile has-text-left">
+                  <p class="title is-6 has-text-link">
+                    Amount
+                  </p>
+                  <p class="subtitle pt-5 mb-0 is-2 <%= @transaction.amount_color %>">
+                    <%= @transaction.amount_decorated %>
+                    <div class="is-size-7 has-text-grey-light"><%= @transaction.updated_at %></div>
+                  </p>
+
+                  <!-- Memo -->
+                  <% if @transaction.memo? %>
+                    <p class="">
+                      <div class="title is-6 has-text-link">Memo</div>
+                      <div class="subtitle is-size-6 has-text-grey"><%= @transaction.memo %></div>
+                    </p>
+                  <% end %>
+
+                  <!-- Attachment -->
+                  <% if @transaction.attachment.attached? then %>
+                    <p class="title mb-5 is-6 has-text-link">
+                      Attachment
+                    </p>
+                    <p class="title">
+                      <% if @transaction.attachment.variable? %>
+                        <%= link_to image_tag(@transaction.attachment.variant(resize: "100x100"), :class => ''), url_for(@transaction.attachment), :target => '_blank' %>
+                      <% else %>
+                        <%= link_to (fa_icon "file-text 3x", class: ''), url_for(@transaction.attachment), :target => "_blank" %>
+                      <% end %>
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
