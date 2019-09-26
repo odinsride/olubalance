@@ -18,8 +18,30 @@ class TransactionDecorator < Draper::Decorator
     amount.negative? ? number_to_currency(amount.abs) : number_to_currency(amount)
   end
 
+  def amount_form
+    amount.present? ? number_with_precision(amount.abs, precision: 2) : nil
+  end
+
   def amount_color
     amount.negative? ? 'has-text-danger' : 'has-text-success'
+  end
+
+  # Used to specify default value of Transaction type on form
+  def trx_type_credit_form
+    amount.present? ? amount.positive? : false
+  end
+
+  def trx_type_debit_form
+    amount.present? ? amount.negative? : false
+  end
+  ###
+
+  def memo_decorated
+    memo? ? memo : '- None -'
+  end
+
+  def filename_size
+    attachment.attached? ? attachment.filename.to_s + ' (' + number_to_human_size(attachment.byte_size).to_s + ')' : nil
   end
 
   def running_balance_display
@@ -36,5 +58,17 @@ class TransactionDecorator < Draper::Decorator
 
   def trx_date_form_value
     trx_date.present? ? trx_date_formatted : Time.current.strftime('%m/%d/%Y')
+  end
+
+  def created_at_decorated
+    created_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')
+  end
+
+  def form_name
+    new_record? ? 'New' : 'Edit'
+  end
+
+  def button_label
+    new_record? ? 'Create' : 'Update'
   end
 end

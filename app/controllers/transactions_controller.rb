@@ -52,6 +52,7 @@ class TransactionsController < ApplicationController
 
   # Edit action retrieves the transaction and renders the edit page
   def edit
+    @transaction = @transaction.decorate
     @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
                             .order('description').uniq.pluck(:description)
     @autocomplete = @descriptions.to_json
@@ -60,6 +61,8 @@ class TransactionsController < ApplicationController
   # Update action updates the transaction with the new information
   def update
     respond_to do |format|
+      @transaction = @transaction.decorate
+
       if @transaction.update(transaction_params)
         format.html { redirect_to account_transactions_path, notice: 'Transaction was successfully updated.' }
         format.xml { head :ok }

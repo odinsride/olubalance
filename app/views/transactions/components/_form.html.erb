@@ -1,4 +1,4 @@
-<h4 class="title is-4 has-text-link">New Transaction</h4>
+<h4 class="title is-4 has-text-link"><%= @transaction.form_name %> Transaction</h4>
 <h6 class="subtitle is-7 has-text-grey has-text-weight-semibold"><%= @account.account_name_balance %></h6>
 <%= form_for([@transaction.account, @transaction]) do |f| %>
   <% if @transaction.errors.any? %>
@@ -40,9 +40,9 @@
       <div class="field">
         <div class="control">
           <label class="label has-text-grey">Type</label>
-            <%= f.radio_button :trx_type, 'credit', id: 'creditType', class: 'is-checkradio is-success' %>
+            <%= f.radio_button :trx_type, 'credit', id: 'creditType', checked: @transaction.trx_type_credit_form, class: 'is-checkradio is-success' %>
             <label for="creditType" class="">Credit</label>
-            <%= f.radio_button :trx_type, 'debit', id: 'debitType', class: 'is-checkradio is-danger' %>
+            <%= f.radio_button :trx_type, 'debit', id: 'debitType', checked: @transaction.trx_type_debit_form, class: 'is-checkradio is-danger' %>
             <label for="debitType" class="">Debit</label>
         </div>
       </div>
@@ -75,7 +75,8 @@
         <label class="label has-text-grey">Amount</label>
         <div class="control has-icons-left">
           <%= f.text_field :amount, class: "input is-primary",
-                                  placeholder: "Amount" %>
+                                    placeholder: "5.00",
+                                    value: @transaction.amount_form %>
           <span class="icon is-small is-left has-text-primary">
             <i class="fas fa-dollar-sign"></i>
           </span>
@@ -131,7 +132,7 @@
 
   <div class="field is-grouped is-grouped-centered">
     <div class="control">
-      <%= f.button '<span class="icon"><i class="fas fa-plus-circle"></i></span><span>Create</span>'.html_safe,
+      <%= f.button @transaction.button_label,
           type: 'submit',
           class: "button is-primary" %>
     </div>
@@ -141,14 +142,14 @@
 <script>
   // Initialize all input of type date
   var calendar = bulmaCalendar.attach('#trx_date', {
-    dateFormat: 'YYYY-MM-DD',
-    displayMode: 'inline',
+    dateFormat: 'YYYY-MM-DDTHH:mm:ss',
+    //displayMode: 'inline',
     startDate: '<%= @transaction.trx_date_form_value %>'
   });
 
   // The mobile calendar will be shown in a different position
   var calendarMobile = bulmaCalendar.attach('#trx_date_mobile', {
-    dateFormat: 'YYYY-MM-DD',
+    dateFormat: 'YYYY-MM-DDTHH:mm:ss',
     displayMode: 'inline',
     startDate: '<%= @transaction.trx_date_form_value %>'
   })
