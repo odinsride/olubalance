@@ -20,6 +20,12 @@
   <% end %>
 
   <div class="columns">
+    <div class="column">
+
+  </div>
+  </div>
+
+  <div class="columns">
     <!-- Datepicker -->
     <div class="column is-hidden-mobile">
       <div class="field">
@@ -39,11 +45,12 @@
       <!-- Transaction Type -->
       <div class="field">
         <div class="control">
-          <label class="label has-text-grey">Type</label>
+          <span class="">
             <%= f.radio_button :trx_type, 'credit', id: 'creditType', checked: @transaction.trx_type_credit_form, class: 'is-checkradio is-success' %>
-            <label for="creditType" class="">Credit</label>
+            <label for="creditType" class="label has-text-grey">Credit</label>
             <%= f.radio_button :trx_type, 'debit', id: 'debitType', checked: @transaction.trx_type_debit_form, class: 'is-checkradio is-danger' %>
-            <label for="debitType" class="">Debit</label>
+            <label for="debitType" class="label has-text-grey">Debit</label>
+          </span>
         </div>
       </div>
 
@@ -110,25 +117,27 @@
           </span>
         </label>
       </div>
+
+      <!-- Pending -->
+      <% if @transaction.description != 'Starting Balance' %>
+        <div class="field is-grouped mt-10">
+          <%= f.check_box :pending, id: "pending", class: "is-checkradio is-square is-primary" %>
+          <label class="label has-text-grey"
+                 for="pending">
+            <span class="tooltip is-tooltip-top is-tooltip-multiline"
+                  data-tooltip="If this transaction has not yet posted, checking this box will make it appear at the top of your transactions list."
+            >
+              Pending?
+            </span>
+          </label>
+        </div>
+      <% end %>
     </div>
 
   </div> <!-- /columns -->
 
 
-  <!-- Pending -->
-  <% if @transaction.description != 'Starting Balance' %>
-    <div class="field is-grouped is-grouped-centered">
-      <%= f.check_box :pending, id: "pending", class: "is-checkradio is-circle is-primary" %>
-      <label class="label has-text-grey"
-             for="pending">
-        <span class="tooltip is-tooltip-top is-tooltip-multiline"
-              data-tooltip="If this transaction has not yet posted, checking this box will make it appear at the top of your transactions list."
-        >
-          Pending?
-        </span>
-      </label>
-    </div>
-  <% end %>
+
 
   <div class="field is-grouped is-grouped-centered">
     <div class="control">
@@ -142,8 +151,8 @@
 <script>
   // Initialize all input of type date
   var calendar = bulmaCalendar.attach('#trx_date', {
-    dateFormat: 'YYYY-MM-DDTHH:mm:ss',
-    //displayMode: 'inline',
+    dateFormat: 'YYYY-MM-DD',
+    displayMode: 'inline',
     startDate: '<%= @transaction.trx_date_form_value %>'
   });
 
@@ -164,5 +173,21 @@
       filename = filename.substring(lastIndex + 1);
     }
     document.getElementById('filename').innerHTML = filename;
+  }
+
+  // Copy the date value to the mobile datepicker
+  var trxDate = document.querySelector('#trx_date');
+  var trxDateMobile = document.querySelector('#trx_date_mobile')
+
+  if (trxDate) {
+    trxDate.bulmaCalendar.on('select', function(datepicker) {
+      trxDateMobile.value = datepicker.data.value();
+    });
+  }
+
+  if (trxDateMobile) {
+    trxDateMobile.bulmaCalendar.on('select', function(datepicker) {
+      trxDate.value = datepicker.data.value();
+    });
   }
 </script>

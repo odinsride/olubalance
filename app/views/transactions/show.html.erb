@@ -38,7 +38,6 @@
 
                 <div class="column is-6 has-text-centered-mobile has-text-right">
                   <!-- Attachment -->
-
                     <p class="title mb-5 is-6 has-text-link">
                       Attachment
                     </p>
@@ -57,7 +56,7 @@
                           </div>
                         <% else %>
                           <%= link_to url_for(@transaction.attachment), target: '_blank',
-                                                                        class: 'button is-primary mt-5 tooltip',
+                                                                        class: 'button is-primary is-large mt-5 tooltip',
                                                                         data: {
                                                                           tooltip: @transaction.filename_size
                                                                         } do %>
@@ -69,7 +68,7 @@
                         <% end %>
                       <% else %>
                         <p>
-                          <span class="tag is-primary has-text-weight-bold">
+                          <span class="tag is-dark has-text-weight-bold">
                             No attachment
                           </span>
                         </p>
@@ -81,7 +80,26 @@
           </div>
             <footer class="card-footer">
               <%= link_to edit_account_transaction_path(@transaction.account, @transaction), class: 'card-footer-item has-text-weight-bold' do %>Edit<% end %>
-              <a href="#" class="card-footer-item has-text-weight-bold">Delete</a>
+              <a class="card-footer-item has-text-weight-bold modal-button" data-target="delete-modal">Delete</a>
+
+              <div id="delete-modal" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-content ob-modal-card">
+                  <div class="card">
+                    <header class="card-header has-background-danger">
+                      <p class="card-header-title has-text-white">Delete <%= @transaction.description %>?</p>
+                    </header>
+                    <section class="card-content">
+                      <p>Are you sure you wish to delete this transaction? This action cannot be reversed.</p>
+                    </section>
+                    <footer class="card-footer">
+                      <a href="#!" class="card-footer-item has-text-weight-bold has-text-grey">Cancel</a>
+                 			<%= link_to "Delete", @account_transaction, method: :delete, class: "card-footer-item has-text-weight-bold has-text-danger" %>
+                    </footer>
+                  </div>
+                </div>
+              </div>
+
             </footer>
         </div>
       </div>
@@ -89,3 +107,4 @@
 
   </div>
 </div>
+
