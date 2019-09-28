@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.3'
+ruby '2.6.4'
 
 gem 'aws-sdk-s3'
 gem 'devise', '~> 4.6.2'
@@ -49,7 +49,6 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
-  gem 'solargraph'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.1'
 end
