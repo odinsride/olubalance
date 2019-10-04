@@ -279,6 +279,8 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
     will_paginate (3.1.8)
+    will_paginate-bulma (1.0.0)
+      will_paginate (>= 3.0.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -310,8 +312,8 @@ DEPENDENCIES
   rspec-rails (~> 3.8.2)
   rubocop
   rubocop-rails
-  sassc (~> 2.0.1)
-  sassc-rails (~> 2.1.2)
+  sassc
+  sassc-rails
   shoulda-matchers
   simplecov
   spring
@@ -319,6 +321,7 @@ DEPENDENCIES
   turbolinks
   uglifier
   will_paginate
+  will_paginate-bulma
 
 RUBY VERSION
    ruby 2.6.4p104

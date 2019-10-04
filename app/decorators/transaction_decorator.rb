@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TransactionDecorator < Draper::Decorator
+class TransactionDecorator < ApplicationDecorator
   decorates_finders
   decorates_association :transaction_balance
   delegate_all
