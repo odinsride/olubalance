@@ -10,12 +10,12 @@
 
     <hr class="navbar-divider"/>
 
-    <a class="navbar-item">
+    <%= link_to edit_user_registration_path, class: "navbar-item" do %>
       <span class="icon has-text-link is-medium ob-icon-rpad">
         <i class="fas fa-cog"></i>
       </span>
       Settings
-    </a>
+    <% end %>
 
     <%= link_to accounts_inactive_path, class: "navbar-item" do %>
       <span class="icon has-text-link is-medium ob-icon-rpad">
@@ -23,7 +23,6 @@
       </span>
       Inactive Accounts
     <% end %>
-
 
     <%= link_to destroy_user_session_path, class: "navbar-item", method: :delete do%>
       <span class="icon has-text-link is-medium ob-icon-rpad">
