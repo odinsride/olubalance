@@ -40,6 +40,15 @@ class Transaction < ApplicationRecord
     %w[Debit debit]
   end
 
+  # Search for transaction by description
+  def self.search(description)
+    if description
+      where('description ILIKE ?', "%#{description}%")
+    else
+      all
+    end
+  end
+
   private
 
   def convert_amount

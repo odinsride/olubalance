@@ -9,15 +9,9 @@ class TransactionsController < ApplicationController
   def index
     session[:trx_index_page] = params[:page] if params[:page]
 
-    @transactions = @account.transactions.with_balance.desc
+    @transactions = @account.transactions.search(params[:description]).with_balance.desc
     @transactions = @transactions.paginate(page: session[:trx_index_page], per_page: 15)
     @transactions = @transactions.decorate
-
-    @search = params['search']
-    if @search.present?
-      @description = @search['description']
-      @transactions = @transactions.where('description ILIKE ?', "%#{@description}%")
-    end
 
     respond_to do |format|
       format.html # index.html.erb
