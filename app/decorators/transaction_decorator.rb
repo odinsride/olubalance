@@ -63,12 +63,4 @@ class TransactionDecorator < ApplicationDecorator
   def created_at_decorated
     created_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')
   end
-
-  def form_name
-    new_record? ? 'New' : 'Edit'
-  end
-
-  def button_label
-    new_record? ? 'Create' : 'Update'
-  end
 end

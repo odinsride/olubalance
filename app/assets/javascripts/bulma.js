@@ -10,7 +10,7 @@ document.addEventListener('turbolinks:load', function () {
   var rootEl = document.documentElement;
   var $modals = getAll('.modal');
   var $modalButtons = getAll('.modal-button');
-  var $modalCloses = getAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button');
+  var $modalCloses = getAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button, .card-footer .card-modal-close');
 
   if ($modalButtons.length > 0) {
     $modalButtons.forEach(function ($el) {

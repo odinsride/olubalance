@@ -1,0 +1,9 @@
+<%= render partial: "accounts/components/inactiveAccountLevel" %>
+
+<p class="content">
+Accounts listed here are for historical purposes only. If you wish to view the transactions of an inactive account, you must first reactivate it.
+</p>
+
+<div class="columns is-multiline" id="accounts">
+  <%= render partial: "accounts/components/inactiveAccountCard", collection: @inactiveaccounts, as: :account %>
+</div>

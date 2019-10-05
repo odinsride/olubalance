@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/new
   def new
-    @account = current_user.accounts.build
+    @account = current_user.accounts.build.decorate
   end
 
   # GET /accounts/1/edit
@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = current_user.accounts.build(account_params)
+    @account = current_user.accounts.build(account_params).decorate
 
     if @account.save
       redirect_to accounts_path, notice: 'Account was successfully created.'
@@ -85,7 +85,7 @@ class AccountsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_account
-    @account = current_user.accounts.find(params[:id])
+    @account = current_user.accounts.find(params[:id]).decorate
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

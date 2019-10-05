@@ -1,0 +1,18 @@
+<!-- Modal for Deactivate -->
+<div id="deactivate-modal-<%= account.id %>%" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content ob-modal-card">
+    <div class="card">
+      <header class="card-header has-background-danger">
+        <p class="card-header-title has-text-white">Deactivate <%= account.name %>?</p>
+      </header>
+      <section class="card-content">
+        <p>Deactivating an account hides it from your account list, while keeping all transaction history for record keeping purposes. Inactive accounts can be found from the user menu and reactivated at any time.</p>
+      </section>
+      <footer class="card-footer">
+        <a href="#!" class="card-footer-item has-text-weight-bold has-text-grey">Cancel</a>
+        <%= link_to "Deactivate", deactivate_account_path(account), class: "card-footer-item card-modal-close has-text-weight-bold has-text-danger" %>
+      </footer>
+    </div>
+  </div>
+</div>

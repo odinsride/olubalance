@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AccountDecorator < Draper::Decorator
+class AccountDecorator < ApplicationDecorator
   decorates_finders
   decorates_association :user
   decorates_association :transaction

@@ -76,25 +76,7 @@
     <!-- Links -->
     <%= link_to edit_account_transaction_path(@transaction.account, @transaction), class: 'card-footer-item has-text-weight-bold' do %>Edit<% end %>
     <a class="card-footer-item has-text-weight-bold modal-button" data-target="delete-modal">Delete</a>
-
-    <!-- Modal for Delete -->
-    <div id="delete-modal" class="modal">
-      <div class="modal-background"></div>
-      <div class="modal-content ob-modal-card">
-        <div class="card">
-          <header class="card-header has-background-danger">
-            <p class="card-header-title has-text-white">Delete <%= @transaction.description %>?</p>
-          </header>
-          <section class="card-content">
-            <p>Are you sure you wish to delete this transaction? This action cannot be reversed.</p>
-          </section>
-          <footer class="card-footer">
-            <a href="#!" class="card-footer-item has-text-weight-bold has-text-grey">Cancel</a>
-            <%= link_to "Delete", @account_transaction, method: :delete, class: "card-footer-item has-text-weight-bold has-text-danger" %>
-          </footer>
-        </div>
-      </div>
-    </div>
-
   </footer>
 </div>
+
+<%= render partial: "transactions/components/deleteModal" %>

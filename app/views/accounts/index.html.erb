@@ -1,4 +1,4 @@
 <%= render partial: "accounts/components/accountLevel" %>
 <div class="columns is-multiline" id="accounts">
-  <%= render partial: "accounts/components/accountCard", collection: @accounts, as: :account %>
+  <%= render partial: "accounts/components/accountCard", collection: @accounts, as: :account, locals: { active: true } %>
 </div>

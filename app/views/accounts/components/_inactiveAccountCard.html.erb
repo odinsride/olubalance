@@ -1,0 +1,10 @@
+<div class="column is-3-widescreen is-6-tablet">
+  <div class="card has-equal-height">
+    <%= render partial: "accounts/components/accountCardContent", locals: { account: account } %>
+
+    <footer class="card-footer">
+      <span class="card-footer-item has-text-weight-medium has-text-grey"><%= account.last_four_display %></span>
+      <%= link_to "Reactivate", activate_account_path(account), class: "card-footer-item has-text-weight-bold has-text-link" %>
+    </footer>
+  </div>
+</div>

@@ -56,8 +56,6 @@
             <%= yield %>
           </div>
 
-
-
           <% flash.each do |message_type, message| %>
             <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
                                                   position: 'top-center',

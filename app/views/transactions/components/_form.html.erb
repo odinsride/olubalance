@@ -141,6 +141,9 @@
 
   <div class="field is-grouped is-grouped-centered">
     <div class="control">
+      <%= link_to "Cancel", account_transactions_path, class: "button is-primary" %>
+    </div>
+    <div class="control">
       <%= f.button @transaction.button_label,
           type: 'submit',
           class: "button is-primary" %>
