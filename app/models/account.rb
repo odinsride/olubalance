@@ -4,7 +4,7 @@
 class Account < ApplicationRecord
   # Define Constants
   NO_ACCOUNT_DESC = "It looks like you don't have any accounts added. To add an account, \
-                     click the add account button at the top of the page :)"
+                     click the <span class='has-text-weight-bold'>New</span> button at the top of the page :)"
 
   NO_INACTIVE_DESC = 'You have no inactive accounts :)'
 

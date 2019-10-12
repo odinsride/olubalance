@@ -97,8 +97,7 @@
               <div class="select is-fullwidth is-primary">
                 <%= f.text_field :current_password, type: "password",
                                                     class: "input is-primary",
-                                                    autocomplete: "off",
-                                                    required: true %>
+                                                    autocomplete: "off" %>
                 <span class="icon is-small is-left has-text-primary">
                   <i class="fas fa-lock"></i>
                 </span>
@@ -157,7 +156,10 @@
             <div class="control has-icons-left">
               <%= f.text_field :password, type: "password",
                                           class: "input is-primary",
-                                          autocomplete: "off" %>
+                                          autocomplete: "off",
+                                          required: true,
+                                          oninvalid: 'this.setCustomValidity("Please enter a new password")',
+                                          oninput: 'setCustomValidity("")' %>
               <span class="icon is-small is-left has-text-primary">
                 <i class="fas fa-lock"></i>
               </span>
@@ -171,7 +173,10 @@
             <div class="control has-icons-left">
               <%= f.text_field :password_confirmation, type: "password",
                                                        class: "input is-primary",
-                                                       autocomplete: "off" %>
+                                                       autocomplete: "off",
+                                                       required: true,
+                                                       oninvalid: 'this.setCustomValidity("Please confirm your new password")',
+                                                       oninput: 'setCustomValidity("")' %>
               <span class="icon is-small is-left has-text-primary">
                 <i class="fas fa-lock"></i>
               </span>
