@@ -50,9 +50,10 @@
       <div class="field">
         <label class="label has-text-grey">Starting Balance</label>
         <div class="control has-icons-left">
-          <%= f.text_field :starting_balance, type: "number",
+          <%= f.number_field :starting_balance, type: "number",
                                               class: "input is-primary",
-                                              placeholder: "Enter the starting balance" %>
+                                              placeholder: "Enter the starting balance",
+                                              disabled: (@account.new_record? ? false : true) %>
           <span class="icon is-small is-left has-text-primary">
             <i class="fas fa-dollar-sign"></i>
           </span>
@@ -62,14 +63,14 @@
 
   </div> <!-- /columns -->
 
-  <div class="field is-grouped is-grouped-centered">
+  <div class="field is-grouped">
     <div class="control">
-      <%= link_to "Cancel", accounts_path, class: "button is-primary" %>
+      <%= link_to "Cancel", accounts_path, class: "button is-link is-outlined" %>
     </div>
     <div class="control">
       <%= f.button @account.button_label,
           type: 'submit',
-          class: "button is-primary" %>
+          class: "button is-link" %>
     </div>
   </div>
 <% end %>

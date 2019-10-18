@@ -1,5 +1,5 @@
-<h4 class="title is-4 has-text-link"><%= @transaction.form_name %> Transaction</h4>
-<h6 class="subtitle is-7 has-text-grey has-text-weight-semibold"><%= @account.account_name_balance %></h6>
+<h4 class="title is-4 has-text-link has-text-centered-mobile"><%= @transaction.form_name %> Transaction</h4>
+<h6 class="subtitle is-7 has-text-grey has-text-weight-semibold has-text-centered-mobile"><%= @account.account_name_balance %></h6>
 <%= form_for([@transaction.account, @transaction]) do |f| %>
   <% if @transaction.errors.any? %>
     <article id="error explanation" class="message is-danger">
@@ -130,14 +130,14 @@
 
   </div> <!-- /columns -->
 
-  <div class="field is-grouped is-grouped-centered">
+  <div class="field is-grouped">
     <div class="control">
-      <%= link_to "Cancel", account_transactions_path, class: "button is-primary" %>
+      <%= link_to "Cancel", account_transactions_path, class: "button is-link is-outlined" %>
     </div>
     <div class="control">
       <%= f.button @transaction.button_label,
           type: 'submit',
-          class: "button is-primary" %>
+          class: "button is-link" %>
     </div>
   </div>
 <% end %>

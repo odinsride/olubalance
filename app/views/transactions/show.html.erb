@@ -1,7 +1,8 @@
+<%= render partial: "shared/backButton", locals: { param_back_path: account_transactions_path(@transaction.account_id), param_back_text: @account.name } %>
 <div class="columns">
   <div class="column is-6-desktop is-offset-3-desktop">
-    <h4 class="title is-4 has-text-link">Transaction Details</h4>
-    <h6 class="subtitle is-7 has-text-grey has-text-weight-semibold"><%= @account.account_name_balance %></h6>
+    <h4 class="title is-4 has-text-link has-text-centered-mobile">Transaction Details</h4>
+    <h6 class="subtitle is-7 has-text-grey has-text-weight-semibold has-text-centered-mobile"><%= @account.account_name_balance %></h6>
     <div class="columns">
       <div class="column">
         <%= render partial: "transactions/components/transactionCard" %>

@@ -1,5 +1,4 @@
 <%= render partial: "accounts/components/accountLevel" %>
-
 <%= render partial: "accounts/components/noAccounts", locals: { description: Account::NO_ACCOUNT_DESC } if @accounts.empty? %>
 
 <div class="columns is-multiline" id="accounts">

@@ -1,0 +1,18 @@
+<div class="level is-mobile">
+  <div class="level-left">
+    <% if !current_page?(root_path) && !current_page?(accounts_path) %>
+      <%= link_to param_back_path do %>
+        <div class="level-item">
+          <span class="icon">
+            <i class="fas fa-lg fa-chevron-left has-text-grey"></i>
+          </span>
+          <div class="title is-size-6 has-text-link ml-5"><%= param_back_text %></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if defined?(param_new_path) %>
+    <%= render partial: "shared/pageLevelNewButtonMobile", locals: { path: param_new_path } %>
+  <% end %>
+</div>
