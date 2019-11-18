@@ -19,6 +19,7 @@ class Account < ApplicationRecord
 
   validates :starting_balance, presence: true
   validates :last_four, length: { minimum: 4, maximum: 4 },
+                        format: { with: /\A\d+\z/, message: "Numbers only." },
                         allow_blank: true
 
   before_create :set_current_balance
