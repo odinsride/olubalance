@@ -3,8 +3,10 @@ require "rails_helper"
 RSpec.describe "Transaction management", type: :request do
   before(:each) do
     @user = FactoryBot.create(:user)
-    @account = FactoryBot.create(:account, name: "Account Management Test", starting_balance: 5000, user: @user)
-    @transaction = FactoryBot.create(:transaction, trx_date: Date.today, description: "Transaction 1", amount: 50, trx_type: 'debit', memo: 'Memo 1', account: @account)
+    @starting_balance = 5000
+    @account = FactoryBot.create(:account, name: "Account Management Test", starting_balance: @starting_balance, user: @user)
+    @trx_amount = 50
+    @transaction = FactoryBot.create(:transaction, trx_date: Date.today, description: "Transaction 1", amount: @trx_amount, trx_type: 'debit', memo: 'Memo 1', account: @account)
   end
 
   it "redirects to login page if not logged in" do
@@ -12,12 +14,14 @@ RSpec.describe "Transaction management", type: :request do
     expect(response).to redirect_to new_user_session_path
   end
 
-  it "displays a list of the user's transactions" do
+  it "displays a list of the user's transactions and the account balance" do
+    @balance = @starting_balance - @trx_amount
     sign_in @user
     get account_transactions_path(@account)
-    puts response
+    puts response.body
     expect(response).to be_successful
-    #expect(response.body).to include(@account.name)
+    expect(response.body).to include(@account.name)
+    expect(response.body).to include(number_to_currency(@balance))
   end
 
 #   it "doesn't show another user's accounts" do

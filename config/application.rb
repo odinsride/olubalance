@@ -21,5 +21,9 @@ module Olubalance
 
     # Fonts path
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    # Force schema format to SQL since schema.db doesn't include
+    # Postgres views
+    config.active_record.schema_format = :sql
   end
 end
