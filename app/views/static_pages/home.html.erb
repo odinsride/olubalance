@@ -1,1 +1,25 @@
-<h1>olubalance</h1>
+<section class="hero is-large is-primary">
+    <div class="hero-body">
+        <p class="title is-size-2 is-size-5-mobile has-text-centered has-text-shadow">
+            olubalance
+        </p>
+        <p class="title is-size-4 is-size-6-mobile has-text-centered has-text-shadow">
+            A personal finance tool designed to help balance and reconcile your accounts.
+        </p>
+        <p class="has-text-centered">
+            <%= link_to new_user_registration_path, class: "button is-white has-text-link" do %>
+                <span class="icon is-small">
+                    <i class="fas fa-user-plus"></i>
+                </span>
+                <span>Sign up</span>
+            <% end %>
+
+            <%= link_to new_user_session_path, class: "button is-white has-text-link" do %>
+                <span class="icon">
+                    <i class="fa fa-sign-in-alt"></i>
+                </span>
+                <span>Login</span>
+            <% end %>
+        </p>
+    </div>
+</section>

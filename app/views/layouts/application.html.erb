@@ -50,11 +50,11 @@
         <%= render "shared/navbar" %>
       </header>
 
-      <main class="olubalance">
-        <section class="section">
-          <div class="container">
+      <main class="olubalance site-content">
+        <!-- <section class="section">
+          <div class="container"> -->
             <%= yield %>
-          </div>
+          <!-- </div> -->
 
           <% flash.each do |message_type, message| %>
             <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
@@ -63,10 +63,10 @@
                                                   animate: { in: 'fadeIn', out: 'fadeOut' },
                                                   duration: 2500 });" %>
           <% end %>
-        </section>
+        <!-- </section> -->
       </main>
 
-      <footer class="footer has-background-white">
+      <footer class="footer">
         <%= render "shared/footer" %>
       </footer>
     </div>

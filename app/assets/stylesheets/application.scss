@@ -36,7 +36,8 @@
 
 // Set Bulma Variables
 $family-primary: 'Muli-Regular';
-$primary: #4db6ac;
+// $primary: #4db6ac;
+$primary: #26a69a;
 $link: #00796b;
 $white-ter: hsl(0,0%,96%);
 
@@ -84,6 +85,7 @@ $positions: ('top','left','bottom','right');
 $fa-font-path: "./fontawesome/webfonts";
 @import "./fontawesome/scss/fontawesome.scss";
 @import "./fontawesome/scss/solid.scss";
+@import "./fontawesome/scss/brands.scss";
 
 // Import Animate.css
 @import "./animate.css/animate.css";
@@ -185,5 +187,6 @@ a.navbar-link {
 }
 
 .has-text-shadow {
-    text-shadow: 1px 1px 10px #acacac;
+    //text-shadow: 1px 1px 10px #acacac;
+    text-shadow: 1px 1px 10px #636363;
 }
