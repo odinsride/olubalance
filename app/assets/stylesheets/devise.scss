@@ -1,3 +1,3 @@
 // Extend Devise error message CSS classes
-.is-alert { @extend .is-danger; }
-.is-notice { @extend .is-dark; }
+.is-alert { @extend .is-danger !optional; }
+.is-notice { @extend .is-dark !optional; }

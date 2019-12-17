@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+
+  <title>olubalance</title>
+
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-144x144.png" sizes="144x144">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="application-name" content="olubalance">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-title" content="olubalance">
+
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'bulma' %>
+  <%= javascript_include_tag 'bulma-calendar' %>
+</head>
+
+<body>
+
+  <!--#####################################################################--
+    #
+    #                             To Malintha
+    #
+    #          Without you I would have never created this application.
+    #         You are my inspiration, my motivation, and my best friend.
+    #                     I love you with all of my heart.
+    #
+    #                                Love,
+    #                                Kevin
+    #
+    #########################################################################-->
+
+  <div id="app">
+    <header>
+      <%= render "shared/navbar" %>
+    </header>
+
+    <main class="olubalance site-content">
+      <%= yield %>
+
+      <% flash.each do |message_type, message| %>
+        <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
+                                                position: 'top-center',
+                                                type: 'is-#{message_type}',
+                                                animate: { in: 'fadeIn', out: 'fadeOut' },
+                                                duration: 2500 });" %>
+      <% end %>
+    </main>
+
+    <footer class="footer">
+      <%= render "shared/footer" %>
+    </footer>
+  </div>
+</body>
+
+</html>

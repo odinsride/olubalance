@@ -40,6 +40,7 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.7.0'
   gem 'pry-rails', '~> 0.3.9'
   gem 'rspec-rails', '~> 3.8.2'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end

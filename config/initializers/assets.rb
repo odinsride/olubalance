@@ -16,4 +16,4 @@ Rails.application.config.assets.precompile += %w( bulma.js )
 Rails.application.config.assets.precompile += %w( bulma-calendar.js )
 
 # Precompile fonts
-Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+Rails.application.config.assets.precompile << ["*.svg", "*.eot", "*.woff", "*.ttf"]

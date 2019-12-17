@@ -17,7 +17,6 @@ RSpec.describe User, type: :model do
   describe 'password missing' do
     subject { FactoryBot.build(:user, password: nil, password_confirmation: nil) }
     it { should validate_presence_of(:password) }
-    it { should validate_presence_of(:password_confirmation) }
   end
 
   describe 'password too short' do

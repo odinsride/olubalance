@@ -18,78 +18,112 @@ RSpec.describe "Transaction management", type: :request do
     @balance = @starting_balance - @trx_amount
     sign_in @user
     get account_transactions_path(@account)
-    puts response.body
     expect(response).to be_successful
     expect(response.body).to include(@account.name)
     expect(response.body).to include(number_to_currency(@balance))
+    expect(response.body).to include(@transaction.description)
   end
 
-#   it "doesn't show another user's accounts" do
-#     user2 = FactoryBot.create(:user, email: 'testuser2@gmail.com')
-#     account2 = FactoryBot.create(:account, name: "User 2 Account", user: user2)
+  it "doesn't show another user's transactions" do
+    user2 = FactoryBot.create(:user, email: 'testuser2@gmail.com')
+    account2 = FactoryBot.create(:account, name: "User 2 Account", user: user2)
+    transaction2 = FactoryBot.create(:transaction, account: account2)
 
-#     sign_in @user
-#     get accounts_path
-#     expect(response).to be_successful
-#     expect(response.body).to_not include("User 2 Account")
-#   end
+    sign_in @user
+    expect { 
+      get account_transactions_path(account2)
+    }.to raise_error(ActiveRecord::RecordNotFound)
+  end
 
-#   it "creates a new account and redirects to the accounts page" do
-#     sign_in @user
-#     get new_account_path
-#     expect(response.body).to include("New Account")
+  it "shows an existing transaction" do
+    sign_in @user
+    get account_transaction_path(@account.id, @transaction.id)
+    expect(response).to render_template(:show)
+    expect(response.body).to include("Transaction Details")
+    expect(response.body).to include("Edit")
+    expect(response.body).to include("Delete")
+    expect(response.body).to include(number_to_currency(@trx_amount))
+  end
 
-#     post "/accounts", params: { account: { name: "Test Create Account", starting_balance: 3500, user: @user.id } }
-#     expect(response).to redirect_to(accounts_path)
-#     follow_redirect!
+  it "creates a new transaction and redirects to the transactions page" do
+    sign_in @user
+    get new_account_transaction_path(@account.id)
+    expect(response.body).to include("New Transaction")
 
-#     expect(response.body).to include("Test Create Account")
-#     expect(response.body).to include("$3,500.00")
-#   end
+    post "/accounts/#{@account.id}/transactions", params: { 
+      transaction: { 
+        trx_date: Date.today,
+        description: "Test New Transaction", 
+        amount: 500,
+        trx_type: 'debit',
+        memo: 'Memo New Transaction',
+        account: @account.id
+      }
+    }
+    expect(response).to redirect_to(account_transactions_path(@account))
+    follow_redirect!
 
-#   it "updates an existing account and redirects to the accounts page" do
-#     sign_in @user
-#     get edit_account_path(id: @account.id)
-#     expect(response.body).to include("Edit Account")
+    @balance = @starting_balance - @trx_amount - 500
+    expect(response.body).to include("Test New Transaction")
+    expect(response.body).to include(number_to_currency(@balance))
+  end
 
-#     patch "/accounts/#{@account.id}", params: { account: { name: "Test Create Account Edited", last_four: "1111" } }
-#     expect(response).to redirect_to(accounts_path)
-#     follow_redirect!
+  it "fails when creating a new transaction with invalid parameters" do
+    sign_in @user
+    get new_account_transaction_path(@account.id)
+    expect(response.body).to include("New Transaction")
 
-#     expect(response.body).to include("Test Create Account Edited")
-#     expect(response.body).to include(@account_starting_balance)
-#     expect(response.body).to include("1111")
-#   end
+    # trx_type omitted
+    post "/accounts/#{@account.id}/transactions", params: { 
+      transaction: { 
+        trx_date: Date.today,
+        description: "Test New Transaction", 
+        amount: 500,
+        memo: 'Memo New Transaction',
+        account: @account.id
+      }
+    }
+    expect(response).to render_template(:new)
 
-#   it "deactivates an existing account and activates an inactive account" do
-#     sign_in @user
+    expect(response.body).to include("Something went wrong!")
+  end
 
-#     # Deactivate the account and check that it is not present on main accounts page
-#     get deactivate_account_path(id: @account.id)
+  it "updates an existing transaction and redirects to the transactions page" do
+    sign_in @user
+    get edit_account_transaction_path(@account.id, @transaction.id)
+    expect(response.body).to include("Edit Transaction")
 
-#     expect(response).to redirect_to(accounts_path)
-#     follow_redirect!
+    patch "/accounts/#{@account.id}/transactions/#{@transaction.id}", params: { 
+      transaction: { 
+        description: "Test Create Transaction Edited",
+        amount: 100,
+        trx_type: 'debit'
+      }
+    }
+    expect(response).to redirect_to(account_transactions_path(@account))
+    follow_redirect!
 
-#     expect(response.body).to_not include(@account.name)
-#     expect(response.body).to_not include(@account_starting_balance)
+    @balance = @starting_balance - 100
 
-#     # Visit the inactive accounts page and check that the inactive account is present
-#     get accounts_inactive_path
-#     expect(response.body).to include(@account.name)
-#     expect(response.body).to include(@account_starting_balance)
+    expect(response.body).to include("Test Create Transaction Edited")
+    expect(response.body).to include(number_to_currency(@balance))
+    # expect(response.body).to include("1111")
+  end
 
-#     # Reactivate the account and check that the account appears back on the main accounts page
-#     get activate_account_path(id: @account.id)
+  it "fails when making an invalid update to a transaction" do
+    sign_in @user
+    get edit_account_transaction_path(@account.id, @transaction.id)
+    expect(response.body).to include("Edit Transaction")
 
-#     expect(response).to redirect_to(accounts_path)
-#     follow_redirect!
+    # trx_type omitted
+    patch "/accounts/#{@account.id}/transactions/#{@transaction.id}", params: { 
+      transaction: { 
+        description: "Test Create Transaction Edited",
+        amount: 100
+      }
+    }
+    expect(response).to render_template(:edit)
 
-#     expect(response.body).to include(@account.name)
-#     expect(response.body).to include(@account_starting_balance)
-
-#     # Go back to the inactive accounts page and ensure the reactivated account is not listed
-#     get accounts_inactive_path
-#     expect(response.body).to_not include(@account.name)
-#     expect(response.body).to_not include(@account_starting_balance)
-#   end
+    expect(response.body).to include("Something went wrong!")
+  end
 end
