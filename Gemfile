@@ -10,7 +10,7 @@ end
 ruby '2.6.4'
 
 gem 'aws-sdk-s3'
-gem 'devise', '~> 4.6.2'
+gem 'devise', '~> 4.7.1'
 gem 'draper', '~> 3.1.0'
 gem 'figaro'
 gem 'font-awesome-rails'
