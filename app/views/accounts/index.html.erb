@@ -1,8 +1,6 @@
-<%= render partial: "shared/pagetitle", locals: { page_model: "account", description: "Accounts" } %>
+<%= render partial: "accounts/components/accountLevel" %>
+<%= render partial: "accounts/components/noAccounts", locals: { description: Account::NO_ACCOUNT_DESC } if @accounts.empty? %>
 
-<!-- Render the message if no accounts exist -->
-<%= render partial: "noaccounts", locals: { description: Account::NO_ACCOUNT_DESC } if @accounts.empty? %>
-
-<div class="row" id="accounts">
-  <%= render partial: "account", collection: @accounts %>
+<div class="columns is-multiline" id="accounts">
+  <%= render partial: "accounts/components/accountCard", collection: @accounts, as: :account, locals: { active: true } %>
 </div>

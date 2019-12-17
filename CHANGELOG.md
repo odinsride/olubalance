@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.4.0] - 2019-12-16
+
+### Changed
+- olubalance has been redesigned! The codebase has had a thorough first-pass to optimize and clean up views, partials, and models. More improvements to come!
+
+### Added
+- Transactions can now be flagged as "Pending". Pending transactions will appear at the top of the transaction list and are useful for marking transactions that don't post the same day of the transaction, such as when writing a check. Pending transactions will also update your overall account balance so you can keep track of what your actual account balance is.
+- RSpec model and request specs have been added to test basic functionality and will continue to be built upon for future releases
+
 ## [v1.3.2] - 2019-06-27
 
 ### Fixed
@@ -113,7 +122,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.3.2...HEAD
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.4.0...HEAD
+[v1.4.0]: https://github.com/odinsride/olubalance/compare/v1.3.2...v1.4.0
 [v1.3.2]: https://github.com/odinsride/olubalance/compare/v1.3.0...v1.3.2
 [v1.3.0]: https://github.com/odinsride/olubalance/compare/v1.2.2...v1.3.0
 [v1.2.2]: https://github.com/odinsride/olubalance/compare/v1.2.1...v1.2.2

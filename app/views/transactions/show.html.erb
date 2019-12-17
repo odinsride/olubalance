@@ -1,99 +1,13 @@
-<div class="row">
-	<div class="col s12">
-    	<p class="ob-text-primary ob-shadow left ob-no-bottom">
-    		<%= link_to account_transactions_path(@transaction.account_id), class: 'ob-text-primary valign-wrapper' do %>
-				<i class="material-icons ob-icon-medium">chevron_left</i>
-				<span class=""><%= @account.name %> Transactions</span>
-			<% end %>
-    	</p>
-  	</div>
-	<div class="col s12 l12 xl8 offset-xl2 center-align">
-		<div class="card z-depth-2 left-align">
-		    <div class="card-content">
-		      <div class="row">
-
-		      	<!-- Header --> 
-		      	<div class="card-title col s8 ob-shadow ob-text-primary ob-no-bottom"><strong class="flow-text"><%= @transaction.description %></strong></div>
-
-		      	<div class="card-title col s4 ob-shadow right-align ob-no-bottom">
-	  				<strong><% if @transaction.amount >= 0 then %>
-						<span class="green-text flow-text"><%= number_to_currency(@transaction.amount) %></span>
-					<% else %>
-						<span class="red-text flow-text"><%= number_to_currency(@transaction.amount.abs) %></span>
-					<% end %></strong>
-		      	</div>
-
-		      	<div class="col s12 ob-shadow text-muted right-align">
-		      		<%= @transaction.trx_date.strftime('%m/%d/%Y') %>
-		      	</div>
-		      	
-		      </div>
-
-		      <!-- Memo -->
-		      <% if @transaction.memo.present? %>
-		      <div class="row">
-		     	<div class="col s12 valign-wrapper">
-		     		<i class="material-icons grey-text text-darken-1 small">event_note</i>&nbsp;<h6><%= @transaction.memo %></h6>
-		     	</div>
-		      </div>
-		      <% end %>
-
-		      <!-- Attachment -->
-		      <% if @transaction.attachment.attached? then %>
-		      	<div class="row">
-		      		<div class="col s12">
-		      			<ul class="collection z-depth-1">
-		      				<li class="collection-item ob-accent ob-text-primary valign-wrapper"><i class="tiny material-icons">attach_file</i>&nbsp;<strong>Attachment</strong></li>
-		      				<li class="collection-item">
-		      					<div class="row ob-no-bottom valign-wrapper">
-		      						<div class="col s5 m3 l3 center-align">
-		      							<% if @transaction.attachment.variable? %>
-                          <%= link_to image_tag(@transaction.attachment.variant(resize: "100x100"), :class => 'z-depth-2 hoverable'), url_for(@transaction.attachment), :target => '_blank' %>
-                        <% else %>
-                          <%= link_to (fa_icon "file-text 3x", class: 'ob-text-primary'), url_for(@transaction.attachment), :target => "_blank" %>
-                        <% end %>
-		      						</div>
-		      						<div class="col s7 m9 l9 xl10">
-		      							<%= link_to @transaction.attachment.filename, url_for(@transaction.attachment), :class => 'ob-text-primary', :target => '_blank' %>
-		      							<br /><%= number_to_human_size(@transaction.attachment.byte_size) %>
-		      						</div>
-		      					</div>
-		      				</li>
-		      			</ul>
-		      		</div>
-		      	</div>
-		      <% end %>
-
-		      <!-- Created At -->
-		      <div class="row ob-no-bottom">
-		      	<div class="col s12 ob-shadow">
-		      		<small class="text-muted">Transaction created on <%= @transaction.created_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z') %></small>
-		      	</div>
-		      </div>
-
-		    </div>
-
-		    <!-- Actions -->
-		    <div class="card-action right-align valign-wrapper valign-fix">
-		      <%= link_to edit_account_transaction_path(@transaction.account, @transaction), class: "btn-flat waves-effect waves-light ob-text-primary ob-card-btn" do %>
-		      	Edit<i class="material-icons right">edit</i>
-		      <% end %>
-		      <a class="modal-trigger btn-flat waves-effect waves-light ob-card-btn ob-text-primary" href="#delete-transaction">Delete</a><i class="material-icons right ob-text-primary">delete</i>
-		    </div>
-
-	  </div>
-	</div>
-
-	<!-- Delete Modal -->
-	<div id="delete-transaction" class="modal">
-		<div class="modal-content ob-text-primary">
-			<h4>Delete <%= @transaction.description %>?</h4>
-			<p>Are you sure you wish to delete this transaction?</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat ob-text-primary">Cancel</a>
-			<%= link_to "Delete", @account_transaction, method: :delete, class: "modal-action modal-close waves-effect waves-light btn-flat ob-text-primary" %>
-		</div>
-	</div>
-
+<%= render partial: "shared/backButton", locals: { param_back_path: account_transactions_path(@transaction.account_id), param_back_text: @account.name } %>
+<div class="columns">
+  <div class="column is-6-desktop is-offset-3-desktop">
+    <h4 class="title is-4 has-text-link has-text-centered-mobile">Transaction Details</h4>
+    <h6 class="subtitle is-7 has-text-grey has-text-weight-semibold has-text-centered-mobile"><%= @account.account_name_balance %></h6>
+    <div class="columns">
+      <div class="column">
+        <%= render partial: "transactions/components/transactionCard" %>
+      </div>
+    </div>
+  </div>
 </div>
+

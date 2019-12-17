@@ -1,0 +1,99 @@
+<div class="row">
+
+	<%= simple_form_for([@transaction.account, @transaction]) do |f| %>
+		<% if @transaction.errors.any? %>
+			<div id="error explanation">
+				<h4>
+					<%= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:" %>
+				</h4>
+				<ul>
+					<% @transaction.errors.full_messages.each do |msg| %>
+						<li>
+							<%= msg %>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<div class="row">
+			<!-- Transaction Date -->
+        	<div class="input-field col l4 s7">
+				<i class="material-icons prefix ob-text-primary">date_range</i>
+				<%= f.text_field :trx_date, class:"datepicker", value: (@transaction.trx_date.present?) ? @transaction.trx_date.strftime('%d %B, %Y') : Time.current.strftime('%d %B, %Y') %>
+				<%= f.label :trx_date, :label => 'Transaction Date' %>
+			</div>
+
+			<!-- Transaction Type -->
+			<%= f.input :trx_type, as: :radio_buttons, collection: [['Credit', 'credit'], ['Debit', 'debit']], wrapper_html: { class: 'l2 s5' }, :label => 'Transaction Type', :item_wrapper_tag => :div, :checked => @transaction.transaction_type, id: 'trx_type' %>
+		</div>
+
+
+		<div class="row">
+			<!-- Description -->
+			<%= f.input :description, icon: 'description', wrapper_html: { class: 'input-field l6 s12' }, input_html: { class: 'autocomplete' } %>
+		</div>
+
+		<div class="row">
+			<!-- Amount -->
+			<%= f.input :amount, icon: 'attach_money', wrapper_html: { class: 'input-field l2 s12' }, input_html: { :value => (@transaction.amount.present?) ? number_with_precision(f.object.amount.abs, precision: 2) : nil} %>
+			<!-- Memo -->
+			<%= f.input :memo, icon: 'note', wrapper_html: { class: 'input-field l4 s12' } %>
+		</div>
+
+		<div class="row">
+			<!-- Attachment -->
+			<%= f.input :attachment, icon: 'attach_file', hint: 'Upload a receipt or invoice (PDF or Image Formats Only)', as: :file, wrapper_html: { class: 'l6 s12' } %>
+		</div>
+
+		<% if @transaction.description != 'Starting Balance' %>
+			<div class="row">
+				<!-- Pending -->
+				<%= f.input :pending, wrapper_html: { class: 'l6 s12 center-align' } %>
+			</div>
+		<% end %>
+
+		<!-- Buttons -->
+		<div class="row center-align">
+			<div class="col s12 l6">
+				<%= link_to 'Cancel', account_transactions_path, class: 'btn waves-effect waves-light' %>
+				<%= button_tag(type: 'submit', class: 'btn waves-effect waves-light', id: 'submit') do %>
+					<% if @transaction.new_record? then %>
+						Create
+					<% else %>
+						Update
+					<% end %><i class="material-icons right">send</i>
+				<% end %>
+			</div>
+		</div>
+
+	<% end %>
+
+	<script type="text/javascript">
+$('.datepicker').pickadate({
+  selectMonths: true, // Creates a dropdown to control month
+  selectYears: 15 // Creates a dropdown of 15 years to control year
+});
+
+$(document).on('turbolinks:load', function() {
+
+	var autoCompleteData = $.parseJSON("<%== j @autocomplete %>");
+	var data = {};
+	var i = 0;
+	for (i = 0; i < autoCompleteData.length; i++) {
+		data[autoCompleteData[i]] = null;
+	}
+
+  $('input.autocomplete').autocomplete({
+		data: data,
+    limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+    onAutocomplete: function(val) {
+      // Callback function when value is autcompleted.
+    },
+    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+  });
+});
+
+</script>
+
+</div>

@@ -1,0 +1,14 @@
+<%= render partial: "shared/pagetitle", locals: { page_model: "account", description: "Inactive Accounts" } %>
+
+<div class="row">
+  <div class="col s12">
+    <h6>Accounts listed here are for historical purposes only. If you wish to view the transactions of an inactive account, you must first reactivate it.</h6>
+  </div>
+</div>
+
+<!-- Render the message if no accounts exist -->
+<%= render partial: "noaccounts", locals: { description: Account::NO_INACTIVE_DESC } if @inactiveaccounts.empty? %>
+
+<div class="row" id="accounts">
+  <%= render partial: "inactiveaccount", collection: @inactiveaccounts %>
+</div>

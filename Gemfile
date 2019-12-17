@@ -7,38 +7,42 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.3'
+ruby '2.6.4'
 
 gem 'aws-sdk-s3'
-gem 'coffee-rails', '~> 4.2'
-gem 'devise'
-gem 'draper'
+gem 'devise', '~> 4.6.2'
+gem 'draper', '~> 3.1.0'
 gem 'figaro'
 gem 'font-awesome-rails'
-gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
-gem 'material_icons'
-gem 'materialize-form'
-gem 'materialize-sass', '~> 0.100.2'
+# gem 'material_icons'
+# gem 'materialize-form', '~> 1.0.8'
+# gem 'materialize-sass', '~> 0.100.2'
 gem 'mini_magick'
-gem 'paperclip', '~> 6.0.0'
 gem 'pg', '~> 1.1.4'
-gem 'puma', '~> 3.12.0'
-gem 'rails', '~> 5.2.1'
+gem 'puma', '~> 4.0.1'
+gem 'rails', '~> 5.2.3'
 gem 'rails-ujs'
-gem 'sassc', '~> 1.12.1'
-gem 'sassc-rails', '~> 1.3.0'
-gem 'simple_form'
-gem 'turbolinks', '~> 5'
-gem 'uglifier', '>= 1.3.0'
-gem 'will_paginate', '~> 3.1.0'
+gem 'sassc'
+gem 'sassc-rails'
+# gem 'simple_form', '~> 4.1.0'
+gem 'turbolinks'
+gem 'uglifier'
+gem 'will_paginate'
+gem 'will_paginate-bulma'
 
 group :development, :test do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'capybara', '~> 2.13'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails', '~> 5.0.2'
   gem 'faker'
-  gem 'selenium-webdriver'
+  gem 'pry-byebug', '~> 3.7.0'
+  gem 'pry-rails', '~> 0.3.9'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 3.8.2'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
 
 group :development do
@@ -46,7 +50,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop', require: false
-  gem 'solargraph'
+  gem 'rubocop-rails', require: false
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen', '~> 2.0.1'
 end

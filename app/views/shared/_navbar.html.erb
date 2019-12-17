@@ -1,0 +1,31 @@
+<nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main-navigation">
+  <div class="navbar-brand">
+    <%= link_to root_path, class: "navbar-item" do %>
+      <%= image_tag("logo.png") %>
+    <% end %>
+    <a
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navMenu"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu" id="navMenu">
+
+    <%= render "shared/userMenu" if user_signed_in? %>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <%= render "shared/guestlinks" if !user_signed_in? %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,34 @@
+<div class="navbar-item has-dropdown is-hoverable">
+  <a class="navbar-link has-text-grey-dark">
+    <span><%= current_user.full_name %></span>
+  </a>
+
+  <div class="navbar-dropdown ob-main-menu">
+    <div class="navbar-item">
+      <%= render "shared/userDetails" %>
+    </div>
+
+    <hr class="navbar-divider"/>
+
+    <%= link_to edit_user_registration_path, class: "navbar-item" do %>
+      <span class="icon has-text-link is-medium ob-icon-rpad">
+        <i class="fas fa-cog"></i>
+      </span>
+      Settings
+    <% end %>
+
+    <%= link_to accounts_inactive_path, class: "navbar-item" do %>
+      <span class="icon has-text-link is-medium ob-icon-rpad">
+        <i class="fas fa-archive"></i>
+      </span>
+      Inactive Accounts
+    <% end %>
+
+    <%= link_to destroy_user_session_path, class: "navbar-item", method: :delete do%>
+      <span class="icon has-text-link is-medium ob-icon-rpad">
+        <i class="fas fa-sign-out-alt"></i>
+      </span>
+      Logout
+    <% end %>
+  </div>
+</div>

@@ -3,36 +3,10 @@
 # A transaction record which belongs to one account. Can have one attached file
 class Transaction < ApplicationRecord
   belongs_to :account
-  has_one :transaction_balance, dependent: :destroy
+
+  has_one :transaction_balance
 
   has_one_attached :attachment
-
-  # has_attached_file :attachment,
-  #                   # In order to determine the styles of the image we want to save
-  #                   # e.g. a small style copy of the image, plus a large style copy
-  #                   # of the image, call the check_file_type method
-  #                   styles: { large: ['1000x1000>', :png], medium: ['300x300>', :png], thumb: ['100x100>', :png] }
-
-  # # Validate that we accept the type of file the user is uploading
-  # # by explicitly listing the mimetypes we are willing to accept
-  # validates_attachment_content_type :attachment,
-  #                                   content_type: [
-  #                                     'image/jpg',
-  #                                     'image/jpeg',
-  #                                     'image/png',
-  #                                     'image/gif',
-  #                                     'application/pdf',
-
-  #                                     'file/txt',
-  #                                     'text/plain',
-
-  #                                     'application/doc',
-  #                                     'application/msword',
-
-  #                                     'application/vnd.ms-excel',
-  #                                     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-  #                                   ],
-  #                                   message: 'Sorry! We do not accept the attached file type'
 
   # Link running_balance to view
   delegate :running_balance, to: :transaction_balance
@@ -40,7 +14,8 @@ class Transaction < ApplicationRecord
   attr_accessor :trx_type
 
   # default_scope { order('trx_date, id DESC') }
-  validates :trx_type, presence: { message: 'Please select debit or credit' }
+  validates :trx_type, presence: { message: 'Please select debit or credit' },
+                       inclusion: { in: %w[credit debit] }
   validates :trx_date, presence: true
   validates :description, presence: true, length: { maximum: 150 }
   validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
@@ -49,12 +24,13 @@ class Transaction < ApplicationRecord
   # before_post_process :rename_file
 
   before_save :convert_amount
-  after_create :update_account_balance_new
+  before_save :set_account
+  after_create :update_account_balance_create
   after_update :update_account_balance_edit
   after_destroy :update_account_balance_destroy
 
   scope :with_balance, -> { includes(:transaction_balance).references(:transaction_balance) }
-  scope :desc, -> { order('trx_date DESC, id DESC') }
+  scope :desc, -> { order('pending DESC, trx_date DESC, id DESC') }
 
   # Determine the transaction_type for existing records based on amount
   def transaction_type
@@ -64,14 +40,26 @@ class Transaction < ApplicationRecord
     %w[Debit debit]
   end
 
+  # Search for transaction by description
+  def self.search(description)
+    if description
+      where('description ILIKE ?', "%#{description}%")
+    else
+      all
+    end
+  end
+
   private
 
   def convert_amount
     self.amount = -amount.abs if trx_type == 'debit'
   end
 
-  def update_account_balance_new
+  def set_account
     @account = Account.find(account_id)
+  end
+
+  def update_account_balance_create
     @account.update(current_balance: @account.current_balance + amount)
   end
 

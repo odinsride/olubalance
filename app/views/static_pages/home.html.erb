@@ -1,53 +1,59 @@
- <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <br><br>
-      <h1 class="header center ob-text-primary">olubalance</h1>
-      <div class="row center">
-        <h5 class="header col s12 light">A personal finance tool designed to help balance and reconcile your accounts</h5>
-      </div>
-      <div class="row center">
-		<%= link_to "New User?", new_user_registration_path, class: "waves-effect waves-light btn" %>
-		<%= link_to "Login", new_user_session_path, class: "btn waves-effect waves-light" %>
-      </div>
-      <br><br>
+<section class="hero is-large is-primary">
+    <div class="hero-body">
+        <p class="title is-size-2 is-size-5-mobile has-text-centered has-text-shadow">
+            olubalance
+        </p>
+        <p class="title is-size-4 is-size-6-mobile has-text-centered has-text-shadow">
+            A personal finance tool designed to help balance and reconcile your accounts.
+        </p>
+        <p class="has-text-centered">
+            <%= link_to new_user_registration_path, class: "button is-white has-text-link" do %>
+                <span class="icon is-small">
+                    <i class="fas fa-user-plus"></i>
+                </span>
+                <span>Sign up</span>
+            <% end %>
 
+            <%= link_to new_user_session_path, class: "button is-white has-text-link" do %>
+                <span class="icon">
+                    <i class="fa fa-sign-in-alt"></i>
+                </span>
+                <span>Login</span>
+            <% end %>
+        </p>
     </div>
-  </div>
+</section>
 
-
-  <div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center ob-text-secondary"><i class="material-icons small">important_devices</i></h2>
-            <h5 class="center">Balance Your Accounts</h5>
-
-            <p class="light">olubalance functions as a web-based replacement for balancing your accounts.  Older generations refer to this as "balancing your checkbook".  olubalance brings this concept to the modern age with a responsive mobile interface, the ability to attach receipts and statements to your accounts and transactions, and more!</p>
-          </div>
+<section class="section">
+<div class="container">
+    <div class="columns has-text-centered">
+        <div class="column is-4">
+            <p class="title is-5 has-text-link">
+                <span class="icon is-medium">
+                    <i class="fa fa-file-pdf"></i>
+                  </span>
+                Balance your accounts
+            </p>
+            <p class="">
+                olubalance is your online checkbook register with support for receipt attachments and more!
+            </p>
         </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center ob-text-secondary"><i class="material-icons small">attach_money</i></h2>
-            <h5 class="center">Always Know Your $</h5>
-
-            <p class="light">Take control of your finances by always knowing your current balance. Online banking can leave you with surprises such as charges that are processed days after-the-fact.  By using olubalance to track your spending, you will always know how much money you have and can avoid overdraft fees from those pesky unprocessed charges.</p>
-          </div>
+        <div class="column is-4">
+            <p class="title is-5 has-text-link">
+                Know where you stand
+            </p>
+            <p class="">
+                Never be surprised by pending charges again! What you enter into olubalance is reflected in your account immediately.
+            </p>
         </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center ob-text-secondary"><i class="material-icons small">account_balance</i></h2>
-            <h5 class="center">You Have Control</h5>
-
-            <p class="light">Other personal finance tools require providing your bank account logins to a third party in order to sync your transactions. With olubalance, we are trying to solve a different problem, and that is to NOT rely on the data from your financial institutions.  You have complete control to enter your transactions as you would write them in a check register.</p>
-          </div>
+        <div class="column is-4">
+            <p class="title is-5 has-text-link">
+                Privacy matters
+            </p>
+            <p class="">
+                olubalance is a standalone application that does not rely on data from your bank. Enter transactions like you would balance a checkbook.
+            </p>
         </div>
-      </div>
-
     </div>
-    <br><br>
-  </div>
+</div>
+</section>
