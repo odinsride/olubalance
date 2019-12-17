@@ -1,0 +1,16 @@
+<article class="media">
+  <div class="media-left">
+    <span class="icon has-text-link is-large">
+      <i class="fa fa-3x fa-user-circle"></i>
+    </span>
+  </div>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <span><%= current_user.email %></span><br />
+        <span class="is-size-7 has-text-grey-light">Member since <%= current_user.member_since %></span><br />
+        <span class="is-size-7 has-text-grey-light">You have <%= current_user.accounts.count %> accounts!</span>
+      </p>
+    </div>
+  </div>
+</article>

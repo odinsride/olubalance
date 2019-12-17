@@ -1,7 +1,1 @@
-<div class="row">
-  <div class="col s12 l4">
-    <h5 class="ob-text-primary ob-shadow"><strong>New Account</strong></h5>
-  </div>
-</div>
-
-<%= render 'form', account: @account %>
+<%= render partial: "shared/formPage", locals: { formPath: "accounts/components/form" } %>

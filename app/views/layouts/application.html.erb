@@ -4,6 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
     <title>olubalance</title>
 
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
@@ -20,10 +21,13 @@
     <meta name="msapplication-TileImage" content="/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-title" content="olubalance">
-    
+
     <%= csrf_meta_tags %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'bulma' %>
+    <%= javascript_include_tag 'bulma-calendar' %>
   </head>
 
   <body>
@@ -41,24 +45,31 @@
     #
     #########################################################################-->
 
-    <header>
-      <%= render "layouts/navbar" %>
-    </header>
+    <div id="app">
+      <header>
+        <%= render "shared/navbar" %>
+      </header>
 
-    <main role="main">
+      <main class="olubalance site-content">
+        <section class="section">
+          <div class="container">
+            <%= yield %>
+          </div>
 
-      <div class="container">
-        <%= yield %>
-      </div>
+          <% flash.each do |message_type, message| %>
+            <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
+                                                  position: 'top-center',
+                                                  type: 'is-#{message_type}',
+                                                  animate: { in: 'fadeIn', out: 'fadeOut' },
+                                                  duration: 2500 });" %>
+          <% end %>
+        </section>
+      </main>
 
-      <% flash.each do |message_type, message| %>
-        <%= javascript_tag "Materialize.toast('#{message}', 4000)" %>
-      <% end %>
-
-    </main>
-
-    <%= render "layouts/footer" %>
-
+      <footer class="footer">
+        <%= render "shared/footer" %>
+      </footer>
+    </div>
   </body>
 
 </html>

@@ -1,0 +1,197 @@
+  <% if resource.errors.any? %>
+    <article id="error explanation" class="message is-danger">
+      <div class="message-header">
+        Something went wrong!
+      </div>
+      <div class="message-body content">
+        Please correct the following <span class="has-text-weight-bold"><%= pluralize(resource.errors.count, "error") %></span>:
+        <ul>
+          <% resource.errors.full_messages.each do |msg | %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+<h3 class="title is-4 has-text-link">Account Settings</h3>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+  <div class="columns">
+    <!-- Fields -->
+    <div class="column">
+
+      <!-- Name -->
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label has-text-grey">First Name</label>
+            <div class="control has-icons-left">
+              <%= f.text_field :first_name, class: "input is-primary",
+                                            placeholder: "John" %>
+              <span class="icon is-small is-left has-text-primary">
+                <i class="fas fa-user-tie"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="field">
+            <label class="label has-text-grey">Last Name</label>
+            <div class="control has-icons-left">
+              <%= f.text_field :last_name, class: "input is-primary",
+                                            placeholder: "Smith" %>
+              <span class="icon is-small is-left has-text-primary">
+                <i class="fas fa-user-tie"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label has-text-grey">Email</label>
+            <div class="control has-icons-left">
+              <%= f.text_field :email, type: "email",
+                                      class: "input is-primary",
+                                      placeholder: "john@smith.com" %>
+              <span class="icon is-small is-left has-text-primary">
+                <i class="fas fa-at"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timezone -->
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label has-text-grey">Time Zone</label>
+            <div class="control has-icons-left">
+              <div class="select is-fullwidth is-primary">
+                <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones,
+                                                  default: "Eastern Time (US & Canada)" %>
+                <span class="icon is-small is-left has-text-primary">
+                  <i class="fas fa-globe-americas"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Password -->
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label has-text-grey">Current Password</label>
+            <div class="control has-icons-left">
+              <div class="select is-fullwidth is-primary">
+                <%= f.text_field :current_password, type: "password",
+                                                    class: "input is-primary",
+                                                    autocomplete: "off" %>
+                <span class="icon is-small is-left has-text-primary">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- /columns -->
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= button_tag(type: 'submit', class: "button is-primary") do %>
+        Update Settings
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<hr />
+
+<!-- CHECK THIS OUT: https://gorails.com/forum/how-do-i-separate-out-the-devise-form-like-gorails-com-edit-profile-edit-password -->
+<h3 class="title is-4 has-text-link">Change Password</h3>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+  <div class="columns">
+    <!-- Fields -->
+    <div class="column">
+
+      <!-- Old Password -->
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label has-text-grey">Old Password</label>
+            <div class="control has-icons-left">
+              <div class="select is-fullwidth is-primary">
+                <%= f.text_field :current_password, type: "password",
+                                                    class: "input is-primary",
+                                                    autocomplete: "off" %>
+                <span class="icon is-small is-left has-text-primary">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label has-text-grey">New Password</label>
+            <div class="control has-icons-left">
+              <%= f.text_field :password, type: "password",
+                                          class: "input is-primary",
+                                          autocomplete: "off",
+                                          required: true,
+                                          oninvalid: 'this.setCustomValidity("Please enter a new password")',
+                                          oninput: 'setCustomValidity("")' %>
+              <span class="icon is-small is-left has-text-primary">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="field">
+            <label class="label has-text-grey">Confirm New Password</label>
+            <div class="control has-icons-left">
+              <%= f.text_field :password_confirmation, type: "password",
+                                                       class: "input is-primary",
+                                                       autocomplete: "off",
+                                                       required: true,
+                                                       oninvalid: 'this.setCustomValidity("Please confirm your new password")',
+                                                       oninput: 'setCustomValidity("")' %>
+              <span class="icon is-small is-left has-text-primary">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- columns -->
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= button_tag(type: 'submit', class: "button is-primary") do %>
+        Update Password
+      <% end %>
+    </div>
+  </div>
+<% end %>

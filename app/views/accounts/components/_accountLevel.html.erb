@@ -1,0 +1,10 @@
+<!-- Main container -->
+<nav class="level is-mobile">
+  <!-- Left side -->
+  <div class="level-left">
+    <%= render partial: "shared/pageLevelTitle", locals: { title: "Accounts" } %>
+    <%= render partial: "shared/pageLevelNewButton", locals: { path: new_account_path } %>
+  </div>
+
+  <%= render partial: "shared/pageLevelNewButtonMobile", locals: { path: new_account_path } %>
+</nav>

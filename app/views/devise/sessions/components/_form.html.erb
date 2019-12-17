@@ -1,0 +1,40 @@
+<h3 class="title is-4 has-text-link">Login to olubalance</h3>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <label class="label has-text-grey">Email Address</label>
+        <div class="control has-icons-left">
+          <%= f.text_field :email, class: "input is-primary",
+                                  placeholder: "john@gmail.com" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label has-text-grey">Password</label>
+        <div class="control has-icons-left">
+          <%= f.password_field :password, class: "input is-primary",
+                                          placeholder: "Password" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-grouped is-grouped-centered">
+    <div class="control">
+      <%= f.button "Login", class: "button is-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="has-text-centered">
+  <%= render partial: "devise/shared/links" %>
+</div>

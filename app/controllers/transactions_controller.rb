@@ -9,14 +9,9 @@ class TransactionsController < ApplicationController
   def index
     session[:trx_index_page] = params[:page] if params[:page]
 
-    @transactions = @account.transactions.with_balance.desc.paginate(page: session[:trx_index_page], per_page: 12)
-    @custom_paginate_renderer = custom_paginate_renderer
-
-    @search = params['search']
-    if @search.present?
-      @description = @search['description']
-      @transactions = @transactions.where('description ILIKE ?', "%#{@description}%")
-    end
+    @transactions = @account.transactions.search(params[:description]).with_balance.desc
+    @transactions = @transactions.paginate(page: session[:trx_index_page], per_page: 15)
+    @transactions = @transactions.decorate
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +21,7 @@ class TransactionsController < ApplicationController
 
   # New action for creating transaction
   def new
-    @transaction = @account.transactions.build
+    @transaction = @account.transactions.build.decorate
     @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
                             .order('description').uniq.pluck(:description)
 
@@ -40,7 +35,7 @@ class TransactionsController < ApplicationController
 
   # Create action saves the trasaction into database
   def create
-    @transaction = @account.transactions.build(transaction_params)
+    @transaction = @account.transactions.build(transaction_params).decorate
 
     if @transaction.save
       redirect_to account_transactions_path, notice: 'Transaction was successfully created.'
@@ -95,7 +90,7 @@ class TransactionsController < ApplicationController
   end
 
   def find_account
-    @account = current_user.accounts.find(params[:account_id])
+    @account = current_user.accounts.find(params[:account_id]).decorate
     respond_to do |format|
       if !@account.active?
         format.html { redirect_to accounts_inactive_path, notice: 'Account is inactive' }
@@ -106,6 +101,6 @@ class TransactionsController < ApplicationController
   end
 
   def find_transaction
-    @transaction = @account.transactions.find(params[:id])
+    @transaction = @account.transactions.find(params[:id]).decorate
   end
 end

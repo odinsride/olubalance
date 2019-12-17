@@ -4,9 +4,11 @@
 class Account < ApplicationRecord
   # Define Constants
   NO_ACCOUNT_DESC = "It looks like you don't have any accounts added. To add an account, \
-                     click the add account button at the top of the page :)"
+                     click the <span class='has-text-weight-bold'>New</span> button at the top of the page :)"
 
   NO_INACTIVE_DESC = 'You have no inactive accounts :)'
+
+  DISPLAY_NAME_LIMIT = 24
 
   belongs_to :user
   has_many :transactions, dependent: :delete_all
@@ -17,6 +19,7 @@ class Account < ApplicationRecord
 
   validates :starting_balance, presence: true
   validates :last_four, length: { minimum: 4, maximum: 4 },
+                        format: { with: /\A\d+\z/, message: "Numbers only." },
                         allow_blank: true
 
   before_create :set_current_balance

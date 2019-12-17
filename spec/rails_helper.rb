@@ -31,6 +31,8 @@ RSpec.configure do |config|
   # Include Devise helpers
   config.include Devise::Test::IntegrationHelpers, type: :request
 
+  config.include ActionView::Helpers::NumberHelper
+  
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.strategy = :transaction
