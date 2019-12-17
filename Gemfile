@@ -39,8 +39,8 @@ group :development, :test do
   gem 'faker'
   gem 'pry-byebug', '~> 3.7.0'
   gem 'pry-rails', '~> 0.3.9'
-  gem 'rspec-rails', '~> 3.8.2'
   gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 3.8.2'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
