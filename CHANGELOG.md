@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Transactions can now be flagged as "Pending". Pending transactions will appear at the top of the transaction list and are useful for marking transactions that don't post the same day of the transaction, such as when writing a check. Pending transactions will also update your overall account balance so you can keep track of what your actual account balance is.
+- RSpec model and request specs have been added to test basic functionality and will continue to be built upon for future releases
 
 ## [v1.3.2] - 2019-06-27
 
