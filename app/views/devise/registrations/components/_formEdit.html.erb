@@ -33,7 +33,7 @@
               <%= f.text_field :first_name, class: "input is-primary",
                                             placeholder: "John" %>
               <span class="icon is-small is-left has-text-primary">
-                <i class="fas fa-user-tie"></i>
+                <i class="fa fa-user"></i>
               </span>
             </div>
           </div>
@@ -46,7 +46,7 @@
               <%= f.text_field :last_name, class: "input is-primary",
                                             placeholder: "Smith" %>
               <span class="icon is-small is-left has-text-primary">
-                <i class="fas fa-user-tie"></i>
+                <i class="fa fa-user"></i>
               </span>
             </div>
           </div>
@@ -63,7 +63,7 @@
                                       class: "input is-primary",
                                       placeholder: "john@smith.com" %>
               <span class="icon is-small is-left has-text-primary">
-                <i class="fas fa-at"></i>
+                <i class="fa fa-at"></i>
               </span>
             </div>
           </div>
@@ -80,7 +80,7 @@
                 <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones,
                                                   default: "Eastern Time (US & Canada)" %>
                 <span class="icon is-small is-left has-text-primary">
-                  <i class="fas fa-globe-americas"></i>
+                  <i class="fa fa-globe"></i>
                 </span>
               </div>
             </div>
@@ -94,14 +94,12 @@
           <div class="field">
             <label class="label has-text-grey">Current Password</label>
             <div class="control has-icons-left">
-              <div class="select is-fullwidth is-primary">
-                <%= f.text_field :current_password, type: "password",
-                                                    class: "input is-primary",
-                                                    autocomplete: "off" %>
-                <span class="icon is-small is-left has-text-primary">
-                  <i class="fas fa-lock"></i>
-                </span>
-              </div>
+              <%= f.text_field :current_password, type: "password",
+                                                  class: "input is-primary",
+                                                  autocomplete: "off" %>
+              <span class="icon is-small is-left has-text-primary">
+                <i class="fa fa-lock"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -135,14 +133,12 @@
           <div class="field">
             <label class="label has-text-grey">Old Password</label>
             <div class="control has-icons-left">
-              <div class="select is-fullwidth is-primary">
-                <%= f.text_field :current_password, type: "password",
-                                                    class: "input is-primary",
-                                                    autocomplete: "off" %>
-                <span class="icon is-small is-left has-text-primary">
-                  <i class="fas fa-lock"></i>
-                </span>
-              </div>
+              <%= f.text_field :current_password, type: "password",
+                                                  class: "input is-primary",
+                                                  autocomplete: "off" %>
+              <span class="icon is-small is-left has-text-primary">
+                <i class="fa fa-lock"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -161,7 +157,7 @@
                                           oninvalid: 'this.setCustomValidity("Please enter a new password")',
                                           oninput: 'setCustomValidity("")' %>
               <span class="icon is-small is-left has-text-primary">
-                <i class="fas fa-lock"></i>
+                <i class="fa fa-lock"></i>
               </span>
             </div>
           </div>
@@ -178,7 +174,7 @@
                                                        oninvalid: 'this.setCustomValidity("Please confirm your new password")',
                                                        oninput: 'setCustomValidity("")' %>
               <span class="icon is-small is-left has-text-primary">
-                <i class="fas fa-lock"></i>
+                <i class="fa fa-lock"></i>
               </span>
             </div>
           </div>

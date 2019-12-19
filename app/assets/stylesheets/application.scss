@@ -82,10 +82,7 @@ $positions: ('top','left','bottom','right');
 }
 
 // Import Font Awesome
-$fa-font-path: "./fontawesome/webfonts";
-@import "./fontawesome/scss/fontawesome.scss";
-@import "./fontawesome/scss/solid.scss";
-@import "./fontawesome/scss/brands.scss";
+@import "font-awesome";
 
 // Import Animate.css
 @import "./animate.css/animate.css";
