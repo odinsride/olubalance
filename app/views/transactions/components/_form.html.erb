@@ -66,7 +66,7 @@
           <%= f.text_field :description, class: "input is-primary",
                                          placeholder: "Description" %>
           <span class="icon is-small is-left has-text-primary">
-            <i class="fas fa-file-alt"></i>
+            <i class="fa fa-file-text"></i>
           </span>
         </div>
       </div>
@@ -79,7 +79,7 @@
                                     placeholder: "5.00",
                                     value: @transaction.amount_form %>
           <span class="icon is-small is-left has-text-primary">
-            <i class="fas fa-dollar-sign"></i>
+            <i class="fa fa-usd"></i>
           </span>
         </div>
       </div>
@@ -91,7 +91,7 @@
           <%= f.text_field :memo, class: "input is-primary",
                                   placeholder: "Memo" %>
           <span class="icon is-small is-left has-text-primary">
-            <i class="fas fa-file-invoice-dollar"></i>
+            <i class="fa fa-info-circle"></i>
           </span>
         </div>
       </div>
@@ -103,7 +103,7 @@
           <%= f.file_field :attachment, id: "upload", class: "file-input is-primary" %>
           <span class="file-cta has-background-primary">
             <span class="file-icon has-text-white">
-              <i class="fas fa-upload"></i>
+              <i class="fa fa-upload"></i>
             </span>
           </span>
           <span id="filename" class="file-name">
