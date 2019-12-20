@@ -11,9 +11,10 @@ AllCops:
     - test/**/*
     - spec/**/*
     - lib/tasks/migrate_paperclip_attachments.rake
+    - node_modules/**/*
 
 # Commonly used screens these days easily fit more than 80 characters.
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 # Relax the Assignment Branch Condition rule a bit
