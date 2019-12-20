@@ -28,6 +28,11 @@ RSpec.describe Account, type: :model do
         FactoryBot.create(:account, user: FactoryBot.create(:user))
       end.to change(Transaction, :count).by(1)
     end
+
+    it 'sets the initial transaction locked flag to true' do
+      account = FactoryBot.create(:account, user: FactoryBot.create(:user))
+      expect(account.transactions.first.locked).to be true
+    end
   end
 
   it { should belong_to(:user) }

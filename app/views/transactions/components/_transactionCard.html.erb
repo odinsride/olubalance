@@ -36,35 +36,35 @@
           </p>
           <p class="title is-7">
             <% if @transaction.attachment.attached? then %>
-            <% if @transaction.attachment.variable? %>
-            <div class="tooltip" data-tooltip="<%= @transaction.filename_size %>">
-              <%= link_to url_for(@transaction.attachment), target: '_blank' do %>
-              <%= image_tag(@transaction.attachment.variant(combine_options: {
-                                                                              gravity: 'Center',
-                                                                              thumbnail: '128x128^',
-                                                                              extent: '128x128'
-                                                                            }),
-                                                                            class: 'mt-5 ob-attachment-img') %>
+              <% if @transaction.attachment.variable? %>
+                <div class="tooltip" data-tooltip="<%= @transaction.filename_size %>">
+                  <%= link_to url_for(@transaction.attachment), target: '_blank' do %>
+                    <%= image_tag(@transaction.attachment.variant(combine_options: {
+                                                                                    gravity: 'Center',
+                                                                                    thumbnail: '128x128^',
+                                                                                    extent: '128x128'
+                                                                                  }),
+                                                                                  class: 'mt-5 ob-attachment-img') %>
+                  <% end %>
+                </div>
+              <% else %>
+                <%= link_to url_for(@transaction.attachment), target: '_blank',
+                                                                            class: 'button is-primary is-large mt-5 tooltip',
+                                                                            data: {
+                                                                              tooltip: @transaction.filename_size
+                                                                            } do %>
+                  <span class="icon is-medium has-text-white">
+                    <i class="fa fa-file-pdf-o"></i>
+                  </span>
+                  <span>Open</span>
+                <% end %>
               <% end %>
-            </div>
             <% else %>
-            <%= link_to url_for(@transaction.attachment), target: '_blank',
-                                                                        class: 'button is-primary is-large mt-5 tooltip',
-                                                                        data: {
-                                                                          tooltip: @transaction.filename_size
-                                                                        } do %>
-            <span class="icon is-medium has-text-white">
-              <i class="fa fa-file-pdf-o"></i>
-            </span>
-            <span>Open</span>
-            <% end %>
-            <% end %>
-            <% else %>
-            <p>
-              <span class="tag is-dark has-text-weight-bold">
-                No attachment
-              </span>
-            </p>
+              <p>
+                <span class="tag is-dark has-text-weight-bold">
+                  No attachment
+                </span>
+              </p>
             <% end %>
           </p>
         </div>
@@ -72,11 +72,13 @@
     </div>
   </div>
 
-  <footer class="card-footer">
-    <!-- Links -->
-    <%= link_to edit_account_transaction_path(@transaction.account, @transaction), class: 'card-footer-item has-text-weight-bold' do %>Edit<% end %>
-    <a class="card-footer-item has-text-weight-bold modal-button" data-target="delete-modal">Delete</a>
-  </footer>
+  <% if !@transaction.locked %>
+    <footer class="card-footer">
+      <!-- Links -->
+      <%= link_to edit_account_transaction_path(@transaction.account, @transaction), class: 'card-footer-item has-text-weight-bold' do %>Edit<% end %>
+      <a class="card-footer-item has-text-weight-bold modal-button" data-target="delete-modal">Delete</a>
+    </footer>
+  <% end %>
 </div>
 
 <%= render partial: "transactions/components/deleteModal" %>
