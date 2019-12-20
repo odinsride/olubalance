@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.5.0] - 2019-12-19
+
+### Changed
+- Ruby version updated to 2.6.4
+- Rails version updated to 6.0.2.1
+- Other gems updated
+- Github pages disabled (for now)
+- Updated README with much more information
+
 ## [v1.4.5] - 2019-12-16
 
 ### Fixed
@@ -138,7 +147,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.4.5...HEAD
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.5.0...HEAD
+[v1.5.0]: https://github.com/odinsride/olubalance/compare/v1.4.5...v1.5.0
 [v1.4.5]: https://github.com/odinsride/olubalance/compare/v1.4.2...v1.4.5
 [v1.4.2]: https://github.com/odinsride/olubalance/compare/v1.4.1...v1.4.2
 [v1.4.1]: https://github.com/odinsride/olubalance/compare/v1.4.0...v1.4.1
