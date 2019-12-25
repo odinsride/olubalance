@@ -151,7 +151,8 @@ CREATE TABLE public.transactions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     memo character varying,
-    pending boolean DEFAULT false
+    pending boolean DEFAULT false,
+    locked boolean DEFAULT false
 );
 
 
@@ -437,6 +438,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190802191418'),
 ('20190802193709'),
 ('20191102124707'),
-('20191219035136');
+('20191219035136'),
+('20191220011006');
 
 
