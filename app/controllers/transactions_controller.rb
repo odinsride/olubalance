@@ -1,16 +1,26 @@
 # frozen_string_literal: true
 
 class TransactionsController < ApplicationController
+  include Pagy::Backend
+
   before_action :authenticate_user!
   before_action :find_account
   before_action :find_transaction, only: %i[edit update show destroy]
 
   # Index action to render all transactions
   def index
-    session[:trx_index_page] = params[:page] if params[:page]
+    # Preserve pagination state when working within the same account,
+    # otherwise reset pagination when moving to a different account
+    if session[:account_id] == @account.id
+      session[:trx_index_page] = params[:page] if params[:page]
+    else
+      session[:account_id] = @account.id
+      session[:trx_index_page] = nil
+    end
 
     @transactions = @account.transactions.search(params[:description]).with_balance.desc
-    @transactions = @transactions.paginate(page: session[:trx_index_page], per_page: 15)
+    # @transactions = @transactions.paginate(page: session[:trx_index_page], per_page: 15)
+    @pagy, @transactions = pagy(@transactions, page: session[:trx_index_page], items: 15)
     @transactions = @transactions.decorate
 
     respond_to do |format|
