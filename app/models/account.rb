@@ -25,6 +25,15 @@ class Account < ApplicationRecord
   before_create :set_current_balance
   after_create :create_initial_transaction
 
+  # Sum of Pending Transactions
+  def pending_balance
+    transactions.where(pending: true).sum(:amount)
+  end
+
+  def non_pending_balance
+    transactions.where(pending: false).sum(:amount)
+  end
+
   private
 
   def set_current_balance
