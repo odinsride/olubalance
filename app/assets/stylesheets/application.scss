@@ -48,10 +48,10 @@ $table-color: hsl(0,0%,35%);
 $modal-background-background-color: rgba(0, 0, 0, 0.5);
 
 // Import Bulma Core
-@import "./bulma-0.7.5/bulma.sass";
+@import "bulma-0.8.0/bulma.sass";
 
 // Import Bulma Extensions
-@import "./bulma-0.7.5/sass/extensions/_all";
+@import "bulma-0.8.0/sass/extensions/_all";
 
 // Override datetimepicker z-index
 .datetimepicker {
@@ -83,9 +83,6 @@ $positions: ('top','left','bottom','right');
 
 // Import Font Awesome
 @import "font-awesome";
-
-// Import Animate.css
-@import "./animate.css/animate.css";
 
 // Import Devise overrides
 @import "./devise";
