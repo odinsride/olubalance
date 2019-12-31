@@ -4,8 +4,6 @@
   }
 
 document.addEventListener('turbolinks:load', function () {
-
-
   // Modals
   var rootEl = document.documentElement;
   var $modals = getAll('.modal');
@@ -53,26 +51,29 @@ document.addEventListener('keydown', function (event) {
 
 
 // Dropdowns
-var $dropdowns = getAll('.dropdown:not(.is-hoverable)');
+document.addEventListener('turbolinks:load', function () {
+  var $dropdowns = getAll('.dropdown:not(.is-hoverable)');
 
-if ($dropdowns.length > 0) {
-  $dropdowns.forEach(function ($el) {
-    $el.addEventListener('click', function (event) {
-      event.stopPropagation();
-      $el.classList.toggle('is-active');
+  if ($dropdowns.length > 0) {
+    $dropdowns.forEach(function ($el) {
+      $el.addEventListener('click', function (event) {
+        event.stopPropagation();
+        $el.classList.toggle('is-active');
+      });
     });
-  });
 
-  document.addEventListener('click', function (event) {
-    closeDropdowns();
-  });
-}
+    document.addEventListener('click', function (event) {
+      closeDropdowns();
+    });
+  }
 
-function closeDropdowns() {
-  $dropdowns.forEach(function ($el) {
-    $el.classList.remove('is-active');
-  });
-}
+  function closeDropdowns() {
+    $dropdowns.forEach(function ($el) {
+      $el.classList.remove('is-active');
+    });
+  }
+});
+
 
 
 // navbar-burger and navbar-menu

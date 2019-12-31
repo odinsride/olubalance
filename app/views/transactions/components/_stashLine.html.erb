@@ -1,0 +1,26 @@
+<div class="dropdown-item">
+  <div class="columns is-mobile is-bottom-aligned">
+    <div class="column is-one-fifth">
+      <div class="field has-addons">
+        <p class="control">
+          <button class="button is-small is-grey">
+            <span class="icon is-small has-text-success">
+              <i class="fa fa-plus"></i>
+            </span>
+          </button>
+        </p>
+        <p class="control">
+          <button class="button is-small is-grey">
+            <span class="icon is-small has-text-danger">
+              <i class="fa fa-minus"></i>
+            </span>
+          </button>
+        </p>
+      </div>
+    </div>
+    <div class="column">
+      <p><strong><%= stash.name %></strong></p>
+      <progress class="progress is-primary is-small" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %>%</progress>
+    </div>
+  </div>
+</div>

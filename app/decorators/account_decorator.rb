@@ -41,6 +41,7 @@ class AccountDecorator < ApplicationDecorator
   def non_pending_balance_display
     number_to_currency(non_pending_balance)
   end
+
   # Display the account name with current balance
   def account_name_balance
     name + ' (' + current_balance_display + ')'

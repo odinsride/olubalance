@@ -46,6 +46,15 @@ RSpec.describe "Transaction management", type: :request do
     expect(response.body).to include("(Pending -#{number_to_currency(@pending_trx_amount)}")
   end
 
+  it "displays a list of account stashes" do
+    sign_in @user
+    @stash_name = "My Test Stash"
+    FactoryBot.create(:stash, name: @stash_name, account: @account)
+    get account_transactions_path(@account)
+    expect(response).to be_successful
+    expect(response.body).to include (@stash_name)
+  end
+
   it "shows an existing transaction" do
     sign_in @user
     get account_transaction_path(@account.id, @transaction.id)

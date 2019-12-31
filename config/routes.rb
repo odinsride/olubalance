@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :accounts do
     resources :transactions
+    resources :stashes
 
     member do
       get :deactivate

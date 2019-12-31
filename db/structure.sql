@@ -139,6 +139,42 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: stashes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.stashes (
+    id bigint NOT NULL,
+    name character varying,
+    description character varying,
+    balance numeric DEFAULT 0.0,
+    goal numeric,
+    active boolean DEFAULT true,
+    account_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: stashes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.stashes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stashes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.stashes_id_seq OWNED BY public.stashes.id;
+
+
+--
 -- Name: transactions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -250,6 +286,13 @@ ALTER TABLE ONLY public.active_storage_blobs ALTER COLUMN id SET DEFAULT nextval
 
 
 --
+-- Name: stashes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stashes ALTER COLUMN id SET DEFAULT nextval('public.stashes_id_seq'::regclass);
+
+
+--
 -- Name: transactions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -304,6 +347,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: stashes stashes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stashes
+    ADD CONSTRAINT stashes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: transactions transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -345,6 +396,13 @@ CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON public.active
 --
 
 CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_blobs USING btree (key);
+
+
+--
+-- Name: index_stashes_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_stashes_on_account_id ON public.stashes USING btree (account_id);
 
 
 --
@@ -401,6 +459,14 @@ ALTER TABLE ONLY public.transactions
 
 
 --
+-- Name: stashes fk_rails_5e3266c16e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stashes
+    ADD CONSTRAINT fk_rails_5e3266c16e FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
 -- Name: accounts fk_rails_b1e30bebc8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -439,6 +505,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190802193709'),
 ('20191102124707'),
 ('20191219035136'),
-('20191220011006');
+('20191220011006'),
+('20191227150641');
 
 

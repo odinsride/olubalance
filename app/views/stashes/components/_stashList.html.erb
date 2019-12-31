@@ -1,0 +1,43 @@
+<div class="columns">
+  <div class="column is-8">
+<table class="table is-hoverable is-fullwidth ob-table">
+  <thead>
+    <th colspan=5 class="ob-table-phead">
+      <!-- Main container -->
+      <div class="level">
+        <!-- Left side -->
+        <div class="level-left">
+          <div class="level-item">
+            <p class="title is-5 is-size-7-mobile has-text-white">
+              <span class="icon is-medium ob-icon-rpad">
+                <i class="fa fa-lg fa-university"></i>
+              </span>
+              <%= @account.name %>
+            </p>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="level-right">
+          <div class="level-item has-text-centered-mobile has-text-right">
+            <p class="title is-5 is-size-7-mobile has-text-white">
+              <%= @stashes.count %> Stashes
+            </p>
+          </div>
+        </div>
+      </nav>
+    </th>
+  </thead>
+  <thead>
+    <th class="">
+      <div>
+        Stashes
+      </div>
+    </th>
+  </thead>
+  <tbody>
+    <%= render partial: "stashes/components/stashLine", collection: @stashes, as: :stash %>
+  </tbody>
+</table>
+</div>
+</div>

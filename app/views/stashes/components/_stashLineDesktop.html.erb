@@ -1,0 +1,19 @@
+<tr class="">
+  <td class="has-text-centered">
+    <%= link_to account_stash_path(id: stash.id) do %>
+      <div class="level is-mobile ob-stash-level">
+        <div class="level-left">
+          <div class="level-item">
+            <%= stash.name %>
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item is-size-7 has-text-grey">
+            <%= stash.balance_display %> saved out of <%= stash.goal_display %>
+          </div>
+        </div>
+      </div>
+      <progress class="progress is-primary" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %></progress>
+    <% end %>
+  </td>
+</tr>
