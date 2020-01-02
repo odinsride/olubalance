@@ -1,0 +1,34 @@
+<div class="card" id="stash-card">
+  <header class="card-header has-background-primary">
+    <p class="card-header-title has-text-white">
+      <%= @stash.name %>
+    </p>
+  </header>
+
+  <div class="card-content">
+    <div class="content">
+      <div class="columns is-multiline">
+
+        <div class="column is-6 has-text-centered-mobile has-text-left">
+          <p class="title is-6 has-text-link">
+            Balance
+          </p>
+          <p class="subtitle pt-5 mb-0 is-2">
+            <%= @stash.balance_display %>
+          </p>
+        </div>
+
+        <div class="column is-6 has-text-centered-mobile has-text-right">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="card-footer">
+    <!-- Links -->
+    <%= link_to edit_account_stash_path(@stash.account, @stash), class: 'card-footer-item has-text-weight-bold' do %>Edit<% end %>
+    <a class="card-footer-item has-text-weight-bold modal-button" data-target="delete-modal">Delete</a>
+  </footer>
+</div>
+
+<%= render partial: "stashes/components/deleteModal" %>

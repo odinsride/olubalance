@@ -1,29 +1,13 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: "shared/backButton", locals: { param_back_path: account_stashes_path(@stash.account_id), param_back_text: @account.name } %>
+<div class="columns">
+  <div class="column is-6-desktop is-offset-3-desktop">
+    <p class="title is-4 has-text-link has-text-centered-mobile">Stash Details</p>
+    <p class="subtitle is-7 has-text-grey has-text-weight-semibold has-text-centered-mobile"><%= @account.account_name_balance %></p>
+    <div class="columns">
+      <div class="column">
+        <%= render partial: "stashes/components/stashCard" %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @stash.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @stash.description %>
-</p>
-
-<p>
-  <strong>Balance:</strong>
-  <%= @stash.balance %>
-</p>
-
-<p>
-  <strong>Goal:</strong>
-  <%= @stash.goal %>
-</p>
-
-<p>
-  <strong>Active:</strong>
-  <%= @stash.active %>
-</p>
-
-<%= link_to 'Edit', edit_account_stash_path(@stash) %> |
-<%= link_to 'Back', account_stashes_path %>
