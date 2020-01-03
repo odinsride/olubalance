@@ -1,4 +1,16 @@
 <h4 class="title is-4 has-text-link has-text-centered-mobile"><%= @stash.form_name %> Stash</h4>
+<article class="message is-primary">
+  <div class="message-header">
+    <p>About Stashes</p>
+  </div>
+  <div class="message-body">
+    <strong>Stashes</strong> can be used to set aside money from your main account.  For example, if you want to save up for a new
+    computer, you might add a stash called <strong>New Computer</strong> and regularly add money into the stash until your goal is
+    met.  By doing this, the money will disappear from your main account so you won't be tempted to spend it.  Stashes are a great
+    way to budget for planned expenses!
+  </div>
+</article>
+
 <%= form_for([@stash.account, @stash]) do |f| %>
   <% if @stash.errors.any? %>
     <article id="error explanation" class="message is-danger">

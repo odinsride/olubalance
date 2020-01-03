@@ -15,21 +15,21 @@
 // Define custom font
 @font-face {
     font-family: 'Muli-Regular';
-    src:font-url('Muli/Muli-Regular.ttf') format('truetype');
+    src: font-url('Muli/Muli-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Muli-Bold';
-    src:font-url('Muli/Muli-Bold.ttf') format('truetype');
+    src: font-url('Muli/Muli-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Muli-SemiBold';
-    src:font-url('Muli/Muli-SemiBold.ttf') format('truetype');
+    src: font-url('Muli/Muli-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
 }
@@ -39,11 +39,11 @@ $family-primary: 'Muli-Regular';
 // $primary: #4db6ac;
 $primary: #26a69a;
 $link: #00796b;
-$white-ter: hsl(0,0%,96%);
+$white-ter: hsl(0, 0%, 96%);
 
 $table-head-background-color: $primary;
 $table-head-cell-color: $white-ter;
-$table-color: hsl(0,0%,35%);
+$table-color: hsl(0, 0%, 35%);
 
 $modal-background-background-color: rgba(0, 0, 0, 0.5);
 
@@ -67,18 +67,19 @@ $modal-background-background-color: rgba(0, 0, 0, 0.5);
 }
 
 // Create spacing helpers
-$sizes: (-10,-5,0,5,10,15,20,25,30,50);
-$positions: ('top','left','bottom','right');
+$sizes: (-10, -5, 0, 5, 10, 15, 20, 25, 30, 50);
+$positions: ('top', 'left', 'bottom', 'right');
 
 @each $size in $sizes {
-  @each $position in $positions {
-    .m#{str-slice($position, 0, 1)}-#{$size} {
-      margin-#{$position}: $size + px !important;
+    @each $position in $positions {
+        .m#{str-slice($position, 0, 1)}-#{$size} {
+            margin-#{$position}: $size + px !important;
+        }
+
+        .p#{str-slice($position, 0, 1)}-#{$size} {
+            padding-#{$position}: $size + px !important;
+        }
     }
-    .p#{str-slice($position, 0, 1)}-#{$size} {
-      padding-#{$position}: $size + px !important;
-    }
-  }
 }
 
 // Import Font Awesome
@@ -109,6 +110,7 @@ $positions: ('top','left','bottom','right');
         flex: 1;
     }
 }
+
 // End Sticky Footer
 
 .button.is-small {
@@ -153,7 +155,8 @@ a.navbar-link {
 }
 
 // Override file-cta and file-name border color
-.file-cta, .file-name {
+.file-cta,
+.file-name {
     border-color: $primary;
 }
 
@@ -166,8 +169,8 @@ a.navbar-link {
 .ob-attachment-img {
     border-radius: 4px;
     box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, .2),
-    0px 8px 10px 1px rgba(0, 0, 0, .14),
-    0px 3px 14px 2px rgba(0, 0, 0, .12);
+        0px 8px 10px 1px rgba(0, 0, 0, .14),
+        0px 3px 14px 2px rgba(0, 0, 0, .12);
 }
 
 .ob-modal-card {
@@ -185,4 +188,35 @@ a.navbar-link {
 .has-text-shadow {
     //text-shadow: 1px 1px 10px #acacac;
     text-shadow: 1px 1px 10px #636363;
+}
+
+
+// Add progress bar values
+.progress-wrapper {
+    position: relative;
+}
+
+.progress-value {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: calc(1rem / 1.5);
+    line-height: 1rem;
+    font-weight: bold;
+}
+
+.progress.is-small+.progress-value {
+    font-size: calc(0.75rem / 1.5);
+    line-height: 0.75rem;
+}
+
+.progress.is-medium+.progress-value {
+    font-size: calc(1.25rem / 1.5);
+    line-height: 1.25rem;
+}
+
+.progress.is-large+.progress-value {
+    font-size: calc(1.5rem / 1.5);
+    line-height: 1.5rem;
 }

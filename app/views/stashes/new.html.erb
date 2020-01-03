@@ -1,5 +1,1 @@
-<h1>New Stash</h1>
-
-<%= render 'form', stash: @stash %>
-
-<%= link_to 'Back', account_stashes_path %>
+<%= render partial: "shared/formPage", locals: { formPath: "stashes/components/form" } %>

@@ -27,7 +27,7 @@ class StashesController < ApplicationController
     @stash = @account.stashes.build(stash_params).decorate
 
     if @stash.save
-      redirect_to account_stashes_path, notice: 'Stash was successfully created.'
+      redirect_to account_transactions_path, notice: 'Stash was successfully created.'
     else
       render :new
     end
@@ -36,7 +36,7 @@ class StashesController < ApplicationController
   # PATCH/PUT /stashes/1
   def update
     if @stash.update(stash_params)
-      redirect_to account_stashes_path, notice: 'Stash was successfully updated.'
+      redirect_to account_transactions_path, notice: 'Stash was successfully updated.'
     else
       render :edit
     end

@@ -12,7 +12,17 @@
     <% end %>
   </div>
 
-  <% if defined?(param_new_path) %>
-    <%= render partial: "shared/pageLevelNewButtonMobile", locals: { path: param_new_path } %>
-  <% end %>
+  <div class="level-right is-hidden-tablet">
+    <% if defined?(stash_list) %>
+      <div class="level-item">
+        <%= render partial: "transactions/components/stashListMobile" %>
+      </div>
+    <% end %>
+
+    <% if defined?(param_new_path) %>
+      <div class="level-item">
+        <%= render partial: "shared/pageLevelNewButtonMobile", locals: { path: param_new_path } %>
+      </div>
+    <% end %>
+  </div>
 </div>

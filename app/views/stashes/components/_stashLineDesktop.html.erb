@@ -30,14 +30,16 @@
             <% end %>
           </p>
           <p class="control">
-            <%= link_to account_stash_path(id: stash.id), class: "button is-small is-danger is-outlined", method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <a class="button is-small is-danger is-outlined modal-button" data-target="delete-modal-<%= stash.id %>">
               <span class="icon is-medium">
                 <i class="fa fa-lg fa-trash"></i>
               </span>
-            <% end %>
+            </a>
           </p>
         </div>
       </div>
     </div>
   </td>
 </tr>
+
+<%= render partial: "stashes/components/deleteModal", locals: { stash: stash } %>

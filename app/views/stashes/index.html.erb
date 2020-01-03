@@ -1,4 +1,4 @@
-<%= render partial: "shared/backButton", locals: { param_back_path: account_transactions_path(@account), param_back_text: "Transactions" } %>
+<%= render partial: "shared/backButton", locals: { param_back_path: account_transactions_path(@account), param_back_text: "Transactions", param_new_path: new_account_stash_path } %>
 <div class="columns">
   <div class="column is-6-desktop is-offset-3-desktop">
     <%= render partial: "stashes/components/stashLevel" %>

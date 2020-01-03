@@ -6,5 +6,9 @@
     <%= render partial: "shared/pageLevelNewButton", locals: { path: new_account_path } %>
   </div>
 
-  <%= render partial: "shared/pageLevelNewButtonMobile", locals: { path: new_account_path } %>
+  <div class="level-right is-hidden-tablet">
+    <div class="level-item">
+      <%= render partial: "shared/pageLevelNewButtonMobile", locals: { path: new_account_path } %>
+    </div>
+  </div>
 </nav>

@@ -9,88 +9,82 @@ RSpec.describe "Stash management", type: :request do
     @stash = FactoryBot.create(:stash, goal: @stash_goal, account: @account)
   end
 
-  it "displays a list of the user's stashes" do
-    sign_in @user
-    get account_stashes_path(account_id: @account.id)
-    expect(response).to be_successful
-    expect(response.body).to include(@stash.name)
-    expect(response.body).to include(@stash_goal.to_s)
+  describe "stash index" do
+
+    it "displays a list of the user's stashes" do
+      sign_in @user
+      get account_stashes_path(account_id: @account.id)
+      expect(response).to be_successful
+      expect(response.body).to include(@stash.name)
+      expect(response.body).to include(@stash_goal.to_s)
+    end
+
+    it "doesn't show another account's stashes" do
+      account2 = FactoryBot.create(:account, name: "Account 2", user: @user)
+      stash2 = FactoryBot.create(:stash, name: "Stash 2", account: account2)
+
+      sign_in @user
+      get account_stashes_path(account_id: @account.id)
+      expect(response).to be_successful
+      expect(response.body).to_not include("Stash 2")
+    end
+
   end
 
-  it "doesn't show another account's stashes" do
-    account2 = FactoryBot.create(:account, name: "Account 2", user: @user)
-    stash2 = FactoryBot.create(:stash, name: "Stash 2", account: account2)
+  describe "stash create" do
+    it "creates a new stash and redirects to the transactions page" do
+      sign_in @user
+      get new_account_stash_path(@account.id)
+      expect(response.body).to include("New Stash")
 
-    sign_in @user
-    get account_stashes_path(account_id: @account.id)
-    expect(response).to be_successful
-    expect(response.body).to_not include("Stash 2")
-  end
-
-  it "creates a new stash and redirects to the transactions page" do
-    sign_in @user
-    get new_account_stashes_path(@account.id)
-    expect(response.body).to include("New Stash")
-
-    post "/accounts/#{@account.id}/stashes", params: { 
-      stash: { 
-        name: "Test Create Stash", 
-        goal: 3500, 
-        account: @account.id
+      post "/accounts/#{@account.id}/stashes", params: { 
+        stash: { 
+          name: "Test Create Stash", 
+          goal: 3500, 
+          account: @account.id
+        }
       }
-    }
-    expect(response).to redirect_to(account_transactions_path(@account))
-    follow_redirect!
+      expect(response).to redirect_to(account_transactions_path(@account))
+      follow_redirect!
 
-    expect(response.body).to include("Test Create Stash")
+      expect(response.body).to include("Test Create Stash")
+    end
   end
 
-  it "updates an existing stash and redirects to the transactions page" do
-    sign_in @user
-    get edit_account_stash_path(@account.id, @stash.id)
-    expect(response.body).to include("Edit Stash")
+  describe "stash update" do
+    it "updates an existing stash and redirects to the transactions page" do
+      sign_in @user
+      get edit_account_stash_path(@account.id, @stash.id)
+      expect(response.body).to include("Edit Stash")
 
-    patch "/accounts/#{@account.id}/stash/#{@stash.id}", params: { 
-      stash: { 
-        name: "Stash Management Test Edited", 
-        goal: 10000 
+      patch "/accounts/#{@account.id}/stashes/#{@stash.id}", params: { 
+        stash: { 
+          name: "Stash Management Test Edited", 
+          goal: 10000 
+        }
       }
-    }
-    expect(response).to redirect_to(account_transactions_path(@account))
-    follow_redirect!
+      expect(response).to redirect_to(account_transactions_path(@account))
+      follow_redirect!
 
-    expect(response.body).to include("Stash Management Test Edited")
+      expect(response.body).to include("Stash Management Test Edited")
+    end
   end
 
-  # it "deactivates an existing account and activates an inactive account" do
-  #   sign_in @user
+  describe "stash delete" do
 
-  #   # Deactivate the account and check that it is not present on main accounts page
-  #   get deactivate_account_path(id: @account.id)
+    it "deletes an existing stash and redirects to the stashes page" do
+      sign_in @user
 
-  #   expect(response).to redirect_to(accounts_path)
-  #   follow_redirect!
+      get account_stash_path(@account.id, @stash.id)
 
-  #   expect(response.body).to_not include(@account.name)
-  #   expect(response.body).to_not include(@account_starting_balance)
+      expect(response.body).to include(@stash.name)
+      expect(response.body).to include("delete-modal-#{@stash.id}")
+      
+      delete "/accounts/#{@account.id}/stashes/#{@stash.id}"
+      expect(response).to redirect_to(account_stashes_path(@account))
+      follow_redirect!
 
-  #   # Visit the inactive accounts page and check that the inactive account is present
-  #   get accounts_inactive_path
-  #   expect(response.body).to include(@account.name)
-  #   expect(response.body).to include(@account_starting_balance)
-
-  #   # Reactivate the account and check that the account appears back on the main accounts page
-  #   get activate_account_path(id: @account.id)
-
-  #   expect(response).to redirect_to(accounts_path)
-  #   follow_redirect!
-
-  #   expect(response.body).to include(@account.name)
-  #   expect(response.body).to include(@account_starting_balance)
-
-  #   # Go back to the inactive accounts page and ensure the reactivated account is not listed
-  #   get accounts_inactive_path
-  #   expect(response.body).to_not include(@account.name)
-  #   expect(response.body).to_not include(@account_starting_balance)
-  # end
+      expect(response.body).to_not include(@stash.name)
+    end
+  end
 end
