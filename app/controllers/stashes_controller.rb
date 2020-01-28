@@ -2,7 +2,7 @@
 
 class StashesController < ApplicationController
   before_action :find_account
-  before_action :set_stash, only: %i[show edit update destroy]
+  before_action :set_stash, only: %i[show edit update destroy add_to_stash]
 
   # GET /stashes
   def index
@@ -30,6 +30,16 @@ class StashesController < ApplicationController
       redirect_to account_transactions_path, notice: 'Stash was successfully created.'
     else
       render :new
+    end
+  end
+
+  def add_to_stash
+    @stash.balance = @stash.balance + params[:amount]
+
+    if @stash.save
+      redirect_to account_transactions_path, notice: 'Amount added to stash.'
+    else
+      redirect_to account_transactions_path, notice: 'Error saving stash.'
     end
   end
 
@@ -68,6 +78,6 @@ class StashesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def stash_params
-    params.require(:stash).permit(:name, :description, :goal)
+    params.require(:stash).permit(:name, :description, :goal, :amount)
   end
 end

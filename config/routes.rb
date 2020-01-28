@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 
   resources :accounts do
     resources :transactions
-    resources :stashes
+    resources :stashes do
+      member do
+        get :add_to_stash
+      end
+    end
 
     member do
       get :deactivate

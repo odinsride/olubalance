@@ -10,4 +10,6 @@ class Stash < ApplicationRecord
 
   validates :goal, presence: true,
                    numericality: { greater_than_or_equal_to: 0 }
+
+  attr_accessor :amount
 end

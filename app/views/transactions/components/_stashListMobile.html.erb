@@ -1,4 +1,6 @@
-<div class="dropdown is-right">
+
+<!-- Come back to this later -->
+<div class="dropdown is-right" id="stash-dropdown">
   <div class="dropdown-trigger">
     <button class="button is-small is-link is-outlined" aria-haspopup="true" aria-controls="dropdown-menu">
       <span>Stashes</span>
@@ -7,9 +9,10 @@
       </span>
     </button>
   </div>
-  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+  <div class="dropdown-menu" id="stash-menu" role="menu">
     <div class="dropdown-content">
-      <%= render partial: "transactions/components/stashLine", collection: @stashes, as: :stash %>
+      <%= render partial: "transactions/components/stashLine", collection: @stashes, as: :stash,
+                                                               locals: { stash_form_class: 'stash-form-mobile' } %>
       <%= render partial: "transactions/components/stashManagementLinks" %>
     </div>
   </div>

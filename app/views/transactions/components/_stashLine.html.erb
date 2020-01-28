@@ -3,14 +3,14 @@
     <div class="column is-one-fifth">
       <div class="field has-addons">
         <p class="control">
-          <button class="button is-small is-grey">
+          <button class="button is-small is-grey add-to-stash" data-action="add" data-target="<%= stash_form_class %>-<%= stash.id %>">
             <span class="icon is-small has-text-success">
               <i class="fa fa-plus"></i>
             </span>
           </button>
         </p>
         <p class="control">
-          <button class="button is-small is-grey">
+          <button class="button is-small is-grey remove-from-stash" data-action="remove" data-target="<%= stash_form_class %>-<%= stash.id %>">
             <span class="icon is-small has-text-danger">
               <i class="fa fa-minus"></i>
             </span>
@@ -23,4 +23,28 @@
       <progress class="progress is-primary is-small" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %>%</progress>
     </div>
   </div>
+</div>
+<div class="dropdown-item ob-stash-form ob-is-hidden" id="<%= stash_form_class%>-<%= stash.id %>">
+  <%= form_for([stash.account, stash]) do |f| %>
+    <div class="field has-addons">
+      <div class="control">
+        <%= f.text_field :amount, class: "input is-small is-primary ob-trx-stash-input",
+                                  placeholder: "0.00" %>
+      </div>
+      <div class="control">
+        <%= link_to add_to_stash_account_stash_path(id: stash.id), class: "button is-small is-success" do %>
+          <span class="icon">
+            <i class="fa fa-lg fa-check"></i>
+          </span>
+        <% end %>
+      </div>
+      <div class="control">
+        <a class="button is-small is-danger cancel-stash-input" data-target="<%= stash_form_class %>-<%= stash.id %>">
+          <span class="icon">
+            <i class="fa fa-lg fa-times"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  <% end %>
 </div>

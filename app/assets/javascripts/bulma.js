@@ -1,7 +1,4 @@
-  // Functions
-  function getAll(selector) {
-    return Array.prototype.slice.call(document.querySelectorAll(selector), 0);
-  }
+ 
 
 document.addEventListener('turbolinks:load', function () {
   // Modals
@@ -58,7 +55,7 @@ document.addEventListener('turbolinks:load', function () {
     $dropdowns.forEach(function ($el) {
       $el.addEventListener('click', function (event) {
         event.stopPropagation();
-        $el.classList.toggle('is-active');
+        $el.classList.add('is-active');
       });
     });
 

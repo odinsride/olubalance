@@ -28,3 +28,16 @@
 .ob-stash-level {
   margin-bottom: 0.3rem !important;
 }
+
+.ob-stash-form {
+  display: block;
+}
+
+.ob-stash-form.ob-is-hidden {
+  display: none;
+}
+
+.ob-trx-stash-input {
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+}
