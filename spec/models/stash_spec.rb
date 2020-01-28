@@ -18,4 +18,7 @@ RSpec.describe Stash, type: :model do
     it { expect(subject.active).to eq true }
     it { expect(subject.balance).to eq 0.00 }
   end
+
+  it { should belong_to(:account) }
+  it { should have_many(:stash_entries) }
 end

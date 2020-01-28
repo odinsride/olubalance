@@ -25,10 +25,9 @@
   </div>
 </div>
 <div class="dropdown-item ob-stash-form ob-is-hidden" id="<%= stash_form_class%>-<%= stash.id %>">
-  <%= form_for([stash.account, stash]) do |f| %>
     <div class="field has-addons">
       <div class="control">
-        <%= f.text_field :amount, class: "input is-small is-primary ob-trx-stash-input",
+        <%# <%= f.text_field :amount, class: "input is-small is-primary ob-trx-stash-input",
                                   placeholder: "0.00" %>
       </div>
       <div class="control">
@@ -46,5 +45,4 @@
         </a>
       </div>
     </div>
-  <% end %>
 </div>
