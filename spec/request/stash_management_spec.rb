@@ -32,7 +32,7 @@ RSpec.describe "Stash management", type: :request do
   end
 
   describe "stash create" do
-    it "creates a new stash and redirects to the transactions page" do
+    it "creates a new stash and redirects to the stashes page" do
       sign_in @user
       get new_account_stash_path(@account.id)
       expect(response.body).to include("New Stash")
@@ -44,7 +44,7 @@ RSpec.describe "Stash management", type: :request do
           account: @account.id
         }
       }
-      expect(response).to redirect_to(account_transactions_path(@account))
+      expect(response).to redirect_to(account_stashes_path(@account))
       follow_redirect!
 
       expect(response.body).to include("Test Create Stash")
@@ -52,7 +52,7 @@ RSpec.describe "Stash management", type: :request do
   end
 
   describe "stash update" do
-    it "updates an existing stash and redirects to the transactions page" do
+    it "updates an existing stash and redirects to the stashes page" do
       sign_in @user
       get edit_account_stash_path(@account.id, @stash.id)
       expect(response.body).to include("Edit Stash")
@@ -63,7 +63,7 @@ RSpec.describe "Stash management", type: :request do
           goal: 10000 
         }
       }
-      expect(response).to redirect_to(account_transactions_path(@account))
+      expect(response).to redirect_to(account_stashes_path(@account))
       follow_redirect!
 
       expect(response.body).to include("Stash Management Test Edited")

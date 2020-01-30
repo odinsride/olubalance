@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   resources :accounts do
     resources :transactions
     resources :stashes do
-      member do
-        get :add_to_stash
+      scope except: %i[show edit update destroy] do
+        resources :stash_entries
       end
     end
 

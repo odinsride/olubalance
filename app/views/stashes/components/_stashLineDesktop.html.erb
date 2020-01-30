@@ -2,44 +2,37 @@
   <td class="has-text-centered">
     <div class="columns is-mobile is-bottom-aligned">
 
-      <div class="column is-10-widescreen is-9-desktop is-10-tablet is-12-mobile">
-        <%= link_to account_stash_path(id: stash.id) do %>
-          <div class="level is-mobile ob-stash-level">
-            <div class="level-left">
-              <div class="level-item">
-                <%= stash.name %>
-              </div>
-            </div>
-            <div class="level-right">
-              <div class="level-item is-size-7 has-text-grey">
-                <%= stash.balance_display %> saved out of <%= stash.goal_display %>
-              </div>
-            </div>
-          </div>
-          <progress class="progress is-primary" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %></progress>
-        <% end %>
-      </div>
-
-      <div class="column is-hidden-mobile">
+      <div class="column is-3-mobile">
         <div class="field is-grouped">
           <p class="control">
-            <%= link_to edit_account_stash_path(id: stash.id), class: "button is-small is-link is-outlined" do %>
+            <%= link_to edit_account_stash_path(id: stash.id), class: "button is-small is-success" do %>
               <span class="icon">
-                <i class="fa fa-lg fa-pencil"></i>
+                <i class="fa fa-lg fa-plus"></i>
               </span>
             <% end %>
           </p>
           <p class="control">
-            <a class="button is-small is-danger is-outlined modal-button" data-target="delete-modal-<%= stash.id %>">
+            <a class="button is-small is-danger modal-button" data-target="delete-modal-<%= stash.id %>">
               <span class="icon is-medium">
-                <i class="fa fa-lg fa-trash"></i>
+                <i class="fa fa-lg fa-minus"></i>
               </span>
             </a>
           </p>
         </div>
       </div>
+
+      <div class="column is-10-widescreen is-9-desktop is-10-tablet is-9-mobile">
+        <%= link_to account_stash_path(id: stash.id) do %>
+          <div class="level ob-stash-level">
+              <div class="level-item">
+                <span><%= stash.name %><br />
+                <span class="is-size-7 has-text-grey"><%= stash.balance_display %> saved out of <%= stash.goal_display %></span></span>
+              </div>
+          </div>
+          <progress class="progress is-primary" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %></progress>
+        <% end %>
+      </div>
+      
     </div>
   </td>
 </tr>
-
-<%= render partial: "stashes/components/deleteModal", locals: { stash: stash } %>

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Transaction management", type: :request do
+RSpec.describe "Stash entry management", type: :request do
   before(:each) do
     @user = FactoryBot.create(:user)
     @starting_balance = 5000
