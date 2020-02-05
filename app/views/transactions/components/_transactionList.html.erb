@@ -19,9 +19,12 @@
         <div class="level-right">
           <div class="level-item has-text-centered-mobile has-text-right">
             <p class="title is-5 is-size-7-mobile has-text-white">
-              <%= @account.current_balance_display %><br />
+              <span class="mb-15"><%= @account.current_balance_display %></span><br/>
               <% if @account.pending_balance != 0 %>
-                <span class="subtitle is-7 has-text-white">(Pending <%= @account.pending_balance_display %> + <%= @account.non_pending_balance_display %>)</span>
+                <span class="tag is-warning is-light">Pending: <%= @account.pending_balance_display %></span>
+              <% end %>
+              <% if @stashed != 0 %>
+                <span class="tag is-success is-light is-small">Stashed <%= number_to_currency(@stashed) %></span>
               <% end %>
             </p>
           </div>

@@ -1,0 +1,27 @@
+<%= render partial: "shared/backButton", locals: { param_back_path: account_stashes_path(@stash.account_id), param_back_text: "Stashes" } %>
+<div class="columns">
+  <div class="column is-6-desktop is-offset-3-desktop">
+    <p class="title is-4 has-text-link has-text-centered-mobile">Stash Details</p>
+    <p class="subtitle is-7 has-text-grey has-text-weight-semibold has-text-centered-mobile"><%= @account.account_name_balance %></p>
+    <div class="columns">
+      <div class="column">
+        <%= render partial: "stashes/components/stashCard" %>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <table class="table is-hoverable is-fullwidth ob-table">
+          <thead>
+              <th>Date</th>
+              <th>Action</th>
+              <th class="has-text-right">Amount</th>
+          </thead>
+          <tbody>
+              <%= render partial: "stashes/components/stashEntryLine", collection: @stash_entries, as: :stash_entry %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

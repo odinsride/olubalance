@@ -4,7 +4,7 @@
       <%= link_to param_back_path do %>
         <div class="level-item">
           <span class="icon">
-            <i class="fa fa-lg fa-chevron-left has-text-grey"></i>
+            <i class="fa fa-lg fa-caret-left has-text-grey"></i>
           </span>
           <div class="title is-size-6 has-text-link ml-5"><%= param_back_text %></div>
         </div>
@@ -12,7 +12,17 @@
     <% end %>
   </div>
 
-  <% if defined?(param_new_path) %>
-    <%= render partial: "shared/pageLevelNewButtonMobile", locals: { path: param_new_path } %>
-  <% end %>
+  <div class="level-right is-hidden-tablet">
+    <% if defined?(stash_list) %>
+      <div class="level-item">
+        <%= render partial: "transactions/components/stashButtonMobile" %>
+      </div>
+    <% end %>
+
+    <% if defined?(param_new_path) %>
+      <div class="level-item">
+        <%= render partial: "shared/pageLevelNewButtonMobile", locals: { path: param_new_path } %>
+      </div>
+    <% end %>
+  </div>
 </div>

@@ -7,6 +7,11 @@ Rails.application.routes.draw do
 
   resources :accounts do
     resources :transactions
+    resources :stashes do
+      scope except: %i[index show edit update destroy] do
+        resources :stash_entries
+      end
+    end
 
     member do
       get :deactivate

@@ -1,0 +1,10 @@
+<!-- Main container -->
+<nav class="level">
+  <!-- Left side -->
+  <div class="level-left">
+    <%= render partial: "shared/pageLevelTitle", locals: { title: "Stashes", subtitle: @account.account_name_balance } %>
+  </div>
+  <div class="level-right">
+    <%= render partial: "shared/pageLevelNewButton", locals: { path: new_account_stash_path } %>
+  </div>
+</nav>

@@ -23,6 +23,8 @@ class TransactionsController < ApplicationController
     @pagy, @transactions = pagy(@transactions, page: session[:trx_index_page], items: 15)
     @transactions = @transactions.decorate
 
+    @stashed = @account.stashes.sum(:balance)
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render xml: @transactions }

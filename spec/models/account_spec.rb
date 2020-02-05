@@ -37,4 +37,5 @@ RSpec.describe Account, type: :model do
 
   it { should belong_to(:user) }
   it { should have_many(:transactions) }
+  it { should have_many(:stashes) }
 end
