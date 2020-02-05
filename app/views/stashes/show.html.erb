@@ -8,6 +8,20 @@
         <%= render partial: "stashes/components/stashCard" %>
       </div>
     </div>
+    <div class="columns">
+      <div class="column">
+        <table class="table is-hoverable is-fullwidth ob-table">
+          <thead>
+              <th>Date</th>
+              <th>Action</th>
+              <th class="has-text-right">Amount</th>
+          </thead>
+          <tbody>
+              <%= render partial: "stashes/components/stashEntryLine", collection: @stash_entries, as: :stash_entry %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 

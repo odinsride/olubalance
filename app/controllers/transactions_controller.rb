@@ -5,7 +5,6 @@ class TransactionsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :find_account
-  before_action :find_stashes, only: %i[index]
   before_action :find_transaction, only: %i[edit update show destroy]
 
   # Index action to render all transactions
@@ -23,6 +22,8 @@ class TransactionsController < ApplicationController
     # @transactions = @transactions.paginate(page: session[:trx_index_page], per_page: 15)
     @pagy, @transactions = pagy(@transactions, page: session[:trx_index_page], items: 15)
     @transactions = @transactions.decorate
+
+    @stashed = @account.stashes.sum(:balance)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -113,9 +114,5 @@ class TransactionsController < ApplicationController
 
   def find_transaction
     @transaction = @account.transactions.find(params[:id]).decorate
-  end
-
-  def find_stashes
-    @stashes = @account.stashes.all
   end
 end

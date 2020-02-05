@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class StashesController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_account
   before_action :set_stash, only: %i[show edit update destroy]
 
@@ -11,6 +12,7 @@ class StashesController < ApplicationController
 
   # GET /stashes/1
   def show
+    @stash_entries = @stash.stash_entries.decorate
   end
 
   # GET /stashes/new

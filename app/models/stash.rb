@@ -10,5 +10,7 @@ class Stash < ApplicationRecord
                    uniqueness: { scope: :account_id }
 
   validates :goal, presence: true,
-                   numericality: { greater_than_or_equal_to: 0 }
+                   numericality: { greater_than_or_equal_to: :balance }
+
+  validates :balance, numericality: { greater_than_or_equal_to: 0 }
 end

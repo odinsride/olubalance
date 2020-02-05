@@ -2,6 +2,7 @@
 
 class StashDecorator < ApplicationDecorator
   decorates_finders
+  decorates_association :stash_entry
   delegate_all
   include Draper::LazyHelpers
 
