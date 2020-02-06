@@ -3,7 +3,7 @@
 # Stashes can be used to set money aside within an account
 class Stash < ApplicationRecord
   belongs_to :account
-  has_many :stash_entries
+  has_many :stash_entries, dependent: :delete_all
 
   validates :name, presence: true,
                    length: { maximum: 50, minimum: 2 },
