@@ -13,7 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Transaction locking feature was implemented and enabled for starting balance transactions as well as stash-related transactions
 
 ## Changed
-- Bulma bumped to 0.8.0
+- Bulma version bumped to 0.8.0
+- Ruby version bumped to 2.6.5
+- Bundler version bumped to 2.0.2
 - will_paginate gem swapped for pagy gem
 - Transactions screen now displays total Pending transactions and total Stashed balance
 
