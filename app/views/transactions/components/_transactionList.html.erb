@@ -17,16 +17,28 @@
 
         <!-- Right side -->
         <div class="level-right">
-          <div class="level-item has-text-centered-mobile has-text-right">
-            <p class="title is-5 is-size-7-mobile has-text-white">
-              <span class="mb-15"><%= @account.current_balance_display %></span><br/>
-              <% if @account.pending_balance != 0 %>
-                <span class="tag is-warning is-light">Pending: <%= @account.pending_balance_display %></span>
-              <% end %>
-              <% if @stashed != 0 %>
-                <span class="tag is-success is-light is-small">Stashed <%= number_to_currency(@stashed) %></span>
-              <% end %>
-            </p>
+            <% if @account.pending_balance != 0 %>
+              <div class="level-item">
+                <div>
+                  <p class="heading has-text-right has-text-centered-mobile">Pending</p>
+                  <p class="title tag is-warning is-6"><%= @account.pending_balance_display %></p>
+                </div>
+              </div>
+            <% end %>
+            <% if @stashed != 0 %>
+              <div class="level-item">
+                <div>
+                  <p class="heading has-text-right has-text-centered-mobile">Stashed</p>
+                  <p class="title tag is-success is-6 "><%= number_to_currency(@stashed) %></p>
+                </div>
+              </div>
+            <% end %>
+            <div class="level-item">
+              <div>
+                <p class="heading has-text-right has-text-centered-mobile">Balance</p>
+                <p class="tag title is-primary is-light is-6 ob-balance-tag"><%= @account.current_balance_display %></p>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
