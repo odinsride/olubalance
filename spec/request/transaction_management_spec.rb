@@ -43,7 +43,7 @@ RSpec.describe "Transaction management", type: :request do
     get account_transactions_path(@account)
     expect(response).to be_successful
     expect(response.body).to include('PENDING')
-    expect(response.body).to include("Pending: -#{number_to_currency(@pending_trx_amount)}")
+    expect(response.body).to include("-#{number_to_currency(@pending_trx_amount)}")
   end
 
   it "shows an existing transaction" do
