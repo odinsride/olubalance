@@ -5,13 +5,26 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
-SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+SET default_with_oids = false;
 
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
@@ -124,8 +137,8 @@ ALTER SEQUENCE public.active_storage_blobs_id_seq OWNED BY public.active_storage
 CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -136,6 +149,76 @@ CREATE TABLE public.ar_internal_metadata (
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: stash_entries; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.stash_entries (
+    id bigint NOT NULL,
+    stash_entry_date timestamp without time zone,
+    description character varying,
+    amount numeric,
+    stash_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: stash_entries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.stash_entries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stash_entries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.stash_entries_id_seq OWNED BY public.stash_entries.id;
+
+
+--
+-- Name: stashes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.stashes (
+    id bigint NOT NULL,
+    name character varying,
+    description character varying,
+    balance numeric DEFAULT 0.0,
+    goal numeric,
+    active boolean DEFAULT true,
+    account_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: stashes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.stashes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stashes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.stashes_id_seq OWNED BY public.stashes.id;
 
 
 --
@@ -151,7 +234,8 @@ CREATE TABLE public.transactions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     memo character varying,
-    pending boolean DEFAULT false
+    pending boolean DEFAULT false,
+    locked boolean DEFAULT false
 );
 
 
@@ -249,6 +333,20 @@ ALTER TABLE ONLY public.active_storage_blobs ALTER COLUMN id SET DEFAULT nextval
 
 
 --
+-- Name: stash_entries id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stash_entries ALTER COLUMN id SET DEFAULT nextval('public.stash_entries_id_seq'::regclass);
+
+
+--
+-- Name: stashes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stashes ALTER COLUMN id SET DEFAULT nextval('public.stashes_id_seq'::regclass);
+
+
+--
 -- Name: transactions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -303,6 +401,22 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: stash_entries stash_entries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stash_entries
+    ADD CONSTRAINT stash_entries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stashes stashes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stashes
+    ADD CONSTRAINT stashes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: transactions transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -344,6 +458,20 @@ CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON public.active
 --
 
 CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_blobs USING btree (key);
+
+
+--
+-- Name: index_stash_entries_on_stash_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_stash_entries_on_stash_id ON public.stash_entries USING btree (stash_id);
+
+
+--
+-- Name: index_stashes_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_stashes_on_account_id ON public.stashes USING btree (account_id);
 
 
 --
@@ -400,6 +528,22 @@ ALTER TABLE ONLY public.transactions
 
 
 --
+-- Name: stashes fk_rails_5e3266c16e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stashes
+    ADD CONSTRAINT fk_rails_5e3266c16e FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: stash_entries fk_rails_6ebf595ff0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stash_entries
+    ADD CONSTRAINT fk_rails_6ebf595ff0 FOREIGN KEY (stash_id) REFERENCES public.stashes(id);
+
+
+--
 -- Name: accounts fk_rails_b1e30bebc8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -437,6 +581,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190802191418'),
 ('20190802193709'),
 ('20191102124707'),
-('20191219035136');
+('20191219035136'),
+('20191220011006'),
+('20191227150641'),
+('20200128211634');
 
 

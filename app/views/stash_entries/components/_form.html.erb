@@ -1,0 +1,58 @@
+<h4 class="title is-4 has-text-link has-text-centered-mobile"><%= @stash_entry.form_title %></h4>
+
+<%= form_for([@stash_entry.stash.account, @stash_entry.stash, @stash_entry]) do |f| %>
+  <% if @stash_entry.errors.any? %>
+    <article id="error explanation" class="message is-danger">
+      <div class="message-header">
+        Something went wrong!
+      </div>
+      <div class="message-body content">
+        Please correct the following <span class="has-text-weight-bold"><%= pluralize(@stash_entry.errors.count, "error") %></span>:
+        <ul>
+          <% @stash_entry.errors.full_messages.each do |msg | %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <div class="columns">
+    
+    <!-- Fields -->
+    <div class="column">
+
+      <!-- Action -->
+      <div class="field">
+          <%= f.hidden_field :stash_action, value: @stash_entry.stash_action %>
+      </div>
+
+      <!-- Amount -->
+      <div class="field">
+        <label class="label has-text-grey">Amount</label>
+        <div class="control has-icons-left">
+          <%= f.text_field :amount, class: "input is-primary",
+                                         placeholder: "Name" %>
+          <span class="icon is-small is-left has-text-primary">
+            <i class="fa fa-file-text"></i>
+          </span>
+        </div>
+      </div>
+    </div> <!-- /column -->
+
+  </div> <!-- /columns -->
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= link_to "Cancel", account_stashes_path, class: "button is-link is-outlined" %>
+    </div>
+    <div class="control">
+      <%= f.button @stash_entry.stash_action.capitalize,
+          type: 'submit',
+          class: "button is-link" %>
+    </div>
+  </div>
+
+<% end %>

@@ -10,7 +10,54 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery.turbolinks
 //= require rails-ujs
 //= require turbolinks
+
+// Functions
+function getAll(selector) {
+  return Array.prototype.slice.call(document.querySelectorAll(selector), 0);
+}
+
+/////////////////////////////////////////////
+// Stashes
+/////////////////////////////////////////////
+
+// When add or remove is clicked from the transactions screen, show a field for user input
+document.addEventListener('turbolinks:load', () => {
+
+  function toggleStashForm(stashFormId) {
+    var stashForm = document.getElementById(stashFormId);
+    stashForm.classList.toggle('ob-is-hidden');
+  }
+
+  var addButtons = getAll('.add-to-stash');
+  var removeButtons = getAll('.remove-from-stash');
+  var cancelButtons = getAll('.cancel-stash-input');
+
+  if (addButtons.length > 0) {
+    addButtons.forEach(function ($el) {
+      $el.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggleStashForm($el.dataset.target);
+      });
+    });
+  }
+
+  if (removeButtons.length > 0) {
+    removeButtons.forEach(function ($el) {
+      $el.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggleStashForm($el.dataset.target);
+      });
+    });
+  }
+
+  if (cancelButtons.length > 0) {
+    cancelButtons.forEach(function ($el) {
+      $el.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggleStashForm($el.dataset.target);
+      });
+    });
+  }
+});

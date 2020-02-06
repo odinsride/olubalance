@@ -1,0 +1,20 @@
+<div class="dropdown is-hidden-mobile" id="stash-dropdown">
+  <div class="dropdown-trigger">
+    <button class="button is-link is-outlined" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Stashes</span>
+      <span class="icon is-small">
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="stash-menu" role="menu">
+    <div class="dropdown-content">
+      <% if @stashes.count > 0 then %>
+      <%= render partial: "transactions/components/stashLine", collection: @stashes, as: :stash,
+                                                               locals: { stash_form_class: 'stash-form' } %>
+      <hr class="dropdown-divider">
+      <% end %>
+      <%= render partial: "transactions/components/stashManagementLinks" %>
+    </div>
+  </div>
+</div>

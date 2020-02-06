@@ -1,0 +1,18 @@
+<!-- Modal for Delete -->
+<div id="delete-modal-<%= stash.id %>" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content ob-modal-card">
+    <div class="card">
+      <header class="card-header has-background-danger">
+        <p class="card-header-title has-text-white">Delete <%= stash.name %>?</p>
+      </header>
+      <section class="card-content">
+        <p>Are you sure you wish to delete this stash? This action cannot be reversed.</p>
+      </section>
+      <footer class="card-footer">
+        <a href="#!" class="card-footer-item has-text-weight-bold has-text-grey">Cancel</a>
+        <%= link_to "Delete", account_stash_path(id: stash.id), method: :delete, class: "card-footer-item card-modal-close has-text-weight-bold has-text-danger" %>
+      </footer>
+    </div>
+  </div>
+</div>

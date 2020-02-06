@@ -12,6 +12,7 @@ class Account < ApplicationRecord
 
   belongs_to :user
   has_many :transactions, dependent: :delete_all
+  has_many :stashes, dependent: :delete_all
 
   validates :name, presence: true,
                    length: { maximum: 50, minimum: 2 },
@@ -24,6 +25,15 @@ class Account < ApplicationRecord
 
   before_create :set_current_balance
   after_create :create_initial_transaction
+
+  # Sum of Pending Transactions
+  def pending_balance
+    transactions.where(pending: true).sum(:amount)
+  end
+
+  def non_pending_balance
+    transactions.where(pending: false).sum(:amount)
+  end
 
   private
 
@@ -39,6 +49,8 @@ class Account < ApplicationRecord
     init_trx.account_id = id
     init_trx.description = 'Starting Balance'
     init_trx.amount = starting_balance
+    init_trx.memo = 'This is the beginning transaction of the account.'
+    init_trx.locked = true
     init_trx.save
     Transaction.set_callback(:create, :after, :update_account_balance_create)
   end

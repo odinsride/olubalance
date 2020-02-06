@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.4'
+ruby '2.6.5'
 
 gem 'aws-sdk-s3', '~> 1.60.0'
 gem 'devise', '~> 4.7.1'
@@ -17,6 +17,7 @@ gem 'font-awesome-rails', '~> 4.7.0.5'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'mini_magick', '~> 4.9.5'
+gem 'pagy', '~> 3.7.1'
 gem 'pg', '~> 1.1.4'
 gem 'puma', '~> 4.3.1'
 gem 'rails', '~> 6.0.2.1'
@@ -26,8 +27,6 @@ gem 'sassc-rails', '~> 2.1.2'
 gem 'turbolinks', '~> 5.2.1'
 gem 'uglifier', '~> 4.2.0'
 gem 'webpacker', '~> 4.2.2'
-gem 'will_paginate', '~> 3.2.1'
-gem 'will_paginate-bulma', '~> 1.0.0'
 
 group :development, :test do
   gem 'capybara'

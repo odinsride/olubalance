@@ -1,0 +1,88 @@
+<h4 class="title is-4 has-text-link has-text-centered-mobile"><%= @stash.form_name %> Stash</h4>
+<article class="message is-primary">
+  <div class="message-header">
+    <p>About Stashes</p>
+  </div>
+  <div class="message-body">
+    <strong>Stashes</strong> can be used to set aside money from your main account.  For example, if you want to save up for a new
+    computer, you might add a stash called <strong>New Computer</strong> and regularly add money into the stash until your goal is
+    met.  By doing this, the money will disappear from your main account so you won't be tempted to spend it.  Stashes are a great
+    way to budget for planned expenses!
+  </div>
+</article>
+
+<%= form_for([@stash.account, @stash]) do |f| %>
+  <% if @stash.errors.any? %>
+    <article id="error explanation" class="message is-danger">
+      <div class="message-header">
+        Something went wrong!
+      </div>
+      <div class="message-body content">
+        Please correct the following <span class="has-text-weight-bold"><%= pluralize(@stash.errors.count, "error") %></span>:
+        <ul>
+          <% @stash.errors.full_messages.each do |msg | %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <div class="columns">
+    
+    <!-- Fields -->
+    <div class="column">
+
+      <!-- Name -->
+      <div class="field">
+        <label class="label has-text-grey">Name</label>
+        <div class="control has-icons-left">
+          <%= f.text_field :name, class: "input is-primary",
+                                         placeholder: "Name" %>
+          <span class="icon is-small is-left has-text-primary">
+            <i class="fa fa-file-text"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="field">
+        <label class="label has-text-grey">Description</label>
+        <div class="control has-icons-left">
+          <%= f.text_field :description, class: "input is-primary",
+                                         placeholder: "Description" %>
+          <span class="icon is-small is-left has-text-primary">
+            <i class="fa fa-file-text"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Goal -->
+      <div class="field">
+        <label class="label has-text-grey">Goal</label>
+        <div class="control has-icons-left">
+          <%= f.text_field :goal, class: "input is-primary",
+                                    placeholder: "500.00" %>
+          <span class="icon is-small is-left has-text-primary">
+            <i class="fa fa-usd"></i>
+          </span>
+        </div>
+      </div>
+    </div> <!-- /column -->
+
+  </div> <!-- /columns -->
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= link_to "Cancel", account_stashes_path, class: "button is-link is-outlined" %>
+    </div>
+    <div class="control">
+      <%= f.button @stash.button_label,
+          type: 'submit',
+          class: "button is-link" %>
+    </div>
+  </div>
+
+<% end %>

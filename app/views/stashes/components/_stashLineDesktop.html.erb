@@ -1,0 +1,38 @@
+<tr class="">
+  <td class="has-text-centered">
+    <div class="columns is-mobile is-bottom-aligned">
+
+      <div class="column is-3-mobile">
+        <div class="field is-grouped">
+          <p class="control">
+            <%= link_to new_account_stash_stash_entry_path(stash_id: stash.id, stash_action: 'add'), class: "button is-small is-success" do %>
+              <span class="icon">
+                <i class="fa fa-lg fa-plus"></i>
+              </span>
+            <% end %>
+          </p>
+          <p class="control">
+            <%= link_to new_account_stash_stash_entry_path(stash_id: stash.id, stash_action: 'remove'), class: "button is-small is-danger" do %>
+              <span class="icon is-medium">
+                <i class="fa fa-lg fa-minus"></i>
+              </span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+
+      <div class="column is-10-widescreen is-9-desktop is-10-tablet is-9-mobile">
+        <%= link_to account_stash_path(id: stash.id) do %>
+          <div class="level ob-stash-level">
+              <div class="level-item">
+                <span><%= stash.name %><br />
+                <span class="is-size-7 has-text-grey"><%= stash.balance_display %> saved out of <%= stash.goal_display %></span></span>
+              </div>
+          </div>
+          <progress class="progress is-primary" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %></progress>
+        <% end %>
+      </div>
+      
+    </div>
+  </td>
+</tr>
