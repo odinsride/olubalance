@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.6.1] - 2020-03-08
+
+## Changed
+- puma bumped to 4.3.3
+- nokogiri bumped to 1.10.8
+- Other gems updated
+
 ## [v1.6.0] - 2020-02-05
 
 ## Added
@@ -160,7 +167,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.6.1...HEAD
+[v1.6.1]: https://github.com/odinsride/olubalance/compare/v1.6.0...v1.6.1
 [v1.6.0]: https://github.com/odinsride/olubalance/compare/v1.5.0...v1.6.0
 [v1.5.0]: https://github.com/odinsride/olubalance/compare/v1.4.5...v1.5.0
 [v1.4.5]: https://github.com/odinsride/olubalance/compare/v1.4.2...v1.4.5
