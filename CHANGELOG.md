@@ -5,21 +5,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] changes
+ 
+## [v1.6.2] - 2020-04-17
+
+### Changed
+- Gems and Yarn dependencies updated
 
 ## [v1.6.1] - 2020-03-08
 
-## Changed
+### Changed
 - puma bumped to 4.3.3
 - nokogiri bumped to 1.10.8
 - Other gems updated
 
 ## [v1.6.0] - 2020-02-05
 
-## Added
+### Added
 - Account Stash feature added to assist in putting money aside and out of site for planned expenses.
 - Transaction locking feature was implemented and enabled for starting balance transactions as well as stash-related transactions
 
-## Changed
+### Changed
 - Bulma version bumped to 0.8.0
 - Ruby version bumped to 2.6.5
 - Bundler version bumped to 2.0.2
