@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.5'
+ruby '2.6.6'
 
 gem 'aws-sdk-s3', '~> 1.60.0'
 gem 'devise', '~> 4.7.1'
@@ -18,9 +18,9 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'mini_magick', '~> 4.9.5'
 gem 'pagy', '~> 3.7.1'
-gem 'pg', '~> 1.1.4'
+gem 'pg', '~> 1.2.3'
 gem 'puma', '~> 4.3.3'
-gem 'rails', '~> 6.0.2.1'
+gem 'rails', '~> 6.0.2.2'
 gem 'rails-ujs', '~> 0.1.0'
 gem 'sassc', '~> 2.2.1'
 gem 'sassc-rails', '~> 2.1.2'
