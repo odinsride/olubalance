@@ -32,7 +32,7 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def trx_type_debit_form
-    amount.present? ? amount.negative? : false
+    object.new_record? ? true : amount.present? ? amount.negative? : false
   end
   ###
 
@@ -49,15 +49,21 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def trx_date_decorated
-    transaction.pending ? 'PENDING' : trx_date_formatted
+    transaction.pending ? 'PENDING' : trx_date_display
   end
 
-  def trx_date_formatted
+  def trx_date_display
     trx_date.in_time_zone(current_user.timezone).strftime('%m/%d/%Y')
   end
 
+  def trx_date_formatted
+    # trx_date.in_time_zone(current_user.timezone).strftime('%m/%d/%Y')
+    trx_date.in_time_zone(current_user.timezone).strftime('%Y-%m-%d')
+  end
+
   def trx_date_form_value
-    trx_date.present? ? trx_date_formatted : Time.current.strftime('%m/%d/%Y')
+    # trx_date.present? ? trx_date_formatted : Time.current.strftime('%m/%d/%Y')
+    trx_date.present? ? trx_date_formatted : Time.current.strftime('%Y-%m-%d')
   end
 
   def created_at_decorated

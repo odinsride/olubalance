@@ -20,19 +20,6 @@
   <% end %>
 
   <div class="columns">
-    <!-- Datepicker -->
-    <div class="column is-hidden-mobile">
-      <div class="field">
-        <label class="label has-text-grey">Date</label>
-        <div class="control">
-          <%= f.text_field :trx_date, id: "trx_date",
-                                      class: "input is-primary",
-                                      type: "date",
-                                      value: @transaction.trx_date_form_value %>
-        </div>
-      </div>
-    </div>
-
     <!-- Fields -->
     <div class="column">
 
@@ -48,14 +35,10 @@
         </div>
       </div>
 
-      <!-- Datepicker Mobile -->
-      <div class="field is-hidden-tablet">
-        <label class="label has-text-grey">Date</label>
+<!-- Transaction Type -->
+      <div class="field">
         <div class="control">
-          <%= f.text_field :trx_date, id: "trx_date_mobile",
-                                      class: "input is-primary",
-                                      type: "date",
-                                      value: @transaction.trx_date_form_value %>
+          <%= f.date_field :trx_date, class: "input is-primary", type: "date", value: @transaction.trx_date_form_value %>
         </div>
       </div>
 
@@ -143,20 +126,6 @@
 <% end %>
 
 <script>
-  // Initialize all input of type date
-  var calendar = bulmaCalendar.attach('#trx_date', {
-    dateFormat: 'YYYY-MM-DD',
-    displayMode: 'inline',
-    startDate: '<%= @transaction.trx_date_form_value %>'
-  });
-
-  // The mobile calendar will be shown in a different position
-  var calendarMobile = bulmaCalendar.attach('#trx_date_mobile', {
-    dateFormat: 'YYYY-MM-DDTHH:mm:ss',
-    displayMode: 'inline',
-    startDate: '<%= @transaction.trx_date_form_value %>'
-  })
-
   // When an attachment file is selected, set the file-name field
   document.getElementById('upload').onchange = uploadOnChange;
 
@@ -167,21 +136,5 @@
       filename = filename.substring(lastIndex + 1);
     }
     document.getElementById('filename').innerHTML = filename;
-  }
-
-  // Copy the date value to the mobile datepicker
-  var trxDate = document.querySelector('#trx_date');
-  var trxDateMobile = document.querySelector('#trx_date_mobile')
-
-  if (trxDate) {
-    trxDate.bulmaCalendar.on('select', function(datepicker) {
-      trxDateMobile.value = datepicker.data.value();
-    });
-  }
-
-  if (trxDateMobile) {
-    trxDateMobile.bulmaCalendar.on('select', function(datepicker) {
-      trxDate.value = datepicker.data.value();
-    });
   }
 </script>
