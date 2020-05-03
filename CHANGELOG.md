@@ -5,7 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] changes
- 
+
+## [v1.6.3] - 2020-04-17
+
+### Fixed
+- An issue with the date picker in Chrome has been fixed by removing bulma-calendar and replacing with a normal date picker field.
+- New transactions now default to Debit.
+
+### Changed
+- Gems and Yarn dependencies updated
+
 ## [v1.6.2] - 2020-04-17
 
 ### Changed
@@ -172,7 +181,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.6.1...HEAD
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.6.3...HEAD
+[v1.6.3]: https://github.com/odinsride/olubalance/compare/v1.6.3...v1.6.3
+[v1.6.2]: https://github.com/odinsride/olubalance/compare/v1.6.1...v1.6.2
 [v1.6.1]: https://github.com/odinsride/olubalance/compare/v1.6.0...v1.6.1
 [v1.6.0]: https://github.com/odinsride/olubalance/compare/v1.5.0...v1.6.0
 [v1.5.0]: https://github.com/odinsride/olubalance/compare/v1.4.5...v1.5.0
