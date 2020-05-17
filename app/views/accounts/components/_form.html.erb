@@ -50,8 +50,7 @@
       <div class="field">
         <label class="label has-text-grey">Starting Balance</label>
         <div class="control has-icons-left">
-          <%= f.number_field :starting_balance, type: "number",
-                                              class: "input is-primary",
+          <%= f.text_field :starting_balance, class: "input is-primary",
                                               placeholder: "Enter the starting balance",
                                               disabled: (@account.new_record? ? false : true) %>
           <span class="icon is-small is-left has-text-primary">

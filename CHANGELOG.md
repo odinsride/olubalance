@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.6.4] - 2020-05-17
+
+### Fixed
+- Account Starting Balance field now allows decimals. Fixes #82
+
+### Changed
+- Gems and Yarn dependencies updated
+
 ## [v1.6.3] - 2020-04-17
 
 ### Fixed
@@ -181,8 +189,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.6.3...HEAD
-[v1.6.3]: https://github.com/odinsride/olubalance/compare/v1.6.3...v1.6.3
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.6.4...HEAD
+[v1.6.3]: https://github.com/odinsride/olubalance/compare/v1.6.3...v1.6.4
+[v1.6.3]: https://github.com/odinsride/olubalance/compare/v1.6.2...v1.6.3
 [v1.6.2]: https://github.com/odinsride/olubalance/compare/v1.6.1...v1.6.2
 [v1.6.1]: https://github.com/odinsride/olubalance/compare/v1.6.0...v1.6.1
 [v1.6.0]: https://github.com/odinsride/olubalance/compare/v1.5.0...v1.6.0
