@@ -6,6 +6,7 @@ RSpec.describe Account, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:starting_balance) }
+    it { should allow_value(150.51).for(:starting_balance) }
     it { should validate_uniqueness_of(:name).scoped_to(:user_id) }
     it { should allow_value('My Account').for(:name) }
     it { should_not allow_value('A').for(:name) }
