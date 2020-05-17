@@ -35,12 +35,12 @@ RSpec.describe "Account management", type: :request do
     get new_account_path
     expect(response.body).to include("New Account")
 
-    post "/accounts", params: { account: { name: "Test Create Account", starting_balance: 3500, user: @user.id } }
+    post "/accounts", params: { account: { name: "Test Create Account", starting_balance: 3500.50, user: @user.id } }
     expect(response).to redirect_to(accounts_path)
     follow_redirect!
 
     expect(response.body).to include("Test Create Account")
-    expect(response.body).to include("$3,500.00")
+    expect(response.body).to include("$3,500.50")
   end
 
   it "updates an existing account and redirects to the accounts page" do
