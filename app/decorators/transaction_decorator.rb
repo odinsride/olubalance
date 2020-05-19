@@ -32,7 +32,11 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def trx_type_debit_form
-    object.new_record? ? true : amount.present? ? amount.negative? : false
+    if object.new_record?
+      true
+    else
+      amount.present? ? amount.negative? : false
+    end
   end
   ###
 
