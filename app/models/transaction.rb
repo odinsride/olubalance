@@ -32,6 +32,11 @@ class Transaction < ApplicationRecord
   scope :with_balance, -> { includes(:transaction_balance).references(:transaction_balance) }
   scope :desc, -> { order('pending DESC, trx_date DESC, id DESC') }
 
+  scope :search, ->(query) {
+    query = sanitize_sql_like(query)
+    where(arel_table[:description].matches("%#{query}%"))
+  }
+
   # Determine the transaction_type for existing records based on amount
   def transaction_type
     # new_record? is checked first to prevent a nil class error
@@ -41,13 +46,13 @@ class Transaction < ApplicationRecord
   end
 
   # Search for transaction by description
-  def self.search(description)
-    if description
-      where('description ILIKE ?', "%#{description}%")
-    else
-      all
-    end
-  end
+  # def self.search(description)
+  #   if description
+  #     where('description ILIKE ?', "%#{description}%")
+  #   else
+  #     all
+  #   end
+  # end
 
   private
 

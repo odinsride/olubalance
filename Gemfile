@@ -24,6 +24,7 @@ gem 'rails', '~> 6.0.2.2'
 gem 'rails-ujs', '~> 0.1.0'
 gem 'sassc', '~> 2.2.1'
 gem 'sassc-rails', '~> 2.1.2'
+gem "stimulus_reflex", "~> 3.2"
 gem 'turbolinks', '~> 5.2.1'
 gem 'uglifier', '~> 4.2.0'
 gem 'webpacker', '~> 4.2.2'

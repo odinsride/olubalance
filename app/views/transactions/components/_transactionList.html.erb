@@ -44,25 +44,30 @@
       </nav>
     </th>
   </thead>
+  <p><%= @pagy.count %> results found</p>
   <thead>
     <th class="has-text-centered is-hidden-mobile">
       <div class="ob-cell-content">
-        Date
+        <%= link_to "Date #{arrow :trx_date}", "#", class: column_css(:trx_date),
+            data: { reflex: "click->TransactionReflex#order", column_name: :trx_date, direction: direction } %>
       </div>
     </th>
     <th class="is-hidden-mobile">
       <div class="ob-cell-content">
-        Description
+        <%= link_to "Description #{arrow :description}", "#", class: column_css(:description),
+            data: { reflex: "click->TransactionReflex#order", column_name: :description, direction: direction } %>
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">
       <div class="ob-cell-content">
-        Credit
+      <%= link_to "Credit #{arrow :amount}", "#", class: column_css(:amount),
+            data: { reflex: "click->TransactionReflex#order", column_name: :amount, direction: direction } %>
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">
       <div class="ob-cell-content">
-        Debit
+        <%= link_to "Debit #{arrow :amount}", "#", class: column_css(:amount),
+            data: { reflex: "click->TransactionReflex#order", column_name: :amount, direction: direction } %>
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">
