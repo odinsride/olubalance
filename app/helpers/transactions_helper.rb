@@ -12,7 +12,7 @@ module TransactionsHelper
   def arrow(column_name)
     return if column_name.to_s != @order_by
 
-    @direction == "desc" ? "↓" : "↑"
+    @direction == "desc" ? "▼" : "▲"
   end
 
   def direction

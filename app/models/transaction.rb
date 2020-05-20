@@ -34,7 +34,9 @@ class Transaction < ApplicationRecord
 
   scope :search, ->(query) {
     query = sanitize_sql_like(query)
-    where(arel_table[:description].matches("%#{query}%"))
+    where(arel_table[:description]
+            .lower
+            .matches("%#{query.downcase}%"))
   }
 
   # Determine the transaction_type for existing records based on amount

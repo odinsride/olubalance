@@ -9,4 +9,7 @@ class ApplicationReflex < StimulusReflex::Reflex
   #   delegate :current_user, to: :connection
   #
   # Learn more at: https://docs.stimulusreflex.com
+
+  # Devise authentication for stimulus reflex
+  delegate :current_user, to: :connection
 end
