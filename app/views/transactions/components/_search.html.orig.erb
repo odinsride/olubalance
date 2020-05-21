@@ -1,0 +1,20 @@
+<!-- TODO: Deprecate this code -->
+<div class="level-item">
+	<%= form_tag(account_transactions_path, method: "GET") do %>
+		<div class="field has-addons">
+			<div class="control has-icons-right">
+				<%= text_field_tag :description, params[:description], placeholder: "Find transactions", class: "input" %>
+        <%= link_to account_transactions_path do %>
+					<span class="icon is-right" style="pointer-events: initial">
+						<i class="fa fa-times"></i>
+					</span>
+        <% end %>
+			</div>
+			<div class="control">
+				<%#<%= button_tag "Search", type: 'submit', class: 'button is-primary', id: 'submit' %>
+				<%= submit_tag "Search", name: nil, class: "button is-primary" %>
+			</div>
+
+		</div>
+	<% end %>
+</div>

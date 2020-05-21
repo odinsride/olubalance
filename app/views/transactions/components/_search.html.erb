@@ -1,19 +1,19 @@
 <div class="level-item">
-	<%= form_tag(account_transactions_path, method: "GET") do %>
-		<div class="field has-addons">
-			<div class="control has-icons-right">
-				<%= text_field_tag :description, params[:description], placeholder: "Find transactions", class: "input" %>
-        <%= link_to account_transactions_path do %>
-					<span class="icon is-right" style="pointer-events: initial">
-						<i class="fa fa-times"></i>
-					</span>
-        <% end %>
-			</div>
-			<div class="control">
-				<%#<%= button_tag "Search", type: 'submit', class: 'button is-primary', id: 'submit' %>
-				<%= submit_tag "Search", name: nil, class: "button is-primary" %>
-			</div>
-
+	<div class="field">
+		<div class="control has-icons-right">
+			<input type="text" placeholder="Find transactions..." class="input" value="<%= @query %>"
+     				 data-reflex="input->TransactionReflex#search" data-reflex-root="#search-results" />
+			<a href='#' data-reflex="click->TransactionReflex#search_reset" data-reflex-root="#search-results">
+			<span class="icon is-right" style="pointer-events: initial">
+				<i class="fa fa-times"></i>
+			</span>
+			</a>
 		</div>
-	<% end %>
+	</div>
+</div>
+<div class="level-item">
+  <span class="has-text-weight-semibold mr-5">
+		<%= @pagy.count %>
+	</span>
+	<%= 'transaction'.pluralize(@pagy.count) %>
 </div>

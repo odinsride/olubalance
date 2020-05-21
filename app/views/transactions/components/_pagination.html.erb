@@ -1,5 +1,24 @@
-<div class="row">
-	<div class="col s12 center-align">
-		<%= pagy_bulma_nav(@pagy).html_safe %>
-	</div>
-</div>
+
+		<!--<%= pagy_bulma_nav(@pagy).html_safe %>-->
+
+
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+	<a class="pagination-previous" href="#" data-reflex="click->TransactionReflex#paginate" data-page="<%= @pagy.prev %>">←</a>
+	<a class="pagination-next" href="#" data-reflex="click->TransactionReflex#paginate" data-page="<%= @pagy.next %>">→</a>
+	<ul class="pagination-list">
+		<% @pagy.series.each do |item| %>
+			<% if item == :gap %>
+				<li><span class="pagination-ellipsis">&hellip;</span></li>
+			<% else %>
+				<li>
+					<a href="#" 
+						class="pagination-link <%= "is-current" if item.is_a?(String) %>" 
+						data-reflex="click->TransactionReflex#paginate"
+						data-page="<%= item %>">
+						<%= item %>
+					</a>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+</nav>

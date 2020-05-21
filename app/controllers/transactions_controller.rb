@@ -9,19 +9,34 @@ class TransactionsController < ApplicationController
 
   # Index action to render all transactions
   def index
+    # TODO: Deprecate following code
     # Preserve pagination state when working within the same account,
     # otherwise reset pagination when moving to a different account
-    if session[:account_id] == @account.id
-      session[:trx_index_page] = params[:page] if params[:page]
-    else
-      session[:account_id] = @account.id
-      session[:trx_index_page] = nil
-    end
+    # if session[:account_id] == @account.id
+    #   session[:trx_index_page] = params[:page] if params[:page]
+    # else
+    #   session[:account_id] = @account.id
+    #   session[:trx_index_page] = nil
+    # end
 
-    @transactions = @account.transactions.search(params[:description]).with_balance.desc
-    # @transactions = @transactions.paginate(page: session[:trx_index_page], per_page: 15)
-    @pagy, @transactions = pagy(@transactions, page: session[:trx_index_page], items: 15)
+    @query = session[:query]
+    @order_by = permitted_column_name(session[:order_by])
+    @direction = permitted_direction(session[:direction])
+    @page = (session[:page] || 1).to_i
+
+    transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
+    transactions = transactions.search(@query) if @query.present?
+    pages = (transactions.count / Pagy::VARS[:items].to_f).ceil
+
+    @page = 1 if @page > pages
+    @pagy, @transactions = pagy(transactions, page: @page, items: 15)
     @transactions = @transactions.decorate
+
+    # TODO: Deprecate following code
+    # @transactions = @account.transactions.search(params[:description]).with_balance.desc
+    # # @transactions = @transactions.paginate(page: session[:trx_index_page], per_page: 15)
+    # @pagy, @transactions = pagy(@transactions, page: session[:trx_index_page], items: 15)
+    # @transactions = @transactions.decorate
 
     @stashed = @account.stashes.sum(:balance)
 
@@ -95,6 +110,14 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+  def permitted_column_name(column_name)
+    %w[trx_date description amount].find { |permitted| column_name == permitted } || 'trx_date'
+  end
+
+  def permitted_direction(direction)
+    %w[asc desc].find { |permitted| direction == permitted } || 'desc'
+  end
 
   def transaction_params
     params.require(:transaction) \
