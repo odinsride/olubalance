@@ -4,15 +4,15 @@ module TransactionsHelper
   include Pagy::Frontend
 
   def column_css(column_name)
-    return "text-light selected" if column_name.to_s == @order_by
+    return "has-text-white sortable sort-selected" if column_name.to_s == @order_by
 
-    "text-light"
+    "has-text-white sortable"
   end
 
   def arrow(column_name)
     return if column_name.to_s != @order_by
 
-    @direction == "desc" ? "▼" : "▲"
+    @direction == "desc" ? "fa-sort-down" : "fa-sort-up"
   end
 
   def direction

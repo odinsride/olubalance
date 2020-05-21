@@ -3,6 +3,10 @@ class TransactionReflex < ApplicationReflex
     session[:query] = element[:value].strip
   end
 
+  def search_reset
+    session[:query] = ''
+  end
+
   def order
     session[:order_by] = element.dataset["column-name"]
     session[:direction] = element.dataset["direction"]

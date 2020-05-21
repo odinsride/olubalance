@@ -48,26 +48,38 @@
   <thead>
     <th class="has-text-centered is-hidden-mobile">
       <div class="ob-cell-content">
-        <%= link_to "Date #{arrow :trx_date}", "#", class: column_css(:trx_date),
-            data: { reflex: "click->TransactionReflex#order", column_name: :trx_date, direction: direction } %>
+        <%= link_to "#", class: column_css(:trx_date),
+            data: { reflex: "click->TransactionReflex#order", column_name: :trx_date, direction: direction } do %>
+            <span class="sortable-column-name">
+              Date
+            </span>
+            <span class="icon is-small">
+              <i class="fa <%= arrow(:trx_date) %>"></i>
+            </span>
+        <% end %>
       </div>
     </th>
     <th class="is-hidden-mobile">
       <div class="ob-cell-content">
-        <%= link_to "Description #{arrow :description}", "#", class: column_css(:description),
-            data: { reflex: "click->TransactionReflex#order", column_name: :description, direction: direction } %>
+        <%= link_to "#", class: column_css(:description),
+            data: { reflex: "click->TransactionReflex#order", column_name: :description, direction: direction } do %>
+            <span class="sortable-column-name">
+              Description
+            </span>
+            <span class="icon is-small">
+              <i class="fa <%= arrow(:description) %>"></i>
+            </span>
+        <% end %>
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">
       <div class="ob-cell-content">
-      <%= link_to "Credit #{arrow :amount}", "#", class: column_css(:amount),
-            data: { reflex: "click->TransactionReflex#order", column_name: :amount, direction: direction } %>
+        Credit
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">
       <div class="ob-cell-content">
-        <%= link_to "Debit #{arrow :amount}", "#", class: column_css(:amount),
-            data: { reflex: "click->TransactionReflex#order", column_name: :amount, direction: direction } %>
+        Debit
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">

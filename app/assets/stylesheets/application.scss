@@ -222,7 +222,40 @@ a.navbar-link {
 }
 
 .ob-balance-tag {
-    //border: 3px solid $danger;
-    box-shadow: 0 0 8px $white;
+    border: 2px solid $primary;
+    //box-shadow: 0 0 8px $white;
 
+}
+
+
+
+a.has-text-white.sortable {
+
+    font-size: 0;
+
+    &.sort-selected {
+        .sortable-column-name {
+            border-bottom: 1px dashed $light;
+            padding-bottom: 2px;
+        }    
+    }
+
+    .sortable-column-name {
+        font-size: 1rem;
+
+        &:hover {
+            color: $light !important;
+            border-bottom: 1px dashed $light;
+            padding-bottom: 2px;
+        }
+
+        &:focus {
+            color: $light !important;
+        }
+    }
+
+    .icon {
+        font-size: 1rem;
+        margin-right: 5px;
+    }
 }
