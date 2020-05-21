@@ -32,7 +32,7 @@ class Transaction < ApplicationRecord
   scope :with_balance, -> { includes(:transaction_balance).references(:transaction_balance) }
   scope :desc, -> { order('pending DESC, trx_date DESC, id DESC') }
 
-  scope :search, ->(query) {
+  scope :search, lambda { |query|
     query = sanitize_sql_like(query)
     where(arel_table[:description]
             .lower

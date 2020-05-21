@@ -4,9 +4,9 @@
   <div class="level-left">
     <%= render partial: "shared/pageLevelTitle", locals: { title: "Transactions" } %>
     <%= render partial: "transactions/components/search" %>
-    <%= render partial: "transactions/components/stashButton" %>
   </div>
   <div class="level-right">
+    <%= render partial: "transactions/components/stashButton" %>
     <%= render partial: "shared/pageLevelNewButton", locals: { path: new_account_transaction_path } %>
   </div>
 </nav>
