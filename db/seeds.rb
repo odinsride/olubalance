@@ -2,6 +2,7 @@
 users = []
 accounts = []
 transactions = []
+stashes = []
 
 # Seed Lists
 trx_type = %w[debit credit]
@@ -40,11 +41,19 @@ trx_debit_desc = %w[
   Starbucks
   Sunoco
 ]
-
 trx_credit_desc = %w[
   Paycheck
   Refund
   Transfer\ from\ Savings
+]
+stash_names = %w[
+  Bills
+  Computer
+  New\ Bike
+  Guitar
+  Jewelery
+  House\ Down\ Payment
+  Vacation
 ]
 
 # Create 3 test accounts
@@ -113,24 +122,57 @@ accounts.each do |account|
   2.times do
     t = Transaction.create!(
           trx_date: Faker::Date.backward(days: 1),
-          description: trx_debit_desc.sample,
+          description: 'Attachment Test Transaction',
           amount: Faker::Number.between(from: 5.00, to: 500.00).to_f.round(2),
           trx_type: 'debit',
           account: account
         )
-    t.attachment.attach(io: File.open('app/assets/images/logo.png'), filename: 'logo.png')
+    t.attachment.attach(io: File.open('app/assets/images/logo.png'), filename: 'logo.png', content_type: 'image/png')
   end
 
+  # Create 2 pending transactions
   2.times do
     Transaction.create!(
       trx_date: Faker::Date.backward(days: 15),
-      description: trx_debit_desc.sample,
+      description: 'Pending Test Transaction',
       amount: Faker::Number.between(from: 5.00, to: 100.00).to_f.round(2),
       trx_type: 'debit',
       pending: true,
       account: account
     )
   end
+
+  # Create 2 stashes
+  selected_stashes = []
+  2.times do
+    # Ensure that an stash name isn't repeated for the account
+    stash_name = (stash_names - selected_stashes).sample
+    selected_stashes << stash_name
+
+    stashes << Stash.create!(
+      name: stash_name,
+      description: 'This is an example stash.',
+      goal: Faker::Number.between(from: 500.00, to: 10000.00).to_f.round(2),
+      account: account
+    )
+  end
+end
+
+# Add stash entries
+stashes.each do |stash|
+  StashEntry.create!(
+    stash_entry_date: Faker::Date.backward(days: 1),
+    amount: 150.00,
+    stash_action: 'add',
+    stash: stash
+  )
+
+  StashEntry.create!(
+    stash_entry_date: Faker::Date.backward(days: 1),
+    amount: 50.00,
+    stash_action: 'remove',
+    stash: stash
+  )
 end
 
 # Account.create!(
