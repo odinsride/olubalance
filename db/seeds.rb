@@ -1,62 +1,207 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Objects
 users = []
 accounts = []
 transactions = []
+stashes = []
+
+# Seed Lists
 trx_type = %w[debit credit]
+emails = %w[
+  john@gmail.com 
+  john2@gmail.com 
+  john3@gmail.com
+]
+account_names = %w[
+  Chase 
+  PNC 
+  Wells\ Fargo 
+  BB&T 
+  TD\ Bank 
+  Capital\ One 
+  Bank\ of\ America
+]
+trx_debit_desc = %w[
+  Electric\ Payment
+  Gas\ Payment
+  Rent
+  Mortgage
+  Shell
+  BP
+  Kroger
+  Transfer\ to\ Savings
+  Gym\ Membership
+  Mobile\ Phone\ Payment
+  McDonalds
+  Subway
+  Oil\ Change
+  Internet\ Payment
+  Car\ Payment
+  Food\ Lion
+  Movie\ Theater
+  Starbucks
+  Sunoco
+]
+trx_credit_desc = %w[
+  Paycheck
+  Refund
+  Transfer\ from\ Savings
+]
+stash_names = %w[
+  Bills
+  Computer
+  New\ Bike
+  Guitar
+  Jewelery
+  House\ Down\ Payment
+  Vacation
+]
 
-users << User.create!(
-  email: 'john@gmail.com',
-  password: 'topsecret',
-  password_confirmation: 'topsecret',
-  first_name: 'John',
-  last_name: 'Smith',
-  timezone: 'Eastern Time (US & Canada)'
-)
-
-# 3.times do
-#   users << User.create(
-#     email: Faker::Internet.unique.free_email,
-#     password: 'topsecret',
-#     password_confirmation: 'topsecret',
-#     first_name: Faker::Name.first_name,
-#     last_name: Faker::Name.last_name,
-#     timezone: 'Eastern Time (US & Canada)'
-#   )
-# end
-
-Account.create!(
-  name: Faker::Bank.unique.name.titlecase,
-  last_four: Faker::Number.number(digits: 4).to_i,
-  starting_balance: 3000.00,
-  user_id: 1
-)
-
-5.times do
-  t = Transaction.create!(
-        trx_date: Faker::Date.between(from: 10.days.from_now, to: 15.days.from_now),
-        description: Faker::Name.name,
-        amount: Faker::Number.between(from: 0.01, to: 150.00).to_f.round(2),
-        trx_type: trx_type.sample,
-        account_id: 1
-      )
-  t.attachment.attach(io: File.open('app/assets/images/logo.png'), filename: 'logo.png')
-end
-
-1000.times do
-  Transaction.create!(
-    trx_date: Faker::Date.forward(days: 10),
-    description: Faker::Name.name,
-    amount: Faker::Number.between(from: 0.01, to: 150.00).to_f.round(2),
-    trx_type: trx_type.sample,
-    account_id: 1
+# Create 3 test accounts
+emails.each do |email|
+  users << User.create!(
+    email: email,
+    password: 'topsecret',
+    password_confirmation: 'topsecret',
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    timezone: 'Eastern Time (US & Canada)'
   )
 end
+
+# Create 5 accounts for each user
+users.each do |user|
+  selected_accounts = []
+    
+  5.times do
+
+    # Ensure that an account name isn't repeated (unique constraint per user)
+    account_name = (account_names - selected_accounts).sample
+    selected_accounts << account_name
+
+    account = Account.create!(
+      name: account_name,
+      last_four: Faker::Number.number(digits: 4).to_i,
+      starting_balance: Faker::Number.between(from: 1500.00, to: 20000.00).to_f.round(2),
+      user: user
+    )
+
+    accounts << account
+
+    # Set the starting balance transaction date to be the first transaction
+    t = account.transactions.first
+    t.trx_date = 91.days.ago.to_s
+    t.save(validate: false)
+  end
+end
+
+# Create Transactions
+accounts.each do |account|
+  # Create 100 debit transactions for each Account
+  100.times do
+    Transaction.create!(
+      trx_date: Faker::Date.backward(days: 90),
+      description: trx_debit_desc.sample,
+      amount: Faker::Number.between(from: 5.00, to: 450.00).to_f.round(2),
+      trx_type: 'debit',
+      account: account
+    )
+  end
+
+  # Create 10 credit transactions for each Account
+  10.times do
+    Transaction.create!(
+      trx_date: Faker::Date.backward(days: 90),
+      description: trx_credit_desc.sample,
+      amount: Faker::Number.between(from: 500.00, to: 2000.00).to_f.round(2),
+      trx_type: 'credit',
+      account: account
+    )
+  end
+
+  # Create 2 transactions with attachments for each Account
+  2.times do
+    t = Transaction.create!(
+          trx_date: Faker::Date.backward(days: 1),
+          description: 'Attachment Test Transaction',
+          amount: Faker::Number.between(from: 5.00, to: 500.00).to_f.round(2),
+          trx_type: 'debit',
+          account: account
+        )
+    t.attachment.attach(io: File.open('app/assets/images/logo.png'), filename: 'logo.png', content_type: 'image/png')
+  end
+
+  # Create 2 pending transactions
+  2.times do
+    Transaction.create!(
+      trx_date: Faker::Date.backward(days: 15),
+      description: 'Pending Test Transaction',
+      amount: Faker::Number.between(from: 5.00, to: 100.00).to_f.round(2),
+      trx_type: 'debit',
+      pending: true,
+      account: account
+    )
+  end
+
+  # Create 2 stashes
+  selected_stashes = []
+  2.times do
+    # Ensure that an stash name isn't repeated for the account
+    stash_name = (stash_names - selected_stashes).sample
+    selected_stashes << stash_name
+
+    stashes << Stash.create!(
+      name: stash_name,
+      description: 'This is an example stash.',
+      goal: Faker::Number.between(from: 500.00, to: 10000.00).to_f.round(2),
+      account: account
+    )
+  end
+end
+
+# Add stash entries
+stashes.each do |stash|
+  StashEntry.create!(
+    stash_entry_date: Faker::Date.backward(days: 1),
+    amount: 150.00,
+    stash_action: 'add',
+    stash: stash
+  )
+
+  StashEntry.create!(
+    stash_entry_date: Faker::Date.backward(days: 1),
+    amount: 50.00,
+    stash_action: 'remove',
+    stash: stash
+  )
+end
+
+# Account.create!(
+#   name: Faker::Bank.unique.name.titlecase,
+#   last_four: Faker::Number.number(digits: 4).to_i,
+#   starting_balance: 3000.00,
+#   user_id: 1
+# )
+
+# 5.times do
+#   t = Transaction.create!(
+#         trx_date: Faker::Date.between(from: 10.days.from_now, to: 15.days.from_now),
+#         description: Faker::Name.name,
+#         amount: Faker::Number.between(from: 0.01, to: 150.00).to_f.round(2),
+#         trx_type: trx_type.sample,
+#         account_id: 1
+#       )
+#   t.attachment.attach(io: File.open('app/assets/images/logo.png'), filename: 'logo.png')
+# end
+
+# 1000.times do
+#   Transaction.create!(
+#     trx_date: Faker::Date.forward(days: 10),
+#     description: Faker::Name.name,
+#     amount: Faker::Number.between(from: 0.01, to: 150.00).to_f.round(2),
+#     trx_type: trx_type.sample,
+#     account_id: 1
+#   )
+# end
 
 # 5.times do
 #   v = Transaction.create!(

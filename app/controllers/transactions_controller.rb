@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
     pages = (transactions.count / Pagy::VARS[:items].to_f).ceil
 
     @page = 1 if @page > pages
-    @pagy, @transactions = pagy(transactions, page: @page, items: 15)
+    @pagy, @transactions = pagy(transactions, page: @page)
     @transactions = @transactions.decorate
 
     # TODO: Deprecate following code
