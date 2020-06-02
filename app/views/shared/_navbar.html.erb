@@ -20,6 +20,8 @@
 
     <%= render "shared/userMenu" if user_signed_in? %>
 
+    <%= render "shared/environment" if !Rails.env.production? %>
+    
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
