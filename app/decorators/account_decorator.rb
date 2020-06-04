@@ -59,7 +59,7 @@ class AccountDecorator < ApplicationDecorator
 
   # Set the balance color to red if the amount is negative
   def balance_color
-    balance_negative? ? 'has-text-danger' : 'has-text-grey'
+    balance_negative? ? 'has-text-danger' : 'has-text-grey-dark'
   end
 
   def noaccounts_partial

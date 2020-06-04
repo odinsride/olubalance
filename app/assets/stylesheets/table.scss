@@ -3,7 +3,7 @@ table.ob-table {
   border-collapse: separate;
   border: 1px dotted #ccc;
 
-  th.ob-table-phead {
+  thead.ob-table-phead {
     // height: 4em;
     background-color: $link;
 
@@ -62,5 +62,9 @@ table.ob-table {
         font-size: 0.85em !important;
       }
     }
+  }
+
+  #transaction-search {
+    display: block;
   }
 }

@@ -1,4 +1,10 @@
-<div class="level-item">
+<div class="level-item is-hidden-mobile">
+  <span class="has-text-weight-semibold mr-5">
+		<%= @pagy.count %>
+	</span>
+	<%= 'transaction'.pluralize(@pagy.count) %>
+</div>
+<div class="level-item" id="transaction-search">
 	<div class="field">
 		<div class="control has-icons-right">
 			<input type="text" placeholder="Find transactions..." class="input" value="<%= @query %>"
@@ -10,10 +16,4 @@
 			</a>
 		</div>
 	</div>
-</div>
-<div class="level-item">
-  <span class="has-text-weight-semibold mr-5">
-		<%= @pagy.count %>
-	</span>
-	<%= 'transaction'.pluralize(@pagy.count) %>
 </div>
