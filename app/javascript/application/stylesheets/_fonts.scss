@@ -1,0 +1,21 @@
+// Define custom font
+@font-face {
+  font-family: 'Muli-Regular';
+  src: url('/fonts/Muli/Muli-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muli-Bold';
+  src: url('/fonts/Muli/Muli-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muli-SemiBold';
+  src: url('/fonts/Muli/Muli-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}

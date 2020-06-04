@@ -1,261 +1,261 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- */
+// /*
+//  * This is a manifest file that'll be compiled into application.css, which will include all the files
+//  * listed below.
+//  *
+//  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+//  * vendor/assets/stylesheets directory can be referenced here using a relative path.
+//  *
+//  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+//  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+//  * files in this directory. Styles in this file should be added after the last require_* statement.
+//  * It is generally better to create a new file per style scope.
+//  *
+//  */
 
-// Define custom font
-@font-face {
-    font-family: 'Muli-Regular';
-    src: font-url('Muli/Muli-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Muli-Bold';
-    src: font-url('Muli/Muli-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Muli-SemiBold';
-    src: font-url('Muli/Muli-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-}
-
-// Set Bulma Variables
-$family-primary: 'Muli-Regular';
-// $primary: #4db6ac;
-$primary: #26a69a;
-$link: #00796b;
-$white-ter: hsl(0, 0%, 96%);
-
-$table-head-background-color: $primary;
-$table-head-cell-color: $white-ter;
-$table-color: hsl(0, 0%, 35%);
-
-$modal-background-background-color: rgba(0, 0, 0, 0.5);
-
-// Import Bulma Core
-@import "bulma-0.8.0/bulma.sass";
-
-// Import Bulma Extensions
-@import "bulma-0.8.0/sass/extensions/_all";
-
-// Override datetimepicker z-index
-.datetimepicker {
-    z-index: 99;
-}
-
-.datetimepicker-dummy {
-    .datetimepicker-dummy-wrapper {
-        border: 1px solid $primary;
-        border-radius: 4px;
-        box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1)
-    }
-}
-
-// Create spacing helpers
-$sizes: (-10, -5, 0, 5, 10, 15, 20, 25, 30, 50);
-$positions: ('top', 'left', 'bottom', 'right');
-
-@each $size in $sizes {
-    @each $position in $positions {
-        .m#{str-slice($position, 0, 1)}-#{$size} {
-            margin-#{$position}: $size + px !important;
-        }
-
-        .p#{str-slice($position, 0, 1)}-#{$size} {
-            padding-#{$position}: $size + px !important;
-        }
-    }
-}
-
-// Import Font Awesome
-@import "font-awesome";
-
-// Import Devise overrides
-@import "./devise";
-
-// Import Custom Card CSS
-@import "./card";
-
-// Import Custom Table CSS
-@import "./table";
-
-@import "./stashes";
-
-// nav {
-//     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+// // Define custom font
+// @font-face {
+//     font-family: 'Muli-Regular';
+//     src: font-url('Muli/Muli-Regular.ttf') format('truetype');
+//     font-weight: 400;
+//     font-style: normal;
 // }
 
-// Sticky Footer
-#app {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+// @font-face {
+//     font-family: 'Muli-Bold';
+//     src: font-url('Muli/Muli-Bold.ttf') format('truetype');
+//     font-weight: 700;
+//     font-style: normal;
+// }
 
-    .olubalance {
-        flex: 1;
-    }
-}
+// @font-face {
+//     font-family: 'Muli-SemiBold';
+//     src: font-url('Muli/Muli-SemiBold.ttf') format('truetype');
+//     font-weight: 600;
+//     font-style: normal;
+// }
 
-// End Sticky Footer
+// // Set Bulma Variables
+// $family-primary: 'Muli-Regular';
+// // $primary: #4db6ac;
+// $primary: #26a69a;
+// $link: #00796b;
+// $white-ter: hsl(0, 0%, 96%);
 
-.button.is-small {
-    border-radius: 5px;
-}
+// $table-head-background-color: $primary;
+// $table-head-cell-color: $white-ter;
+// $table-color: hsl(0, 0%, 35%);
 
-.button,
-a.dropdown-item {
-    font-weight: bold;
-}
+// $modal-background-background-color: rgba(0, 0, 0, 0.5);
 
-h6.title {
-    i {
-        margin-right: 10px;
-    }
-}
+// // Import Bulma Core
+// @import "bulma-0.8.0/bulma.sass";
 
-a.navbar-item,
-a.navbar-link {
-    font-weight: bold;
-}
+// // Import Bulma Extensions
+// @import "bulma-0.8.0/sass/extensions/_all";
 
-.navbar-menu {
-    padding-left: 50px;
-}
+// // Override datetimepicker z-index
+// .datetimepicker {
+//     z-index: 99;
+// }
 
-// Override max height for logo
-.navbar-item img {
-    max-height: 2.25rem;
-}
+// .datetimepicker-dummy {
+//     .datetimepicker-dummy-wrapper {
+//         border: 1px solid $primary;
+//         border-radius: 4px;
+//         box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1)
+//     }
+// }
 
-// Make cards equal height
-.has-equal-height {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
+// // Create spacing helpers
+// $sizes: (-10, -5, 0, 5, 10, 15, 20, 25, 30, 50);
+// $positions: ('top', 'left', 'bottom', 'right');
 
-// Override file-icon margin
-.file-icon {
-    margin-right: 0;
-}
+// @each $size in $sizes {
+//     @each $position in $positions {
+//         .m#{str-slice($position, 0, 1)}-#{$size} {
+//             margin-#{$position}: $size + px !important;
+//         }
 
-// Override file-cta and file-name border color
-.file-cta,
-.file-name {
-    border-color: $primary;
-}
+//         .p#{str-slice($position, 0, 1)}-#{$size} {
+//             padding-#{$position}: $size + px !important;
+//         }
+//     }
+// }
 
-.ob-icon-rpad {
-    i {
-        margin-right: 10px;
-    }
-}
+// // Import Font Awesome
+// @import "font-awesome";
 
-.ob-attachment-img {
-    border-radius: 4px;
-    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, .2),
-        0px 8px 10px 1px rgba(0, 0, 0, .14),
-        0px 3px 14px 2px rgba(0, 0, 0, .12);
-}
+// // Import Devise overrides
+// @import "./devise";
 
-.ob-modal-card {
-    border-radius: 5px;
-}
+// // Import Custom Card CSS
+// @import "./card";
 
-.ob-main-menu {
-    width: 18rem;
-}
+// // Import Custom Table CSS
+// @import "./table";
 
-.ob-last-updated {
-    margin-top: -2.5rem;
-}
+// @import "./stashes";
 
-.has-text-shadow {
-    //text-shadow: 1px 1px 10px #acacac;
-    text-shadow: 1px 1px 10px #636363;
-}
+// // nav {
+// //     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+// // }
+
+// // Sticky Footer
+// #app {
+//     display: flex;
+//     min-height: 100vh;
+//     flex-direction: column;
+
+//     .olubalance {
+//         flex: 1;
+//     }
+// }
+
+// // End Sticky Footer
+
+// .button.is-small {
+//     border-radius: 5px;
+// }
+
+// .button,
+// a.dropdown-item {
+//     font-weight: bold;
+// }
+
+// h6.title {
+//     i {
+//         margin-right: 10px;
+//     }
+// }
+
+// a.navbar-item,
+// a.navbar-link {
+//     font-weight: bold;
+// }
+
+// .navbar-menu {
+//     padding-left: 50px;
+// }
+
+// // Override max height for logo
+// .navbar-item img {
+//     max-height: 2.25rem;
+// }
+
+// // Make cards equal height
+// .has-equal-height {
+//     height: 100%;
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// // Override file-icon margin
+// .file-icon {
+//     margin-right: 0;
+// }
+
+// // Override file-cta and file-name border color
+// .file-cta,
+// .file-name {
+//     border-color: $primary;
+// }
+
+// .ob-icon-rpad {
+//     i {
+//         margin-right: 10px;
+//     }
+// }
+
+// .ob-attachment-img {
+//     border-radius: 4px;
+//     box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, .2),
+//         0px 8px 10px 1px rgba(0, 0, 0, .14),
+//         0px 3px 14px 2px rgba(0, 0, 0, .12);
+// }
+
+// .ob-modal-card {
+//     border-radius: 5px;
+// }
+
+// .ob-main-menu {
+//     width: 18rem;
+// }
+
+// .ob-last-updated {
+//     margin-top: -2.5rem;
+// }
+
+// .has-text-shadow {
+//     //text-shadow: 1px 1px 10px #acacac;
+//     text-shadow: 1px 1px 10px #636363;
+// }
 
 
-// Add progress bar values
-.progress-wrapper {
-    position: relative;
-}
+// // Add progress bar values
+// .progress-wrapper {
+//     position: relative;
+// }
 
-.progress-value {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: calc(1rem / 1.5);
-    line-height: 1rem;
-    font-weight: bold;
-}
+// .progress-value {
+//     position: absolute;
+//     top: 0;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     font-size: calc(1rem / 1.5);
+//     line-height: 1rem;
+//     font-weight: bold;
+// }
 
-.progress.is-small+.progress-value {
-    font-size: calc(0.75rem / 1.5);
-    line-height: 0.75rem;
-}
+// .progress.is-small+.progress-value {
+//     font-size: calc(0.75rem / 1.5);
+//     line-height: 0.75rem;
+// }
 
-.progress.is-medium+.progress-value {
-    font-size: calc(1.25rem / 1.5);
-    line-height: 1.25rem;
-}
+// .progress.is-medium+.progress-value {
+//     font-size: calc(1.25rem / 1.5);
+//     line-height: 1.25rem;
+// }
 
-.progress.is-large+.progress-value {
-    font-size: calc(1.5rem / 1.5);
-    line-height: 1.5rem;
-}
+// .progress.is-large+.progress-value {
+//     font-size: calc(1.5rem / 1.5);
+//     line-height: 1.5rem;
+// }
 
-.ob-balance-tag {
-    border: 2px solid $primary;
-    //box-shadow: 0 0 8px $white;
+// .ob-balance-tag {
+//     border: 2px solid $primary;
+//     //box-shadow: 0 0 8px $white;
 
-}
+// }
 
 
 
-a.has-text-white.sortable {
+// a.has-text-white.sortable {
 
-    font-size: 0;
+//     font-size: 0;
 
-    &.sort-selected {
-        .sortable-column-name {
-            border-bottom: 1px dashed $light;
-            padding-bottom: 2px;
-        }    
-    }
+//     &.sort-selected {
+//         .sortable-column-name {
+//             border-bottom: 1px dashed $light;
+//             padding-bottom: 2px;
+//         }    
+//     }
 
-    .sortable-column-name {
-        font-size: 1rem;
+//     .sortable-column-name {
+//         font-size: 1rem;
 
-        &:hover {
-            color: $light !important;
-            border-bottom: 1px dashed $light;
-            padding-bottom: 2px;
-        }
+//         &:hover {
+//             color: $light !important;
+//             border-bottom: 1px dashed $light;
+//             padding-bottom: 2px;
+//         }
 
-        &:focus {
-            color: $light !important;
-        }
-    }
+//         &:focus {
+//             color: $light !important;
+//         }
+//     }
 
-    .icon {
-        font-size: 1rem;
-        margin-right: 5px;
-    }
-}
+//     .icon {
+//         font-size: 1rem;
+//         margin-right: 5px;
+//     }
+// }
