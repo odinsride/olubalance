@@ -799,6 +799,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@creativebulma/bulma-tooltip@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@creativebulma/bulma-tooltip/-/bulma-tooltip-1.2.0.tgz#84dcdd59d94c09c2975fadbec1d3d765ae29c471"
+  integrity sha512-ooImbeXEBxf77cttbzA7X5rC5aAWm9UsXIGViFOnsqB+6M944GkB28S5R4UWRqjFd2iW4zGEkEifAU+q43pt2w==
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
@@ -1610,6 +1615,11 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+
+bulma-toast@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/bulma-toast/-/bulma-toast-2.0.1.tgz#8c0e929efa52e124a17d53f55fc17e02c3b0186a"
+  integrity sha512-py63dWP7tD/FmmW+jRUaA+G8mV66T+R/WNaYU5INvtweIhqGU1DwiS/rm0xjJ1wLettEegBvuWNpRhYmD3PGJg==
 
 bulma@^0.8.2:
   version "0.8.2"

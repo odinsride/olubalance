@@ -17,3 +17,5 @@
 
 //console.log('Hello World from Webpacker')
 import "controllers"
+import "../application/stylesheets/application"
+import bulmaToast from 'bulma-toast';
