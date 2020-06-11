@@ -55,11 +55,14 @@
       <%= yield %>
 
       <% flash.each do |message_type, message| %>
-        <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
-                                                position: 'top-center',
-                                                type: 'is-#{message_type}',
-                                                animate: { in: 'fadeIn', out: 'fadeOut' },
-                                                duration: 2500 });" %>
+        <% if message.present? and message.is_a? String %>
+          <div 
+            data-controller="application" 
+            data-application-message-type="<%= message_type %>" 
+            data-application-message="<%= message %>"
+          >
+          </div>
+        <% end %>
       <% end %>
     </main>
 
