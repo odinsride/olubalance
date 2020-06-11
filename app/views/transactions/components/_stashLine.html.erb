@@ -5,14 +5,14 @@
         <p class="control">
           <button class="button is-small is-grey add-to-stash" data-action="add" data-target="<%= stash_form_class %>-<%= stash.id %>">
             <span class="icon is-small has-text-success">
-              <i class="fa fa-plus"></i>
+              <i class="fas fa-plus"></i>
             </span>
           </button>
         </p>
         <p class="control">
           <button class="button is-small is-grey remove-from-stash" data-action="remove" data-target="<%= stash_form_class %>-<%= stash.id %>">
             <span class="icon is-small has-text-danger">
-              <i class="fa fa-minus"></i>
+              <i class="fas fa-minus"></i>
             </span>
           </button>
         </p>
@@ -33,14 +33,14 @@
       <div class="control">
         <%= link_to add_to_stash_account_stash_path(id: stash.id), class: "button is-small is-success" do %>
           <span class="icon">
-            <i class="fa fa-lg fa-check"></i>
+            <i class="fas fa-lg fa-check"></i>
           </span>
         <% end %>
       </div>
       <div class="control">
         <a class="button is-small is-danger cancel-stash-input" data-target="<%= stash_form_class %>-<%= stash.id %>">
           <span class="icon">
-            <i class="fa fa-lg fa-times"></i>
+            <i class="fas fa-lg fa-times"></i>
           </span>
         </a>
       </div>

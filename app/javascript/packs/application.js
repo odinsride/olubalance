@@ -17,5 +17,5 @@
 
 //console.log('Hello World from Webpacker')
 import "controllers"
+import "@fortawesome/fontawesome-free/js/all"
 import "../application/stylesheets/application"
-import bulmaToast from 'bulma-toast';

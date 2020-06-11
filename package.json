@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@creativebulma/bulma-tooltip": "^1.2.0",
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/webpacker": "4.2.2",
     "bulma": "^0.8.2",
     "bulma-toast": "^2.0.1",

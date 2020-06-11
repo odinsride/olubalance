@@ -10,7 +10,7 @@ module TransactionsHelper
   end
 
   def arrow(column_name)
-    return if column_name.to_s != @order_by
+    return 'fa-sort' if column_name.to_s != @order_by
 
     @direction == 'desc' ? 'fa-sort-down' : 'fa-sort-up'
   end
