@@ -1,4 +1,4 @@
-<nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main-navigation">
+<nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main-navigation" data-controller="nav">
   <div class="navbar-brand">
     <%= link_to root_path, class: "navbar-item" do %>
       <%= image_tag("logo.png") %>
@@ -8,7 +8,8 @@
       class="navbar-burger burger"
       aria-label="menu"
       aria-expanded="false"
-      data-target="navMenu"
+      data-target="nav.burger"
+      data-action="click->nav#toggleNav"
     >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -16,7 +17,7 @@
     </a>
   </div>
 
-  <div class="navbar-menu" id="navMenu">
+  <div class="navbar-menu" id="navMenu" data-target="nav.menu">
 
     <%= render "shared/userMenu" if user_signed_in? %>
 
