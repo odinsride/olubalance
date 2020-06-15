@@ -54,9 +54,9 @@
       <% flash.each do |message_type, message| %>
         <% if message.present? and message.is_a? String %>
           <div 
-            data-controller="application" 
-            data-application-message-type="<%= message_type %>" 
-            data-application-message="<%= message %>"
+            data-controller="shared" 
+            data-shared-message-type="<%= message_type %>" 
+            data-shared-message="<%= message %>"
           >
           </div>
         <% end %>

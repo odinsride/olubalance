@@ -1,6 +1,5 @@
 import { Controller } from 'stimulus'
 import StimulusReflex from 'stimulus_reflex'
-import * as bulmaToast from 'bulma-toast'
 
 /* This is your application's ApplicationController.
  * All StimulusReflex controllers should inherit from this class.
@@ -16,16 +15,6 @@ import * as bulmaToast from 'bulma-toast'
 export default class extends Controller {
   connect () {
     StimulusReflex.register(this)
-    
-    // this.element.remove()
-    // var message = this.data.get("message")
-    // var messageType = this.data.get("message-type")
-    // bulmaToast.toast({ 
-    //   message: message,
-    //   position: 'top-center',
-    //   type: 'is-' + messageType,
-    //   duration: 1500 
-    // })
   }
 
   /* Application wide lifecycle methods.
