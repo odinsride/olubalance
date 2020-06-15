@@ -19,8 +19,8 @@ module Olubalance
     # Enforce javascript engine (not coffeescript)
     config.generators.javascript_engine = :js
 
-    # Fonts path
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    # Fonts path TODO: Deprecate
+    # config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     # Force schema format to SQL since schema.db doesn't include
     # Postgres views
