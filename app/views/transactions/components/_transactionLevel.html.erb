@@ -1,4 +1,4 @@
-<!-- Main Level -->
+<!-- Main Level: Account Name and Buttons -->
 <nav class="level mb-15 ob-account-name-level is-mobile">
   <div class="level-left">
     <% account_subtitle = "Account ending in " + @account.last_four_display unless @account.last_four_display.nil? %>
@@ -9,14 +9,18 @@
                 } 
     %>
   </div>
-  <div class="level-right">
+  <div class="level-right is-hidden-mobile">
     <%= render partial: "transactions/components/stashButton" %>
     <%= render partial: "shared/pageLevelNewButton", locals: { path: new_account_transaction_path } %>
+  </div>
+
+  <!-- Mobile Balances: Separated because of last-child right margin on levels -->
+  <div class="level-right is-hidden-tablet">
     <%= render partial: "transactions/components/balancesMobile" %>
   </div>
 </nav>
 
-<!-- Secondary Level -->
+<!-- Secondary Level: Balances and Search -->
 <nav class="level is-hidden-mobile">
   <div class="level-left">
     <%= render partial: "transactions/components/balances" %>

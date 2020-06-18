@@ -78,7 +78,7 @@ RSpec.describe "Stash management", type: :request do
       get account_stash_path(@account.id, @stash.id)
 
       expect(response.body).to include(@stash.name)
-      expect(response.body).to include("delete-modal-#{@stash.id}")
+      expect(response.body).to include("delete-stash-#{@stash.id}")
       
       delete "/accounts/#{@account.id}/stashes/#{@stash.id}"
       expect(response).to redirect_to(account_stashes_path(@account))

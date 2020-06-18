@@ -1,100 +1,17 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- */
+@import 'fonts';
+@import 'bulmaVars';
 
-// Define custom font
-@font-face {
-    font-family: 'Muli-Regular';
-    src: font-url('Muli/Muli-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}
+@import '~bulma/bulma';
+@import '~@creativebulma/bulma-tooltip';
+@import '@fortawesome/fontawesome-free';
 
-@font-face {
-    font-family: 'Muli-Bold';
-    src: font-url('Muli/Muli-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-}
+@import 'bulma-checkradio';
 
-@font-face {
-    font-family: 'Muli-SemiBold';
-    src: font-url('Muli/Muli-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-}
-
-// Set Bulma Variables
-$family-primary: 'Muli-Regular';
-// $primary: #4db6ac;
-$primary: #26a69a;
-$link: #00796b;
-$white-ter: hsl(0, 0%, 96%);
-
-$table-head-background-color: $primary;
-$table-head-cell-color: $white-ter;
-$table-color: hsl(0, 0%, 35%);
-
-$modal-background-background-color: rgba(0, 0, 0, 0.5);
-
-// Import Bulma Core
-@import "bulma-0.8.0/bulma.sass";
-
-// Import Bulma Extensions
-@import "bulma-0.8.0/sass/extensions/_all";
-
-// Override datetimepicker z-index
-.datetimepicker {
-    z-index: 99;
-}
-
-.datetimepicker-dummy {
-    .datetimepicker-dummy-wrapper {
-        border: 1px solid $primary;
-        border-radius: 4px;
-        box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1)
-    }
-}
-
-// Create spacing helpers
-$sizes: (-10, -5, 0, 5, 10, 15, 20, 25, 30, 50);
-$positions: ('top', 'left', 'bottom', 'right');
-
-@each $size in $sizes {
-    @each $position in $positions {
-        .m#{str-slice($position, 0, 1)}-#{$size} {
-            margin-#{$position}: $size + px !important;
-        }
-
-        .p#{str-slice($position, 0, 1)}-#{$size} {
-            padding-#{$position}: $size + px !important;
-        }
-    }
-}
-
-// Import Font Awesome
-@import "font-awesome";
-
-// Import Devise overrides
-@import "./devise";
-
-// Import Custom Card CSS
-@import "./card";
-
-// Import Custom Table CSS
-@import "./table";
-
-@import "./stashes";
+@import 'helpers';
+@import 'devise';
+@import 'card';
+@import 'table';
+@import 'stashes';
 
 // nav {
 //     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);

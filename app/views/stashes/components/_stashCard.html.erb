@@ -30,7 +30,13 @@
   <footer class="card-footer">
     <!-- Links -->
     <%= link_to edit_account_stash_path(@stash.account, @stash), class: 'card-footer-item has-text-weight-bold' do %>Edit<% end %>
-    <a class="card-footer-item has-text-weight-bold modal-button" data-target="delete-modal-<%= @stash.id %>">Delete</a>
+    <a 
+      class="card-footer-item has-text-weight-bold modal-button" 
+      data-action="click->shared#toggleModal"
+      data-id="delete-stash-<%= @stash.id %>"
+    >
+      Delete
+    </a>
   </footer>
 </div>
 

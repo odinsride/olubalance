@@ -1,6 +1,15 @@
     <!-- Modal for Delete -->
-    <div id="delete-modal" class="modal">
-      <div class="modal-background"></div>
+    <div 
+      id="delete-transaction-<%= @transaction.id %>" 
+      class="modal"
+      style="z-index: 9999" 
+      data-target="shared.modal"
+    >
+      <div 
+        class="modal-background"
+        data-action="click->shared#toggleModal"
+        data-id="delete-transaction-<%= @transaction.id %>"
+      ></div>
       <div class="modal-content ob-modal-card">
         <div class="card">
           <header class="card-header has-background-danger">
@@ -10,7 +19,13 @@
             <p>Are you sure you wish to delete this transaction? This action cannot be reversed.</p>
           </section>
           <footer class="card-footer">
-            <a href="#!" class="card-footer-item has-text-weight-bold has-text-grey">Cancel</a>
+            <a 
+              class="card-footer-item has-text-weight-bold has-text-grey"
+              data-action="click->shared#toggleModal"
+              data-id="delete-transaction-<%= @transaction.id %>"
+            >
+              Cancel
+            </a>
             <%= link_to "Delete", @account_transaction, method: :delete, class: "card-footer-item card-modal-close has-text-weight-bold has-text-danger" %>
           </footer>
         </div>
