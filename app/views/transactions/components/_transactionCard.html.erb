@@ -76,7 +76,13 @@
     <footer class="card-footer">
       <!-- Links -->
       <%= link_to edit_account_transaction_path(@transaction.account, @transaction), class: 'card-footer-item has-text-weight-bold' do %>Edit<% end %>
-      <a class="card-footer-item has-text-weight-bold modal-button" data-target="delete-modal">Delete</a>
+      <a 
+        class="card-footer-item has-text-weight-bold modal-button" 
+        data-action="click->shared#toggleModal"
+        data-id="delete-transaction-<%= @transaction.id %>"
+      >
+        Delete
+      </a>
     </footer>
   <% end %>
 </div>

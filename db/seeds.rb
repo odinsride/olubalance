@@ -127,7 +127,7 @@ accounts.each do |account|
           trx_type: 'debit',
           account: account
         )
-    t.attachment.attach(io: File.open('app/assets/images/logo.png'), filename: 'logo.png', content_type: 'image/png')
+    t.attachment.attach(io: File.open('app/javascript/application/images/logo.png'), filename: 'logo.png', content_type: 'image/png')
   end
 
   # Create 2 pending transactions
