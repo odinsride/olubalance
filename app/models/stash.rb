@@ -13,4 +13,22 @@ class Stash < ApplicationRecord
                    numericality: { greater_than_or_equal_to: :balance }
 
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
+
+  before_destroy :unstash
+
+
+  private
+
+  # Create an account transaction to return any stashed money
+  # to the Account balance when a Stash is deleted
+  def unstash
+    transaction = Transaction.new
+    transaction.trx_type = 'credit'
+    transaction.trx_date = Time.current
+    transaction.account_id = account_id
+    transaction.description = 'Transfer from ' + name + ' (Stash Deleted)'
+    transaction.amount = balance.abs
+    transaction.locked = true
+    transaction.save
+  end
 end
