@@ -3,6 +3,8 @@
 # A transaction record which belongs to one account. Can have one attached file
 class Transaction < ApplicationRecord
   belongs_to :account
+  belongs_to :parent_transaction, foreign_key: :parent_transaction_id, optional: :true
+  has_one :child_transaction, foreign_key: :parent_transaction_id
 
   has_one :transaction_balance
 
