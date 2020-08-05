@@ -36,5 +36,14 @@ module Olubalance
     # Force schema format to SQL since schema.db doesn't include
     # Postgres views
     config.active_record.schema_format = :sql
+
+    # Dial in generators for Rspec
+    config.generators do |g|
+      g.text_framework :rspec,
+        fixtures: false,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false
+    end
   end
 end
