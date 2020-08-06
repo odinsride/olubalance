@@ -14,11 +14,13 @@ gem 'devise', '~> 4.7.2'
 gem 'draper', '~> 4.0.1'
 gem 'faker', '~> 2.12.0'
 gem 'figaro', '~> 1.2.0'
+gem 'hiredis'
 gem 'mini_magick', '~> 4.10.1'
 gem 'pagy', '~> 3.8.2'
 gem 'pg', '~> 1.2.3'
 gem 'puma', '~> 4.3.5'
 gem 'rails', '~> 6.0.3.2'
+gem 'redis', '>= 4.0', :require => ['redis', 'redis/connection/hiredis']
 gem 'stimulus_reflex', '~> 3.2.3'
 gem 'webpacker', '~> 5.1.1'
 
