@@ -19,6 +19,20 @@ RSpec.describe Stash, type: :model do
     it { expect(subject.balance).to eq 0.00 }
   end
 
+  describe '#unstash' do
+    it 'should return any stashed money to the main account upon destroy' do
+      stash_balance = 500
+      @account = FactoryBot.create(:account, user: FactoryBot.create(:user), starting_balance: 1000.00)
+      @stash = FactoryBot.create(:stash, account: @account, balance: stash_balance)
+      expect {
+       @stash.destroy
+      }.to change(Transaction, :count).by(1)
+      expect(Transaction.last.amount).to eq (stash_balance)
+      @account.reload
+      expect(@account.current_balance).to eq (@account.starting_balance + 500)
+    end
+  end
+
   it { should belong_to(:account) }
   it { should have_many(:stash_entries) }
 end

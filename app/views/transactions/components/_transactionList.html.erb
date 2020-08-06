@@ -1,58 +1,29 @@
 <table class="table is-hoverable is-fullwidth ob-table">
-  <thead>
-    <th colspan=5 class="ob-table-phead">
-      <!-- Main container -->
-      <div class="level">
-        <!-- Left side -->
-        <div class="level-left">
-          <div class="level-item">
-            <p class="title is-5 is-size-7-mobile has-text-white">
-              <span class="icon is-medium ob-icon-rpad">
-                <i class="fa fa-lg fa-university"></i>
-              </span>
-              <%= @account.name %>
-            </p>
-          </div>
-        </div>
-
-        <!-- Right side -->
-        <div class="level-right">
-            <% if @account.pending_balance != 0 %>
-              <div class="level-item">
-                <div>
-                  <p class="heading has-text-right has-text-centered-mobile">Pending</p>
-                  <p class="title tag is-warning is-6"><%= @account.pending_balance_display %></p>
-                </div>
-              </div>
-            <% end %>
-            <% if @stashed != 0 %>
-              <div class="level-item">
-                <div>
-                  <p class="heading has-text-right has-text-centered-mobile">Stashed</p>
-                  <p class="title tag is-success is-6 "><%= number_to_currency(@stashed) %></p>
-                </div>
-              </div>
-            <% end %>
-            <div class="level-item">
-              <div>
-                <p class="heading has-text-right has-text-centered-mobile">Balance</p>
-                <p class="tag title is-primary is-light is-6 ob-balance-tag"><%= @account.current_balance_display %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </th>
-  </thead>
-  <thead>
+  <thead class="ob-table-phead">
     <th class="has-text-centered is-hidden-mobile">
       <div class="ob-cell-content">
-        Date
+        <%= link_to "#", class: column_css(:trx_date),
+            data: { reflex: "click->TransactionReflex#order", column_name: :trx_date, direction: direction } do %>
+            <span class="sortable-column-name">
+              Date
+            </span>
+            <span class="icon is-small" style="display: inline-table">
+              <i class="fas <%= arrow(:trx_date) %>"></i>
+            </span>
+        <% end %>
       </div>
     </th>
     <th class="is-hidden-mobile">
       <div class="ob-cell-content">
-        Description
+        <%= link_to "#", class: column_css(:description),
+            data: { reflex: "click->TransactionReflex#order", column_name: :description, direction: direction } do %>
+            <span class="sortable-column-name">
+              Description
+            </span>
+            <span class="icon is-small" style="display: inline-table">
+              <i class="fas <%= arrow(:description) %>"></i>
+            </span>
+        <% end %>
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">
@@ -72,7 +43,7 @@
     </th>
     <th class="is-hidden-tablet">
       <div>
-        Transactions
+        Transactions (<%= @pagy.count %>)
       </div>
     </th>
   </thead>

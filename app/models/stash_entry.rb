@@ -31,9 +31,8 @@ class StashEntry < ApplicationRecord
       errors.add(:amount, "can't cause the stash balance to become negative")
     end
 
-    if (validation_stash.balance + validation_amount) > validation_stash.goal
-      errors.add(:amount, "can't cause the stash balance to exceed the goal")
-    end
+    errors.add(:amount, "can't cause the stash balance to exceed the goal") \
+      if (validation_stash.balance + validation_amount) > validation_stash.goal
   end
 
   def set_stash

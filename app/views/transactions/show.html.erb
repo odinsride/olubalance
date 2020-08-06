@@ -4,7 +4,7 @@
     <h4 class="title is-4 has-text-link has-text-centered-mobile">Transaction Details</h4>
     <h6 class="subtitle is-7 has-text-grey has-text-weight-semibold has-text-centered-mobile"><%= @account.account_name_balance %></h6>
     <div class="columns">
-      <div class="column">
+      <div class="column" data-controller="shared">
         <%= render partial: "transactions/components/transactionCard" %>
       </div>
     </div>

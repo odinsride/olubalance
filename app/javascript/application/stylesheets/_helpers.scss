@@ -1,0 +1,15 @@
+// Create spacing helpers
+$sizes: (-10, -5, 0, 5, 10, 15, 20, 25, 30, 50);
+$positions: ('top', 'left', 'bottom', 'right');
+
+@each $size in $sizes {
+    @each $position in $positions {
+        .m#{str-slice($position, 0, 1)}-#{$size} {
+            margin-#{$position}: $size + px !important;
+        }
+
+        .p#{str-slice($position, 0, 1)}-#{$size} {
+            padding-#{$position}: $size + px !important;
+        }
+    }
+}

@@ -7,7 +7,12 @@
     <footer class="card-footer">
       <span class="card-footer-item has-text-weight-medium has-text-grey"><%= account.last_four_display %></span>
       <%= link_to "Edit", edit_account_path(account), class: "card-footer-item has-text-weight-bold" %>
-      <a class="card-footer-item has-text-weight-bold modal-button" data-target="deactivate-modal-<%=account.id%>%">Deactivate</a>
+      <a class="card-footer-item has-text-weight-bold modal-button" 
+         data-action="click->shared#toggleModal" 
+         data-id="deactivate-modal-<%=account.id%>"
+      >
+        Deactivate
+      </a>
     </footer>
   </div>
 </div>

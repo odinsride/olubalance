@@ -4,7 +4,7 @@
     <p class="title is-4 has-text-link has-text-centered-mobile">Stash Details</p>
     <p class="subtitle is-7 has-text-grey has-text-weight-semibold has-text-centered-mobile"><%= @account.account_name_balance %></p>
     <div class="columns">
-      <div class="column">
+      <div class="column" data-controller="shared">
         <%= render partial: "stashes/components/stashCard" %>
       </div>
     </div>

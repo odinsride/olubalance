@@ -23,10 +23,10 @@
     <meta name="apple-mobile-web-app-title" content="olubalance">
 
     <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'bulma' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
   </head>
 
   <body>
@@ -56,11 +56,14 @@
           </div>
 
           <% flash.each do |message_type, message| %>
-            <%= javascript_tag "bulmaToast.toast({ message: '#{message}',
-                                                  position: 'top-center',
-                                                  type: 'is-#{message_type}',
-                                                  animate: { in: 'fadeIn', out: 'fadeOut' },
-                                                  duration: 2500 });" %>
+            <% if message.present? and message.is_a? String %>
+              <div 
+                data-controller="shared" 
+                data-shared-message-type="<%= message_type %>" 
+                data-shared-message="<%= message %>"
+              >
+              </div>
+            <% end %>
           <% end %>
         </section>
       </main>

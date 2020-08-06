@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.7.0] - 2020-08-06
+
+### New
+- Transaction sorting has been added on the date and description fields
+- Transaction search has been improved and now provides instant results as you type
+
+### Fixed
+- Bulma Toast notifications become stuck on screen. Fixes #67
+- When deleting a Stash, any stashed money should now be returned to the parent account. Fixes #99
+- Pagination issues have been fixed
+
+### Changed
+- Many UI improvements to the transaction list header on both desktop and mobile
+
+### Under the hood
+- Assets pipeline dropped in favor of webpacker
+- StimulusJS and StimulusReflex have been added
+- Add pending rubocop cops
+- Massive improvement to seeds file
+- Navbar now displays the rails environment (non-production only)
+- Dependencies updated
+
 ## [v1.6.4] - 2020-05-17
 
 ### Fixed
@@ -189,8 +211,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.6.4...HEAD
-[v1.6.3]: https://github.com/odinsride/olubalance/compare/v1.6.3...v1.6.4
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.7.0...develop
+[v1.7.0]: https://github.com/odinsride/olubalance/compare/v1.6.4...v1.7.0
+[v1.6.4]: https://github.com/odinsride/olubalance/compare/v1.6.3...v1.6.4
 [v1.6.3]: https://github.com/odinsride/olubalance/compare/v1.6.2...v1.6.3
 [v1.6.2]: https://github.com/odinsride/olubalance/compare/v1.6.1...v1.6.2
 [v1.6.1]: https://github.com/odinsride/olubalance/compare/v1.6.0...v1.6.1
