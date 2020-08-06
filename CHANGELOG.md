@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add pending rubocop cops
 - Massive improvement to seeds file
 - Navbar now displays the rails environment (non-production only)
+- Upgrade to Fontawesome 5
 - Dependencies updated
 
 ## [v1.6.4] - 2020-05-17
