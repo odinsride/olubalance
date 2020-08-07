@@ -134,6 +134,10 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -310,6 +314,7 @@ DEPENDENCIES
   faker (~> 2.12.0)
   figaro (~> 1.2.0)
   hiredis
+  letter_opener
   listen
   mini_magick (~> 4.10.1)
   pagy (~> 3.8.2)
