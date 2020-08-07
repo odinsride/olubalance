@@ -24,7 +24,7 @@
       Inactive Accounts
     <% end %>
 
-    <%= link_to destroy_user_session_path, class: "navbar-item" do%>
+    <%= link_to destroy_user_session_path, class: "navbar-item", method: :delete do%>
       <span class="icon has-text-link is-medium ob-icon-rpad">
         <i class="fas fa-sign-out-alt"></i>
       </span>
