@@ -18,6 +18,16 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 
+  describe "user sign up" do
+    before do
+      @user = FactoryBot.create(:user, confirmed_at: :null)
+    end
+    
+    it "should send the user a confirmation email" do
+      expect(Devise.mailer.deliveries.count).to eq 1
+    end
+  end
+
   describe 'validations' do
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_presence_of(:first_name).with_message('Please enter your First Name') }
