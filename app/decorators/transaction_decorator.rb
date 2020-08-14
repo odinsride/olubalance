@@ -48,6 +48,14 @@ class TransactionDecorator < ApplicationDecorator
     attachment.attached? ? attachment.filename.to_s + ' (' + number_to_human_size(attachment.byte_size).to_s + ')' : nil
   end
 
+  def filename_form
+    attachment.attached? ? filename_size : '- No receipt -'
+  end
+
+  def add_receipt_button_label
+    attachment.attached? ? 'Change receipt...' : 'Add receipt...'
+  end
+
   def running_balance_display
     number_to_currency(running_balance)
   end
