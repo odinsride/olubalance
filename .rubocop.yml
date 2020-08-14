@@ -1,5 +1,6 @@
 AllCops:
   DisplayCopNames: true
+  NewCops: enable
   Exclude:
     - db/**/*
     - script/**/*
@@ -67,3 +68,7 @@ Style/HashTransformValues:
 
 Style/SlicingWithRange:
   Enabled: true
+
+Style/StringConcatenation:
+  Enabled: false
+

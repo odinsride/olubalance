@@ -20,7 +20,7 @@ gem 'pagy', '~> 3.8.2'
 gem 'pg', '~> 1.2.3'
 gem 'puma', '~> 4.3.5'
 gem 'rails', '~> 6.0.3.2'
-gem 'redis', '>= 4.0', :require => ['redis', 'redis/connection/hiredis']
+gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
 gem 'stimulus_reflex', '~> 3.2.3'
 gem 'webpacker', '~> 5.1.1'
 
@@ -39,10 +39,11 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'letter_opener'
   gem 'listen'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'spring'
-  gem 'spring-watcher-listen'
   gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen'
 end

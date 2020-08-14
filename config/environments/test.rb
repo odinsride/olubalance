@@ -27,7 +27,14 @@ Rails.application.configure do
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
+
   config.action_mailer.perform_caching = false
+
+  # Ignore bad email addresses and do not raise email delivery errors.
+  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the

@@ -8,5 +8,6 @@ FactoryBot.define do
     first_name { 'John' }
     last_name { 'Doe' }
     timezone { 'Eastern Time (US & Canada)' }
+    confirmed_at { Time.now }
   end
 end

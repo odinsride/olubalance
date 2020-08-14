@@ -16,7 +16,6 @@ class Stash < ApplicationRecord
 
   before_destroy :unstash
 
-
   private
 
   # Create an account transaction to return any stashed money
