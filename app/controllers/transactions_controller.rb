@@ -9,16 +9,6 @@ class TransactionsController < ApplicationController
 
   # Index action to render all transactions
   def index
-    # TODO: Deprecate following code
-    # Preserve pagination state when working within the same account,
-    # otherwise reset pagination when moving to a different account
-    # if session[:account_id] == @account.id
-    #   session[:trx_index_page] = params[:page] if params[:page]
-    # else
-    #   session[:account_id] = @account.id
-    #   session[:trx_index_page] = nil
-    # end
-
     @query = session[:query]
     @order_by = permitted_column_name(session[:order_by])
     @direction = permitted_direction(session[:direction])
@@ -31,12 +21,6 @@ class TransactionsController < ApplicationController
     @page = 1 if @page > pages
     @pagy, @transactions = pagy(transactions, page: @page)
     @transactions = @transactions.decorate
-
-    # TODO: Deprecate following code
-    # @transactions = @account.transactions.search(params[:description]).with_balance.desc
-    # # @transactions = @transactions.paginate(page: session[:trx_index_page], per_page: 15)
-    # @pagy, @transactions = pagy(@transactions, page: session[:trx_index_page], items: 15)
-    # @transactions = @transactions.decorate
 
     @stashed = @account.stashes.sum(:balance)
 

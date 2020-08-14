@@ -7,7 +7,6 @@ export default class extends Controller {
 
   connect () {
     //Invoke bulma toast notifications, if any
-    //this.element.remove() TODO: is this needed?
     var message = this.data.get("message")
     var messageType = this.data.get("message-type")
     if (message && messageType) {
