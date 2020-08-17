@@ -82,7 +82,11 @@ class TransactionDecorator < ApplicationDecorator
     created_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')
   end
 
-  def trx_line_desc_mobile
-    description.length > 35 ? description[0..35] + '...' : description
+  def name_too_long
+    description.length > 35
+  end
+
+  def trx_desc_display
+    name_too_long ? description[0..35] + '...' : description
   end
 end
