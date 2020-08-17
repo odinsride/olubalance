@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.7.1] - 2020-08-17
+
+### New
+- User registration, and current user email changes now require email confirmation. This is to prevent false registrations from bots.
+- Version number has been added to footer
+
+### Changed
+- Transaction attachment interface improved to display the filename of the current attachment, as well as corrections to a text overflow issue with long attachment filenames.
+- Favicon has been updated
+
+### Fixed
+- User sign-out no longer causes an error
+- Transactions with long descriptions now display better on mobile
+
 ## [v1.7.0] - 2020-08-06
 
 ### New
@@ -212,7 +226,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.7.0...develop
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.7.1...develop
+[v1.7.1]: https://github.com/odinsride/olubalance/compare/v1.7.0...v1.7.1
 [v1.7.0]: https://github.com/odinsride/olubalance/compare/v1.6.4...v1.7.0
 [v1.6.4]: https://github.com/odinsride/olubalance/compare/v1.6.3...v1.6.4
 [v1.6.3]: https://github.com/odinsride/olubalance/compare/v1.6.2...v1.6.3
