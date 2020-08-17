@@ -66,15 +66,14 @@ a.navbar-link {
     flex-direction: column;
 }
 
-// Override file-icon margin
-.file-icon {
-    margin-right: 0;
-}
-
 // Override file-cta and file-name border color
 .file-cta,
 .file-name {
     border-color: $primary;
+}
+
+.ob-file-name {
+    margin-top: 0.5em;
 }
 
 .ob-icon-rpad {

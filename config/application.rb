@@ -22,6 +22,9 @@ module Olubalance
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    # olubalance Version
+    config.version = "1.7.1"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
@@ -29,9 +32,6 @@ module Olubalance
 
     # Enforce javascript engine (not coffeescript)
     config.generators.javascript_engine = :js
-
-    # Fonts path TODO: Deprecate
-    # config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     # Force schema format to SQL since schema.db doesn't include
     # Postgres views

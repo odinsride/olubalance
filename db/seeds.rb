@@ -58,14 +58,18 @@ stash_names = %w[
 
 # Create 3 test accounts
 emails.each do |email|
-  users << User.create!(
+  user = User.new(
     email: email,
     password: 'topsecret',
     password_confirmation: 'topsecret',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    timezone: 'Eastern Time (US & Canada)'
+    timezone: 'Eastern Time (US & Canada)',
+    confirmed_at: DateTime.now
   )
+  user.skip_confirmation!
+  user.save!
+  users << user
 end
 
 # Create 5 accounts for each user

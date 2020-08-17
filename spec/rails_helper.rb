@@ -33,6 +33,8 @@ RSpec.configure do |config|
 
   config.include ActionView::Helpers::NumberHelper
   
+  config.include RequestSpecHelper, type: :request
+  
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.strategy = :transaction

@@ -82,18 +82,23 @@
 
       <!-- Attachment -->
       <label class="label has-text-grey">Receipt</label>
-      <div class="file has-name is-fullwidth">
+      <div class="file">
         <label class="file-label">
           <%= f.file_field :attachment, id: "upload", class: "file-input is-primary" %>
           <span class="file-cta has-background-primary">
             <span class="file-icon has-text-white">
               <i class="fas fa-upload"></i>
             </span>
-          </span>
-          <span id="filename" class="file-name">
-            Add receipt ...
+            <span class="file-label has-text-white">
+              <%= @transaction.add_receipt_button_label %>
+            </span>
           </span>
         </label>
+      </div>
+      
+      <div class="ob-file-name has-text-grey">
+        <span id="newreceipt" class="has-text-weight-bold has-text-danger"></span>
+        <span id="filename"><%= @transaction.filename_form %></span>
       </div>
 
       <!-- Pending -->
@@ -135,7 +140,9 @@
     var lastIndex = filename.lastIndexOf("\\");
     if (lastIndex >= 0) {
       filename = filename.substring(lastIndex + 1);
+      filename = filename;
     }
+    document.getElementById('newreceipt').innerHTML = "Adding receipt: ";
     document.getElementById('filename').innerHTML = filename;
   }
 </script>

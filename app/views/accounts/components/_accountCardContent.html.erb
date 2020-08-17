@@ -1,9 +1,8 @@
-<header class="card-header has-background-primary <%= class_string(tooltip: account.name_too_long) %>"
-  data-tooltip="<%= account.name %>">
+<%= content_tag :header, class: "card-header has-background-primary", data: { tooltip: account.name_too_long ? account.name : nil } do -%>
   <h6 class="title is-6 card-header-title has-text-white">
     <%= account.account_card_title %>
   </h6>
-</header>
+<% end %>
 <div class="card-content">
   <div class="content has-text-right ">
     <p class="title is-6 has-text-link">

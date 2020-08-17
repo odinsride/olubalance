@@ -48,6 +48,14 @@ class TransactionDecorator < ApplicationDecorator
     attachment.attached? ? attachment.filename.to_s + ' (' + number_to_human_size(attachment.byte_size).to_s + ')' : nil
   end
 
+  def filename_form
+    attachment.attached? ? filename_size : '- No receipt -'
+  end
+
+  def add_receipt_button_label
+    attachment.attached? ? 'Change receipt...' : 'Add receipt...'
+  end
+
   def running_balance_display
     number_to_currency(running_balance)
   end
@@ -72,5 +80,13 @@ class TransactionDecorator < ApplicationDecorator
 
   def created_at_decorated
     created_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')
+  end
+
+  def name_too_long
+    description.length > 35
+  end
+
+  def trx_desc_display
+    name_too_long ? description[0..35] + '...' : description
   end
 end
