@@ -115,12 +115,12 @@
         </div>
       </div>
 
-      <%= flash[:recaptcha_error] %>
-      <% if @show_checkbox_recaptcha %>
-        <%= recaptcha_tags %>
-      <% else %>
-        <%= recaptcha_v3(action: 'registration') %>
-      <% end %>
+      <div class="columns">
+        <div class="column">
+          <%= flash[:recaptcha_error] %>
+          <%= recaptcha_tags %>
+        </div>
+      </div>
   </div>
 
   </div> <!-- /columns -->
