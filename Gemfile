@@ -20,6 +20,7 @@ gem 'pagy', '~> 3.8.2'
 gem 'pg', '~> 1.2.3'
 gem 'puma', '~> 4.3.5'
 gem 'rails', '~> 6.0.3.2'
+gem 'recaptcha'
 gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
 gem 'stimulus_reflex', '~> 3.2.3'
 gem 'webpacker', '~> 5.1.1'
