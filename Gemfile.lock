@@ -64,7 +64,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.1)
     aws-eventstream (1.1.0)
-    aws-partitions (1.356.0)
+    aws-partitions (1.357.0)
     aws-sdk-core (3.104.3)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -134,6 +134,7 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
+    json (2.3.1)
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.7.0)
@@ -214,6 +215,8 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    recaptcha (5.5.0)
+      json
     redis (4.2.1)
     regexp_parser (1.7.1)
     request_store (1.5.0)
@@ -324,6 +327,7 @@ DEPENDENCIES
   puma (~> 4.3.5)
   rails (~> 6.0.3.2)
   rails-controller-testing (~> 1.0.4)
+  recaptcha
   redis (>= 4.0)
   rspec-rails (~> 4.0.1)
   rubocop
