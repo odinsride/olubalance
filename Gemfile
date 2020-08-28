@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.6'
+ruby '2.7.1'
 
 gem 'aws-sdk-s3', '~> 1.69.0'
 gem 'devise', '~> 4.7.2'
