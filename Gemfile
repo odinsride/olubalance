@@ -7,12 +7,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.6'
+ruby '2.7.1'
 
-gem 'aws-sdk-s3', '~> 1.69.0'
+gem 'aws-sdk-s3', '~> 1.79.0'
 gem 'devise', '~> 4.7.2'
 gem 'draper', '~> 4.0.1'
-gem 'faker', '~> 2.12.0'
+gem 'faker', '~> 2.13.0'
 gem 'figaro', '~> 1.2.0'
 gem 'hiredis'
 gem 'invisible_captcha'
@@ -24,17 +24,17 @@ gem 'rails', '~> 6.0.3.2'
 gem 'recaptcha'
 gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
 gem 'stimulus_reflex', '~> 3.2.3'
-gem 'webpacker', '~> 5.1.1'
+gem 'webpacker', '~> 5.2.1'
 
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner', '~> 1.8.5'
-  gem 'factory_bot_rails', '~> 6.0.0'
+  gem 'factory_bot_rails', '~> 6.1.0'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rails-controller-testing', '~> 1.0.4'
   gem 'rspec-rails', '~> 4.0.1'
-  gem 'shoulda-matchers', '~> 4.3.0'
+  gem 'shoulda-matchers', '~> 4.4.1'
   gem 'simplecov', require: false
 end
 
