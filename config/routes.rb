@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     member do
       get :deactivate
       get :activate
+      get :transfer
     end
   end
 

@@ -221,8 +221,7 @@ CREATE TABLE public.transactions (
     memo character varying,
     pending boolean DEFAULT false,
     locked boolean DEFAULT false,
-    transfer boolean DEFAULT false,
-    parent_transaction_id integer
+    transfer boolean DEFAULT false
 );
 
 
@@ -583,7 +582,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191220011006'),
 ('20191227150641'),
 ('20200128211634'),
+('20200623012351'),
 ('20200807000110');
-('20200623012351');
 
 
