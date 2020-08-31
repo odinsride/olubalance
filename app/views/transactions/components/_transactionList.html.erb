@@ -1,6 +1,6 @@
 <table class="table is-hoverable is-fullwidth ob-table">
   <thead class="ob-table-phead">
-    <th class="has-text-centered is-hidden-mobile">
+    <th class="has-text-centered is-hidden-mobile" id="trx-date">
       <div class="ob-cell-content">
         <%= link_to "#", class: column_css(:trx_date),
             data: { reflex: "click->TransactionReflex#order", column_name: :trx_date, direction: direction } do %>
@@ -36,12 +36,12 @@
         Debit
       </div>
     </th>
-    <th class="has-text-right is-hidden-mobile">
+    <th class="has-text-right is-hidden-mobile" id="trx-balance">
       <div>
         Balance
       </div>
     </th>
-    <th class="is-hidden-tablet">
+    <th class="is-hidden-tablet" id="trx-header-mobile">
       <div>
         Transactions (<%= @pagy.count %>)
       </div>
