@@ -25,9 +25,9 @@
 
     <div class="dropdown-menu" id="transfer-dropdown" role="menu">
       <div class="dropdown-content">
-        <%= link_to transfer_account_path(@account), class: 'dropdown-item' do %>
-          Transfer
-        <% end %>
+        <div class="dropdown-item">
+          <%= render partial: "transfers/components/transferForm" %>
+        </div>
       </div>
     </div>
   </div>

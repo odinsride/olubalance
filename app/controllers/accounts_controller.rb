@@ -2,7 +2,7 @@
 
 class AccountsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_account, only: %i[show edit update destroy activate deactivate transfer]
+  before_action :set_account, only: %i[show edit update destroy activate deactivate]
 
   # GET /accounts
   # GET /accounts.json
@@ -79,15 +79,6 @@ class AccountsController < ApplicationController
     else
       render :show
     end
-  end
-
-  # Transfer to another account - creates appropriate transaction records for each account
-  def transfer
-    puts 'Source Account ' + @account.name
-    puts 'Target Account '
-    puts 'Amount         '
-
-    redirect_to account_transactions_path(@account), notice: 'Transfer successful.'
   end
 
   private

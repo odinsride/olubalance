@@ -71,5 +71,4 @@ class Transaction < ApplicationRecord
     # Rails 5.2 - amount_was is still valid in after_destroy callbacks
     @account.update(current_balance: @account.current_balance - amount_was)
   end
-
 end
