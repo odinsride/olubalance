@@ -12,12 +12,12 @@ class PerformTransfer
 
   def do_transfer
     Transaction.transaction do
-      create_source_transaction
-      create_target_transaction
+      create_source_transaction!
+      create_target_transaction!
     end
   end
 
-  def create_source_transaction
+  def create_source_transaction!
     transaction = Transaction.new
     transaction.trx_type = 'debit'
     transaction.trx_date = Time.current
@@ -29,7 +29,7 @@ class PerformTransfer
     transaction.save!
   end
 
-  def create_target_transaction
+  def create_target_transaction!
     transaction = Transaction.new
     transaction.trx_type = 'credit'
     transaction.trx_date = Time.current
