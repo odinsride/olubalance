@@ -5,6 +5,8 @@
         class="button is-white" 
         aria-haspopup="true" 
         aria-controls="balance-dropdown"
+        aria-expanded="false"
+        data-target="shared.dropDownButton"
         data-action="click->shared#toggleDropdown"
       >
         <span class="subtitle is-size-6 has-text-weight-bold <%= @account.balance_color %>">

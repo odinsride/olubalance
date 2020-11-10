@@ -3,7 +3,6 @@
 # A transaction record which belongs to one account. Can have one attached file
 class Transaction < ApplicationRecord
   belongs_to :account
-
   has_one :transaction_balance
 
   has_one_attached :attachment
@@ -47,15 +46,6 @@ class Transaction < ApplicationRecord
     %w[Debit debit]
   end
 
-  # Search for transaction by description
-  # def self.search(description)
-  #   if description
-  #     where('description ILIKE ?', "%#{description}%")
-  #   else
-  #     all
-  #   end
-  # end
-
   private
 
   def convert_amount
@@ -81,10 +71,4 @@ class Transaction < ApplicationRecord
     # Rails 5.2 - amount_was is still valid in after_destroy callbacks
     @account.update(current_balance: @account.current_balance - amount_was)
   end
-
-  # def rename_file
-  #   extension = File.extname(attachment_file_name).downcase
-  #   file_description = description.squish.tr(' ', '_')
-  #   attachment.instance_write :file_name, "#{trx_date}_#{file_description}#{extension}"
-  # end
 end

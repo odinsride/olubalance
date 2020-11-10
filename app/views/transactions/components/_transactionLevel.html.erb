@@ -4,13 +4,13 @@
     <% account_subtitle = "Account ending in " + @account.last_four_display unless @account.last_four_display.nil? %>
     <%= render  partial: "shared/pageLevelTitle", 
                 locals: { 
-                  title: @account.name, 
+                  title: @account.account_card_title, 
                   subtitle: account_subtitle
                 } 
     %>
   </div>
   <div class="level-right is-hidden-mobile">
-    <%= render partial: "transactions/components/stashButton" %>
+    <%= render partial: "transactions/components/transactionButtons" %>
     <%= render partial: "shared/pageLevelNewButton", locals: { path: new_account_transaction_path } %>
   </div>
 
