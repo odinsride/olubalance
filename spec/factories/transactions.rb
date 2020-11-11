@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :transaction do
     trx_date { Date.today }
     description { 'Test Transaction' }
-    amount { 50 }
+    amount { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
     trx_type { 'debit' }
     memo { 'Sample Memo' }
     association :account

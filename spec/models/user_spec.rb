@@ -8,16 +8,14 @@ RSpec.describe User, type: :model do
   end
   
   describe "user sign up" do
-    before do
-      @user = FactoryBot.create(:user, confirmed_at: :null)
-    end
+    let!(:user) { FactoryBot.create(:user, confirmed_at: :null) }
     
     it "should send the user a confirmation email on signup" do
       expect(Devise.mailer.deliveries.count).to eq 1
     end
 
     it "should send the user a confirmation email when email changes" do
-      @user.update(email: "new-email@gmail.com")
+      user.update(email: "new-email@gmail.com")
       expect(Devise.mailer.deliveries.count).to eq 2
     end
   end

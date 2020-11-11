@@ -8,57 +8,51 @@ RSpec.describe Account, type: :model do
   end
 
   describe 'account creation' do
-    before do
-      @account = FactoryBot.create(:account)
-    end
+    let(:account) { FactoryBot.create(:account) }
     
     it 'should set the current balance to the starting balance' do
-      expect(@account.current_balance).to_not eq nil
-      expect(@account.current_balance).to eq @account.starting_balance
+      expect(account.current_balance).to_not eq nil
+      expect(account.current_balance).to eq account.starting_balance
     end
 
     it 'should create initial transaction' do
-      expect(@account.transactions.first.account_id).to eq @account.id
+      expect(account.transactions.first.account_id).to eq account.id
     end
 
     it 'sets the initial transaction locked flag to true' do
-      expect(@account.transactions.first.locked).to be true
+      expect(account.transactions.first.locked).to be true
     end
   end
 
-  describe 'transaction amount totals' do
+  describe 'pending and non-pending balances' do
+
+    # Set up account and define some pending/non-pending amounts, and calculate totals
+    let(:account) { FactoryBot.create(:account) }
+    let(:pending_amts) { [20, 140, 500] }
+    let(:non_pending_amts) { [120, 80, 900] }
+    let(:total_pending) { pending_amts.sum }
+    let(:total_non_pending) { non_pending_amts.sum + account.current_balance }
+
+    # Create transactions in pending/non-pending status
     before do
-      @account = FactoryBot.create(:account)
-      
-      amt1 = 20
-      amt2 = 140
-      amt3 = 500
-      @total_pending = amt1 + amt2 + amt3
+      pending_amts.each do |amt|
+        FactoryBot.create(:transaction, :credit_transaction, account: account, amount: amt, pending: true)
+      end
 
-      amt4 = 120
-      amt5 = 80
-      amt6 = 900
-      @total_non_pending = amt4 + amt5 + amt6 + @account.current_balance
-
-      FactoryBot.create(:transaction, :credit_transaction, account: @account, amount: amt1, pending: true)
-      FactoryBot.create(:transaction, :credit_transaction, account: @account, amount: amt2, pending: true)
-      FactoryBot.create(:transaction, :credit_transaction, account: @account, amount: amt3, pending: true)
-      FactoryBot.create(:transaction, :credit_transaction, account: @account, amount: amt4)
-      FactoryBot.create(:transaction, :credit_transaction, account: @account, amount: amt5)
-      FactoryBot.create(:transaction, :credit_transaction, account: @account, amount: amt6)
+      non_pending_amts.each do |amt|
+        FactoryBot.create(:transaction, :credit_transaction, account: account, amount: amt)
+      end
     end
 
     context 'pending balance' do
       it 'returns the balance of pending transactions' do
-        puts @account.pending_balance
-        expect(@account.pending_balance).to eq @total_pending
+        expect(account.pending_balance).to eq total_pending
       end
     end
 
     context 'non-pending balance' do
       it 'returns the balance of non-pending transactions' do
-        puts @account.non_pending_balance
-        expect(@account.non_pending_balance).to eq @total_non_pending
+        expect(account.non_pending_balance).to eq total_non_pending
       end
     end
   end

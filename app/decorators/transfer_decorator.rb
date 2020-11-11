@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TransferDecorator < ApplicationDecorator
   delegate_all
 
