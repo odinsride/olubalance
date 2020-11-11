@@ -3,9 +3,14 @@
 FactoryBot.define do
   factory :transaction do
     trx_date { Date.today }
-    description { 'Transaction API Factory Test' }
+    description { 'Test Transaction' }
     amount { 50 }
     trx_type { 'debit' }
     memo { 'Sample Memo' }
+    association :account
+
+    trait :credit_transaction do
+      trx_type { 'credit' }
+    end
   end
 end

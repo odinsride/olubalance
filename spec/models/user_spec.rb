@@ -7,17 +7,6 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.build(:user)).to be_valid
   end
   
-  it "is valid with required fields populated" do
-    user = User.new(
-      first_name: 'John',
-      last_name: 'Doe',
-      email: 'john@gmail.com',
-      password: 'topsecret',
-      timezone: 'Eastern Time (US & Canada)'
-    )
-    expect(user).to be_valid
-  end
-
   describe "user sign up" do
     before do
       @user = FactoryBot.create(:user, confirmed_at: :null)

@@ -3,5 +3,6 @@ FactoryBot.define do
     name { "Test Stash" }
     description { "Test Factory for Stashes" }
     goal { "1000.00" }
+    association :account
   end
 end
