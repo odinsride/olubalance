@@ -8,7 +8,6 @@ RSpec.describe Stash, type: :model do
   describe 'default stash values' do
     subject { FactoryBot.create(:stash) }
     it { expect(subject.active).to eq true }
-    it { expect(subject.balance).to eq 0.00 }
   end
 
   describe 'stash emptied to account upon delete' do
