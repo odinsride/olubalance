@@ -3,8 +3,8 @@
 
 
 <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-	<a class="pagination-previous" href="#" data-reflex="click->TransactionReflex#paginate" data-page="<%= @pagy.prev %>">←</a>
-	<a class="pagination-next" href="#" data-reflex="click->TransactionReflex#paginate" data-page="<%= @pagy.next %>">→</a>
+	<a class="pagination-previous" href="#" data-reflex="click->TransactionReflex#paginate" data-page="<%= prev_page %>">←</a>
+	<a class="pagination-next" href="#" data-reflex="click->TransactionReflex#paginate" data-page="<%= next_page %>">→</a>
 	<ul class="pagination-list">
 		<% @pagy.series.each do |item| %>
 			<% if item == :gap %>
