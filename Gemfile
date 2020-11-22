@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.7.1'
+ruby '2.7.2'
 
 gem 'aws-sdk-s3', '~> 1.79.0'
 gem 'devise', '~> 4.7.2'
@@ -36,6 +36,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers', '~> 4.4.1'
   gem 'simplecov', require: false
+  gem 'webdrivers'
 end
 
 group :development do

@@ -112,10 +112,10 @@ class TransactionsController < ApplicationController
   def find_account
     @account = current_user.accounts.find(params[:account_id]).decorate
     respond_to do |format|
-      if !@account.active?
-        format.html { redirect_to accounts_inactive_path, notice: 'Account is inactive' }
-      else
+      if @account.active?
         format.html
+      else
+        format.html { redirect_to accounts_inactive_path, notice: 'Account is inactive' }
       end
     end
   end

@@ -7,28 +7,15 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.build(:user)).to be_valid
   end
   
-  it "is valid with required fields populated" do
-    user = User.new(
-      first_name: 'John',
-      last_name: 'Doe',
-      email: 'john@gmail.com',
-      password: 'topsecret',
-      timezone: 'Eastern Time (US & Canada)'
-    )
-    expect(user).to be_valid
-  end
-
   describe "user sign up" do
-    before do
-      @user = FactoryBot.create(:user, confirmed_at: :null)
-    end
+    let!(:user) { FactoryBot.create(:user, confirmed_at: :null) }
     
     it "should send the user a confirmation email on signup" do
       expect(Devise.mailer.deliveries.count).to eq 1
     end
 
     it "should send the user a confirmation email when email changes" do
-      @user.update(email: "new-email@gmail.com")
+      user.update(email: "new-email@gmail.com")
       expect(Devise.mailer.deliveries.count).to eq 2
     end
   end

@@ -3,6 +3,60 @@
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
+  it "has a valid factory" do
+    expect(FactoryBot.build(:account)).to be_valid
+  end
+
+  describe 'account creation' do
+    let(:account) { FactoryBot.create(:account) }
+    
+    it 'should set the current balance to the starting balance' do
+      expect(account.current_balance).to_not eq nil
+      expect(account.current_balance).to eq account.starting_balance
+    end
+
+    it 'should create initial transaction' do
+      expect(account.transactions.first.account_id).to eq account.id
+    end
+
+    it 'sets the initial transaction locked flag to true' do
+      expect(account.transactions.first.locked).to be true
+    end
+  end
+
+  describe 'pending and non-pending balances' do
+
+    # Set up account and define some pending/non-pending amounts, and calculate totals
+    let(:account) { FactoryBot.create(:account) }
+    let(:pending_amts) { [20, 140, 500] }
+    let(:non_pending_amts) { [120, 80, 900] }
+    let(:total_pending) { pending_amts.sum }
+    let(:total_non_pending) { non_pending_amts.sum + account.current_balance }
+
+    # Create transactions in pending/non-pending status
+    before do
+      pending_amts.each do |amt|
+        FactoryBot.create(:transaction, :credit_transaction, account: account, amount: amt, pending: true)
+      end
+
+      non_pending_amts.each do |amt|
+        FactoryBot.create(:transaction, :credit_transaction, account: account, amount: amt)
+      end
+    end
+
+    context 'pending balance' do
+      it 'returns the balance of pending transactions' do
+        expect(account.pending_balance).to eq total_pending
+      end
+    end
+
+    context 'non-pending balance' do
+      it 'returns the balance of non-pending transactions' do
+        expect(account.non_pending_balance).to eq total_non_pending
+      end
+    end
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:starting_balance) }
@@ -12,28 +66,10 @@ RSpec.describe Account, type: :model do
     it { should_not allow_value('A').for(:name) }
     it { should_not allow_value('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA').for(:name) }
     it { should allow_value('1234').for(:last_four) }
+    it { should allow_value(nil).for(:last_four) }
     it { should_not allow_value('12').for(:last_four) }
     it { should_not allow_value('12345').for(:last_four) }
     it { should_not allow_value('ASDF').for(:last_four) }
-  end
-
-  describe '#set_current_balance' do
-    subject { FactoryBot.create(:account, user: FactoryBot.create(:user)) }
-    it { expect(subject.current_balance).to_not eq nil }
-    it { expect(subject.current_balance).to eq subject.starting_balance }
-  end
-
-  describe '#create_initial_transaction' do
-    it 'creates a new transaction record for the starting balance' do
-      expect do
-        FactoryBot.create(:account, user: FactoryBot.create(:user))
-      end.to change(Transaction, :count).by(1)
-    end
-
-    it 'sets the initial transaction locked flag to true' do
-      account = FactoryBot.create(:account, user: FactoryBot.create(:user))
-      expect(account.transactions.first.locked).to be true
-    end
   end
 
   it { should belong_to(:user) }
