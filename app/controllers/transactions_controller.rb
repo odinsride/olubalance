@@ -23,6 +23,7 @@ class TransactionsController < ApplicationController
     @pagy, @transactions = pagy(transactions, page: @page)
     @transactions = @transactions.decorate
 
+    @stashes = @account.stashes.decorate
     @stashed = @account.stashes.sum(:balance)
 
     respond_to do |format|

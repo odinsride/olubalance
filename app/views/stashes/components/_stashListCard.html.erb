@@ -1,0 +1,34 @@
+<div class="column is-3-widescreen is-6-tablet">
+  <div class="card stash-card" id="stash-card-<%= stash.id %>">
+    <%= link_to(account_stash_path(id: stash.id)) do %>
+      <div class="card-content">
+        <div class="columns is-mobile">
+          <div class="column is-four-fifths">
+            <div clas="content">
+              <p class="is-size-7">
+                <strong><%= stash.name %></strong>
+              </p>
+              <progress class="progress is-link is-small" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %></progress>
+              <p class="is-size-7 has-text-centered">
+                <span class="has-text-grey has-text-weight-semibold"><%= stash.balance_display %> / <%= stash.goal_display %></span></span>
+              </p>
+            </div>
+          </div>
+
+          <div class="column ml-5 mt-5">
+            <div clas="content has-text-centered">
+                <span class="icon has-text-success" style="display: inline-table">
+                  <i class="fas fa-lg fa-plus-circle"></i>
+                </span>
+                <span class="icon has-text-danger" style="display: inline-table">
+                  <i class="fas fa-lg fa-minus-circle"></i>
+                </span>
+            </div>
+          </div>
+
+           <%= render partial: "shared/modal", locals: { partialPath: "stash_entries/components/form" } %> 
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

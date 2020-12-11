@@ -1,23 +1,9 @@
-<table class="table is-fullwidth is-hoverable ob-table">
-  <thead>
-    <th colspan=5 class="ob-table-phead">
-      <!-- Main container -->
-      <div class="level">
-        <!-- Left side -->
-        <div class="level-left">
-          <div class="level-item">
-            <p class="title is-5 is-size-7-mobile has-text-white">
-              <span class="icon is-medium ob-icon-rpad" style="display: inline-table">
-                <i class="fas fa-lg fa-briefcase"></i>
-              </span>
-              <%= @stashes.count %> <%= "stash".pluralize(@stashes.count) %> for this account
-            </p>
-          </div>
-        </div>
-      </nav>
-    </th>
-  </thead>
-  <tbody>
-    <%= render partial: "stashes/components/stashLine", collection: @stashes, as: :stash %>
-  </tbody>
-</table>
+<div class="is-size-7 has-text-weight-semibold has-text-grey-dark mb-10">
+  STASHES (<%= @stashes.count %>)
+  <span class="icon has-text-link ml-5" style="display: inline-table">
+    <i class="fas fa-chevron-down"></i>
+  </span>
+</div>
+<div class="columns is-multiline">
+  <%= render partial: "stashes/components/stashListCard", collection: @stashes, as: :stash %>
+</div>

@@ -16,15 +16,15 @@ table.ob-table {
     }
   }
 
-  th#trx-date {
+  th#trx-date, th#stash-entry-date {
     border-top-left-radius: $ob-table-border-radius;
   }
 
-  th#trx-balance {
+  th#trx-balance, th#stash-entry-amount {
     border-top-right-radius: $ob-table-border-radius;
   }
 
-  th#trx-header-mobile {
+  th#trx-header-mobile, th#ob-stash-list {
     border-top-left-radius: $ob-table-border-radius;
     border-top-right-radius: $ob-table-border-radius;
   }
