@@ -37,7 +37,7 @@ export default class extends Controller {
    * Remove the is-active class to hide a dropdown
    */
   hide(e) {
-    if (e.target == this.menuTarget) {
+    if (e && (this.menuTarget.contains(e.target))) {
       e.preventDefault()
       return
     }
