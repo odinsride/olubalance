@@ -21,11 +21,13 @@ class Stash < ApplicationRecord
   # Create an account transaction to return any stashed money
   # to the Account balance when a Stash is deleted
   def unstash
+    return unless balance.positive?
+
     transaction = Transaction.new
     transaction.trx_type = 'credit'
     transaction.trx_date = Time.current
     transaction.account_id = account_id
-    transaction.description = 'Transfer from ' + name + ' (Stash Deleted)'
+    transaction.description = 'Transfer from ' + name + ' Stash (Stash Deleted)'
     transaction.amount = balance.abs
     transaction.locked = true
     transaction.save

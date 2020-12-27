@@ -8,7 +8,7 @@
       class="navbar-burger burger"
       aria-label="menu"
       aria-expanded="false"
-      data-target="nav.burger"
+      data-nav-target="burger"
       data-action="click->nav#toggleNav"
     >
       <span aria-hidden="true"></span>
@@ -17,7 +17,7 @@
     </a>
   </div>
 
-  <div class="navbar-menu" id="navMenu" data-target="nav.menu">
+  <div class="navbar-menu" id="navMenu" data-nav-target="menu">
 
     <%= render "shared/userMenu" if user_signed_in? %>
 

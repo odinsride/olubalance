@@ -1,40 +1,3 @@
-<div class="level-item is-hidden-tablet">
-  <%= link_to account_stashes_path, class: "button is-link is-outlined" do %>
-    Stashes
-  <% end %>
-</div>
-
-<div class="level-item">
-  <div class="dropdown is-right" data-controller="dropdown">
-    <div class="dropdown-trigger">
-      <button 
-        id="stashes-button" 
-        class="button is-link is-outlined" 
-        role="button"
-        aria-haspopup="true" 
-        aria-controls="stashes-dropdown"
-        aria-expanded="false"
-        data-target="dropdown.button"
-        data-toggle="dropdown"
-        data-action="click->dropdown#toggle click@window->dropdown#hide"
-      >
-        <span class="icon is-small">
-          <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
-        <span>Stashes</span>
-      </button>
-    </div>
-
-    <div class="dropdown-menu stashes-menu" id="stashes-dropdown" data-target="dropdown.menu" role="menu">
-      <div class="dropdown-content stashes-menu-content">
-        <div class="dropdown-item stashes-menu-item">
-          <%= render partial: "stashes/components/stashList" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="level-item">
   <div class="dropdown is-right" data-controller="dropdown">
     <div class="dropdown-trigger">
@@ -45,7 +8,7 @@
         aria-haspopup="true" 
         aria-controls="transfer-dropdown"
         aria-expanded="false"
-        data-target="dropdown.button"
+        data-dropdown-target="button"
         data-toggle="dropdown"
         data-action="click->dropdown#toggle click@window->dropdown#hide"
       >
@@ -56,7 +19,7 @@
       </button>
     </div>
 
-    <div class="dropdown-menu" id="transfer-dropdown" data-target="dropdown.menu" role="menu">
+    <div class="dropdown-menu" id="transfer-dropdown" data-dropdown-target="menu" role="menu">
       <div class="dropdown-content">
         <div class="dropdown-item">
           <%= render partial: "transfers/components/transferForm" %>

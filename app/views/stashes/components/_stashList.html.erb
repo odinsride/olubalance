@@ -1,9 +1,24 @@
-<div class="is-size-7 has-text-weight-semibold has-text-grey-dark mb-10">
-  STASHES (<%= @stashes.count %>)
-  <span class="icon has-text-link ml-5" style="display: inline-table">
-    <i class="fas fa-chevron-down"></i>
-  </span>
-</div>
-<div class="columns is-multiline">
-  <%= render partial: "stashes/components/stashListCard", collection: @stashes, as: :stash %>
+<div data-controller="stashlist" data-stashlist-hide-value="true" class="mb-15">
+  <a href="#" data-action="click->stashlist#toggle">
+    <div class="is-size-7 has-text-weight-semibold has-text-grey-dark mb-5">
+      STASHES (<%= @stashes.count %>)
+      <span class="icon has-text-link ml-5" style="display: inline-table">
+        <i class="fas fa-chevron-right" data-stashlist-target="chevron"></i>
+      </span>
+    </div>
+  </a>
+  <div class="animate__animated animate__fadeIn" data-stashlist-target="list">
+    <nav class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <%= link_to new_account_stash_path, class: "button is-small is-primary" do %>
+            <span>New Stash</span>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    <div class="columns is-vcentered is-multiline">
+      <%= render partial: "stashes/components/stashListCard", collection: @stashes, as: :stash %>
+    </div>
+  </div>
 </div>

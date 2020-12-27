@@ -9,28 +9,6 @@ RSpec.describe "Stash management", type: :request do
     @stash = FactoryBot.create(:stash, goal: @stash_goal, account: @account)
   end
 
-  describe "stash index" do
-
-    it "displays a list of the user's stashes" do
-      sign_in @user
-      get account_stashes_path(account_id: @account.id)
-      expect(response).to be_successful
-      expect(response.body).to include(@stash.name)
-      expect(response.body).to include(@stash_goal.to_s)
-    end
-
-    it "doesn't show another account's stashes" do
-      account2 = FactoryBot.create(:account, name: "Account 2", user: @user)
-      stash2 = FactoryBot.create(:stash, name: "Stash 2", account: account2)
-
-      sign_in @user
-      get account_stashes_path(account_id: @account.id)
-      expect(response).to be_successful
-      expect(response.body).to_not include("Stash 2")
-    end
-
-  end
-
   describe "stash create" do
     it "creates a new stash and redirects to the stashes page" do
       sign_in @user
@@ -44,7 +22,8 @@ RSpec.describe "Stash management", type: :request do
           account: @account.id
         }
       }
-      expect(response).to redirect_to(account_stashes_path(@account))
+      create_stash_id = Stash.last.id
+      expect(response).to redirect_to(account_stash_path(id: create_stash_id))
       follow_redirect!
 
       expect(response.body).to include("Test Create Stash")
@@ -63,7 +42,7 @@ RSpec.describe "Stash management", type: :request do
           goal: 10000 
         }
       }
-      expect(response).to redirect_to(account_stashes_path(@account))
+      expect(response).to redirect_to(account_stash_path(id: @stash.id))
       follow_redirect!
 
       expect(response.body).to include("Stash Management Test Edited")
@@ -71,7 +50,6 @@ RSpec.describe "Stash management", type: :request do
   end
 
   describe "stash delete" do
-
     it "deletes an existing stash and redirects to the stashes page" do
       sign_in @user
 
@@ -81,10 +59,7 @@ RSpec.describe "Stash management", type: :request do
       expect(response.body).to include("delete-stash-#{@stash.id}")
       
       delete "/accounts/#{@account.id}/stashes/#{@stash.id}"
-      expect(response).to redirect_to(account_stashes_path(@account))
-      follow_redirect!
-
-      expect(response.body).to_not include(@stash.name)
+      expect(response).to redirect_to(account_transactions_path(@account))
     end
   end
 end
