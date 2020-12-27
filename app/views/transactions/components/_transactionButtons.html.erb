@@ -1,20 +1,16 @@
 <div class="level-item">
-  <%= link_to account_stashes_path, class: "button is-link is-outlined" do %>
-    Stashes
-  <% end %>
-</div>
-
-<div class="level-item">
-  <div class="dropdown is-right" data-controller="shared" data-target="shared.dropDown">
+  <div class="dropdown is-right" data-controller="dropdown">
     <div class="dropdown-trigger">
       <button 
         id="transfer-button" 
         class="button is-link is-outlined" 
+        role="button"
         aria-haspopup="true" 
         aria-controls="transfer-dropdown"
         aria-expanded="false"
-        data-target="shared.dropDownButton"
-        data-action="click->shared#toggleDropdown"
+        data-dropdown-target="button"
+        data-toggle="dropdown"
+        data-action="click->dropdown#toggle click@window->dropdown#hide"
       >
         <span class="icon is-small">
           <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -23,7 +19,7 @@
       </button>
     </div>
 
-    <div class="dropdown-menu" id="transfer-dropdown" role="menu">
+    <div class="dropdown-menu" id="transfer-dropdown" data-dropdown-target="menu" role="menu">
       <div class="dropdown-content">
         <div class="dropdown-item">
           <%= render partial: "transfers/components/transferForm" %>

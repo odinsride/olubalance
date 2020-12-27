@@ -14,7 +14,7 @@ class StashEntriesController < ApplicationController
   def create
     @stash_entry = @stash.stash_entries.build(stash_entry_params).decorate
     if @stash_entry.save
-      redirect_to account_stashes_path, notice: 'Stash entry was successfully created.'
+      redirect_to account_transactions_path, notice: 'Stash entry was successfully created.'
     else
       render :new
     end

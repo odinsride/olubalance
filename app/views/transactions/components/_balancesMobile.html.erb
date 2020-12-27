@@ -1,12 +1,12 @@
 <div class="level-item has-text-centered is-hidden-tablet">
-  <div class="dropdown is-right" data-controller="shared" data-target="shared.dropDown">
+  <div class="dropdown is-right" data-controller="shared" data-shared-target="dropDown">
     <div class="dropdown-trigger">
       <button 
         class="button is-white" 
         aria-haspopup="true" 
         aria-controls="balance-dropdown"
         aria-expanded="false"
-        data-target="shared.dropDownButton"
+        data-shared-target="dropDownButton"
         data-action="click->shared#toggleDropdown"
       >
         <span class="subtitle is-size-6 has-text-weight-bold <%= @account.balance_color %>">

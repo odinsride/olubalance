@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div class="column is-10-widescreen is-9-desktop is-10-tablet is-9-mobile">
+      <div class="column is-10-widescreen is-9-desktop is-9-tablet is-9-mobile">
         <%= link_to account_stash_path(id: stash.id) do %>
           <div class="level ob-stash-level">
               <div class="level-item">
@@ -29,7 +29,7 @@
                 <span class="is-size-7 has-text-grey"><%= stash.balance_display %> saved out of <%= stash.goal_display %></span></span>
               </div>
           </div>
-          <progress class="progress is-primary" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %></progress>
+          <progress class="progress is-link" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %></progress>
         <% end %>
       </div>
       

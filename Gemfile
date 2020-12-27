@@ -23,8 +23,8 @@ gem 'puma', '~> 4.3.5'
 gem 'rails', '~> 6.0.3.2'
 gem 'recaptcha'
 gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
-gem 'stimulus_reflex', '~> 3.2.3'
-gem 'webpacker', '~> 5.2.1'
+gem 'stimulus_reflex'
+gem 'webpacker'
 
 group :development, :test do
   gem 'capybara'

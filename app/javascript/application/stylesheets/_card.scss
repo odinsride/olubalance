@@ -1,5 +1,5 @@
 .column>.card {
-  min-height: 200px;
+  //min-height: 200px;
 
   /* Olubalance Card Gradient */
   /* Old browsers */
@@ -23,7 +23,7 @@
     box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, .2),
                 0px 8px 10px 1px rgba(0, 0, 0, .14),
                 0px 3px 14px 2px rgba(0, 0, 0, .12);
-    transform: scale(1.1, 1.1);
+    //transform: scale(1.1, 1.1);
     z-index: 1000;
   }
 
@@ -38,6 +38,37 @@
   .card-footer {
     .card-footer-item {
       font-size: 0.85em;
+    }
+  }
+}
+
+.stash-card {
+  border: 1px solid $primary;
+  height: 75px;
+
+  a:hover {
+    color: $link;
+  }
+
+  .card-content {
+    padding: 0.5rem;
+
+    p {
+      margin-bottom: 0.5rem;
+    }
+
+    progress {
+      background-color: white;
+      border: 1px solid $link;
+      margin-bottom: 0.3rem;
+    }
+
+    progress::-webkit-progress-bar {
+      background-color: white;
+    }
+
+    progress::-moz-progress-bar {
+      background-color: white;
     }
   }
 }
