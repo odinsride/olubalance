@@ -85,7 +85,7 @@
         <label class="label has-text-grey">Receipt</label>
         <div class="file">
           <label class="file-label">
-            <%= f.file_field :attachment, id: "upload", class: "file-input is-primary", data: { 'trxform-target': 'attachment' } %>
+            <%= f.file_field :attachment, class: "file-input is-primary", data: { action: 'change->trxform#attachmentSelected', 'trxform-target': 'attachment' } %>
             <span class="file-cta has-background-primary">
               <span class="file-icon has-text-white">
                 <i class="fas fa-upload"></i>
@@ -98,8 +98,8 @@
         </div>
         
         <div class="ob-file-name has-text-grey">
-          <span id="newreceipt" class="has-text-weight-bold has-text-danger"></span>
-          <span id="filename"><%= @transaction.filename_form %></span>
+          <span data-trxform-target="newreceipt" class="has-text-weight-bold has-text-danger"></span>
+          <span data-trxform-target="filename"><%= @transaction.filename_form %></span>
         </div>
 
         <!-- Pending -->
@@ -136,18 +136,3 @@
     </div>
   <% end %>
 </span>
-<script>
-  // When an attachment file is selected, set the file-name field
-  document.getElementById('upload').onchange = uploadOnChange;
-
-  function uploadOnChange() {
-    var filename = this.value;
-    var lastIndex = filename.lastIndexOf("\\");
-    if (lastIndex >= 0) {
-      filename = filename.substring(lastIndex + 1);
-      filename = filename;
-    }
-    document.getElementById('newreceipt').innerHTML = "Adding receipt: ";
-    document.getElementById('filename').innerHTML = filename;
-  }
-</script>
