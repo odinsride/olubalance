@@ -9,6 +9,18 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: account_types; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.account_types AS ENUM (
+    'checking',
+    'savings',
+    'credit',
+    'cash'
+);
+
+
 SET default_tablespace = '';
 
 --
@@ -24,7 +36,10 @@ CREATE TABLE public.accounts (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     last_four character varying,
-    active boolean DEFAULT true
+    active boolean DEFAULT true,
+    account_type public.account_types DEFAULT 'checking'::public.account_types,
+    interest_rate numeric,
+    credit_limit numeric
 );
 
 
@@ -423,6 +438,13 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: index_accounts_on_account_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_accounts_on_account_type ON public.accounts USING btree (account_type);
+
+
+--
 -- Name: index_accounts_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -583,6 +605,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191227150641'),
 ('20200128211634'),
 ('20200623012351'),
-('20200807000110');
+('20200807000110'),
+('20201230210340'),
+('20201230210944'),
+('20210102150348');
 
 

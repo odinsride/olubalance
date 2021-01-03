@@ -25,10 +25,11 @@ export default class extends Controller {
    * Add the is-active class to show a dropdown
    */
   show() {
-    this.buttonTargets.forEach((b) => b.setAttribute('aria-expanded', "false"))
-    this.menuTargets.forEach((m) => m.classList.remove('is-active'))
+    //this.buttonTargets.forEach((b) => b.setAttribute('aria-expanded', "false"))
+    //this.menuTargets.forEach((m) => m.classList.remove('is-active'))
     this.buttonTarget.setAttribute('aria-expanded', "true")
     this.element.classList.add('is-active')
+    this.menuTarget.classList.add('is-active')
   }
   
   /**
@@ -38,10 +39,11 @@ export default class extends Controller {
    */
   hide(e) {
     if (e && (this.menuTarget.contains(e.target))) {
-      e.preventDefault()
+      //e.preventDefault()
       return
     }
     this.buttonTarget.setAttribute('aria-expanded', "false")
     this.element.classList.remove('is-active')
+    this.menuTarget.classList.remove('is-active')
   }
 }

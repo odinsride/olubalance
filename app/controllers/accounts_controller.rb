@@ -8,6 +8,21 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     @accounts = current_user.accounts.where(active: true).order('created_at ASC')
+
+    @accounts_checking = @accounts.where(account_type: :checking)
+    @accounts_savings_cash = @accounts.where(account_type: :savings).or(@accounts.where(account_type: :cash))
+    @accounts_credit = @accounts.where(account_type: :credit)
+
+    @checking_total = @accounts_checking.sum(:current_balance)
+    @savings_cash_total = @accounts_savings_cash.sum(:current_balance)
+
+    @credit_total = @accounts_credit.sum(:current_balance)
+    @credit_limit_total = @accounts_credit.sum(:credit_limit)
+    @credit_utilization_total = ((@credit_total.abs / @credit_limit_total) * 100).round(2)
+
+    @accounts_checking = @accounts_checking.decorate
+    @accounts_savings_cash = @accounts_savings_cash.decorate
+    @accounts_credit = @accounts_credit.decorate
     @accounts = @accounts.decorate
   end
 
@@ -90,6 +105,6 @@ class AccountsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def account_params
-    params.require(:account).permit(:name, :starting_balance, :current_balance, :last_four, :active, :user_id)
+    params.require(:account).permit(:name, :starting_balance, :current_balance, :last_four, :active, :account_type, :interest_rate, :credit_limit, :user_id)
   end
 end

@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_account
   before_action :find_transaction, only: %i[edit update show destroy]
-  before_action :all_accounts, only: %i[index]
+  before_action :transfer_accounts, only: %i[index]
 
   # Index action to render all transactions
   def index
@@ -121,9 +121,9 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def all_accounts
+  def transfer_accounts
     account_id = params[:account_id]
-    @all_accounts = current_user.accounts.where('active = ?', 'true').where('id != ?', account_id).decorate
+    @transfer_accounts = current_user.accounts.where('active = ?', 'true').where('account_type != ?', 'credit').where('id != ?', account_id).decorate
   end
 
   def find_transaction

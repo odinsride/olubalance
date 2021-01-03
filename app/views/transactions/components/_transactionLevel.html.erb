@@ -10,7 +10,9 @@
     %>
   </div>
   <div class="level-right is-hidden-mobile">
-    <%= render partial: "transactions/components/transactionButtons" %>
+    <% if !@account.credit? %>
+      <%= render partial: "transactions/components/transactionButtons" %>
+    <% end %>
     <%= render partial: "shared/pageLevelNewButton", locals: { path: new_account_transaction_path } %>
   </div>
 
@@ -29,6 +31,13 @@
     <%= render partial: "transactions/components/search" %>
   </div>
 </nav>
+
+<!-- Tertiary Level: Credit Card Details -->
+<% if @account.credit? %>
+  <nav class="level is-hidden-mobile">
+    <%= render partial: "transactions/components/creditDetails" %>
+  </nav>
+<% end %>
 
 <!-- Mobile Search -->
 <nav class="level is-hidden-tablet">

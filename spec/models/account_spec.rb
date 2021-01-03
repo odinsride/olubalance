@@ -70,6 +70,27 @@ RSpec.describe Account, type: :model do
     it { should_not allow_value('12').for(:last_four) }
     it { should_not allow_value('12345').for(:last_four) }
     it { should_not allow_value('ASDF').for(:last_four) }
+    it { should define_enum_for(:account_type).with(checking: 'checking', credit: 'credit', cash: 'cash', savings: 'savings').backed_by_column_of_type(:enum) }
+
+    context 'credit account' do
+      before { allow(subject).to receive(:credit?).and_return(true) }
+      it { should validate_presence_of(:interest_rate) }
+      it { should allow_value(20.00).for(:interest_rate) }
+      it { should_not allow_value('ASDF').for(:interest_rate) }
+      it { should_not allow_value(-10.00).for(:interest_rate) }
+      it { should validate_presence_of(:credit_limit) }
+      it { should allow_value(9000.00).for(:credit_limit) }
+      it { should_not allow_value('ASDF').for(:credit_limit) }
+      it { should_not allow_value(-5000.00).for(:credit_limit) }
+    end
+
+    context 'savings account' do
+      before { allow(subject).to receive(:savings?).and_return(true) }
+      it { should validate_presence_of(:interest_rate) }
+      it { should allow_value(20.00).for(:interest_rate) }
+      it { should_not allow_value('ASDF').for(:interest_rate) }
+      it { should_not allow_value(-10.00).for(:interest_rate) }
+    end
   end
 
   it { should belong_to(:user) }

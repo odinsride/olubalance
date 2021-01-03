@@ -22,9 +22,23 @@ class Account < ApplicationRecord
   validates :last_four, length: { minimum: 4, maximum: 4 },
                         format: { with: /\A\d+\z/, message: 'Numbers only.' },
                         allow_blank: true
+  validates :interest_rate, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u| !u.credit? } 
+  validates :interest_rate, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u| !u.savings? } 
+  validates :credit_limit, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u| !u.credit? }
 
   before_create :set_current_balance
   after_create :create_initial_transaction
+
+  enum account_type: {
+    checking: 'checking',
+    savings: 'savings',
+    credit: 'credit',
+    cash: 'cash'
+  }
+
+  validates :account_type, inclusion: {
+    in: account_types.keys
+  }
 
   # Sum of Pending Transactions
   def pending_balance
@@ -33,6 +47,18 @@ class Account < ApplicationRecord
 
   def non_pending_balance
     transactions.where(pending: false).sum(:amount)
+  end
+
+  def available_credit
+    if current_balance.abs <= credit_limit
+      credit_limit - current_balance.abs
+    else
+      0
+    end
+  end
+
+  def credit_utilization
+    ((current_balance.abs / credit_limit) * 100).round(2)
   end
 
   private

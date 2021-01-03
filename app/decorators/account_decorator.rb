@@ -59,10 +59,23 @@ class AccountDecorator < ApplicationDecorator
 
   # Set the balance color to red if the amount is negative
   def balance_color
+    return 'has-text-grey-dark' if account.credit?
+
     balance_negative? ? 'has-text-danger' : 'has-text-grey-dark'
   end
 
   def noaccounts_partial
     render partial: 'noaccounts', locals: { description: NO_ACCOUNT_DESC } if @accounts.empty?
+  end
+
+  def account_icon
+    case account_type
+    when 'credit'
+      'fa-credit-card'
+    when 'checking'
+      'fa-money-check'
+    else
+      'fa-piggy-bank'
+    end
   end
 end
