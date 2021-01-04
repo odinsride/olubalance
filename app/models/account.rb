@@ -22,9 +22,15 @@ class Account < ApplicationRecord
   validates :last_four, length: { minimum: 4, maximum: 4 },
                         format: { with: /\A\d+\z/, message: 'Numbers only.' },
                         allow_blank: true
-  validates :interest_rate, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u| !u.credit? } 
-  validates :interest_rate, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u| !u.savings? } 
-  validates :credit_limit, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u| !u.credit? }
+  validates :interest_rate, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u|
+                                                                                                     !u.credit?
+                                                                                                   }
+  validates :interest_rate, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u|
+                                                                                                     !u.savings?
+                                                                                                   }
+  validates :credit_limit, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u|
+                                                                                                    !u.credit?
+                                                                                                  }
 
   before_create :set_current_balance
   after_create :create_initial_transaction

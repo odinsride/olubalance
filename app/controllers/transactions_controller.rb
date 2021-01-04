@@ -123,7 +123,9 @@ class TransactionsController < ApplicationController
 
   def transfer_accounts
     account_id = params[:account_id]
-    @transfer_accounts = current_user.accounts.where('active = ?', 'true').where('account_type != ?', 'credit').where('id != ?', account_id).decorate
+    @transfer_accounts = current_user.accounts.where('active = ?', 'true').where('account_type != ?', 'credit').where(
+      'id != ?', account_id
+    ).decorate
   end
 
   def find_transaction
