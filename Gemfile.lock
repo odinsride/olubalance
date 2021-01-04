@@ -342,10 +342,11 @@ DEPENDENCIES
   faker (~> 2.15.1)
   figaro (~> 1.2.0)
   hiredis (~> 0.6.3)
-  image_processing (~> 1.12.1)
+  image_processing
   invisible_captcha (~> 1.1.0)
   letter_opener
   listen
+  mini_magick (~> 4.11.0)
   pagy (~> 3.10.0)
   pg (~> 1.2.3)
   pry-byebug
