@@ -36,7 +36,7 @@ class TransactionsController < ApplicationController
   def new
     @transaction = @account.transactions.build.decorate
     @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
-                            .order('description').uniq.pluck(:description)
+                            .order('description').uniq(&:description).pluck(:description)
 
     @autocomplete = @descriptions.to_json
 

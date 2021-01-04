@@ -45,11 +45,15 @@
         </div>
 
         <!-- Description -->
-        <div class="field">
+        <div class="field" data-controller="autocomplete">
           <label class="label has-text-grey">Description</label>
           <div class="control has-icons-left">
             <%= f.text_field :description, class: "input is-primary",
-                                          placeholder: "Description" %>
+                                          placeholder: "Description",
+                                          data: {
+                                            'autocomplete-target': 'field',
+                                            'autocomplete-json': @autocomplete
+                                          } %>
             <span class="icon is-small is-left has-text-primary">
               <i class="fas fa-file-alt"></i>
             </span>
