@@ -7,24 +7,24 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.7.2'
+ruby '3.0.0'
 
-gem 'aws-sdk-s3', '~> 1.79.0'
-gem 'devise', '~> 4.7.2'
+gem 'aws-sdk-s3', '~> 1.87.0'
+gem 'devise', '~> 4.7.3'
 gem 'draper', '~> 4.0.1'
-gem 'faker', '~> 2.13.0'
+gem 'faker', '~> 2.15.1'
 gem 'figaro', '~> 1.2.0'
-gem 'hiredis'
-gem 'invisible_captcha'
-gem 'mini_magick', '~> 4.10.1'
-gem 'pagy', '~> 3.8.2'
+gem 'hiredis', '~> 0.6.3'
+gem 'invisible_captcha', '~> 1.1.0'
+gem 'mini_magick', '~> 4.11.0'
+gem 'pagy', '~> 3.10.0'
 gem 'pg', '~> 1.2.3'
-gem 'puma', '~> 4.3.5'
-gem 'rails', '~> 6.0.3.2'
-gem 'recaptcha'
+gem 'puma', '~> 5.1.1'
+gem 'rails', '~> 6.1.0'
+gem 'recaptcha', '~> 5.6.0'
 gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
-gem 'stimulus_reflex'
-gem 'webpacker'
+gem 'stimulus_reflex', '~> 3.4.0'
+gem 'webpacker', '~> 5.2.1'
 
 group :development, :test do
   gem 'capybara'
@@ -32,8 +32,8 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.1.0'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'rails-controller-testing', '~> 1.0.4'
-  gem 'rspec-rails', '~> 4.0.1'
+  gem 'rails-controller-testing', '~> 1.0.5'
+  gem 'rspec-rails', '~> 4.0.2'
   gem 'shoulda-matchers', '~> 4.4.1'
   gem 'simplecov', require: false
   gem 'webdrivers'
