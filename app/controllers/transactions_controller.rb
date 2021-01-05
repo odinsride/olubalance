@@ -6,6 +6,7 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_account
   before_action :find_transaction, only: %i[edit update show destroy]
+  before_action :transfer_accounts, only: %i[index]
 
   # Index action to render all transactions
   def index
@@ -22,6 +23,7 @@ class TransactionsController < ApplicationController
     @pagy, @transactions = pagy(transactions, page: @page)
     @transactions = @transactions.decorate
 
+    @stashes = @account.stashes.order(id: :asc).decorate
     @stashed = @account.stashes.sum(:balance)
 
     respond_to do |format|
@@ -34,7 +36,7 @@ class TransactionsController < ApplicationController
   def new
     @transaction = @account.transactions.build.decorate
     @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
-                            .order('description').uniq.pluck(:description)
+                            .order('description').uniq(&:description).pluck(:description)
 
     @autocomplete = @descriptions.to_json
 
@@ -105,18 +107,25 @@ class TransactionsController < ApplicationController
 
   def transaction_params
     params.require(:transaction) \
-          .permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :page, :pending, :locked)
+          .permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :page, :pending, :locked, :transfer)
   end
 
   def find_account
     @account = current_user.accounts.find(params[:account_id]).decorate
     respond_to do |format|
-      if !@account.active?
-        format.html { redirect_to accounts_inactive_path, notice: 'Account is inactive' }
-      else
+      if @account.active?
         format.html
+      else
+        format.html { redirect_to accounts_inactive_path, notice: 'Account is inactive' }
       end
     end
+  end
+
+  def transfer_accounts
+    account_id = params[:account_id]
+    @transfer_accounts = current_user.accounts.where('active = ?', 'true').where('account_type != ?', 'credit').where(
+      'id != ?', account_id
+    ).decorate
   end
 
   def find_transaction

@@ -1,7 +1,7 @@
 <div class="level-item has-text-centered mr-30">
   <div>
     <p class="title <%= @account.balance_color %>"><%= @account.current_balance_display %></p>
-    <p class="heading has-text-grey is-size-7 has-text-weight-bold">Balance</p>
+    <p class="heading has-text-grey is-size-7 has-text-weight-bold">Balance (Usable)</p>
   </div>
 </div>
 <% if @account.pending_balance != 0 %>
@@ -15,8 +15,16 @@
 <% if @stashed != 0 %>
   <div class="level-item has-text-centered">
     <div>
-      <p class="title tag is-success is-6 "><%= number_to_currency(@stashed) %></p>
+      <p class="title tag is-success is-6"><%= number_to_currency(@stashed) %></p>
       <p class="heading has-text-grey has-text-weight-semibold">Stashed</p>
+    </div>
+  </div>
+<% end %>
+<% if @account.savings? %>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="title tag is-white is-6"><%= @account.interest_rate %>%
+      <p class="heading has-text-grey has-text-weight-semibold">Interest Rate</p>
     </div>
   </div>
 <% end %>

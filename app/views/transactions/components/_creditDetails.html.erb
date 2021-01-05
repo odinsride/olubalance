@@ -1,0 +1,24 @@
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Available</p>
+      <p class="title is-size-4"><%= number_to_currency(@account.available_credit) %></p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Credit Limit</p>
+      <p class="title is-size-4"><%= number_to_currency(@account.credit_limit) %></p>    
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Utilization</p>
+      <p class="title is-size-4"><%= @account.credit_utilization %>%</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Interest Rate</p>
+      <p class="title is-size-4"><%= @account.interest_rate %>%</p>
+    </div>
+  </div>

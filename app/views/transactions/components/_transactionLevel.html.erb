@@ -4,13 +4,15 @@
     <% account_subtitle = "Account ending in " + @account.last_four_display unless @account.last_four_display.nil? %>
     <%= render  partial: "shared/pageLevelTitle", 
                 locals: { 
-                  title: @account.name, 
+                  title: @account.account_card_title, 
                   subtitle: account_subtitle
                 } 
     %>
   </div>
   <div class="level-right is-hidden-mobile">
-    <%= render partial: "transactions/components/stashButton" %>
+    <% if !@account.credit? %>
+      <%= render partial: "transactions/components/transactionButtons" %>
+    <% end %>
     <%= render partial: "shared/pageLevelNewButton", locals: { path: new_account_transaction_path } %>
   </div>
 
@@ -29,6 +31,13 @@
     <%= render partial: "transactions/components/search" %>
   </div>
 </nav>
+
+<!-- Tertiary Level: Credit Card Details -->
+<% if @account.credit? %>
+  <nav class="level is-hidden-mobile">
+    <%= render partial: "transactions/components/creditDetails" %>
+  </nav>
+<% end %>
 
 <!-- Mobile Search -->
 <nav class="level is-hidden-tablet">

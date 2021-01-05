@@ -12,7 +12,7 @@ class StashEntry < ApplicationRecord
   validates :stash_action, presence: true,
                            inclusion: { in: %w[add remove] }
   validates :amount, presence: true,
-                     numericality: { greater_than_or_equal_to: 0 }
+                     numericality: { greater_than: 0 }
 
   validate :stash_balance_out_of_bounds
 
@@ -25,11 +25,13 @@ class StashEntry < ApplicationRecord
   private
 
   def stash_balance_out_of_bounds
+    return unless amount.present?
+
     validation_stash = Stash.find(stash_id)
     validation_amount = stash_action == 'remove' ? -amount.abs : amount.abs
-    if (validation_stash.balance + validation_amount).negative?
-      errors.add(:amount, "can't cause the stash balance to become negative")
-    end
+
+    errors.add(:amount, "can't cause the stash balance to become negative") \
+      if (validation_stash.balance + validation_amount).negative?
 
     errors.add(:amount, "can't cause the stash balance to exceed the goal") \
       if (validation_stash.balance + validation_amount) > validation_stash.goal

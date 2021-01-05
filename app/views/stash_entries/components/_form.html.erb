@@ -1,4 +1,7 @@
 <h4 class="title is-4 has-text-link has-text-centered-mobile"><%= @stash_entry.form_title %></h4>
+<h6 class="subtitle is-7 has-text-grey has-text-weight-semibold has-text-centered-mobile">
+  <%= @stash.balance_display %> of <%= @stash.goal_display %> (<%= @stash.progress %>%)
+</h6>
 
 <%= form_for([@stash_entry.stash.account, @stash_entry.stash, @stash_entry]) do |f| %>
   <% if @stash_entry.errors.any? %>
@@ -34,7 +37,7 @@
         <label class="label has-text-grey">Amount</label>
         <div class="control has-icons-left">
           <%= f.text_field :amount, class: "input is-primary",
-                                         placeholder: "Name" %>
+                                         placeholder: "0.00" %>
           <span class="icon is-small is-left has-text-primary">
             <i class="fas fa-dollar-sign"></i>
           </span>
@@ -46,7 +49,7 @@
 
   <div class="field is-grouped">
     <div class="control">
-      <%= link_to "Cancel", account_stashes_path, class: "button is-link is-outlined" %>
+      <%= link_to "Cancel", account_transactions_path, class: "button is-link is-outlined" %>
     </div>
     <div class="control">
       <%= f.button @stash_entry.stash_action.capitalize,

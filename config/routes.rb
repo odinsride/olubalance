@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'accounts/inactive' => 'accounts#inactive'
 
-  resources :accounts do
+  resources :accounts, except: %i[show] do
     resources :transactions
     resources :stashes do
       scope except: %i[index show edit update destroy] do
@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       get :activate
     end
   end
+
+  resources :transfers, only: %i[create]
 
   authenticated do
     root to: 'accounts#index', as: :authenticated_root

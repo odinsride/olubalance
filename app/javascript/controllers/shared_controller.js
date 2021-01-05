@@ -3,7 +3,7 @@ import * as bulmaToast from 'bulma-toast'
 
 export default class extends Controller {
 
-  static targets = [ "modal", "dropDown" ]
+  static targets = [ "modal" ]
 
   connect () {
     //Invoke bulma toast notifications, if any
@@ -30,11 +30,4 @@ export default class extends Controller {
     document.getElementById(modalId).classList.toggle('is-active')
   }
 
-  /**
-   * toggleDropdown
-   * Toggle the is-active class to hide and show a dropdown
-   */
-  toggleDropdown () {
-    this.dropDownTarget.classList.toggle('is-active')
-  }
 }

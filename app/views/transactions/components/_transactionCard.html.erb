@@ -39,12 +39,8 @@
               <% if @transaction.attachment.variable? %>
                 <div class="tooltip" data-tooltip="<%= @transaction.filename_size %>">
                   <%= link_to url_for(@transaction.attachment), target: '_blank' do %>
-                    <%= image_tag(@transaction.attachment.variant(combine_options: {
-                                                                                    gravity: 'Center',
-                                                                                    thumbnail: '128x128^',
-                                                                                    extent: '128x128'
-                                                                                  }),
-                                                                                  class: 'mt-5 ob-attachment-img') %>
+                    <%= image_tag @transaction.attachment.variant(resize_to_fill: [128, 128]).processed.url,
+                                                                  class: 'mt-5 ob-attachment-img' %>
                   <% end %>
                 </div>
               <% else %>

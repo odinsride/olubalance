@@ -1,75 +1,129 @@
 <h4 class="title is-4 has-text-link"><%= @account.form_name %> Account</h4>
-<%= form_for(@account) do |f| %>
-  <% if @account.errors.any? %>
-    <article id="error explanation" class="message is-danger">
-      <div class="message-header">
-        Something went wrong!
+<div data-controller="acctform">
+  <%= form_for(@account) do |f| %>
+    <% if @account.errors.any? %>
+      <article id="error explanation" class="message is-danger">
+        <div class="message-header">
+          Something went wrong!
+        </div>
+        <div class="message-body content">
+          Please correct the following <span class="has-text-weight-bold"><%= pluralize(@account.errors.count, "error") %></span>:
+          <ul>
+            <% @account.errors.full_messages.each do |msg | %>
+              <li>
+                <%= msg %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </article>
+    <% end %>
+
+    <div class="columns">
+      <!-- Fields -->
+      <div class="column">
+
+        <!-- Name -->
+        <div class="field">
+          <label class="label has-text-grey">Name</label>
+          <div class="control has-icons-left">
+            <%= f.text_field :name, class: "input is-primary",
+                                    placeholder: "Account Name" %>
+            <span class="icon is-small is-left has-text-primary">
+              <i class="fas fa-university"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Last Four -->
+        <div class="field">
+          <label class="label has-text-grey">Last Four</label>
+          <div class="control has-icons-left">
+            <%= f.text_field :last_four, class: "input is-primary",
+                                        placeholder: "1234" %>
+            <span class="icon is-small is-left has-text-primary">
+              <i class="fas fa-credit-card"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Starting Balance -->
+        <div class="field">
+          <label class="label has-text-grey">Starting Balance</label>
+          <div class="control has-icons-left">
+            <%= f.text_field :starting_balance, class: "input is-primary",
+                                                placeholder: "Enter the starting balance",
+                                                disabled: (@account.new_record? ? false : true) %>
+            <span class="icon is-small is-left has-text-primary">
+              <i class="fas fa-dollar-sign"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="columns">
+
+          <!-- Account Type -->
+          <div class="column is-4">
+            <div class="field">
+              <label class="label has-text-grey">Account Type</label>
+              <div class="control has-icons-left">
+                <div class="select is-fullwidth is-primary">
+                  <%= f.select :account_type, 
+                              Account.account_types.keys.map { |w| [w.humanize, w]}, {},
+                              data: {
+                                'acctform-target': 'accounttype',
+                                action: 'change->acctform#toggleFields'
+                              } %>
+                </div>
+                <div class="icon is-small is-left has-text-primary">
+                  <i class="fas fa-piggy-bank"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interest Rate -->
+          <div class="column is-hidden" data-acctform-target="interestrate">
+            <div class="field">
+              <label class="label has-text-grey">Interest Rate</label>
+              <div class="control has-icons-left">
+                <%= f.text_field :interest_rate, class: "input is-primary",
+                                                placeholder: "Interest rate" %>
+                <span class="icon is-small is-left has-text-primary">
+                  <i class="fas fa-percent"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Credit Limit -->
+          <div class="column is-hidden" data-acctform-target="creditlimit">
+            <div class="field">
+              <label class="label has-text-grey">Credit Limit</label>
+              <div class="control has-icons-left">
+                <%= f.text_field :credit_limit, class: "input is-primary",
+                                                placeholder: "Credit limit" %>
+                <span class="icon is-small is-left has-text-primary">
+                  <i class="fas fa-credit-card"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="message-body content">
-        Please correct the following <span class="has-text-weight-bold"><%= pluralize(@account.errors.count, "error") %></span>:
-        <ul>
-          <% @account.errors.full_messages.each do |msg | %>
-            <li>
-              <%= msg %>
-            </li>
-          <% end %>
-        </ul>
+
+    </div> <!-- /columns -->
+
+    <div class="field is-grouped">
+      <div class="control">
+        <%= link_to "Cancel", accounts_path, class: "button is-link is-outlined" %>
       </div>
-    </article>
+      <div class="control">
+        <%= f.button @account.button_label,
+            type: 'submit',
+            class: "button is-link" %>
+      </div>
+    </div>
   <% end %>
-
-  <div class="columns">
-    <!-- Fields -->
-    <div class="column">
-
-      <!-- Name -->
-      <div class="field">
-        <label class="label has-text-grey">Name</label>
-        <div class="control has-icons-left">
-          <%= f.text_field :name, class: "input is-primary",
-                                  placeholder: "Account Name" %>
-          <span class="icon is-small is-left has-text-primary">
-            <i class="fas fa-university"></i>
-          </span>
-        </div>
-      </div>
-
-      <!-- Last Four -->
-      <div class="field">
-        <label class="label has-text-grey">Last Four</label>
-        <div class="control has-icons-left">
-          <%= f.text_field :last_four, class: "input is-primary",
-                                       placeholder: "1234" %>
-          <span class="icon is-small is-left has-text-primary">
-            <i class="fas fa-credit-card"></i>
-          </span>
-        </div>
-      </div>
-
-      <!-- Starting Balance -->
-      <div class="field">
-        <label class="label has-text-grey">Starting Balance</label>
-        <div class="control has-icons-left">
-          <%= f.text_field :starting_balance, class: "input is-primary",
-                                              placeholder: "Enter the starting balance",
-                                              disabled: (@account.new_record? ? false : true) %>
-          <span class="icon is-small is-left has-text-primary">
-            <i class="fas fa-dollar-sign"></i>
-          </span>
-        </div>
-      </div>
-    </div>
-
-  </div> <!-- /columns -->
-
-  <div class="field is-grouped">
-    <div class="control">
-      <%= link_to "Cancel", accounts_path, class: "button is-link is-outlined" %>
-    </div>
-    <div class="control">
-      <%= f.button @account.button_label,
-          type: 'submit',
-          class: "button is-link" %>
-    </div>
-  </div>
-<% end %>
+</div>

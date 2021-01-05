@@ -4,7 +4,7 @@ RSpec.describe "Transaction management", type: :request do
   before(:each) do
     @user = FactoryBot.create(:user)
     @starting_balance = 5000
-    @account = FactoryBot.create(:account, name: "Account Management Test", starting_balance: @starting_balance, user: @user)
+    @account = FactoryBot.create(:account, name: "Account Management Test", starting_balance: @starting_balance, user: @user).decorate
     @trx_amount = 50
     @transaction = FactoryBot.create(:transaction, trx_date: Date.today, description: "Transaction 1", amount: @trx_amount, trx_type: 'debit', memo: 'Memo 1', account: @account)
   end
@@ -19,7 +19,7 @@ RSpec.describe "Transaction management", type: :request do
     sign_in @user
     get account_transactions_path(@account)
     expect(response).to be_successful
-    expect(response.body).to include(@account.name)
+    expect(response.body).to include(@account.account_card_title)
     expect(response.body).to include(number_to_currency(@balance))
     expect(response.body).to include(@transaction.description)
   end

@@ -11,7 +11,7 @@ emails = %w[
   john2@gmail.com 
   john3@gmail.com
 ]
-account_names = %w[
+checking_account_names = %w[
   Chase 
   PNC 
   Wells\ Fargo 
@@ -19,6 +19,29 @@ account_names = %w[
   TD\ Bank 
   Capital\ One 
   Bank\ of\ America
+  Ally
+]
+credit_account_names = %w[
+  Chase\ Freedom
+  Chase\ Slate
+  American\ Express
+  Apple\ Card
+  Citi\ Double\ Cash
+]
+savings_account_names = %w[
+  Capital\ One\ 360
+  Vio
+  Synchrony
+  Marcus
+  Barclays
+  Chime
+]
+cash_account_names = %w[
+  Piggy\ Bank
+  Under\ Mattress
+  Secret\ Stash
+  Home\ Safe
+  Wallet
 ]
 trx_debit_desc = %w[
   Electric\ Payment
@@ -76,16 +99,90 @@ end
 users.each do |user|
   selected_accounts = []
     
-  5.times do
+  # Checking
+  3.times do
 
     # Ensure that an account name isn't repeated (unique constraint per user)
-    account_name = (account_names - selected_accounts).sample
+    account_name = (checking_account_names - selected_accounts).sample
     selected_accounts << account_name
 
     account = Account.create!(
       name: account_name,
       last_four: Faker::Number.number(digits: 4).to_i,
-      starting_balance: Faker::Number.between(from: 1500.00, to: 20000.00).to_f.round(2),
+      starting_balance: Faker::Number.between(from: 1500.00, to: 5000.00).to_f.round(2),
+      account_type: 'checking',
+      user: user
+    )
+
+    accounts << account
+
+    # Set the starting balance transaction date to be the first transaction
+    t = account.transactions.first
+    t.trx_date = 91.days.ago.to_s
+    t.save(validate: false)
+  end
+
+  # Credit
+  5.times do
+
+    # Ensure that an account name isn't repeated (unique constraint per user)
+    account_name = (credit_account_names - selected_accounts).sample
+    selected_accounts << account_name
+
+    account = Account.create!(
+      name: account_name,
+      last_four: Faker::Number.number(digits: 4).to_i,
+      starting_balance: 0,
+      credit_limit: Faker::Number.between(from: 5000.00, to: 20000.00).to_f.round(2),
+      interest_rate: Faker::Number.between(from: 10.00, to: 25.00).to_f.round(2),
+      account_type: 'credit',
+      user: user
+    )
+
+    accounts << account
+
+    # Set the starting balance transaction date to be the first transaction
+    t = account.transactions.first
+    t.trx_date = 91.days.ago.to_s
+    t.save(validate: false)
+  end
+
+  # Savings
+  1.times do
+
+    # Ensure that an account name isn't repeated (unique constraint per user)
+    account_name = (savings_account_names - selected_accounts).sample
+    selected_accounts << account_name
+
+    account = Account.create!(
+      name: account_name,
+      last_four: Faker::Number.number(digits: 4).to_i,
+      starting_balance: Faker::Number.between(from: 10000.00, to: 50000.00).to_f.round(2),
+      interest_rate: Faker::Number.between(from: 0.30, to: 1.00).to_f.round(2),
+      account_type: 'savings',
+      user: user
+    )
+
+    accounts << account
+
+    # Set the starting balance transaction date to be the first transaction
+    t = account.transactions.first
+    t.trx_date = 91.days.ago.to_s
+    t.save(validate: false)
+  end
+
+  # Cash
+  1.times do
+
+    # Ensure that an account name isn't repeated (unique constraint per user)
+    account_name = (cash_account_names - selected_accounts).sample
+    selected_accounts << account_name
+
+    account = Account.create!(
+      name: account_name,
+      last_four: Faker::Number.number(digits: 4).to_i,
+      starting_balance: Faker::Number.between(from: 500.00, to: 15000.00).to_f.round(2),
+      account_type: 'cash',
       user: user
     )
 
@@ -105,7 +202,7 @@ accounts.each do |account|
     Transaction.create!(
       trx_date: Faker::Date.backward(days: 90),
       description: trx_debit_desc.sample,
-      amount: Faker::Number.between(from: 5.00, to: 450.00).to_f.round(2),
+      amount: Faker::Number.between(from: 1.00, to: 50.00).to_f.round(2),
       trx_type: 'debit',
       account: account
     )
@@ -116,7 +213,7 @@ accounts.each do |account|
     Transaction.create!(
       trx_date: Faker::Date.backward(days: 90),
       description: trx_credit_desc.sample,
-      amount: Faker::Number.between(from: 500.00, to: 2000.00).to_f.round(2),
+      amount: Faker::Number.between(from: 1.00, to: 5.00).to_f.round(2),
       trx_type: 'credit',
       account: account
     )
@@ -127,7 +224,7 @@ accounts.each do |account|
     t = Transaction.create!(
           trx_date: Faker::Date.backward(days: 1),
           description: 'Attachment Test Transaction',
-          amount: Faker::Number.between(from: 5.00, to: 500.00).to_f.round(2),
+          amount: Faker::Number.between(from: 1.00, to: 50.00).to_f.round(2),
           trx_type: 'debit',
           account: account
         )
@@ -139,7 +236,7 @@ accounts.each do |account|
     Transaction.create!(
       trx_date: Faker::Date.backward(days: 15),
       description: 'Pending Test Transaction',
-      amount: Faker::Number.between(from: 5.00, to: 100.00).to_f.round(2),
+      amount: Faker::Number.between(from: 1.00, to: 50.00).to_f.round(2),
       trx_type: 'debit',
       pending: true,
       account: account

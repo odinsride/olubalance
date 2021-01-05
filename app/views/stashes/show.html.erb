@@ -1,4 +1,4 @@
-<%= render partial: "shared/backButton", locals: { param_back_path: account_stashes_path(@stash.account_id), param_back_text: "Stashes" } %>
+<%= render partial: "shared/backButton", locals: { param_back_path: account_transactions_path, param_back_text: "Transactions" } %>
 <div class="columns">
   <div class="column is-6-desktop is-offset-3-desktop">
     <p class="title is-4 has-text-link has-text-centered-mobile">Stash Details</p>
@@ -12,9 +12,9 @@
       <div class="column">
         <table class="table is-hoverable is-fullwidth ob-table">
           <thead>
-              <th>Date</th>
+              <th id="stash-entry-date">Date</th>
               <th>Action</th>
-              <th class="has-text-right">Amount</th>
+              <th class="has-text-right" id="stash-entry-amount">Amount</th>
           </thead>
           <tbody>
               <%= render partial: "stashes/components/stashEntryLine", collection: @stash_entries, as: :stash_entry %>

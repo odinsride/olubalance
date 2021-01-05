@@ -1,0 +1,30 @@
+<div class="level-item">
+  <div class="dropdown is-right" data-controller="dropdown">
+    <div class="dropdown-trigger">
+      <button 
+        id="transfer-button" 
+        class="button is-link is-outlined <%= defined?(size) ? size : '' %>" 
+        role="button"
+        aria-haspopup="true" 
+        aria-controls="transfer-dropdown"
+        aria-expanded="false"
+        data-dropdown-target="button"
+        data-toggle="dropdown"
+        data-action="click->dropdown#toggle click@window->dropdown#hide touchend@window->dropdown#hide"
+      >
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+        <span>Transfer</span>
+      </button>
+    </div>
+
+    <div class="dropdown-menu" id="transfer-dropdown" data-dropdown-target="menu" role="menu">
+      <div class="dropdown-content">
+        <div class="dropdown-item">
+          <%= render partial: "transfers/components/transferForm" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

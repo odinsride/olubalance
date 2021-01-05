@@ -41,3 +41,19 @@
   border-top-left-radius: 5px !important;
   border-bottom-left-radius: 5px !important;
 }
+
+
+.stashes-menu {
+  width: 50vw;
+  position: absolute;
+  left: 0;
+  padding: 0;
+
+  .stashes-menu-content {
+    padding: 0;
+
+    .stashes-menu-item {
+      padding: 0;
+    }
+  }
+}

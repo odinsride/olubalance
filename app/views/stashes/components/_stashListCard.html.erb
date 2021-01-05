@@ -1,0 +1,36 @@
+<div class="column is-3-widescreen is-6-tablet">
+  <div class="card stash-card" id="stash-card-<%= stash.id %>">
+      <div class="card-content">
+        <div class="columns is-mobile">
+            <div class="column is-10">
+              <div clas="content">
+                <%= link_to account_stash_path(id: stash.id) do %>
+                  <p class="is-size-7 ml-5 has-tooltip-bottom" data-tooltip="Stash details">
+                    <strong><%= stash.name %></strong>
+                  </p>
+                  <progress class="progress is-link is-small" value="<%= stash.balance %>" max="<%= stash.goal %>"><%= stash.balance %></progress>
+                  <p class="is-size-7 has-text-centered">
+                    <span class="has-text-grey has-text-weight-semibold"><%= stash.balance_display %> / <%= stash.goal_display %></span></span>
+                  </p>
+                <% end %>
+              </div>
+            </div>
+
+          <div class="column mt-5 has-text-centered">
+            <div clas="content">
+                <%= link_to new_account_stash_stash_entry_path(stash_id: stash.id, stash_action: 'add') do %>
+                  <span class="icon has-text-success has-tooltip-arrow has-tooltip-left" data-tooltip="Add to stash" style="display: inline-table">
+                    <i class="fas fa-lg fa-plus-circle"></i>
+                  </span>
+                <% end %><br />
+                <%= link_to new_account_stash_stash_entry_path(stash_id: stash.id, stash_action: 'remove') do %>
+                  <span class="icon has-text-danger has-tooltip-arrow has-tooltip-left" data-tooltip="Remove from stash" style="display: inline-table">
+                    <i class="fas fa-lg fa-minus-circle"></i>
+                  </span>
+                <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
