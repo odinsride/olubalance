@@ -1,12 +1,21 @@
 <div data-controller="stashlist" data-stashlist-hide-value="true" class="mb-15 mt-15">
-  <a href="#" data-action="click->stashlist#toggle">
-    <div class="is-size-7 has-text-weight-semibold has-text-grey-dark mb-5">
-      STASHES (<%= @stashes.count %>)
-      <span class="icon has-text-link ml-5" style="display: inline-table">
-        <i class="fas fa-chevron-right" data-stashlist-target="chevron"></i>
-      </span>
+  <nav class="level is-mobile">
+    <div class="level-left">
+      <div class="level-item mt-5">
+        <a href="#" data-action="click->stashlist#toggle">
+          <div class="is-size-7 has-text-weight-semibold has-text-grey-dark">
+            STASHES (<%= @stashes.count %>)
+            <span class="icon has-text-link ml-5" style="display: inline-table">
+              <i class="fas fa-chevron-right" data-stashlist-target="chevron"></i>
+            </span>
+          </div>
+        </a>
+      </div>
     </div>
-  </a>
+    <div class="level-right is-hidden-tablet">
+      <%= render partial: 'transactions/components/transactionButtons', locals: { size: 'is-small' } %>
+    </div>
+  </nav>
   <div class="animate__animated animate__fadeIn" data-stashlist-target="list">
     <nav class="level">
       <div class="level-left">
