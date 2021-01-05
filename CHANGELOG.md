@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.8.0] - 2020-01-06
+
+### New
+- Accounts can now have an account type, which allows you to specify if the account is a Checking, Savings, Credit Card, or Cash account.
+  - As a result, accounts are now organized by account type on the main screen
+  - Additionally, for Credit and Savings accounts you can specify Interest Rate (as well as Credit Limit for Credit Cards), which will be displayed on the account cards and in the transactions list.
+- Transfer feature added - for Checking, Savings, and Cash account types, you will now have the option to perform a transfer into another account.  Doing so will automatically create the appropriate debit/credit transactions in the source and target accounts.
+
+### Changed
+- Stash UI has been revamped and hopefully will be nicer to use :)
+- Transactions index page has minor UI improvements
+- When uploading a receipt/attachment to a transaction, a loading indicator will now be displayed to indicate something is happening while you wait.
+
+### Chores
+- Upgrade to Ruby 3.0.0
+- Upgrade to Rails 6.1.0
+- Update all dependencies
+- Tests have been cleaned up
+- New tests created for Stashes and Stash Entires
 ## [v1.7.3] - 2020-08-27
 
 ### New
