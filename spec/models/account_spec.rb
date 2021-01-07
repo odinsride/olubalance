@@ -70,7 +70,7 @@ RSpec.describe Account, type: :model do
     it { should_not allow_value('12').for(:last_four) }
     it { should_not allow_value('12345').for(:last_four) }
     it { should_not allow_value('ASDF').for(:last_four) }
-    it { should define_enum_for(:account_type).with(checking: 'checking', credit: 'credit', cash: 'cash', savings: 'savings').backed_by_column_of_type(:enum) }
+    it { should define_enum_for(:account_type).with_values(checking: 'checking', credit: 'credit', cash: 'cash', savings: 'savings').backed_by_column_of_type(:enum) }
 
     context 'credit account' do
       before { allow(subject).to receive(:credit?).and_return(true) }
