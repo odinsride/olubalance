@@ -301,6 +301,9 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     thor (1.1.0)
+    turbolinks (5.2.1)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
@@ -331,6 +334,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.4)
+  byebug
   capybara
   database_cleaner (~> 1.8.5)
   devise (~> 4.7.3)
@@ -362,6 +366,8 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-watcher-listen
+  turbolinks (~> 5)
+  tzinfo-data
   webdrivers
   webpacker (~> 5.2.1)
 
