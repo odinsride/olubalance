@@ -24,7 +24,6 @@ gem 'pg', '~> 1.2.3'
 gem 'puma', '~> 5.1.1'
 gem 'rails', '~> 6.1.1'
 gem 'recaptcha', '~> 5.6.0'
-gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.2.1'
 
