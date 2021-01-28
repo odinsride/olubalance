@@ -14,6 +14,13 @@ class Account < ApplicationRecord
   has_many :transactions, dependent: :delete_all
   has_many :stashes, dependent: :delete_all
 
+  enum account_type: {
+    checking: 'checking',
+    savings: 'savings',
+    credit: 'credit',
+    cash: 'cash'
+  }
+
   validates :name, presence: true,
                    length: { maximum: 50, minimum: 2 },
                    uniqueness: { scope: :user_id }
@@ -22,29 +29,24 @@ class Account < ApplicationRecord
   validates :last_four, length: { minimum: 4, maximum: 4 },
                         format: { with: /\A\d+\z/, message: 'Numbers only.' },
                         allow_blank: true
-  validates :interest_rate, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u|
-                                                                                                     !u.credit?
-                                                                                                   }
-  validates :interest_rate, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u|
-                                                                                                     !u.savings?
-                                                                                                   }
-  validates :credit_limit, presence: true, numericality: { greater_than_or_equal_to: 0 }, unless: proc { |u|
-                                                                                                    !u.credit?
-                                                                                                  }
-
-  before_create :set_current_balance
-  after_create :create_initial_transaction
-
-  enum account_type: {
-    checking: 'checking',
-    savings: 'savings',
-    credit: 'credit',
-    cash: 'cash'
-  }
-
+  validates :interest_rate, presence: true,
+                            numericality: { greater_than_or_equal_to: 0 },
+                            unless: proc { |u|
+                              !u.credit? || !u.savings?
+                            }
+  validates :credit_limit, presence: true,
+                           numericality: { greater_than_or_equal_to: 0 },
+                           unless: proc { |u|
+                             !u.credit?
+                           }
   validates :account_type, inclusion: {
     in: account_types.keys
   }
+
+  before_create :set_current_balance
+  # after_create :create_initial_transaction
+
+
 
   # Sum of Pending Transactions
   def pending_balance
