@@ -10,6 +10,7 @@ end
 ruby '3.0.0'
 
 gem 'aws-sdk-s3', '~> 1.87.0'
+gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.7.3'
 gem 'draper', '~> 4.0.1'
 gem 'faker', '~> 2.15.1'
@@ -21,7 +22,7 @@ gem 'mini_magick', '~> 4.11.0'
 gem 'pagy', '~> 3.10.0'
 gem 'pg', '~> 1.2.3'
 gem 'puma', '~> 5.1.1'
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 6.1.1'
 gem 'recaptcha', '~> 5.6.0'
 gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
 gem 'webpacker', '~> 5.2.1'
