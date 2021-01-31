@@ -44,7 +44,7 @@ class Account < ApplicationRecord
   }
 
   before_create :set_current_balance
-  # after_create :create_initial_transaction
+  after_create :create_initial_transaction
 
 
 

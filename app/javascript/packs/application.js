@@ -11,7 +11,7 @@ Turbolinks.start()
 ActiveStorage.start()
 
 import "@fortawesome/fontawesome-free/js/all"
-import "../application/images"
 import "../application/stylesheets/application"
+const images = require.context("../application/images", true)
 import "controllers"
 import "animate.css"
