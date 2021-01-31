@@ -7,7 +7,7 @@
     "@rails/actioncable": "^6.0.3",
     "@rails/activestorage": "^6.0.3",
     "@rails/ujs": "^6.0.3",
-    "@rails/webpacker": "^5.1.1",
+    "@rails/webpacker": "5.2.1",
     "animate.css": "^4.1.1",
     "bulma": "^0.9.1",
     "bulma-checkradio": "^2.1.1",
@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.2"
   }
 }
