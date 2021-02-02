@@ -26,5 +26,5 @@ Rails.application.routes.draw do
     root to: 'accounts#index', as: :authenticated_root
   end
 
-  root to: 'static_pages#home'
+  root to: 'home#index'
 end
