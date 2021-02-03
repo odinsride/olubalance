@@ -12,10 +12,8 @@ ruby '3.0.0'
 gem 'aws-sdk-s3', '~> 1.87.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.7.3'
-gem 'draper', '~> 4.0.1'
 gem 'faker', '~> 2.15.1'
 gem 'figaro', '~> 1.2.0'
-gem 'hiredis', '~> 0.6.3'
 gem 'image_processing'
 gem 'invisible_captcha', '~> 1.1.0'
 gem 'mini_magick', '~> 4.11.0'
@@ -44,7 +42,6 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'foreman'
   gem 'letter_opener'
   gem 'listen'
   gem 'rubocop', require: false
