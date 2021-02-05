@@ -14,13 +14,14 @@
 //@import 'stashes';
 
 @import "tailwindcss/base";
+
+html {
+  @apply font-body;
+}
+
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "fonts";
 
-body {
-  font-family: 'Mulish-Regular', sans-serif;
-}
 
 @responsive {
   .text-shadow {

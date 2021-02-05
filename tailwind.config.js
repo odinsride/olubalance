@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   purge: [],
@@ -11,7 +12,11 @@ module.exports = {
       green: colors.teal,
       white: colors.white,
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        body: ['Mulish']
+      },
+    },
   },
   variants: {
     extend: {},

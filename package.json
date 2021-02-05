@@ -11,6 +11,7 @@
     "stimulus": "^2.0.0",
     "tailwindcss": "^2.0.1-compat",
     "turbolinks": "^5.2.0",
+    "typeface-mulish": "^1.1.13",
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1"
   },
