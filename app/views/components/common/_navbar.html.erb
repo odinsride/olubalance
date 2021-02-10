@@ -1,14 +1,25 @@
-<div class="p-4 flex justify-between items-center shadow border-t-8 border-green-800">
+<nav class="py-1 md:py-6 px-3 md:px-8 flex flex-wrap justify-between items-center shadow border-t-4 border-green-700">
   <!--   left side -->
-  <div class="flex items-center">
-    <%= link_to root_path do %>
-      <%= image_pack_tag 'media/images/logo.png', width: "175", alt: "olubalance logo" %>
-    <% end %>
-  </div>
+  <%= link_to root_path do %>
+    <%= image_pack_tag 'media/images/logo.png', width: "175", alt: "olubalance logo" %>
+  <% end %>
 
   <!--   right side -->
-  <div>
-    <a href="#" class="inline-block py-2 px-4 mr-2 shadow rounded border border-green-600 hover:border-transparent text-green-700 hover:text-gray-100 hover:bg-green-800 font-semibold capitalize transition ease-in duration-150">Login</a>
-    <a href="#" class="inline-block py-2 px-4 shadow rounded font-semibold text-gray-100 bg-green-700 hover:bg-green-800 transition ease-in duration-150">Sign up</a>
+  <div class="text-center md:hidden">
+    <button id="nav-toggle" class="px-3 py-2 text-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-70">
+      <svg class="text-center inline-block fill-current mb-1 h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <title>Menu</title>
+        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+      </svg>
+      <p class="uppercase text-xs">
+        Menu
+      </p>
+    </button>
   </div>
-</div>
+
+  <div class="toggle hidden w-full md:flex md:w-auto md:items-center md:block">
+    <a href="#" class="block md:inline-block py-2 px-4 mr-2 shadow rounded border border-green-600 hover:border-transparent text-green-700 hover:text-gray-100 hover:bg-green-800 font-semibold capitalize transition ease-in duration-150">Login</a>
+    <a href="#" class="block md:inline-block py-2 px-4 shadow rounded font-semibold text-gray-100 bg-green-700 hover:bg-green-800 transition ease-in duration-150">Sign up</a>
+  </div>
+
+</nav>

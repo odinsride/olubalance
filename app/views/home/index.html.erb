@@ -1,24 +1,31 @@
 <!-- hero -->
-<div class="py-20 md:py-60 px-10 bg-gradient-to-br from-green-700 to-green-400 text-center text-white">
-  <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 md:mb-6 font-semibold text-shadow-md">olubalance</h2>
-  <p class="text-sm md:text-xl mb-6 text-shadow-md font-light">A personal finance tool designed to help balance and reconcile your accounts.</p>
+<div class="py-16 md:py-48 px-10 md:px-40 2xl:px-80 bg-gradient-to-br from-green-700 to-green-400 text-white text-center md:text-left md:flex md:items-center">
+  <!-- left -->
+  <div class="lg:flex-auto lg:pr-40">
+    <h2 class="text-3xl md:text-4xl lg:text-6xl mb-4 md:mb-6 font-semibold text-shadow-md">olubalance</h2>
+    <p class="text-sm md:text-xl mb-6 text-shadow-md font-light">A personal finance tool designed to help balance and reconcile your accounts.</p>
+    <a href="#" class="inline-block py-2 px-4 mr-2 shadow rounded border border-green-600 hover:border-transparent text-green-700 hover:text-gray-100 bg-gray-100 hover:bg-green-800 font-semibold capitalize transition ease-in duration-150">Login</a>
+    <a href="#" class="inline-block py-2 px-4 shadow rounded font-semibold text-gray-100 bg-green-700 hover:bg-green-800 transition ease-in duration-150">Sign up</a>
+  </div>
 
-  <a href="#" class="inline-block py-2 px-4 mr-2 shadow rounded border border-green-600 hover:border-transparent text-green-700 hover:text-gray-100 bg-gray-100 hover:bg-green-800 font-semibold capitalize transition ease-in duration-150">Login</a>
-  <a href="#" class="inline-block py-2 px-4 shadow rounded font-semibold text-gray-100 bg-green-700 hover:bg-green-800 transition ease-in duration-150">Sign up</a>
+  <!-- right -->
+  <div class="hidden lg:flex lg:flex-auto">
+    <%= image_pack_tag 'media/images/hero2.svg', width: "600", alt: "olubalance hero" %>
+  </div>
 </div>
 
 <!-- features -->
-<div class="px-10 py-10 md:flex md:py-20 md:px-20 lg:px-40 bg-green-50 text-center">
-  <div class="mr-4 flex-1 text-center mb-10">
-    <h3 class="text-xl text-green-800 font-semibold mb-4">Balance your accounts</h3>
-    <p class="text-gray-800">olubalance is your online checkbook register with support for receipt attachments and more!</p>
+<div class="px-10 py-6 md:flex md:py-10 md:px-20 lg:px-40 bg-green-50 text-center">
+  <div class="md:mr-4 flex-1 text-center mb-6">
+    <h3 class="text-lg md:text-xl text-green-800 font-semibold mb-2">Balance your accounts</h3>
+    <p class="text-sm md:text-base leading-relaxed text-gray-800">olubalance is your online checkbook register with support for receipt attachments and more!</p>
   </div>
-  <div class="mr-4 flex-1 text-center mb-10">
-    <h3 class="text-xl text-green-800 font-semibold mb-4">Know where you stand</h3>
-    <p>Never be surprised by pending charges again! What you enter into olubalance is reflected in your account immediately.</p>
+  <div class="md:mr-4 flex-1 text-center mb-6">
+    <h3 class="text-lg md:text-xl text-green-800 font-semibold mb-2">Know where you stand</h3>
+    <p class="text-sm md:text-base leading-relaxed text-gray-800">Never be surprised by pending charges again! What you enter into olubalance is reflected in your account immediately.</p>
   </div>
   <div class="flex-1 text-center">
-    <h3 class="text-xl text-green-800 font-semibold mb-4">Privacy matters</h3>
-    <p>olubalance is a standalone application that does not rely on data from your bank. Enter transactions like you would balance a checkbook.</p>
+    <h3 class="text-lg md:text-xl text-green-800 font-semibold mb-2">Privacy matters</h3>
+    <p class="text-sm md:text-base leading-relaxed text-gray-800">olubalance is a standalone application that does not rely on data from your bank. Enter transactions like you would balance a checkbook.</p>
   </div>
 </div>
