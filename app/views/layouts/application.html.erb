@@ -24,7 +24,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
   </head>
 
-  <body class="flex flex-col min-h-screen">
+  <body class="flex flex-col min-h-screen h-screen">
 
     <!--#####################################################################--
     #
@@ -43,7 +43,7 @@
       <%= render "components/common/navbar" %>
     </header>
 
-    <main class="flex-grow">
+    <main class="flex-grow bg-green-50 h-full">
       <%= yield %>
       <% flash.each do |message_type, message| %>
         <% if message.present? and message.is_a? String %>

@@ -1,0 +1,26 @@
+<div class="bg-gradient-to-br from-green-700 to-green-400 py-10 h-full">
+<%= render(FormComponent.new(title: "Login")) do %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'mt-6') do |f| %>
+    <div class="my-5 text-sm text-green-800">
+      <%= f.label :email , class: 'block text-black' %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full', placeholder: 'Email' %>
+    </div>
+
+    <div class="my-5 text-sm text-green-800">
+      <%= f.label :password, class: 'block text-black' %>
+      <%= f.password_field :password, autocomplete: "current-password", class: 'rounded px-4 py-3 mt-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50 bg-gray-100 w-full', placeholder: 'Password' %>
+    </div>
+
+    <%# if devise_mapping.rememberable? %>
+<!--      <div class="field">-->
+        <%#= f.check_box :remember_me %>
+        <%#= f.label :remember_me %>
+<!--      </div>-->
+    <%# end %>
+
+    <%= f.submit "Login", class: "block text-center text-white bg-green-700 rounded p-3 duration-300 rounded-sm hover:bg-green-800 w-full" %>
+  <% end %>
+<% end %>
+
+<%= render "users/shared/links" %>
+</div>

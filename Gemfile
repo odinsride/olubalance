@@ -23,6 +23,7 @@ gem 'puma', '~> 5.1.1'
 gem 'rails', '~> 6.1.1'
 gem 'recaptcha', '~> 5.6.0'
 gem 'turbolinks', '~> 5'
+gem 'view_component', require: 'view_component/engine'
 gem 'webpacker', '~> 5.2.1'
 
 group :development, :test do

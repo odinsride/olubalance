@@ -292,6 +292,8 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
+    view_component (2.25.1)
+      activesupport (>= 5.0.0, < 7.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     webdrivers (4.5.0)
@@ -349,6 +351,7 @@ DEPENDENCIES
   spring-watcher-listen
   turbolinks (~> 5)
   tzinfo-data
+  view_component
   webdrivers
   webpacker (~> 5.2.1)
 
