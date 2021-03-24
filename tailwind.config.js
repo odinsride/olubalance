@@ -2,7 +2,12 @@ const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  purge: [],
+  purge: [
+      './app/**/*.html.erb',
+      './app/helpers/**/*.rb',
+      './app/components/**/*.html.erb',
+      './app/javascript/**/*.js',
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
