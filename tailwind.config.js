@@ -16,8 +16,14 @@ module.exports = {
       gray: colors.gray,
       green: colors.teal,
       white: colors.white,
+      violet: colors.violet,
     },
     extend: {
+      colors: {
+        green: {
+          75: '#ebf5f3',
+        }
+      },
       fontFamily: {
         body: ['Mulish']
       },

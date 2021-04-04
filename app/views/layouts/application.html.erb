@@ -43,7 +43,7 @@
       <%= render "components/common/navbar" %>
     </header>
 
-    <main class="flex-grow bg-green-50 h-full">
+    <main class="flex-grow h-full">
       <%= yield %>
       <% flash.each do |message_type, message| %>
         <% if message.present? and message.is_a? String %>

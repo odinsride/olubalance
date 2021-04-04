@@ -1,0 +1,19 @@
+@layer components {
+
+  // Buttons
+  .o-btn {
+    @apply py-1.5 px-4 border-2 border-transparent shadow hover:shadow-lg focus:shadow-sm text-gray-800 bg-gray-100 rounded-full capitalize font-semibold focus:outline-none transition ease-in duration-100;
+  }
+
+  .o-btn--small {
+    @apply text-sm py-1 px-3 font-semibold
+  }
+
+  .o-btn--primary {
+    @apply text-green-50 bg-violet-600 bg-opacity-70 hover:bg-violet-700 hover:border-opacity-50 hover:border-violet-100
+  }
+
+  .o-btn--secondary {
+    @apply text-violet-700 bg-violet-50 hover:border-opacity-30 hover:border-violet-600 hover:bg-violet-100
+  }
+}

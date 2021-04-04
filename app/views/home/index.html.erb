@@ -1,10 +1,12 @@
 <!-- hero -->
-<div class="py-16 md:py-48 px-10 md:px-40 2xl:px-80 bg-gradient-to-br from-green-700 to-green-400 text-white text-center md:text-left md:flex md:items-center">
+<div class="py-16 md:py-48 px-10 md:px-40 2xl:px-80 bg-gradient-to-br from-green-700 to-green-500 text-white text-center md:text-left md:flex md:items-center">
   <!-- left -->
   <div class="lg:flex-auto lg:pr-40">
-    <h2 class="text-3xl md:text-4xl lg:text-6xl mb-4 md:mb-6 font-semibold text-shadow-md">olubalance</h2>
+    <h2 class="text-3xl md:text-4xl lg:text-6xl mb-4 md:mb-6 font-semibold text-shadow-md">
+      olubalance
+    </h2>
     <p class="text-sm md:text-xl mb-6 text-shadow-md font-light">A personal finance tool designed to help balance and reconcile your accounts.</p>
-    <a href="#" class="inline-block o-btn o-btn--light">Login</a>
+    <%= link_to "Login", new_user_session_path, class: "inline-block o-btn o-btn--secondary mr-2" %>
     <a href="#" class="inline-block o-btn o-btn--primary">Sign up</a>
   </div>
 
@@ -15,17 +17,17 @@
 </div>
 
 <!-- features -->
-<div class="px-10 py-6 md:flex md:py-16 md:px-20 lg:px-40 bg-green-50">
+<div class="px-10 py-6 md:flex md:py-16 md:px-20 lg:px-40">
   <div class="md:mr-4 xl:px-20 flex-1 mb-6">
-    <h3 class="text-lg md:text-xl text-green-800 font-semibold mb-2">Balance your accounts</h3>
+    <h3 class="text-lg md:text-xl text-violet-700 text-opacity-90 font-bold mb-2">Balance your accounts</h3>
     <p class="text-sm md:text-base leading-relaxed text-gray-800">olubalance is your online checkbook register with support for receipt attachments and more!</p>
   </div>
   <div class="md:mr-4 xl:px-20 flex-1 mb-6">
-    <h3 class="text-lg md:text-xl text-green-800 font-semibold mb-2">Know where you stand</h3>
+    <h3 class="text-lg md:text-xl text-violet-700 text-opacity-90 font-bold mb-2">Know where you stand</h3>
     <p class="text-sm md:text-base leading-relaxed text-gray-800">Never be surprised by pending charges again! What you enter into olubalance is reflected in your account immediately.</p>
   </div>
   <div class="flex-1 xl:px-20">
-    <h3 class="text-lg md:text-xl text-green-800 font-semibold mb-2">Privacy matters</h3>
+    <h3 class="text-lg md:text-xl text-violet-700 text-opacity-90 font-bold mb-2">Privacy matters</h3>
     <p class="text-sm md:text-base leading-relaxed text-gray-800">olubalance is a standalone application that does not rely on data from your bank. Enter transactions like you would balance a checkbook.</p>
   </div>
 </div>
