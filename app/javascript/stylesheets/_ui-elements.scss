@@ -10,10 +10,10 @@
   }
 
   .o-btn--primary {
-    @apply text-green-50 bg-violet-600 bg-opacity-70 hover:bg-violet-700 hover:border-opacity-50 hover:border-violet-100
+    @apply text-green-50 bg-green-700 bg-opacity-70 hover:bg-green-800 hover:border-opacity-50 hover:border-green-100
   }
 
   .o-btn--secondary {
-    @apply text-violet-700 bg-violet-50 hover:border-opacity-30 hover:border-violet-600 hover:bg-violet-100
+    @apply text-green-700 bg-green-50 hover:border-opacity-30 hover:border-green-600 hover:bg-green-100 hover:text-green-800
   }
 }
