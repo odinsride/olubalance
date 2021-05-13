@@ -23,7 +23,7 @@ CREATE TYPE public.account_types AS ENUM (
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+SET default_with_oids = false;
 
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
