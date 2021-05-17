@@ -1,14 +1,14 @@
-<div class="bg-gradient-to-br from-green-700 to-green-400 py-10 h-full">
+<div class="py-10 h-full">
 <%= render(FormComponent.new(title: "Login")) do %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'mt-6') do |f| %>
-    <div class="my-5 text-sm text-green-800">
-      <%= f.label :email , class: 'block text-black' %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full', placeholder: 'Email' %>
+    <div class="font-bold text-green-800 tracking-wide">
+      <%= f.label :email , class: 'block' %>
+      <%= f.email_field :email, class: 'py-3 w-full text-lg border-b border-gray-300 focus:outline-none focus:border-green-500', placeholder: 'john@gmail.com' %>
     </div>
 
-    <div class="my-5 text-sm text-green-800">
-      <%= f.label :password, class: 'block text-black' %>
-      <%= f.password_field :password, autocomplete: "current-password", class: 'rounded px-4 py-3 mt-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50 bg-gray-100 w-full', placeholder: 'Password' %>
+    <div class="mt-8 font-bold text-green-800 tracking-wide">
+      <%= f.label :password, class: 'block' %>
+      <%= f.password_field :password, class: 'py-3 w-full text-lg border-b border-gray-300 focus:outline-none focus:border-green-500', placeholder: 'Enter your password' %>
     </div>
 
     <%# if devise_mapping.rememberable? %>
@@ -17,8 +17,9 @@
         <%#= f.label :remember_me %>
 <!--      </div>-->
     <%# end %>
-
-    <%= f.submit "Login", class: "block text-center text-white bg-green-700 rounded p-3 duration-300 rounded-sm hover:bg-green-800 w-full" %>
+    <div class="mt-10">
+      <%= f.submit "Login", class: "o-btn o-btn--primary w-full" %>
+    </div>
   <% end %>
 <% end %>
 
