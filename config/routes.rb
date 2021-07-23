@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
   get 'accounts/inactive' => 'accounts#inactive'
+  get 'accounts/summary' => 'summary#index'
 
   resources :accounts, except: %i[show] do
     resources :transactions
