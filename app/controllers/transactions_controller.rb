@@ -10,17 +10,8 @@ class TransactionsController < ApplicationController
 
   # Index action to render all transactions
   def index
-    @query = session[:query]
-    @order_by = permitted_column_name(session[:order_by])
-    @direction = permitted_direction(session[:direction])
-    @page = (session[:page] || 1).to_i
-
-    transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
-    transactions = transactions.search(@query) if @query.present?
-    pages = (transactions.count / Pagy::VARS[:items].to_f).ceil
-
-    @page = 1 if @page > pages
-    @pagy, @transactions = pagy(transactions, page: @page)
+    @transactions = @account.transactions.search(params[:description]).with_balance.desc
+    @pagy, @transactions = pagy(@transactions, page: session[:trx_index_page], items: 15)
     @transactions = @transactions.decorate
 
     @stashes = @account.stashes.order(id: :asc).decorate
@@ -35,10 +26,6 @@ class TransactionsController < ApplicationController
   # New action for creating transaction
   def new
     @transaction = @account.transactions.build.decorate
-    @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
-                            .order('description').uniq(&:description).pluck(:description)
-
-    @autocomplete = @descriptions.to_json
 
     respond_to do |format|
       format.html # new.html.erb
@@ -59,9 +46,6 @@ class TransactionsController < ApplicationController
 
   # Edit action retrieves the transaction and renders the edit page
   def edit
-    @descriptions = @account.transactions.where('description != ?', 'Starting Balance')
-                            .order('description').uniq.pluck(:description)
-    @autocomplete = @descriptions.to_json
   end
 
   # Update action updates the transaction with the new information
@@ -96,14 +80,6 @@ class TransactionsController < ApplicationController
   end
 
   private
-
-  def permitted_column_name(column_name)
-    %w[trx_date description amount].find { |permitted| column_name == permitted } || 'trx_date'
-  end
-
-  def permitted_direction(direction)
-    %w[asc desc].find { |permitted| direction == permitted } || 'desc'
-  end
 
   def transaction_params
     params.require(:transaction) \

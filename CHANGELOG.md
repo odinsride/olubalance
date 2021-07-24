@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.8.1] - 2021-07-24
+
+### New
+- A daily summary page has been added to quickly see all accounts with a list of transactions added in the current day, all pending transactions, and stash balances
+
+### Chores
+- Upgrade to Ruby 3.0.1
+- Upgrade to Rails 6.1.4
+- Update all dependencies
+
 ## [v1.8.0] - 2020-01-06
 
 ### New
@@ -24,7 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade to Rails 6.1.0
 - Update all dependencies
 - Tests have been cleaned up
-- New tests created for Stashes and Stash Entires
+- New tests created for Stashes and Stash Entries
+
 ## [v1.7.3] - 2020-08-27
 
 ### New
@@ -258,7 +269,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Account overview with list of all accounts and balances for each
 
 
-[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.7.3...develop
+[Unreleased]: https://github.com/odinsride/olubalance/compare/v1.8.1...develop
+[v1.8.1]: https://github.com/odinsride/olubalance/compare/v1.8.0...v1.8.1
+[v1.8.0]: https://github.com/odinsride/olubalance/compare/v1.7.3...v1.8.0
 [v1.7.3]: https://github.com/odinsride/olubalance/compare/v1.7.2...v1.7.3
 [v1.7.2]: https://github.com/odinsride/olubalance/compare/v1.7.1...v1.7.2
 [v1.7.1]: https://github.com/odinsride/olubalance/compare/v1.7.0...v1.7.1

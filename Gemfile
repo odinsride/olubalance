@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '3.0.0'
+ruby '3.0.1'
 
 gem 'aws-sdk-s3', '~> 1.87.0'
 gem 'devise', '~> 4.7.3'
@@ -24,7 +24,6 @@ gem 'puma', '~> 5.1.1'
 gem 'rails', '~> 6.1.0'
 gem 'recaptcha', '~> 5.6.0'
 gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
-gem 'stimulus_reflex', '~> 3.4.0'
 gem 'webpacker', '~> 5.2.1'
 
 group :development, :test do
@@ -43,6 +42,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'foreman'
   gem 'letter_opener'
   gem 'listen'
   gem 'rubocop', require: false
