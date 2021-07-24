@@ -30,7 +30,9 @@ class Transaction < ApplicationRecord
 
   scope :with_balance, -> { includes(:transaction_balance).references(:transaction_balance) }
   scope :desc, -> { order('pending DESC, trx_date DESC, id DESC') }
-
+  scope :current_day, -> { where(created_at: Time.current.all_day) }
+  scope :pending, -> { where(pending: true) }
+  
   def self.search(description)
     if description
       where('description ILIKE ?', "%#{description}%")
