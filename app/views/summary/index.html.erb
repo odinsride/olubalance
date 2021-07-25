@@ -3,6 +3,7 @@
   <h3 class="subtitle"><%= Time.now.strftime("%m/%d/%Y") %></h3>
   <div class="content">
     <h3 class="title">Checking</h3>
+    <h6 class="subtitle">Total: <%= number_to_currency(@checking_total) %></h6>
     <div class="ml-10">
       <% @accounts_checking.each do | account | %>
         <h4 class="title"><%= account.name %></h4>
@@ -31,10 +32,11 @@
     </div>
 
     <h3 class="title">Credit Cards</h3>
+    <h6 class="subtitle">Total: <%= number_to_currency(@credit_total) %> / <%= number_to_currency(@credit_limit_total) %> (<%= @credit_utilization_total %>%)</h6>
     <div class="ml-10">
       <% @accounts_credit.each do | account | %>
         <h4 class="title"><%= account.name %></h4>
-        <h6 class="subtitle"><%= account.current_balance_display %></h6>
+        <h6 class="subtitle"><%= account.current_balance_display %> / <%= number_to_currency(account.credit_limit) %> (<%= account.credit_utilization %>%)</h6>
         <ul class="mb-30">
           <li>New transactions</li>
             <ul>
@@ -53,6 +55,7 @@
     </div>
 
     <h3 class="title">Savings</h3>
+    <h6 class="subtitle">Total: <%= number_to_currency(@savings_total) %></h6>
     <div class="ml-10">
       <% @accounts_savings.each do | account | %>
         <h4 class="title"><%= account.name %></h4>
