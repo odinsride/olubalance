@@ -2,12 +2,28 @@
   <thead class="ob-table-phead">
     <th class="has-text-centered is-hidden-mobile" id="trx-date">
       <div class="ob-cell-content">
-        Date
+        <%= link_to "#", class: column_css(:trx_date),
+            data: { reflex: "click->TransactionReflex#order", column_name: :trx_date, direction: direction } do %>
+            <span class="sortable-column-name">
+              Date
+            </span>
+            <span class="icon is-small" style="display: inline-table">
+              <i class="fas <%= arrow(:trx_date) %>"></i>
+            </span>
+        <% end %>
       </div>
     </th>
     <th class="is-hidden-mobile">
       <div class="ob-cell-content">
-        Description
+        <%= link_to "#", class: column_css(:description),
+            data: { reflex: "click->TransactionReflex#order", column_name: :description, direction: direction } do %>
+            <span class="sortable-column-name">
+              Description
+            </span>
+            <span class="icon is-small" style="display: inline-table">
+              <i class="fas <%= arrow(:description) %>"></i>
+            </span>
+        <% end %>
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">

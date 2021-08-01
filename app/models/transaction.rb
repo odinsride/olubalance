@@ -33,13 +33,12 @@ class Transaction < ApplicationRecord
   scope :current_day, -> { where('created_at > ?', 18.hours.ago) }
   scope :pending, -> { where(pending: true) }
 
-  def self.search(description)
-    if description
-      where('description ILIKE ?', "%#{description}%")
-    else
-      all
-    end
-  end
+  scope :search, lambda { |query|
+    query = sanitize_sql_like(query)
+    where(arel_table[:description]
+            .lower
+            .matches("%#{query.downcase}%"))
+  }
 
   # Determine the transaction_type for existing records based on amount
   def transaction_type
