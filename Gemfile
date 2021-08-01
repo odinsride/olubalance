@@ -24,6 +24,7 @@ gem 'puma', '~> 5.1.1'
 gem 'rails', '~> 6.1.0'
 gem 'recaptcha', '~> 5.6.0'
 gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
+gem 'stimulus_reflex', '~> 3.4.0'
 gem 'webpacker', '~> 5.2.1'
 
 group :development, :test do
