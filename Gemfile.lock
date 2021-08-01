@@ -92,6 +92,8 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.4)
     byebug (11.1.3)
+    cable_ready (4.4.6)
+      rails (>= 5.2)
     capybara (3.35.3)
       addressable
       mini_mime (>= 0.1.3)
@@ -297,6 +299,12 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stimulus_reflex (3.4.0)
+      cable_ready (>= 4.4)
+      nokogiri
+      rack
+      rails (>= 5.2)
+      redis
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -358,6 +366,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-watcher-listen
+  stimulus_reflex (~> 3.4.0)
   webdrivers
   webpacker (~> 5.2.1)
 
