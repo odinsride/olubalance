@@ -32,6 +32,10 @@ class Summary
   end
 
   def credit_utilization_total
-    ((credit_total.abs / credit_limit_total) * 100).round(2)
+    if credit_limit_total.positive?
+      ((credit_total.abs / credit_limit_total) * 100).round(2)
+    else
+      0
+    end
   end
 end
