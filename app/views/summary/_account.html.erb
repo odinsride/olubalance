@@ -1,0 +1,21 @@
+<h4 class="title has-text-link"><%= account.name %></h4>
+<h4 class="subtitle">
+  <% if account.account_type == "credit" %>
+    <%= account.current_balance_display %> / <%= number_to_currency(account.credit_limit) %> (<%= account.credit_utilization %>%)
+  <% else %>
+    <%= account.current_balance_display %>
+  <% end %>
+</h6>
+<%= render partial: "summary/transactions_table", locals: { title: "Recent transactions (3 days)", transactions: account.transactions.recent.decorate } %>
+<%= render partial: "summary/transactions_table", locals: { title: "Pending transactions (" + number_to_currency(account.transactions.pending.sum(:amount).abs.to_s) + ")", transactions: account.transactions.pending.decorate } %>
+<ul class="mb-50">
+  <% if account.account_type != "credit" %>
+    <li class="has-text-weight-bold">Stashes (<%= number_to_currency(account.stashes.sum(:balance)) %>)
+      <ul>
+        <% account.stashes.decorate.each do | stash | %>
+          <li><%= stash.name %> - <%= number_to_currency(stash.balance) %> / <%= number_to_currency(stash.goal) %> (<%= stash.progress %>%)</li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
