@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'accounts/inactive' => 'accounts#inactive'
   get 'accounts/summary' => 'summary#index'
+  post 'accounts/summary/mail' => 'summary#send_mail'
 
   resources :accounts, except: %i[show] do
     resources :transactions

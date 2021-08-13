@@ -49,7 +49,7 @@ class AccountDecorator < ApplicationDecorator
 
   # Display the descriptive last updated at date for the account
   def updated_at_display
-    updated_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')
+    updated_at.in_time_zone(User.new.decorate.h.controller.current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')
   end
 
   # Simple check if the account balance is negative

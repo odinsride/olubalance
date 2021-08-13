@@ -1,80 +1,24 @@
 <div class="container">
-  <h2 class="title">Daily Summary
-  <h3 class="subtitle"><%= Time.now.strftime("%m/%d/%Y") %></h3>
-  <div class="content">
-    <h3 class="title">Checking</h3>
-    <h6 class="subtitle">Total: <%= number_to_currency(@checking_total) %></h6>
-    <div class="ml-10">
-      <% @accounts_checking.each do | account | %>
-        <h4 class="title"><%= account.name %></h4>
-        <h6 class="subtitle"><%= account.current_balance_display %></h6>
-        <ul class="mb-30">
-          <li>New transactions</li>
-            <ul>
-              <% account.transactions.current_day.decorate.each do | transaction | %>
-                <li><%= transaction.trx_date_display %> - <%= transaction.description %> :: <span class="<%= transaction.amount_color %>"><%= number_to_currency(transaction.amount) %></span></li>
-              <% end %>
-            </ul>
-          <li>Pending transactions</li>
-            <ul>
-              <% account.transactions.pending.decorate.each do | transaction | %>
-                <li><%= transaction.trx_date_display %> - <%= transaction.description %> :: <span class="<%= transaction.amount_color %>"><%= number_to_currency(transaction.amount) %></span></li>
-              <% end %>
-            </ul>
-          <li>Stashes</li>
-            <ul>
-              <% account.stashes.decorate.each do | stash | %>
-                <li><%= stash.name %> - <%= number_to_currency(stash.balance) %> / <%= number_to_currency(stash.goal) %> (<%= stash.progress %>%)</li>
-              <% end %>
-            </ul>
-        </ul>
-      <% end %>
+  <nav class="level">
+    <!-- Left side -->
+    <div class="level-left">
     </div>
 
-    <h3 class="title">Credit Cards</h3>
-    <h6 class="subtitle">Total: <%= number_to_currency(@credit_total) %> / <%= number_to_currency(@credit_limit_total) %> (<%= @credit_utilization_total %>%)</h6>
-    <div class="ml-10">
-      <% @accounts_credit.each do | account | %>
-        <h4 class="title"><%= account.name %></h4>
-        <h6 class="subtitle"><%= account.current_balance_display %> / <%= number_to_currency(account.credit_limit) %> (<%= account.credit_utilization %>%)</h6>
-        <ul class="mb-30">
-          <li>New transactions</li>
-            <ul>
-              <% account.transactions.current_day.decorate.each do | transaction | %>
-                <li><%= transaction.trx_date_display %> - <%= transaction.description %> :: <span class="<%= transaction.amount_color %>"><%= number_to_currency(transaction.amount) %></span></li>
-              <% end %>
-            </ul>
-          <li>Pending transactions</li>
-            <ul>
-              <% account.transactions.pending.decorate.each do | transaction | %>
-                <li><%= transaction.trx_date_display %> - <%= transaction.description %> :: <span class="<%= transaction.amount_color %>"><%= number_to_currency(transaction.amount) %></span></li>
-              <% end %>
-            </ul>
-        </ul>
-      <% end %>
+    <!-- Right side -->
+    <div class="level-right">
+      <div class="level-item">
+        <%= form_for :summary_mail, url: "summary/mail" do |f| %>
+          <div class="field has-addons">
+            <p class="control">
+              <%= f.text_field :to, class: "input is-small" %>
+            </p>
+            <p class="control">
+              <%= f.submit "Send", class: "button is-small" %>
+            </p>
+          </div>
+        <% end %>
+      </div>
     </div>
-
-    <h3 class="title">Savings</h3>
-    <h6 class="subtitle">Total: <%= number_to_currency(@savings_total) %></h6>
-    <div class="ml-10">
-      <% @accounts_savings.each do | account | %>
-        <h4 class="title"><%= account.name %></h4>
-        <h6 class="subtitle"><%= account.current_balance_display %></h6>
-        <ul class="mb-30">
-          <li>New transactions</li>
-            <ul>
-              <% account.transactions.current_day.decorate.each do | transaction | %>
-                <li><%= transaction.trx_date_display %> - <%= transaction.description %> :: <span class="<%= transaction.amount_color %>"><%= number_to_currency(transaction.amount) %></span></li>
-              <% end %>
-            </ul>
-          <li>Pending transactions</li>
-            <ul>
-              <% account.transactions.pending.decorate.each do | transaction | %>
-                <li><%= transaction.trx_date_display %> - <%= transaction.description %> :: <span class="<%= transaction.amount_color %>"><%= number_to_currency(transaction.amount) %></span></li>
-              <% end %>
-            </ul>
-        </ul>
-      <% end %>
-    </div>
-  </div>
+  </nav>
+  <%= render partial: "summary" %>
 </div>

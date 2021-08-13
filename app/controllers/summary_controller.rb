@@ -1,25 +1,27 @@
 class SummaryController < ApplicationController
   before_action :authenticate_user!
+  before_action :collect_summary_info
+  skip_forgery_protection
 
   def index
-    @accounts = current_user.accounts.where(active: true).order('created_at ASC')
+  end
 
-    @accounts_checking = @accounts.where(account_type: :checking)
-    @accounts_savings = @accounts.where(account_type: :savings)
-    @accounts_credit = @accounts.where(account_type: :credit)
+  def send_mail
+    puts "send_mail params"
+    puts params
+    SummaryMailer.with(summary: @summary, current_user: current_user, to: params[:summary_mail][:to]).new_summary_email.deliver_now
+  end
 
-    @checking_total = @accounts_checking.sum(:current_balance)
-    @savings_total = @accounts_savings.sum(:current_balance)
+  private
 
-    @credit_total = @accounts_credit.sum(:current_balance)
-    @credit_limit_total = @accounts_credit.sum(:credit_limit)
-    @credit_utilization_total = ((@credit_total.abs / @credit_limit_total) * 100).round(2)
+  # Get the summary object (defined in facade)
+  def collect_summary_info
+    accounts = current_user.accounts.where(active: true).order('created_at ASC').decorate
+    @summary = Summary.new(accounts)
+  end
 
-    @accounts_checking = @accounts_checking.decorate
-    @accounts_savings = @accounts_savings.decorate
-    @accounts_credit = @accounts_credit.decorate
-    @accounts = @accounts.decorate
-
-
+  def summary_params
+    params.require(:summary_mail) \
+          .permit(:to)
   end
 end

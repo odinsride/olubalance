@@ -65,12 +65,12 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def trx_date_display
-    trx_date.in_time_zone(current_user.timezone).strftime('%m/%d/%Y')
+    trx_date.in_time_zone(User.new.decorate.h.controller.current_user.timezone).strftime('%m/%d/%Y')
   end
 
   def trx_date_formatted
     # trx_date.in_time_zone(current_user.timezone).strftime('%m/%d/%Y')
-    trx_date.in_time_zone(current_user.timezone).strftime('%Y-%m-%d')
+    trx_date.in_time_zone(User.new.decorate.h.controller.current_user.timezone).strftime('%Y-%m-%d')
   end
 
   def trx_date_form_value
@@ -79,7 +79,7 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def created_at_decorated
-    created_at.in_time_zone(current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')
+    created_at.in_time_zone(User.new.decorate.h.controller.current_user.timezone).strftime('%b %d, %Y @ %I:%M %p %Z')
   end
 
   def name_too_long

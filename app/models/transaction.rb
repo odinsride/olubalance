@@ -30,7 +30,7 @@ class Transaction < ApplicationRecord
 
   scope :with_balance, -> { includes(:transaction_balance).references(:transaction_balance) }
   scope :desc, -> { order('pending DESC, trx_date DESC, id DESC') }
-  scope :current_day, -> { where('created_at > ?', 18.hours.ago) }
+  scope :recent, -> { where('created_at > ?', 3.days.ago) }
   scope :pending, -> { where(pending: true) }
 
   scope :search, lambda { |query|

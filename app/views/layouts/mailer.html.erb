@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+            body {
+        font-family: "SF Pro", "Segoe UI", "Arial", sans-serif;
+        font-size: 1em;
+        font-weight: 400;
+        line-height: 1.5;
+        padding: 20px !important;
+      }
+
+      .tabs:not(:last-child), .pagination:not(:last-child), .message:not(:last-child), .level:not(:last-child), .breadcrumb:not(:last-child), .block:not(:last-child), .title:not(:last-child), .subtitle:not(:last-child), .table-container:not(:last-child), .table:not(:last-child), .progress:not(:last-child), .notification:not(:last-child), .content:not(:last-child), .box:not(:last-child) {
+          margin-bottom: 1.5rem;
+      }
+
+      .content h3 {
+          font-size: 1.5em;
+          margin-bottom: 0.6666em;
+      }
+
+      .content h4 {
+          font-size: 1.25em;
+          margin-bottom: 0.8em;
+      }
+      .content h6 {
+          font-size: 1em;
+          margin-bottom: 1em;
+      }
+      .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+          color: #363636;
+          font-weight: 600;
+          line-height: 1.125;
+      }
+      .title {
+          color: #363636;
+          font-size: 2rem;
+          font-weight: 600;
+          line-height: 1.125;
+      }
+      .title, .subtitle {
+          word-break: break-word;
+      }
+
+      .subtitle {
+          color: #4a4a4a;
+          font-size: 1.25rem;
+          font-weight: 400;
+          line-height: 1.25;
+      }
+
+      .title:not(.is-spaced) + .subtitle {
+          margin-top: -1.25rem;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+          font-size: 100%;
+          font-weight: normal;
+      }
+      html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+          margin: 0;
+          padding: 0;
+      }
+
+      .has-text-link {
+          color: #00796b !important;
+      }
+      
+      .title em, .title span, .subtitle em, .subtitle span {
+          font-weight: inherit;
+      }
+      .has-text-weight-bold {
+          font-weight: 700 !important;
+      }
+
+      .has-text-primary {
+          color: #26a69a !important;
+      }
+
+      .mb-50 {
+          margin-bottom: 50px !important;
+      }
+
+      .mb-30 {
+          margin-bottom: 30px !important;
+      }
+
+      .table {
+          background-color: white;
+          color: #595959;
+          width: 100%;
+      }
+
+      table {
+          border-collapse: collapse;
+          border-spacing: 0;
+      }
+
+      .table thead {
+          background-color: #26a69a;
+      }
+
+      *, *::before, *::after {
+          box-sizing: inherit;
+      }
+
+      user agent stylesheet
+      tr {
+          display: table-row;
+          vertical-align: inherit;
+          border-color: inherit;
+      }
+
+      .content table th:not([align]) {
+          text-align: inherit;
+      }
+      .table th:not([align]) {
+          text-align: inherit;
+      }
+      .content table thead td, .content table thead th {
+          border-width: 0 0 2px;
+          color: #363636;
+      }
+      .table thead td, .table thead th {
+          border-width: 0 0 2px;
+          color: whitesmoke;
+      }
+      .content table th {
+          color: #363636;
+      }
+      .content table td, .content table th {
+          border: 1px solid #dbdbdb;
+          border-width: 0 0 1px;
+          padding: 0.5em 0.75em;
+          vertical-align: top;
+      }
+      table td:not([align]), table th:not([align]) {
+          text-align: inherit;
+      }
+      .table th {
+          color: #363636;
+      }
+      .table td, .table th {
+          border: 1px solid #dbdbdb;
+          border-width: 0 0 1px;
+          padding: 0.5em 0.75em;
+          vertical-align: top;
+      }
+      td:not([align]), th:not([align]) {
+          text-align: inherit;
+      }
+
+      .has-text-white {
+          color: white !important;
+      }
+      .has-text-right {
+          text-align: right !important;
+      }
+      .has-text-centered {
+          text-align: center !important;
+      }
+
+      .has-background-link {
+          background-color: #00796b !important;
+      }
+      .content ul {
+        list-style: disc outside;
+        margin-left: 2em;
+        margin-top: 1em;
+      }
+      html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+        padding: 0;
+      }
+
+      .content ul ul {
+          list-style-type: circle;
+          margin-top: 0.5em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<h2 class="title has-text-link">olubalance</h2>
+<h3 class="subtitle">Summary for <span class="has-text-weight-bold has-text-primary"><%= Time.now.strftime("%m/%d/%Y") %></span></h3>
+<div class="content">
+  <h3 class="title">Checking</h3>
+  <h6 class="subtitle">Total: <%= number_to_currency(@summary.checking_total) %></h6>
+  <div class="ml-10">
+    <%= render partial: "summary/account", collection: @summary.accounts_checking %>
+  </div>
+
+  <h3 class="title">Credit Cards</h3>
+  <h6 class="subtitle">Total: <%= number_to_currency(@summary.credit_total) %> / <%= number_to_currency(@summary.credit_limit_total) %> (<%= @summary.credit_utilization_total %>%)</h6>
+  <div class="ml-10">
+    <%= render partial: "summary/account", collection: @summary.accounts_credit %>
+  </div>
+
+  <h3 class="title">Savings</h3>
+  <h6 class="subtitle">Total: <%= number_to_currency(@summary.savings_total) %></h6>
+  <div class="ml-10">
+    <%= render partial: "summary/account", collection: @summary.accounts_savings %>     
+  </div>
+</div>

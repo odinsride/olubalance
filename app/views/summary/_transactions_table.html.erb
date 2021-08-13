@@ -1,0 +1,28 @@
+<table class="table is-striped mb-30" style="">
+  <thead>
+    <tr>
+      <th colspan="3" class="has-background-link has-text-white"><%= title %></th>
+    </tr>
+    <% if transactions.count > 0 %>
+      <tr>
+        <th class="has-text-white" style="width: 20%">Date</th>
+        <th class="has-text-white">Description</th>
+        <th class="has-text-white has-text-right">Amount</th>
+      </tr>
+    <% end %>
+  </thead>
+  <tbody>
+    <% if transactions.count == 0 %>
+      <tr>
+        <td colspan="3" class="has-text-centered">- No transactions -</td>
+      </tr>
+    <% end %>
+    <% transactions.each do | transaction | %>
+      <tr>
+        <td><%= transaction.trx_date_display %></td>
+        <td><%= transaction.description %></td>
+        <td class="has-text-right"><span class="<%= transaction.amount_color %>"><%= number_to_currency(transaction.amount) %></span></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
