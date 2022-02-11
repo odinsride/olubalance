@@ -20,7 +20,7 @@ gem 'invisible_captcha', '~> 1.1.0'
 gem 'mini_magick', '~> 4.11.0'
 gem 'pagy', '~> 3.10.0'
 gem 'pg', '~> 1.2.3'
-gem 'puma', '~> 5.1.1'
+gem 'puma', '~> 5.6.2'
 gem 'rails', '~> 6.1.0'
 gem 'recaptcha', '~> 5.6.0'
 gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
