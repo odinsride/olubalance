@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] changes
 
+## [v1.8.5] - 2022-12-13
+
+### Changed
+- Disabled user registrations. This project is planned to be sunset in the near future.
+
 ## [v1.8.4] - 2021-08-14
 
 ### Fixed
@@ -291,6 +296,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 [Unreleased]: https://github.com/odinsride/olubalance/compare/v1.8.4...develop
+[v1.8.5]: https://github.com/odinsride/olubalance/compare/v1.8.4...v1.8.5
 [v1.8.4]: https://github.com/odinsride/olubalance/compare/v1.8.3...v1.8.4
 [v1.8.3]: https://github.com/odinsride/olubalance/compare/v1.8.2...v1.8.3
 [v1.8.2]: https://github.com/odinsride/olubalance/compare/v1.8.1...v1.8.2
