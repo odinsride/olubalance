@@ -1,7 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_scope :user do
+    get "/sign_in" => "devise/sessions#new"
+  end
+
+  devise_for :users, :skip => [:registrations], controllers: { registrations: 'registrations' }
+
+  as :user do
+    get "users/edit" => "devise/registrations#edit", :as => "edit_user_registration"
+    patch "users/:id" => "devise/registrations#update", :as => "user_registration"
+  end
 
   get 'accounts/inactive' => 'accounts#inactive'
   get 'accounts/summary' => 'summary#index'

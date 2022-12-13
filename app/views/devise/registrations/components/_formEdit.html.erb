@@ -18,7 +18,7 @@
 
 <h3 class="title is-4 has-text-link">Account Settings</h3>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: user_registration_path(resource_name)) do |f| %>
 
   <div class="columns">
     <!-- Fields -->
@@ -121,7 +121,7 @@
 
 <!-- CHECK THIS OUT: https://gorails.com/forum/how-do-i-separate-out-the-devise-form-like-gorails-com-edit-profile-edit-password -->
 <h3 class="title is-4 has-text-link">Change Password</h3>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: user_registration_path(resource_name)) do |f| %>
 
   <div class="columns">
     <!-- Fields -->
