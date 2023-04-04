@@ -4,21 +4,19 @@
   "dependencies": {
     "@creativebulma/bulma-tooltip": "^1.2.0",
     "@fortawesome/fontawesome-free": "^5.15.1",
-    "@rails/actioncable": "^6.0.3",
+    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/turbo-rails": "^7.3.0",
     "@rails/activestorage": "^6.0.3",
-    "@rails/ujs": "^6.0.3",
-    "@rails/webpacker": "^5.1.1",
     "animate.css": "^4.1.1",
     "bulma": "^0.9.1",
     "bulma-checkradio": "^2.1.1",
     "bulma-toast": "^2.2.0",
-    "stimulus": "^2.0.0",
-    "turbolinks": "^5.2.0",
-    "url-loader": "^4.1.0",
-    "webpack": "^4.44.1"
+    "esbuild": "^0.17.15",
+    "url-loader": "^4.1.0"
   },
   "devDependencies": {
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
   }
 }
