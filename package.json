@@ -2,21 +2,18 @@
   "name": "olubalance",
   "private": true,
   "dependencies": {
-    "@creativebulma/bulma-tooltip": "^1.2.0",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
     "@rails/activestorage": "^6.0.3",
     "animate.css": "^4.1.1",
     "bulma": "^0.9.1",
-    "bulma-checkradio": "^2.1.1",
     "bulma-toast": "^2.2.0",
     "esbuild": "^0.17.15",
-    "url-loader": "^4.1.0"
-  },
-  "devDependencies": {
+    "sass": "^1.61.0"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "build:css": "sass ./app/assets/stylesheets/application.bulma.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }
