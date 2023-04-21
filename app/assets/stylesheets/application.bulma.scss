@@ -20,13 +20,14 @@
 @import 'bulma/bulma';
 
 @import 'bulma-checkradio';
-@import '@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css';
+// @import 'bulma-tooltip';
 
 @import 'helpers';
 @import 'devise';
 @import 'card';
 @import 'table';
 @import 'stashes';
+@import 'tooltip';
 
 nav.navbar {
     border-top: 5px solid $link;
