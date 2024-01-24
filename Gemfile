@@ -7,14 +7,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '3.0.1'
+ruby '3.3.0'
 
 gem 'aws-sdk-s3', '~> 1.87.0'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise', '~> 4.7.3'
 gem 'draper', '~> 4.0.1'
-gem 'faker', '~> 2.15.1'
+gem 'faker'
 gem 'figaro', '~> 1.2.0'
 gem 'hiredis', '~> 0.6.3'
 gem 'image_processing'
@@ -22,7 +22,7 @@ gem 'invisible_captcha', '~> 1.1.0'
 gem 'mini_magick', '~> 4.11.0'
 gem 'jsbundling-rails'
 gem 'pagy', '~> 3.10.0'
-gem 'pg', '~> 1.2.3'
+gem 'pg', '~> 1.5.4'
 gem 'puma', '~> 5.6.4'
 gem 'rails', '~> 6.1.0'
 gem 'recaptcha', '~> 5.6.0'

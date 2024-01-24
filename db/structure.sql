@@ -278,8 +278,8 @@ CREATE TABLE public.transactions (
 --
 
 CREATE VIEW public.transaction_balances AS
- SELECT transactions.id AS transaction_id,
-    sum(transactions.amount) OVER (PARTITION BY transactions.account_id ORDER BY transactions.pending, transactions.trx_date, transactions.id) AS running_balance
+ SELECT id AS transaction_id,
+    sum(amount) OVER (PARTITION BY account_id ORDER BY pending, trx_date, id) AS running_balance
    FROM public.transactions;
 
 
