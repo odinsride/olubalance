@@ -407,24 +407,24 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   database_cleaner
-  devise
-  draper
+  devise (~> 4.9.0)
+  draper (~> 4.0.2)
   factory_bot_rails
   faker
   figaro
   foreman
   hiredis
-  image_processing
+  image_processing (~> 1.12.2)
   invisible_captcha
   jsbundling-rails
   letter_opener
   listen
-  mini_magick
-  pagy
-  pg
+  mini_magick (~> 4.12.0)
+  pagy (~> 6)
+  pg (~> 1.5.4)
   pry-byebug
   pry-rails
-  puma
+  puma (~> 6.4.2)
   rails (~> 7.1)
   rails-controller-testing
   recaptcha
