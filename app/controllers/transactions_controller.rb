@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
 
     transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
     transactions = transactions.search(@query) if @query.present?
-    pages = (transactions.count / Pagy::VARS[:items].to_f).ceil
+    pages = (transactions.count / Pagy::DEFAULT[:items].to_f).ceil
 
     @page = 1 if @page > pages
     @pagy, @transactions = pagy(transactions, page: @page)
