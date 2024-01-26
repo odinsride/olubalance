@@ -31,7 +31,6 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 # gem 'redis', '~> 4.4.0', require: ['redis', 'redis/connection/hiredis']
 
-
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
