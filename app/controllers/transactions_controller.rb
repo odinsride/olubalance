@@ -32,6 +32,18 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def list
+    @page = (session[:page] || 1).to_i
+
+    transactions = @account.transactions.order("#{params[:column]} asc")
+    pages = (transactions.count / Pagy::DEFAULT[:items].to_f).ceil
+
+    @page = 1 if @page > pages
+    @pagy, @transactions = pagy(transactions, page: @page)
+    @transactions = @transactions.decorate
+    render(partial: 'transactions/components/transactionList')
+  end
+
   # New action for creating transaction
   def new
     @transaction = @account.transactions.build.decorate

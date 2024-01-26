@@ -15,6 +15,10 @@ module TransactionsHelper
     @direction == 'desc' ? 'fa-sort-down' : 'fa-sort-up'
   end
 
+  def sort_link(column:, label:)
+    link_to(label, list_account_transactions_path(column: column))
+  end
+
   def direction
     @direction == 'asc' ? 'desc' : 'asc'
   end
