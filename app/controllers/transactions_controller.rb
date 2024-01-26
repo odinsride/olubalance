@@ -10,17 +10,8 @@ class TransactionsController < ApplicationController
 
   # Index action to render all transactions
   def index
-    @query = session[:query]
-    @order_by = permitted_column_name(session[:order_by])
-    @direction = permitted_direction(session[:direction])
-    @page = (session[:page] || 1).to_i
-
-    transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
-    transactions = transactions.search(@query) if @query.present?
-    pages = (transactions.count / Pagy::DEFAULT[:items].to_f).ceil
-
-    @page = 1 if @page > pages
-    @pagy, @transactions = pagy(transactions, page: @page)
+    transactions = @account.transactions.order(pending: :desc, trx_date: :desc, id: :desc)
+    @pagy, @transactions = pagy(transactions, items: 15)
     @transactions = @transactions.decorate
 
     @stashes = @account.stashes.order(id: :asc).decorate
@@ -33,13 +24,8 @@ class TransactionsController < ApplicationController
   end
 
   def list
-    @page = (session[:page] || 1).to_i
-
     transactions = @account.transactions.order("#{params[:column]} asc")
-    pages = (transactions.count / Pagy::DEFAULT[:items].to_f).ceil
-
-    @page = 1 if @page > pages
-    @pagy, @transactions = pagy(transactions, page: @page)
+    @pagy, @transactions = pagy(transactions, items: 15)
     @transactions = @transactions.decorate
     render(partial: 'transactions/components/transactionList')
   end
