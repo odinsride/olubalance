@@ -20,10 +20,10 @@ Bundler.require(*Rails.groups)
 module Olubalance
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.0
 
     # olubalance Version
-    config.version = "1.8.5"
+    config.version = "1.8.6"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

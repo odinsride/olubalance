@@ -19,9 +19,9 @@ module TransactionsHelper
     @direction == 'asc' ? 'desc' : 'asc'
   end
 
-  def pagy_get_params(params)
-    params.merge query: @query, order_by: @order_by, direction: @direction
-  end
+  # def pagy_massage_params(params)
+  #   params.merge query: @query, order_by: @order_by, direction: @direction
+  # end
 
   def prev_page
     @pagy.prev || 1
