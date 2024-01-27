@@ -50,7 +50,7 @@
         </div>
       </th>
     </thead>
-    <tbody>
+    <tbody id="transactionTbody">
       <%= render partial: "transactions/components/transactionLine", collection: @transactions, as: :transaction %>
     </tbody>
   </table>

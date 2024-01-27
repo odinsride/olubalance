@@ -10,21 +10,21 @@ class TransactionsController < ApplicationController
 
   # Index action to render all transactions
   def index
-    transactions = @account.transactions.order(pending: :desc, trx_date: :desc, id: :desc)
+    transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, trx_date: :desc, id: :desc)
     @pagy, @transactions = pagy(transactions, items: 15)
     @transactions = @transactions.decorate
 
     @stashes = @account.stashes.order(id: :asc).decorate
     @stashed = @account.stashes.sum(:balance)
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml { render xml: @transactions }
-    end
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.xml { render xml: @transactions }
+    # end
   end
 
   def list
-    transactions = @account.transactions.order("#{params[:column]} asc")
+    transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order("#{params[:column]} asc")
     @pagy, @transactions = pagy(transactions, items: 15)
     @transactions = @transactions.decorate
     render(partial: 'transactions/components/transactionList')

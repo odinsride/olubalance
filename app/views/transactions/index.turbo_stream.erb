@@ -1,10 +1,10 @@
 <%= turbo_stream_action_tag(
   "append",
-  target: "transactions",
-  template: %(#{render @transactions}) 
+  target: "transactionTbody",
+  template: %(#{render "transactions/components/transactionLine", collection: @transactions, as: :transaction}) 
 ) %>
 <%= turbo_stream_action_tag(
   "replace",
   target: "pager",
-  template: %(#{render "pager", pagy: @pagy})
+  template: %(#{render "transactions/components/pagination"})
 ) %>

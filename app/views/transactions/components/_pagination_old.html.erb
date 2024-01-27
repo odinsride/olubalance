@@ -1,0 +1,12 @@
+<div id="pager">
+  <div>
+    <% if @pagy.prev %>
+      <%= link_to "< Previous page", account_transactions_path(page: @pagy.prev) %>
+    <% end %>
+  </div>
+  <div>
+    <% if @pagy.next %>
+      <%= link_to "Next page >", account_transactions_path(page: @pagy.next) %>
+    <% end %>
+  </div>
+</div>
