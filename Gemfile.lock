@@ -427,7 +427,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma (~> 6.4.2)
-  rails (~> 7.1)
+  rails (~> 7.2)
   rails-controller-testing
   recaptcha
   redis (~> 4.4.0)

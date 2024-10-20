@@ -24,7 +24,7 @@ gem 'mini_magick', '~> 4.12.0'
 gem 'pagy', '~> 6'
 gem 'pg', '~> 1.5.4'
 gem 'puma', '~> 6.4.2'
-gem 'rails', '~> 7.1'
+gem 'rails', '~> 7.2'
 gem 'recaptcha'
 gem 'redis', '~> 4.4.0', require: ['redis', 'redis/connection/hiredis']
 gem 'sprockets-rails'
