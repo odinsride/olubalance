@@ -3,7 +3,7 @@
     <th class="has-text-centered is-hidden-mobile" id="trx-date">
       <div class="ob-cell-content">
         <%= link_to "#", class: column_css(:trx_date),
-            data: { reflex: "click->TransactionReflex#order", column_name: :trx_date, direction: direction } do %>
+            data: { column_name: :trx_date, direction: direction } do %>
             <span class="sortable-column-name">
               Date
             </span>
@@ -16,7 +16,7 @@
     <th class="is-hidden-mobile">
       <div class="ob-cell-content">
         <%= link_to "#", class: column_css(:description),
-            data: { reflex: "click->TransactionReflex#order", column_name: :description, direction: direction } do %>
+            data: { column_name: :description, direction: direction } do %>
             <span class="sortable-column-name">
               Description
             </span>
