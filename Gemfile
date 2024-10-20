@@ -25,12 +25,11 @@ gem 'pagy', '~> 6'
 gem 'pg', '~> 1.5.4'
 gem 'puma', '~> 6.4.2'
 gem 'rails', '~> 7.1'
-gem 'redis'
 gem 'recaptcha'
+gem 'redis', '~> 4.4.0', require: ['redis', 'redis/connection/hiredis']
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
-# gem 'redis', '~> 4.4.0', require: ['redis', 'redis/connection/hiredis']
 
 group :development, :test do
   gem 'capybara'
