@@ -1,19 +1,18 @@
 <div class="level-item is-hidden-mobile">
   <span class="has-text-weight-semibold mr-5">
-		<%= @pagy.count %>
-	</span>
-	<%= 'transaction'.pluralize(@pagy.count) %>
+    <%= @pagy.count %>
+  </span>
+  <%= 'transaction'.pluralize(@pagy.count) %>
 </div>
 <div class="level-item" id="transaction-search">
-	<div class="field">
-		<div class="control has-icons-right">
-			<input type="text" placeholder="Find transactions..." class="input" value="<%= @query %>"
-     				 data-reflex="input->TransactionReflex#search" data-reflex-root="#search-results" />
-			<a href='#' data-reflex="click->TransactionReflex#search_reset" data-reflex-root="#search-results">
-			<span class="icon is-right" style="pointer-events: initial">
-				<i class="fas fa-times"></i>
-			</span>
-			</a>
-		</div>
-	</div>
+  <div class="field">
+    <div class="control has-icons-right">
+      <input type="text" placeholder="Find transactions..." class="input" value="<%= @query %>" />
+      <a href='#'>
+        <span class="icon is-right" style="pointer-events: initial">
+          <i class="fas fa-times"></i>
+        </span>
+      </a>
+    </div>
+  </div>
 </div>
