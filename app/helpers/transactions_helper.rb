@@ -19,6 +19,9 @@ module TransactionsHelper
     @direction == 'asc' ? 'desc' : 'asc'
   end
 
+  def sort_link(column:, label:)
+    link_to(label, account_transactions_path(column: column))
+  end
   # def pagy_massage_params(params)
   #   params.merge query: @query, order_by: @order_by, direction: @direction
   # end
