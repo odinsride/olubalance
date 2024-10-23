@@ -21,13 +21,32 @@ module TransactionsHelper
 
   def sort_link(column:, label:)
     direction = column == params[:column] ? next_direction : 'asc'
-    link_to(account_transactions_path(column: column, direction: direction), class: column_css(column), data: { turbo_action: 'replace'}) do
+    link_to(account_transactions_path(column: column, direction: direction), class: 'has-text-white sortable', data: { turbo_action: 'replace'}) do
       ('<span class="sortable-column-name">' + label + '</span>').html_safe
     end
   end
 
   def next_direction
     params[:direction] == 'asc' ? 'desc' : 'asc'
+  end
+
+  def sort_indicator
+    icon = params[:direction] == 'asc' ? 'fa-sort-up' : 'fa-sort-down'
+    ('<span class="icon is-small" style="display: inline-table">' +
+      '<i class="fas ' + icon + '"></i>' +
+    '</span>').html_safe
+  end
+
+  def sort_indicator_default
+    ('<span class="icon is-small" style="display: inline-table">' +
+      '<i class="fas fa-sort"></i>' +
+    '</span>').html_safe
+  end
+
+  def show_sort_indicator_for(column)
+    return sort_indicator if params[:column] == column
+
+    sort_indicator_default
   end
 
   # def pagy_massage_params(params)

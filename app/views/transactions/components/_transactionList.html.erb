@@ -1,21 +1,15 @@
 <table class="table is-hoverable is-fullwidth ob-table">
   <thead class="ob-table-phead">
     <th class="has-text-centered is-hidden-mobile" id="trx-date">
-      <div id="trx-date" class="ob-cell-content">
+      <div class="ob-cell-content">
         <%= sort_link(column: "trx_date", label: "Date") %>
+        <%= show_sort_indicator_for("trx_date") %>
       </div>
     </th>
     <th class="is-hidden-mobile">
       <div class="ob-cell-content">
-        <%= link_to "#", class: column_css(:description),
-            data: { column_name: :description, direction: direction } do %>
-            <span class="sortable-column-name">
-              Description
-            </span>
-            <span class="icon is-small" style="display: inline-table">
-              <i class="fas <%= arrow(:description) %>"></i>
-            </span>
-        <% end %>
+        <%= sort_link(column: "description", label: "Description") %>
+        <%= show_sort_indicator_for("description") %>
       </div>
     </th>
     <th class="has-text-right is-hidden-mobile">
