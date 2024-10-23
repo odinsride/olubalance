@@ -20,8 +20,16 @@ module TransactionsHelper
   end
 
   def sort_link(column:, label:)
-    link_to(label, account_transactions_path(column: column))
+    direction = column == params[:column] ? next_direction : 'asc'
+    link_to(account_transactions_path(column: column, direction: direction), class: column_css(column), data: { turbo_action: 'replace'}) do
+      ('<span class="sortable-column-name">' + label + '</span>').html_safe
+    end
   end
+
+  def next_direction
+    params[:direction] == 'asc' ? 'desc' : 'asc'
+  end
+
   # def pagy_massage_params(params)
   #   params.merge query: @query, order_by: @order_by, direction: @direction
   # end

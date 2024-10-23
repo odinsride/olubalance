@@ -39,6 +39,7 @@
     </th>
   </thead>
   <tbody>
-    <%= render partial: "transactions/components/transactionLine", collection: @transactions, as: :transaction %>
+    <%= render partial: "transactions/components/transactionLineDesktop", collection: @transactions, as: :transaction %>
+    <%= render partial: "transactions/components/transactionLineMobile", collection: @transactions, as: :transaction %>
   </tbody>
 </table>

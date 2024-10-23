@@ -16,9 +16,9 @@ class TransactionsController < ApplicationController
     # @page = (session[:page] || 1).to_i
 
     if params[:column].present?
-      transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order("#{params[:column]}")
+      transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, "#{params[:column]}" => "#{params[:direction]}", id: :desc)
     else
-      transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance)
+      transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, id: :desc)
     end
     # transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
     # transactions = transactions.search(@query) if @query.present?
