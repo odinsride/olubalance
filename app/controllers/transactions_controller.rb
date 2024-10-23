@@ -18,15 +18,15 @@ class TransactionsController < ApplicationController
     if params[:column].present?
       transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, "#{params[:column]}" => "#{params[:direction]}", id: :desc)
     else
-      transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, id: :desc)
+      transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, trx_date: :desc, id: :desc)
     end
     # transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
     # transactions = transactions.search(@query) if @query.present?
     # pages = (transactions.count / Pagy::DEFAULT[:items].to_f).ceil
 
     # @page = 1 if @page > pages
-    # @pagy, @transactions = pagy(transactions, page: @page)
-    @transactions = transactions.decorate
+    @pagy, @transactions = pagy(transactions)
+    @transactions = @transactions.decorate
 
     @stashes = @account.stashes.order(id: :asc).decorate
     @stashed = @account.stashes.sum(:balance)
