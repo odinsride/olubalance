@@ -1,6 +1,6 @@
 <tr class="is-hidden-mobile">
   <td class="has-text-centered">
-    <%= link_to account_transaction_path(id: transaction.id) do %>
+    <%= link_to account_transaction_path(id: transaction.id), data: { turbo_frame: "_top" } do %>
       <div class="ob-cell-content has-text-grey">
         <%= transaction.trx_date_decorated %>
       </div>
@@ -8,7 +8,7 @@
   </td>
 
   <td class="">
-    <%= link_to account_transaction_path(id: transaction.id) do %>
+    <%= link_to account_transaction_path(id: transaction.id), data: { turbo_frame: "_top" } do %>
       <div class="ob-cell-content">
         <%= transaction.trx_desc_display %>
         <% if transaction.attachment.attached? then %>
@@ -21,7 +21,7 @@
   </td>
 
   <td class="has-text-right">
-    <%= link_to account_transaction_path(id: transaction.id) do %>
+    <%= link_to account_transaction_path(id: transaction.id), data: { turbo_frame: "_top" } do %>
       <div class="ob-cell-content <%= transaction.amount_color %>">
         <%= transaction.credit %>
       </div>
@@ -29,7 +29,7 @@
   </td>
 
   <td class="has-text-right">
-    <%= link_to account_transaction_path(id: transaction.id) do %>
+    <%= link_to account_transaction_path(id: transaction.id), data: { turbo_frame: "_top" } do %>
       <div class="ob-cell-content <%= transaction.amount_color %>">
         <%= transaction.debit %>
       </div>
@@ -37,7 +37,7 @@
   </td>
 
   <td class="has-text-right">
-    <%= link_to account_transaction_path(id: transaction.id) do %>
+    <%= link_to account_transaction_path(id: transaction.id), data: { turbo_frame: "_top" } do %>
       <div class="has-text-weight-semibold has-text-grey">
         <%= transaction.running_balance_display %>
       </div>
