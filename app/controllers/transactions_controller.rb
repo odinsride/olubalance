@@ -7,6 +7,7 @@ class TransactionsController < ApplicationController
   before_action :find_account
   before_action :find_transaction, only: %i[edit update show destroy]
   before_action :transfer_accounts, only: %i[index]
+  before_action :check_account_change, only: [:index]
 
   # Index action to render all transactions
   def index
@@ -26,7 +27,9 @@ class TransactionsController < ApplicationController
 
     @transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance)
                             .then { search_by_description _1 }
+                            .then { apply_pending_order _1 }
                             .then { apply_order _1 }
+                            .then { apply_id_order _1 }
 
     # transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
     # transactions = transactions.search(@query) if @query.present?
@@ -124,8 +127,24 @@ class TransactionsController < ApplicationController
     session['filters']['description'].present? ? scope.where('UPPER(description) like UPPER(?)', "%#{session['filters']['description']}%") : scope
   end
 
+  def apply_pending_order(scope)
+    scope.order(pending: :desc)
+  end
+
   def apply_order(scope)
     scope.order(session['filters'].slice('column', 'direction').values.join(' '))
+  end
+
+  def apply_id_order(scope)
+    scope.order(id: :desc)
+  end
+
+  def check_account_change
+    # If there is no account ID stored in the session, set it to the current account
+    if session[:current_account_id].nil? || session[:current_account_id] != @account.id
+      session[:current_account_id] = @account.id
+      session['filters'] = {} # Clear filters when the account is set or changed
+    end
   end
 
   def find_account
