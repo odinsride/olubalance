@@ -11,17 +11,6 @@ class TransactionsController < ApplicationController
 
   # Index action to render all transactions
   def index
-    # @query = session[:query]
-    # @order_by = permitted_column_name(session[:order_by])
-    # @direction = permitted_direction(session[:direction])
-    # @page = (session[:page] || 1).to_i
-
-    # if params[:column].present?
-    #   transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, "#{params[:column]}" => "#{params[:direction]}", id: :desc)
-    # else
-    #   transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, trx_date: :desc, id: :desc)
-    # end
-
     session['filters'] ||= {}
     session['filters'].merge!(filter_params)
 
@@ -31,11 +20,6 @@ class TransactionsController < ApplicationController
                             .then { apply_order _1 }
                             .then { apply_id_order _1 }
 
-    # transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
-    # transactions = transactions.search(@query) if @query.present?
-    # pages = (transactions.count / Pagy::DEFAULT[:items].to_f).ceil
-
-    # @page = 1 if @page > pages
     @pagy, @transactions = pagy(@transactions)
     @transactions = @transactions.decorate
 
@@ -105,14 +89,6 @@ class TransactionsController < ApplicationController
   end
 
   private
-
-  def permitted_column_name(column_name)
-    %w[trx_date description amount].find { |permitted| column_name == permitted } || 'trx_date'
-  end
-
-  def permitted_direction(direction)
-    %w[asc desc].find { |permitted| direction == permitted } || 'desc'
-  end
 
   def filter_params
     params.permit(:description, :column, :direction)
