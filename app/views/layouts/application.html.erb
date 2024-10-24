@@ -18,6 +18,10 @@
     <meta name="msapplication-TileColor" content="#366a64">
     <meta name="theme-color" content="#366a64">
 
+    <% if content_for? :head %>
+      <%= yield :head %>
+    <% end %>
+
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
 
