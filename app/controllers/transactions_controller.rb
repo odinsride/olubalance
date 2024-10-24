@@ -15,17 +15,25 @@ class TransactionsController < ApplicationController
     # @direction = permitted_direction(session[:direction])
     # @page = (session[:page] || 1).to_i
 
-    if params[:column].present?
-      transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, "#{params[:column]}" => "#{params[:direction]}", id: :desc)
-    else
-      transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, trx_date: :desc, id: :desc)
-    end
+    # if params[:column].present?
+    #   transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, "#{params[:column]}" => "#{params[:direction]}", id: :desc)
+    # else
+    #   transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance).order(pending: :desc, trx_date: :desc, id: :desc)
+    # end
+
+    session['filters'] ||= {}
+    session['filters'].merge!(filter_params)
+
+    @transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance)
+                            .then { search_by_description _1 }
+                            .then { apply_order _1 }
+
     # transactions = @account.transactions.order(pending: :desc, @order_by => @direction, id: :desc)
     # transactions = transactions.search(@query) if @query.present?
     # pages = (transactions.count / Pagy::DEFAULT[:items].to_f).ceil
 
     # @page = 1 if @page > pages
-    @pagy, @transactions = pagy(transactions)
+    @pagy, @transactions = pagy(@transactions)
     @transactions = @transactions.decorate
 
     @stashes = @account.stashes.order(id: :asc).decorate
@@ -103,9 +111,21 @@ class TransactionsController < ApplicationController
     %w[asc desc].find { |permitted| direction == permitted } || 'desc'
   end
 
+  def filter_params
+    params.permit(:description, :column, :direction)
+  end
+
   def transaction_params
     params.require(:transaction) \
-          .permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :page, :pending, :locked, :transfer)
+          .permit(:trx_date, :description, :amount, :trx_type, :memo, :attachment, :page, :pending, :locked, :transfer, :account_id)
+  end
+
+  def search_by_description(scope)
+    session['filters']['description'].present? ? scope.where('UPPER(description) like UPPER(?)', "%#{session['filters']['description']}%") : scope
+  end
+
+  def apply_order(scope)
+    scope.order(session['filters'].slice('column', 'direction').values.join(' '))
   end
 
   def find_account

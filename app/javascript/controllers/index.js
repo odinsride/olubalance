@@ -27,3 +27,6 @@ application.register("stashlist", StashlistController)
 
 import TrxformController from "./trxform_controller"
 application.register("trxform", TrxformController)
+
+import TrxsearchController from "./trxsearch_controller"
+application.register("trxsearch", TrxsearchController)
