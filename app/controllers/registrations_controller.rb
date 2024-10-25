@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class RegistrationsController < Devise::RegistrationsController
-  prepend_before_action :check_captcha, only: [:create] # Change this to be any actions you want to protect.
-  invisible_captcha only: [:create], honeypot: :subtitle
+  prepend_before_action :check_captcha, only: [ :create ] # Change this to be any actions you want to protect.
+  invisible_captcha only: [ :create ], honeypot: :subtitle
 
   private
 

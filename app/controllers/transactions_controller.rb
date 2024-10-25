@@ -7,12 +7,12 @@ class TransactionsController < ApplicationController
   before_action :find_account
   before_action :find_transaction, only: %i[edit update show destroy]
   before_action :transfer_accounts, only: %i[index]
-  before_action :check_account_change, only: [:index]
+  before_action :check_account_change, only: [ :index ]
 
   # Index action to render all transactions
   def index
-    session['filters'] ||= {}
-    session['filters'].merge!(filter_params)
+    session["filters"] ||= {}
+    session["filters"].merge!(filter_params)
 
     @transactions = @account.transactions.with_attached_attachment.includes(:transaction_balance)
                             .then { search_by_description _1 }
@@ -47,9 +47,9 @@ class TransactionsController < ApplicationController
     @transaction = @account.transactions.build(transaction_params).decorate
 
     if @transaction.save
-      redirect_to account_transactions_path, notice: 'Transaction was successfully created.'
+      redirect_to account_transactions_path, notice: "Transaction was successfully created."
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
@@ -61,10 +61,10 @@ class TransactionsController < ApplicationController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to account_transactions_path, notice: 'Transaction was successfully updated.' }
+        format.html { redirect_to account_transactions_path, notice: "Transaction was successfully updated." }
         format.xml { head :ok }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: "edit" }
         format.xml { render xml: @transaction.errors, status: :unprocessable_entity }
       end
     end
@@ -100,7 +100,7 @@ class TransactionsController < ApplicationController
   end
 
   def search_by_description(scope)
-    session['filters']['description'].present? ? scope.where('UPPER(description) like UPPER(?)', "%#{session['filters']['description']}%") : scope
+    session["filters"]["description"].present? ? scope.where("UPPER(description) like UPPER(?)", "%#{session['filters']['description']}%") : scope
   end
 
   def apply_pending_order(scope)
@@ -108,7 +108,7 @@ class TransactionsController < ApplicationController
   end
 
   def apply_order(scope)
-    scope.order(session['filters'].slice('column', 'direction').values.join(' '))
+    scope.order(session["filters"].slice("column", "direction").values.join(" "))
   end
 
   def apply_id_order(scope)
@@ -119,7 +119,7 @@ class TransactionsController < ApplicationController
     # If there is no account ID stored in the session, set it to the current account
     if session[:current_account_id].nil? || session[:current_account_id] != @account.id
       session[:current_account_id] = @account.id
-      session['filters'] = {} # Clear filters when the account is set or changed
+      session["filters"] = {} # Clear filters when the account is set or changed
     end
   end
 
@@ -129,15 +129,15 @@ class TransactionsController < ApplicationController
       if @account.active?
         format.html
       else
-        format.html { redirect_to accounts_inactive_path, notice: 'Account is inactive' }
+        format.html { redirect_to accounts_inactive_path, notice: "Account is inactive" }
       end
     end
   end
 
   def transfer_accounts
     account_id = params[:account_id]
-    @transfer_accounts = current_user.accounts.where('active = ?', 'true').where('account_type != ?', 'credit').where(
-      'id != ?', account_id
+    @transfer_accounts = current_user.accounts.where("active = ?", "true").where("account_type != ?", "credit").where(
+      "id != ?", account_id
     ).decorate
   end
 

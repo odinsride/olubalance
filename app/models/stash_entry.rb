@@ -2,8 +2,8 @@
 
 # Records money added and removed from a stash
 class StashEntry < ApplicationRecord
-  STASH_ADD_DESC = 'Stash funded'
-  STASH_REMOVE_DESC = 'Stash withdrawal'
+  STASH_ADD_DESC = "Stash funded"
+  STASH_REMOVE_DESC = "Stash withdrawal"
 
   belongs_to :stash
 
@@ -28,7 +28,7 @@ class StashEntry < ApplicationRecord
     return unless amount.present?
 
     validation_stash = Stash.find(stash_id)
-    validation_amount = stash_action == 'remove' ? -amount.abs : amount.abs
+    validation_amount = stash_action == "remove" ? -amount.abs : amount.abs
 
     errors.add(:amount, "can't cause the stash balance to become negative") \
       if (validation_stash.balance + validation_amount).negative?
@@ -42,8 +42,8 @@ class StashEntry < ApplicationRecord
   end
 
   def initialize_stash_entry
-    self.amount = stash_action == 'remove' ? -amount.abs : amount.abs # convert amount
-    self.description = stash_action == 'add' ? STASH_ADD_DESC : STASH_REMOVE_DESC # set appropriate description
+    self.amount = stash_action == "remove" ? -amount.abs : amount.abs # convert amount
+    self.description = stash_action == "add" ? STASH_ADD_DESC : STASH_REMOVE_DESC # set appropriate description
     self.stash_entry_date = Time.current # default to current date/time
   end
 
@@ -52,14 +52,14 @@ class StashEntry < ApplicationRecord
   end
 
   def create_stash_transaction
-    desc_add = 'Transfer to ' + @stash.name + ' Stash'
-    desc_remove = 'Transfer from ' + @stash.name + ' Stash'
+    desc_add = "Transfer to " + @stash.name + " Stash"
+    desc_remove = "Transfer from " + @stash.name + " Stash"
 
     transaction = Transaction.new
-    transaction.trx_type = stash_action == 'add' ? 'debit' : 'credit'
+    transaction.trx_type = stash_action == "add" ? "debit" : "credit"
     transaction.trx_date = Time.current
     transaction.account_id = @stash.account_id
-    transaction.description = stash_action == 'add' ? desc_add : desc_remove
+    transaction.description = stash_action == "add" ? desc_add : desc_remove
     transaction.amount = amount.abs
     transaction.locked = true
     transaction.save

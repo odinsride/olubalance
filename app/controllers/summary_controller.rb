@@ -16,7 +16,7 @@ class SummaryController < ApplicationController
 
   # Get the summary object (defined in facade)
   def collect_summary_info
-    accounts = current_user.accounts.where(active: true).order('created_at ASC').decorate
+    accounts = current_user.accounts.where(active: true).order("created_at ASC").decorate
     @summary = Summary.new(accounts)
   end
 

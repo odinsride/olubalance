@@ -1,3 +1,12 @@
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+# Overwrite or add rules to create your own house style
+#
+# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# Layout/SpaceInsideArrayLiteralBrackets:
+#   Enabled: false
+
 AllCops:
   DisplayCopNames: true
   NewCops: enable
@@ -11,64 +20,63 @@ AllCops:
     - config/application.rb
     - test/**/*
     - spec/**/*
-    - lib/tasks/migrate_paperclip_attachments.rake
+    - lib/tasks/**/*
     - node_modules/**/*
+# # Commonly used screens these days easily fit more than 80 characters.
+# Layout/LineLength:
+#   Max: 120
 
-# Commonly used screens these days easily fit more than 80 characters.
-Layout/LineLength:
-  Max: 120
+# # Relax the Assignment Branch Condition rule a bit
+# Metrics/AbcSize:
+#   Max: 60
 
-# Relax the Assignment Branch Condition rule a bit
-Metrics/AbcSize:
-  Max: 60
+# # Too short methods lead to extraction of single-use methods, which can make
+# # the code easier to read (by naming things), but can also clutter the class
+# Metrics/MethodLength:
+#   Max: 40
 
-# Too short methods lead to extraction of single-use methods, which can make
-# the code easier to read (by naming things), but can also clutter the class
-Metrics/MethodLength:
-  Max: 40
+# # The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+# Metrics/ClassLength:
+#   Max: 1500
 
-# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
-Metrics/ClassLength:
-  Max: 1500
+# Style/Documentation:
+#   Include:
+#     - app/models/**/*
+#     - lib/**/*
 
-Style/Documentation:
-  Include:
-    - app/models/**/*
-    - lib/**/*
+# # I don't see a benefit to forcing empty methods onto one line
+# Style/EmptyMethod:
+#   Exclude:
+#     - app/**/*
 
-# I don't see a benefit to forcing empty methods onto one line
-Style/EmptyMethod:
-  Exclude:
-    - app/**/*
+# # Pending Cops:
+# Layout/EmptyLinesAroundAttributeAccessor:
+#   Enabled: true
 
-# Pending Cops:
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
+# Layout/SpaceAroundMethodCallOperator:
+#   Enabled: true
 
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
+# Lint/RaiseException:
+#   Enabled: true
 
-Lint/RaiseException:
-  Enabled: true
+# Lint/StructNewOverride:
+#   Enabled: true
 
-Lint/StructNewOverride:
-  Enabled: true
+# Style/ExponentialNotation:
+#   Enabled: false
 
-Style/ExponentialNotation:
-  Enabled: false
+# Style/HashEachMethods:
+#   Enabled: true
 
-Style/HashEachMethods:
-  Enabled: true
+# Style/HashTransformKeys:
+#   Enabled: true
 
-Style/HashTransformKeys:
-  Enabled: true
+# Style/HashTransformValues:
+#   Enabled: true
 
-Style/HashTransformValues:
-  Enabled: true
+# Style/SlicingWithRange:
+#   Enabled: true
 
-Style/SlicingWithRange:
-  Enabled: true
-
-Style/StringConcatenation:
-  Enabled: false
+# Style/StringConcatenation:
+#   Enabled: false
 

@@ -5,16 +5,16 @@ Rails.application.routes.draw do
     get "/sign_in" => "devise/sessions#new"
   end
 
-  devise_for :users, :skip => [:registrations], controllers: { registrations: 'registrations' }
+  devise_for :users, skip: [ :registrations ], controllers: { registrations: "registrations" }
 
   as :user do
     get "users/edit" => "devise/registrations#edit", :as => "edit_user_registration"
     patch "users/:id" => "devise/registrations#update", :as => "user_registration"
   end
 
-  get 'accounts/inactive' => 'accounts#inactive'
-  get 'accounts/summary' => 'summary#index'
-  post 'accounts/summary/mail' => 'summary#send_mail'
+  get "accounts/inactive" => "accounts#inactive"
+  get "accounts/summary" => "summary#index"
+  post "accounts/summary/mail" => "summary#send_mail"
 
   resources :accounts, except: %i[show] do
     resources :transactions
@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   resources :transfers, only: %i[create]
 
   authenticated do
-    root to: 'accounts#index', as: :authenticated_root
+    root to: "accounts#index", as: :authenticated_root
   end
 
-  root to: 'static_pages#home'
+  root to: "static_pages#home"
 end
