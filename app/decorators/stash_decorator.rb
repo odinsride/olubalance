@@ -27,6 +27,6 @@ class StashDecorator < ApplicationDecorator
   end
 
   def progress_class
-    progress >= 50 ? 'has-text-white' : 'has-text-grey'
+    progress >= 50 ? "has-text-white" : "has-text-grey"
   end
 end

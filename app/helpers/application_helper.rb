@@ -12,7 +12,7 @@ module ApplicationHelper
       classes << css if bool
     end
 
-    classes.join(' ')
+    classes.join(" ")
   end
 
   # Devise Helpers

@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = current_user.accounts.where(active: true).order('created_at ASC')
+    @accounts = current_user.accounts.where(active: true).order("created_at ASC")
 
     @accounts_checking = @accounts.where(account_type: :checking)
     @accounts_savings_cash = @accounts.where(account_type: :savings).or(@accounts.where(account_type: :cash))
@@ -27,7 +27,7 @@ class AccountsController < ApplicationController
   end
 
   def inactive
-    @inactiveaccounts = current_user.accounts.where(active: false).order('created_at ASC')
+    @inactiveaccounts = current_user.accounts.where(active: false).order("created_at ASC")
     @inactiveaccounts = @inactiveaccounts.decorate
   end
 
@@ -51,7 +51,7 @@ class AccountsController < ApplicationController
     @account = current_user.accounts.build(account_params).decorate
 
     if @account.save
-      redirect_to accounts_path, notice: 'Account was successfully created.'
+      redirect_to accounts_path, notice: "Account was successfully created."
     else
       render :new
     end
@@ -61,7 +61,7 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1.json
   def update
     if @account.update(account_params)
-      redirect_to accounts_path, notice: 'Account was successfully updated.'
+      redirect_to accounts_path, notice: "Account was successfully updated."
     else
       render :edit
     end
@@ -71,7 +71,7 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1.json
   def destroy
     @account.destroy
-    redirect_to accounts_url, notice: 'Account was successfully deleted.'
+    redirect_to accounts_url, notice: "Account was successfully deleted."
   end
 
   # Sets account active field to false
@@ -79,7 +79,7 @@ class AccountsController < ApplicationController
     @account.active = false
 
     if @account.save
-      redirect_to accounts_path, notice: 'Account was deactivated.'
+      redirect_to accounts_path, notice: "Account was deactivated."
     else
       render :show
     end
@@ -90,7 +90,7 @@ class AccountsController < ApplicationController
     @account.active = true
 
     if @account.save
-      redirect_to accounts_path, notice: 'Account was activated.'
+      redirect_to accounts_path, notice: "Account was activated."
     else
       render :show
     end
