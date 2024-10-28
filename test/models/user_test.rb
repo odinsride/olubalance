@@ -2,7 +2,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = users(:valid)
+    @user = FactoryBot.build(:user)
   end
 
   test 'valid user' do
@@ -28,6 +28,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test '#accounts' do
+    # Assuming you want the user to have 4 accounts
+    @user.save!
+    FactoryBot.create_list(:account, 4, user: @user)
     assert_equal 4, @user.accounts.size
   end
 end

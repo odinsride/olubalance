@@ -35,6 +35,7 @@ group :development, :test do
   gem "better_errors"
   gem "brakeman", require: false
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
+  gem "factory_bot_rails"
   gem "rubocop-rails-omakase", require: false
 end
 
