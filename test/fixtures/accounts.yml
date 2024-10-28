@@ -1,0 +1,36 @@
+# test/fixtures/accounts.yml
+
+checking_account:
+  name: 'Test Account 1'
+  starting_balance: 1000.50
+  last_four: 1234
+  active: true
+  account_type: 'checking'
+  user: valid
+
+credit_account:
+  name: 'Test Account 2'
+  starting_balance: 5000.00
+  last_four: 4321
+  active: true
+  account_type: 'credit'
+  interest_rate: 15.25
+  credit_limit: 10000.00
+  user: valid
+
+savings_account:
+  name: 'Test Account 3'
+  starting_balance: 200.75
+  last_four: 5678
+  active: true
+  account_type: 'savings'
+  interest_rate: 0.75
+  user: valid
+
+cash_account:
+  name: 'Test Account 4'
+  starting_balance: 150.00
+  last_four: 6789
+  active: true
+  account_type: 'cash'
+  user: valid
