@@ -35,7 +35,7 @@ class Account < ApplicationRecord
   before_create :set_current_balance
   after_create :create_initial_transaction
 
-  enum account_type: {
+  enum :account_type, {
     checking: "checking",
     savings: "savings",
     credit: "credit",

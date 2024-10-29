@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Sessions", type: :request do
   it "signs user in and out" do
     user = User.new(
-      email: "john@gmail.com",
+      email: "john2525@gmail.com",
       password: 'topsecret',
       password_confirmation: 'topsecret',
       first_name: Faker::Name.first_name,

@@ -32,13 +32,17 @@ gem "stimulus-rails"
 gem "turbo-rails"
 
 group :development, :test do
-  gem "better_errors"
   gem "brakeman", require: false
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
+  gem "factory_bot_rails"
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 7.0.0'
   gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
   gem "letter_opener"
   gem "web-console"
 end
@@ -46,4 +50,6 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'shoulda-matchers', '~> 6.0'
+  gem "simplecov", require: false
 end
