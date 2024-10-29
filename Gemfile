@@ -32,7 +32,6 @@ gem "stimulus-rails"
 gem "turbo-rails"
 
 group :development, :test do
-  gem "better_errors"
   gem "brakeman", require: false
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
   gem "factory_bot_rails"
@@ -42,6 +41,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
   gem "letter_opener"
   gem "web-console"
 end
