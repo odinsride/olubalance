@@ -23,7 +23,7 @@ module Olubalance
     config.load_defaults 7.2
 
     # olubalance Version
-    config.version = "1.8.6"
+    config.version = "1.9.0"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
