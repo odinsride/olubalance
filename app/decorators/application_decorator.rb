@@ -6,10 +6,10 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   def form_name
-    new_record? ? 'New' : 'Edit'
+    new_record? ? "New" : "Edit"
   end
 
   def button_label
-    new_record? ? 'Create' : 'Update'
+    new_record? ? "Create" : "Update"
   end
 end

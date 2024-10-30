@@ -1,3 +1,4 @@
 require 'pagy/extras/bulma'
 
-Pagy::VARS[:items] = 15
+Pagy::DEFAULT[:items] = 15
+Pagy::DEFAULT[:link_extra] = 'data-turbo-frame="_self"'

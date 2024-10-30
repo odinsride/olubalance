@@ -1,3 +1,5 @@
+<%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+
 <%= render partial: "shared/backButton", locals: { 
   param_back_path: accounts_path, 
   param_back_text: "Accounts", 
@@ -9,5 +11,7 @@
   <%= render partial: "stashes/components/stashList" %>
 <% end %>
 
-<%= render partial: "transactions/components/transactionList" %>
-<%= render partial: "transactions/components/pagination" %>
+<%= turbo_frame_tag "transactions_table", data: {turbo_action: "replace"} do %>
+  <%= render partial: "transactions/components/transactionList" %>
+  <%= render partial: "transactions/components/pagination" %>
+<% end %>

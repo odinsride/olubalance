@@ -24,7 +24,7 @@ class StashesController < ApplicationController
     @stash = @account.stashes.build(stash_params).decorate
 
     if @stash.save
-      redirect_to account_stash_path(id: @stash.id), notice: 'Stash was successfully created.'
+      redirect_to account_stash_path(id: @stash.id), notice: "Stash was successfully created."
     else
       render :new
     end
@@ -33,7 +33,7 @@ class StashesController < ApplicationController
   # PATCH/PUT /stashes/1
   def update
     if @stash.update(stash_params)
-      redirect_to account_stash_path(id: @stash.id), notice: 'Stash was successfully updated.'
+      redirect_to account_stash_path(id: @stash.id), notice: "Stash was successfully updated."
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class StashesController < ApplicationController
   # DELETE /stashes/1
   def destroy
     @stash.destroy
-    redirect_to account_transactions_path, notice: 'Stash was successfully destroyed.'
+    redirect_to account_transactions_path, notice: "Stash was successfully destroyed."
   end
 
   private
@@ -58,7 +58,7 @@ class StashesController < ApplicationController
       if @account.active?
         format.html
       else
-        format.html { redirect_to accounts_inactive_path, notice: 'Account is inactive' }
+        format.html { redirect_to accounts_inactive_path, notice: "Account is inactive" }
       end
     end
   end

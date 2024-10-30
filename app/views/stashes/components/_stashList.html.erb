@@ -1,4 +1,4 @@
-<div data-controller="stashlist" data-stashlist-hide-value="true" class="mb-15 mt-15">
+<div data-controller="stashlist" class="mb-15 mt-15">
   <nav class="level is-mobile">
     <div class="level-left">
       <div class="level-item mt-5">
@@ -16,7 +16,7 @@
       <%= render partial: 'transactions/components/transactionButtons', locals: { size: 'is-small' } %>
     </div>
   </nav>
-  <div class="animate__animated animate__fadeIn" data-stashlist-target="list">
+  <div class="animate__animated animate__fadeIn is-hidden" data-stashlist-target="list"> <!-- Start hidden -->
     <nav class="level">
       <div class="level-left">
         <div class="level-item">

@@ -6,10 +6,10 @@ class UserDecorator < Draper::Decorator
   delegate_all
 
   def full_name
-    first_name + ' ' + last_name
+    first_name + " " + last_name
   end
 
   def member_since
-    created_at.in_time_zone(timezone).strftime('%b %d, %Y')
+    created_at.in_time_zone(timezone).strftime("%b %d, %Y")
   end
 end

@@ -1,54 +1,55 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '3.0.1'
+ruby "3.3.0"
 
-gem 'aws-sdk-s3', '~> 1.87.0'
-gem 'devise', '~> 4.7.3'
-gem 'draper', '~> 4.0.1'
-gem 'faker', '~> 2.15.1'
-gem 'figaro', '~> 1.2.0'
-gem 'hiredis', '~> 0.6.3'
-gem 'image_processing'
-gem 'invisible_captcha', '~> 1.1.0'
-gem 'mini_magick', '~> 4.11.0'
-gem 'pagy', '~> 3.10.0'
-gem 'pg', '~> 1.2.3'
-gem 'puma', '~> 5.6.4'
-gem 'rails', '~> 6.1.0'
-gem 'recaptcha', '~> 5.6.0'
-gem 'redis', '~> 4.4.0', require: ['redis', 'redis/connection/hiredis']
-gem 'stimulus_reflex', '~> 3.4.0'
-gem 'webpacker', '~> 5.2.1'
+gem "aws-sdk-s3"
+gem "bootsnap", require: false
+gem "cssbundling-rails"
+gem "devise", "~> 4.9.0"
+gem "draper", "~> 4.0.2"
+gem "faker"
+gem "figaro"
+gem "hiredis"
+gem "image_processing", "~> 1.12.2"
+gem "invisible_captcha"
+gem "jsbundling-rails"
+gem "mini_magick", "~> 4.12.0"
+gem "pagy", "~> 9"
+gem "pg", "~> 1.5.4"
+gem "puma", "~> 6.4.2"
+gem "rails", "~> 7.2"
+gem "recaptcha"
+gem "redis", "~> 4.4.0", require: [ "redis", "redis/connection/hiredis" ]
+gem "sprockets-rails"
+gem "stimulus-rails"
+gem "turbo-rails"
 
 group :development, :test do
-  gem 'capybara'
-  gem 'database_cleaner', '~> 1.8.5'
-  gem 'factory_bot_rails', '~> 6.1.0'
-  gem 'pry-byebug'
-  gem 'pry-rails'
-  gem 'rails-controller-testing', '~> 1.0.5'
-  gem 'rspec-rails', '~> 4.0.2'
-  gem 'shoulda-matchers', '~> 4.4.1'
-  gem 'simplecov', require: false
-  gem 'webdrivers'
+  gem "brakeman", require: false
+  gem "debug", platforms: %i[mri windows], require: "debug/prelude"
+  gem "factory_bot_rails"
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 7.0.0'
+  gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'foreman'
-  gem 'letter_opener'
-  gem 'listen'
-  gem 'rubocop', require: false
-  gem 'rubocop-rails', require: false
-  gem 'spring'
-  gem 'spring-commands-rspec'
-  gem 'spring-watcher-listen'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "letter_opener"
+  gem "web-console"
+end
+
+group :test do
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem 'shoulda-matchers', '~> 6.0'
+  gem "simplecov", require: false
 end

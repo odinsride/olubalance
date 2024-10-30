@@ -24,10 +24,10 @@ class Stash < ApplicationRecord
     return unless balance.positive?
 
     transaction = Transaction.new
-    transaction.trx_type = 'credit'
+    transaction.trx_type = "credit"
     transaction.trx_date = Time.current
     transaction.account_id = account_id
-    transaction.description = 'Transfer from ' + name + ' Stash (Stash Deleted)'
+    transaction.description = "Transfer from " + name + " Stash (Stash Deleted)"
     transaction.amount = balance.abs
     transaction.locked = true
     transaction.save

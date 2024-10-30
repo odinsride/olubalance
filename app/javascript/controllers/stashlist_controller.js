@@ -1,38 +1,47 @@
-import { Controller } from "stimulus"
+import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = [ "list", "chevron" ]
-  
+  static targets = ['list', 'chevron'];
+
   initialize() {
-    this.stashHidden = JSON.parse(localStorage.getItem('stashHidden')) // must use JSON.parse to convert string to Boolean
-    
-    if (this.stashHidden === null)
-      this.stashHidden = true
-
-    this.toggleList()
+    this.stashHidden = this.getStashVisibility(); // Retrieve visibility state from sessionStorage
+    this.updateVisibility(); // Update the visibility on initialization
   }
 
-  toggle(e) {
-    e.preventDefault()
-    this.stashHidden = !this.stashHidden
-    localStorage.setItem('stashHidden', JSON.stringify(this.stashHidden))
-    this.toggleList()
+  toggle(event) {
+    event.preventDefault(); // Prevent default anchor click behavior
+    this.stashHidden = !this.stashHidden; // Toggle visibility state
+    this.updateVisibility(); // Update the visibility of the stash list
+    this.setStashVisibility(this.stashHidden); // Save the visibility state to sessionStorage
   }
 
-  toggleList() {
-    if (this.stashHidden)
-      this.hide()
-    else
-      this.show()
+  updateVisibility() {
+    if (this.stashHidden) {
+      this.hide(); // Hide the stash list
+    } else {
+      this.show(); // Show the stash list
+    }
   }
 
   hide() {
-    this.chevronTarget.classList.add('fa-chevron-right')
-    this.listTarget.classList.add('is-hidden')
+    this.chevronTarget.classList.remove('fa-chevron-down');
+    this.chevronTarget.classList.add('fa-chevron-right');
+    this.listTarget.classList.add('is-hidden'); // Use your CSS class for hidden
   }
 
   show() {
-    this.chevronTarget.classList.add('fa-chevron-down')
-    this.listTarget.classList.remove('is-hidden')
+    this.chevronTarget.classList.remove('fa-chevron-right');
+    this.chevronTarget.classList.add('fa-chevron-down');
+    this.listTarget.classList.remove('is-hidden'); // Show the stash list
+  }
+
+  // Helper methods to get and set stash visibility in sessionStorage
+  getStashVisibility() {
+    const stashHidden = sessionStorage.getItem('stashHidden');
+    return stashHidden !== null ? JSON.parse(stashHidden) : true; // Default to true if not set
+  }
+
+  setStashVisibility(value) {
+    sessionStorage.setItem('stashHidden', JSON.stringify(value)); // Save the visibility state
   }
 }

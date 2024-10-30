@@ -10,9 +10,9 @@ class TransfersController < ApplicationController
     )
 
     if transfer.do_transfer
-      redirect_to account_transactions_path(params[:transfer_from_account]), notice: 'Transfer successful.'
+      redirect_to account_transactions_path(params[:transfer_from_account]), notice: "Transfer successful."
     else
-      redirect_to account_transactions_path(params[:transfer_from_account]), notice: 'Transfer failed.'
+      redirect_to account_transactions_path(params[:transfer_from_account]), notice: "Transfer failed."
     end
   end
 

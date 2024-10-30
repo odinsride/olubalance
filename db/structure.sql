@@ -1,6 +1,7 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+-- SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -108,7 +109,7 @@ CREATE TABLE public.active_storage_blobs (
     content_type character varying,
     metadata text,
     byte_size bigint NOT NULL,
-    checksum character varying NOT NULL,
+    checksum character varying,
     created_at timestamp without time zone NOT NULL,
     service_name character varying NOT NULL
 );
@@ -278,8 +279,8 @@ CREATE TABLE public.transactions (
 --
 
 CREATE VIEW public.transaction_balances AS
- SELECT transactions.id AS transaction_id,
-    sum(transactions.amount) OVER (PARTITION BY transactions.account_id ORDER BY transactions.pending, transactions.trx_date, transactions.id) AS running_balance
+ SELECT id AS transaction_id,
+    sum(amount) OVER (PARTITION BY account_id ORDER BY pending, trx_date, id) AS running_balance
    FROM public.transactions;
 
 
@@ -648,31 +649,31 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20180130031514'),
-('20180130031515'),
-('20180130031520'),
-('20180319220307'),
-('20180321221542'),
-('20180327154122'),
-('20180327154809'),
-('20180723221149'),
-('20180819191749'),
-('20180926184009'),
-('20181009135959'),
-('20190626011950'),
-('20190802191418'),
-('20190802193709'),
-('20191102124707'),
-('20191219035136'),
-('20191220011006'),
-('20191227150641'),
-('20200128211634'),
-('20200623012351'),
-('20200807000110'),
-('20201230210340'),
-('20201230210944'),
-('20210102150348'),
+('20240125144637'),
+('20210104203329'),
 ('20210104203328'),
-('20210104203329');
-
+('20210102150348'),
+('20201230210944'),
+('20201230210340'),
+('20200807000110'),
+('20200623012351'),
+('20200128211634'),
+('20191227150641'),
+('20191220011006'),
+('20191219035136'),
+('20191102124707'),
+('20190802193709'),
+('20190802191418'),
+('20190626011950'),
+('20181009135959'),
+('20180926184009'),
+('20180819191749'),
+('20180723221149'),
+('20180327154809'),
+('20180327154122'),
+('20180321221542'),
+('20180319220307'),
+('20180130031520'),
+('20180130031515'),
+('20180130031514');
 

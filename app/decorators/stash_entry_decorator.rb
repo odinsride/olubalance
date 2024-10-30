@@ -14,18 +14,18 @@ class StashEntryDecorator < ApplicationDecorator
   end
 
   def amount_color
-    amount.negative? ? 'has-text-danger' : 'has-text-success'
+    amount.negative? ? "has-text-danger" : "has-text-success"
   end
 
   def stash_entry_date_formatted
-    stash_entry_date.in_time_zone(current_user.timezone).strftime('%m/%d/%Y')
+    stash_entry_date.in_time_zone(current_user.timezone).strftime("%m/%d/%Y")
   end
 
   def form_title
-    if stash_action == 'add'
-      'Add to ' + stash.name + ' Stash'
+    if stash_action == "add"
+      "Add to " + stash.name + " Stash"
     else
-      'Remove from ' + stash.name + ' Stash'
+      "Remove from " + stash.name + " Stash"
     end
   end
 end

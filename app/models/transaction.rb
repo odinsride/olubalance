@@ -13,7 +13,7 @@ class Transaction < ApplicationRecord
   attr_accessor :trx_type
 
   # default_scope { order('trx_date, id DESC') }
-  validates :trx_type, presence: { message: 'Please select debit or credit' },
+  validates :trx_type, presence: { message: "Please select debit or credit" },
                        inclusion: { in: %w[credit debit] }
   validates :trx_date, presence: true
   validates :description, presence: true, length: { maximum: 150 }
@@ -29,9 +29,9 @@ class Transaction < ApplicationRecord
   after_destroy :update_account_balance_destroy
 
   scope :with_balance, -> { includes(:transaction_balance).references(:transaction_balance) }
-  scope :desc, -> { order('pending DESC, trx_date DESC, id DESC') }
-  scope :recent, -> { where('created_at > ?', 3.days.ago).order('trx_date, id') }
-  scope :pending, -> { where(pending: true).order('trx_date, id') }
+  scope :desc, -> { order("pending DESC, trx_date DESC, id DESC") }
+  scope :recent, -> { where("created_at > ?", 3.days.ago).order("trx_date, id") }
+  scope :pending, -> { where(pending: true).order("trx_date, id") }
 
   scope :search, lambda { |query|
     query = sanitize_sql_like(query)
@@ -51,7 +51,7 @@ class Transaction < ApplicationRecord
   private
 
   def convert_amount
-    self.amount = -amount.abs if trx_type == 'debit'
+    self.amount = -amount.abs if trx_type == "debit"
   end
 
   def set_account

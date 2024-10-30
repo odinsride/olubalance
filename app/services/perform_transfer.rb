@@ -19,10 +19,10 @@ class PerformTransfer
 
   def create_source_transaction!
     transaction = Transaction.new
-    transaction.trx_type = 'debit'
+    transaction.trx_type = "debit"
     transaction.trx_date = Time.current
     transaction.account_id = @source_account.id
-    transaction.description = 'Transfer to ' + @target_account.name
+    transaction.description = "Transfer to " + @target_account.name
     transaction.amount = @amount.to_d.abs
     transaction.locked = true
     transaction.transfer = true
@@ -31,10 +31,10 @@ class PerformTransfer
 
   def create_target_transaction!
     transaction = Transaction.new
-    transaction.trx_type = 'credit'
+    transaction.trx_type = "credit"
     transaction.trx_date = Time.current
     transaction.account_id = @target_account.id
-    transaction.description = 'Transfer from ' + @source_account.name
+    transaction.description = "Transfer from " + @source_account.name
     transaction.amount = @amount.to_d.abs
     transaction.locked = true
     transaction.transfer = true

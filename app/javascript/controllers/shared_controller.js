@@ -1,4 +1,4 @@
-import { Controller } from "stimulus"
+import { Controller } from "@hotwired/stimulus"
 import * as bulmaToast from 'bulma-toast'
 
 export default class extends Controller {
