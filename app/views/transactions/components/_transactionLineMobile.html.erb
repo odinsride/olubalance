@@ -1,7 +1,7 @@
 <!-- Mobile Row -->
 <tr class="is-hidden-tablet">
   <td class="is-hidden-tablet">
-    <%= link_to account_transaction_path(id: transaction.id) do %>
+    <%= link_to account_transaction_path(id: transaction.id), data: { turbo_frame: "_top" } do %>
       <div class="level ob-mobile-level is-mobile">
         <div class="level-left">
           <div class="level-item">
