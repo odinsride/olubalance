@@ -10,11 +10,11 @@
     "bulma": "^0.9.1",
     "bulma-toast": "^2.2.0",
     "esbuild": "^0.17.15",
-    "sass": "^1.61.0"
+    "sass": "^1.80.6"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
-    "build:css": "sass ./app/assets/stylesheets/application.bulma.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ./app/assets/stylesheets/application.bulma.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules --quiet"
   },
   "engines": {
     "node": "20.x",
