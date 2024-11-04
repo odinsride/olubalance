@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby "3.3.0"
+ruby "3.3.5"
 
 gem "aws-sdk-s3"
 gem "bootsnap", require: false
