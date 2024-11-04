@@ -91,7 +91,8 @@ class TransactionsController < ApplicationController
   private
 
   def filter_params
-    params.permit(:description, :column, :direction)
+    # params.permit(:description, :column, :direction)
+    params.permit(:description)
   end
 
   def transaction_params
@@ -108,7 +109,8 @@ class TransactionsController < ApplicationController
   end
 
   def apply_order(scope)
-    scope.order(session["filters"].slice("column", "direction").values.join(" "))
+    # scope.order(session["filters"].slice("column", "direction").values.join(" "))
+    scope.order(trx_date: :desc)
   end
 
   def apply_id_order(scope)
@@ -135,7 +137,7 @@ class TransactionsController < ApplicationController
   end
 
   def transfer_accounts
-    account_id = params[:account_id]
+    account_id = @account.id
     @transfer_accounts = current_user.accounts.where("active = ?", "true").where("account_type != ?", "credit").where(
       "id != ?", account_id
     ).decorate
