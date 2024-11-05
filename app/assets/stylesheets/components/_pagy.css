@@ -1,0 +1,59 @@
+  .pagy-nav,
+  .pagy-nav-js {
+    @apply flex space-x-2 py-4;
+  }
+
+  .pagy-nav .page a,
+  .pagy-nav .page.active,
+  .pagy-nav .page.prev.disabled,
+  .pagy-nav .page.next.disabled,
+  .pagy-nav-js .page a,
+  .pagy-nav-js .page.active,
+  .pagy-nav-js .page.prev.disabled,
+  .pagy-nav-js .page.next.disabled {
+    @apply block rounded shadow-md px-3 py-1;
+    @apply transition ease-in-out duration-200;
+    @apply font-semibold text-sm;
+    @apply text-primary-700 bg-white;
+    @apply hover:bg-primary-100;
+  }
+
+  .pagy-nav .page.prev.disabled,
+  .pagy-nav .page.next.disabled,
+  .pagy-nav-js .page.prev.disabled,
+  .pagy-nav-js .page.next.disabled {
+    @apply text-primary-400 cursor-default hover:bg-white;
+  }
+
+  .pagy-nav .page.active,
+  .pagy-nav-js .page.active {
+    @apply text-white cursor-default bg-accent-700 hover:bg-accent-700;
+  }
+
+
+  .pagy-combo-nav-js {
+    @apply flex max-w-max rounded-full px-3 py-1 text-sm text-primary-500 font-semibold bg-primary-200 shadow-md;
+  }
+
+  .pagy-combo-nav-js .pagy-combo-input {
+    @apply bg-white px-2 rounded-sm
+  }
+
+  .pagy-combo-nav-js .page.prev,
+  .pagy-combo-nav-js .page.next {
+    &:hover {
+      @apply text-primary-800;
+    }
+    &:active {
+      @apply text-primary-800;
+    }
+  }
+
+  .pagy-combo-nav-js .page.prev.disabled,
+  .pagy-combo-nav-js .page.next.disabled {
+    @apply text-primary-400 cursor-default;
+  }
+
+  .pagy-info {
+    @apply text-sm text-primary-700;
+  }

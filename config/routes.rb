@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_scope :user do
-    get "/sign_in" => "devise/sessions#new"
-  end
-
   devise_for :users, skip: [ :registrations ], controllers: { registrations: "registrations" }
-
   as :user do
     get "users/edit" => "devise/registrations#edit", :as => "edit_user_registration"
     patch "users/:id" => "devise/registrations#update", :as => "user_registration"
@@ -36,5 +31,7 @@ Rails.application.routes.draw do
     root to: "accounts#index", as: :authenticated_root
   end
 
-  root to: "static_pages#home"
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
 end

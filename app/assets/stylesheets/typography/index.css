@@ -1,0 +1,9 @@
+@layer components {
+  .oh-heading-1 {
+    @apply text-2xl lg:text-3xl font-semibold
+  }
+
+  .oh-heading-2 {
+    @apply text-lg lg:text-xl font-semibold
+  }
+}

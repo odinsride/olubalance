@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -23,10 +22,10 @@
     <% end %>
 
     <%= csrf_meta_tags %>
-    <%= action_cable_meta_tag %>
+    <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body>
@@ -43,41 +42,25 @@
     #                                Kevin
     #
     #########################################################################-->
-
-    <!-- Site Container -->
     <div class="h-screen overflow-hidden relative">
-      <!-- Layout Container -->
-      <div class="flex items-start justify-between">
-
-        <!-- Main Container -->
-        <div class="flex flex-col w-full bg-primary-50">
-          <header>
-            <%= render "shared/navbar" %>
-          </header>
-          <div class="overflow-auto h-screen pb-12">
-            <main class="olubalance site-content">
-              <!-- Content Container -->
-              <div class="px-4 lg:px-8 py-2 lg:py-10 w-full max-w-7xl mx-auto">
-                <% flash.each do |type, data| %>
-                  <div id="notice">
-                    <% if @data.present? %>
-                      <div class="mx-auto md:w-2/3 w-full flex">
-                        <p class="mx-auto py-2 px-3 mb-5 font-medium rounded-md shadow inline-block border <%= @color_class %>"><%= @data %></p>
-                      </div>
-                    <% end %>
+      <div class="overflow-auto h-screen pb-12 bg-primary-100">
+        <main>
+          <!-- Content Container -->
+          <div class="px-4 lg:px-8 py-2 lg:py-10 w-full mx-auto">
+            <% flash.each do |type, data| %>
+              <div id="notice">
+                <% if @data.present? %>
+                  <div class="mx-auto md:w-2/3 w-full flex">
+                    <p class="mx-auto py-2 px-3 mb-5 font-medium rounded-md shadow inline-block border <%= @color_class %>"><%= @data %></p>
                   </div>
                 <% end %>
-
-                <%= yield %>
               </div>
-            </main>
+            <% end %>
+
+            <%= yield %>
           </div>
-          <footer class="footer">
-          <%= render "shared/footer" %>
-        </footer>
-        </div>
+        </main>
       </div>
     </div>
   </body>
-
 </html>

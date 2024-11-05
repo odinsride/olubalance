@@ -1,0 +1,5 @@
+@layer components {
+  .oh-panel {
+    @apply shadow-md px-4 py-4 lg:px-8 lg:py-8 bg-white rounded-md
+  }
+}

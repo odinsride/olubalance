@@ -1,0 +1,21 @@
+@layer components {
+  .oh-btn {
+    @apply text-sm lg:text-base font-semibold py-1 px-2 lg:py-2 lg:px-3 rounded-md shadow-md flex items-center gap-1.5 leading-6 transition ease-in-out delay-100 duration-200 hover:scale-110;
+  }
+
+  .oh-btn-sm {
+    @apply text-xs lg:text-sm
+  }
+
+  .oh-btn-primary {
+    @apply bg-accent-700 hover:bg-accent-900 hover:shadow-lg text-white;
+  }
+
+  .oh-btn-danger {
+    @apply bg-white border border-danger-700 hover:bg-danger-700 hover:shadow-lg text-danger-700 hover:text-white;
+  }
+
+  .oh-btn-muted {
+    @apply bg-primary-50 border border-primary-300 hover:bg-primary-400;
+  }
+}

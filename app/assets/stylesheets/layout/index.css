@@ -1,0 +1,5 @@
+@layer components {
+  .oh-section {
+    @apply my-2 lg:my-6;
+  }
+}

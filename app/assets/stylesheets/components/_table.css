@@ -1,0 +1,56 @@
+@layer components {
+  table {
+    @apply w-full bg-white
+  }
+
+  /* Row Hover */
+  table tbody tr:not(.oh-empty-row) {
+    @apply hover:bg-primary-50
+  }
+
+
+  /* Cell Padding */
+  table tr td {
+    @apply px-2 py-3
+  }
+
+  table tr th {
+    @apply px-2 py-3
+  }
+
+  table tr td:first-child, table tr th:first-child {
+    @apply pl-4
+  }
+
+  table tr td:last-child, table tr th:last-child {
+    @apply pr-4
+  }
+
+
+  /* Table Header */
+  table thead {
+    @apply bg-primary-200 border-b border-primary-300
+  }
+
+
+  /* Table Header Cells */
+  table tr th {
+    @apply text-primary-500 text-xs font-semibold text-left uppercase;
+  }
+
+
+  /* Fix rounded corners in table header */
+/*  table tr:first-child th:first-child {
+    @apply rounded-tl
+  }
+  
+  table tr:first-child th:last-child {
+    @apply rounded-tr
+  }
+*/
+
+  /* Table Body */
+  table tbody {
+    @apply text-sm divide-y divide-primary-300
+  }
+}

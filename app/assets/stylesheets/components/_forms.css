@@ -1,0 +1,22 @@
+@layer components {
+  .oh-form-group {
+    @apply mb-4 lg:mb-8;
+  }
+  
+  .oh-form-label {
+    @apply block text-primary-700 text-sm font-semibold mb-2;
+  }
+
+  .oh-form-input {
+    @apply shadow rounded-md py-2 px-3 text-primary-500 leading-tight w-full transition ease-in-out;
+    @apply border-primary-300 focus:ring-accent-500 focus:border-accent-500;
+  }
+
+  .oh-form-check-input {
+    @apply shadow rounded focus:ring-accent-500 focus:border-accent-500 text-accent-500;
+  }
+
+  .oh-form-input[disabled] {
+    @apply bg-primary-200 text-primary-400
+  }
+}

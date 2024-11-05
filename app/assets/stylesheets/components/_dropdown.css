@@ -1,0 +1,9 @@
+@layer components {
+  .oh-dropdown-link {
+    @apply text-sm font-medium no-underline block px-4 py-2 text-primary-700 bg-white hover:bg-primary-100 whitespace-nowrap text-right
+  }
+
+  .oh-dropdown-panel {
+    @apply bg-white shadow-xl rounded border overflow-hidden
+  }
+}
