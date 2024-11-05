@@ -1,3 +1,3 @@
 web: bin/rails s -p 3000
 js: yarn build --watch
-css: yarn build:css --watch
+css: yarn build:tw --watch
