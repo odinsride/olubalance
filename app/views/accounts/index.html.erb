@@ -1,68 +1,22 @@
-<%= render partial: "accounts/components/accountLevel" %>
-<%= render partial: "accounts/components/noAccounts", locals: { description: Account::NO_ACCOUNT_DESC } if @accounts.empty? %>
-
-<% if !@accounts_checking.empty? %>
-  <div class="container">
-    <p class="title mb-10 is-size-5 has-text-link">Checking</p>
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          <div>
-            <p class="heading">Total</p>
-            <p class="title is-size-6"><%= number_to_currency(@checking_total) %></p>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <div class="columns is-multiline" id="accounts" data-controller="shared">
-      <%= render partial: "accounts/components/accountCard", collection: @accounts_checking, as: :account, locals: { active: true } %>
-    </div>
+<div class="oh-section flex justify-between">
+  <div>
+    <h1 class="oh-heading-1 text-primary-700">
+      Accounts
+    </h1>
   </div>
-<% end %>
-
-<% if !@accounts_credit.empty? %>
-  <div class="container">
-    <hr/>
-    <p class="title mb-10 is-size-5 has-text-link">Credit Cards</p>
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          <div>
-            <p class="heading">Total</p>
-            <p class="title is-size-6"><%= number_to_currency(@credit_total) %></p>
-          </div>
-        </div>
-        <div class="level-item ml-15">
-          <div>
-            <p class="heading">Utilization</p>
-            <p class="title is-size-6"><%= @credit_utilization_total %>%</p>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <div class="columns is-multiline" id="accounts" data-controller="shared">
-      <%= render partial: "accounts/components/accountCard", collection: @accounts_credit, as: :account, locals: { active: true } %>
-    </div>
+  <div>
+    <%= link_to new_account_path do %>
+      <button class="oh-btn oh-btn-primary">
+        <%= render "ui/svgs/plus" %>
+        New
+      </button>
+    <% end %>
   </div>
-<% end %>
+</div>
 
-<% if !@accounts_savings_cash.empty? %>
-  <div class="container">
-    <hr/>
-    <p class="title mb-10 is-size-5 has-text-link">Savings & Cash</p>
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          <div>
-            <p class="heading">Total</p>
-            <p class="title is-size-6"><%= number_to_currency(@savings_cash_total) %></p>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <div class="columns is-multiline" id="accounts" data-controller="shared">
-      <%= render partial: "accounts/components/accountCard", collection: @accounts_savings_cash, as: :account, locals: { active: true } %>
-    </div>
+<% @accounts.group_by(&:account_type).each do |type, accounts| %>
+  <div class="oh-section">
+    <h2 class="oh-heading-2 text-primary-700 mb-4"><%= type.capitalize %></h2>
+    <%= render (Accounts::AccountListComponent.new(accounts: accounts)) %>
   </div>
 <% end %>

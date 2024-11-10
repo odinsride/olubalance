@@ -1,6 +1,6 @@
 <div class="grid lg:grid-cols-3 gap-4">
   <% if @accounts.each do |account| %>
-    <%= link_to account_path(account) do %>
+    <%= link_to account_transactions_path(account) do %>
     <div class="flex bg-white rounded-lg h-full shadow-md hover:shadow-xl hover:scale-105 transition ease-in-out flex-col">
       <div class="px-3 py-2 text-white bg-gradient-to-br from-accent-600 to-accent-500 rounded-t-lg">
         <h2 class="font-medium"><%= account.name %></h2>
