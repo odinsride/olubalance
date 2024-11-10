@@ -1,0 +1,12 @@
+<div class="transition ease-in-out py-2 text-primary-900 hover:font-semibold hover:pl-2">
+  <%= link_to eval(link.to_s), class: "pl-1 flex items-center justify-start" do %>
+    <% if icon? %>
+      <span class="text-left text-primary-400">
+        <%= icon %>
+      </span>
+    <% end %>
+    <span class="mx-2 text-sm <%= label_class %>">
+      <%= label %>
+    </span>
+  <% end %>
+</div>

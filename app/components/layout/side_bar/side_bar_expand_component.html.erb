@@ -1,0 +1,15 @@
+<div data-controller="toggle" class="transition ease-in-out text-primary-900">
+  <div data-action="click->toggle#toggle touch->toggle#toggle" class="pl-1 py-2 flex items-center justify-start hover:font-semibold hover:pl-2">
+    <% if icon? %>
+      <span class="text-left text-primary-400">
+        <%= icon %>
+      </span>
+    <% end %>
+    <span class="mx-2 text-sm <%= label_class %>">
+      <%= label %>
+    </span>
+  </div>
+  <div data-toggle-target="toggleable" class="hidden">
+    <%= content %>
+  </div>
+</div>

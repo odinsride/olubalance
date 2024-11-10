@@ -29,34 +29,15 @@
   </head>
 
   <body>
-
-    <!--#####################################################################--
-    #
-    #                             To Malintha
-    #
-    #          Without you I would have never created this application.
-    #         You are my inspiration, my motivation, and my best friend.
-    #                     I love you with all of my heart.
-    #
-    #                                Love,
-    #                                Kevin
-    #
-    #########################################################################-->
+    <!-- Site Container -->
     <div class="h-screen overflow-hidden relative">
       <div class="overflow-auto h-screen pb-12 bg-primary-100">
         <main>
           <!-- Content Container -->
           <div class="px-4 lg:px-8 py-2 lg:py-10 w-full mx-auto">
             <% flash.each do |type, data| %>
-              <div id="notice">
-                <% if @data.present? %>
-                  <div class="mx-auto md:w-2/3 w-full flex">
-                    <p class="mx-auto py-2 px-3 mb-5 font-medium rounded-md shadow inline-block border <%= @color_class %>"><%= @data %></p>
-                  </div>
-                <% end %>
-              </div>
+              <%= render Layout::Notifications::FlashComponent.new(type: type, data: data) %>
             <% end %>
-
             <%= yield %>
           </div>
         </main>

@@ -1,0 +1,24 @@
+<div class="h-screen hidden lg:block shadow-lg border-r border-primary-200 border-opacity-90 relative w-72 ">
+  <div class="bg-primary-100 h-full py-10 px-8 flex flex-col">
+    <div class="flex items-center justify-start mb-8">
+      <%= link_to root_path, class: "navbar-item" do %>
+        <%= image_tag 'logo.png', class: "object-contain h-12 w-48", alt: "olubalance" %>
+      <% end %>
+      <%= button_to destroy_user_session_path, class: "text-primary-500 pl-2 mt-2" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+        </svg>
+      <% end %>
+    </div>
+    <nav class="grow">
+      <div>
+        <%= render(Layout::SideBar::SideBarContentComponent.new) %>
+      </div>
+    </nav>
+    <div class="text-primary-500 text-center text-sm">
+      <a href="https://github.com/olumentary/oluhome" target="_blank">
+        olubalance v<%= Rails.configuration.version %>
+      </a>
+    </div>
+  </div>
+</div>

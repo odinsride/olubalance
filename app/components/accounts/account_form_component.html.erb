@@ -1,0 +1,81 @@
+<%= form_with model: @account, class: "oh-section oh-panel oh-form-panel lg:py-8 lg:px-10 lg:w-1/2" do |form| %>
+  <%= render (Layout::Notifications::FormErrorsComponent.new(form_obj: @account)) %>
+  <div class="lg:grid grid-cols-1 gap-x-12" data-controller="acctform">
+    <div class="oh-form-group">
+      <%= form.label :account_type, class: "oh-form-label" %>
+      <% if @account.id.present? %>
+        <span class="text-sm text-primary-500"><%= @account.account_type.titleize %></span>
+      <% else %>
+        <%= form.select :account_type, 
+                  options_for_select(Account.account_types.map {|key, value| [key.titleize, Account.account_types.key(value)]}, @account.account_type),
+                  {},
+                  data: {
+                    'acctform-target': 'accounttype',
+                    action: 'change->acctform#toggleFields'
+                  },
+                  class: "oh-form-input" %>
+      <% end %>
+    </div>
+
+    <div class="oh-form-group">
+      <%= form.label :name, class: "oh-form-label" %>
+      <%= form.text_field :name, class: "oh-form-input", autocomplete: "none" %>
+    </div>
+
+    <div class="oh-form-group">
+      <%= form.label :last_four, class: "oh-form-label" %>
+      <%= form.text_field :last_four, class: "oh-form-input", autocomplete: "disabled" %>
+    </div>
+
+    <% if !@account.id.present? %>
+      <div class="oh-form-group">
+        <%= form.label :current_balance, class: "oh-form-label" %>
+        <%= form.text_field :current_balance, class: "oh-form-input", autocomplete: "disabled", disabled: (@account.id.present?) %>
+      </div>
+    <% end %>
+
+    <div class="oh-form-group hidden" data-acctform-target="interestrate">
+      <%= form.label :interest_rate, class: "oh-form-label" %>
+      <%= form.text_field :interest_rate, class: "oh-form-input", autocomplete: "disabled" %>
+    </div>
+
+    <div class="oh-form-group hidden" data-acctform-target="creditlimit">
+      <%= form.label :credit_limit, class: "oh-form-label" %>
+      <%= form.text_field :credit_limit, class: "oh-form-input", autocomplete: "disabled" %>
+    </div>
+  </div>
+
+  <div class="flex justify-between">
+    <%= form.submit button_text, class: "oh-btn oh-btn-primary" %>
+    <% if @account.id.present? %>
+      <div data-controller="modal" data-modal-allow-background-close="false">
+        <a href="#" data-action="click->modal#open" class="oh-btn oh-btn-danger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        
+        <!-- Modal Container -->
+        <div data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
+          <!-- Modal Inner Container -->
+          <div class="max-h-screen w-full max-w-lg relative">
+            <!-- Modal Card -->
+            <div class="m-1 bg-white rounded shadow">
+              <div class="p-8">
+                <h2 class="oh-heading-2 mb-2">Are you sure?</h2>
+                <p class="mb-4">You are about to delete account <strong><%= @account.name %></strong>. This action cannot be undone!</p>
+
+                <div class="flex justify-end items-center gap-2 flex-wrap mt-6">
+                  <button class="oh-btn oh-btn-muted text-sm" data-action="click->modal#close">Cancel</button>
+                  <%= link_to account_path(@account), data: { "turbo-method": :delete }, class: "oh-btn oh-btn-danger text-sm" do %>
+                    Delete
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -3,30 +3,3 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
-
-import AcctformController from "./acctform_controller"
-application.register("acctform", AcctformController)
-
-import ApplicationController from "./application_controller"
-application.register("application", ApplicationController)
-
-import DropdownController from "./dropdown_controller"
-application.register("dropdown", DropdownController)
-
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
-import NavController from "./nav_controller"
-application.register("nav", NavController)
-
-import SharedController from "./shared_controller"
-application.register("shared", SharedController)
-
-import StashlistController from "./stashlist_controller"
-application.register("stashlist", StashlistController)
-
-import TrxformController from "./trxform_controller"
-application.register("trxform", TrxformController)
-
-import TrxsearchController from "./trxsearch_controller"
-application.register("trxsearch", TrxsearchController)

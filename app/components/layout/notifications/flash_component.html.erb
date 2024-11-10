@@ -1,0 +1,7 @@
+<div id="notice">
+  <% if @data.present? %>
+    <div class="mx-auto md:w-2/3 w-full flex">
+      <p class="mx-auto py-2 px-3 mb-5 font-medium rounded-md shadow inline-block border <%= @color_class %>"><%= @data %></p>
+    </div>
+  <% end %>
+</div>

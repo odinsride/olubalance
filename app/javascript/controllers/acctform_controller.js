@@ -9,16 +9,16 @@ export default class extends Controller {
   
   toggleFields() {
     if (this.accounttypeTarget.value == 'credit') {
-      this.interestrateTarget.classList.remove('is-hidden')
-      this.creditlimitTarget.classList.remove('is-hidden')
+      this.interestrateTarget.classList.remove('hidden')
+      this.creditlimitTarget.classList.remove('hidden')
     }
     else if (this.accounttypeTarget.value == 'savings') {
-      this.interestrateTarget.classList.remove('is-hidden')
-      this.creditlimitTarget.classList.add('is-hidden')
+      this.interestrateTarget.classList.remove('hidden')
+      this.creditlimitTarget.classList.add('hidden')
     }
     else {
-      this.interestrateTarget.classList.add('is-hidden')
-      this.creditlimitTarget.classList.add('is-hidden')
+      this.interestrateTarget.classList.add('hidden')
+      this.creditlimitTarget.classList.add('hidden')
     }
   }
 }

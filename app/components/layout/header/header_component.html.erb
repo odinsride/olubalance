@@ -1,0 +1,33 @@
+<header class="lg:hidden relative bg-primary-100 text-primary-700 shadow border-b-2 border-primary-200 border-opacity-90" 
+        data-controller="dropdown"
+        data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
+        data-dropdown-invisible-class="opacity-0 scale-80"
+        data-dropdown-visible-class="opacity-100 scale-100"
+        data-dropdown-entering-class="ease-out duration-300"
+        data-dropdown-enter-timeout="300"
+        data-dropdown-leaving-class="ease-in duration-300"
+        data-dropdown-leave-timeout="300"
+>
+  <aside class="w-full h-16 z-40 flex items-center justify-between">
+    <div class="block lg:hidden ml-4">
+      <button class="flex p-2 items-center text-md select-none" data-action="dropdown#toggle:stop" role="button" tabindex="0">
+        <svg width="20" height="20" class="text-primary-500" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class="relative z-20 flex flex-col justify-center h-full px-4 md:w-full">
+      <div class="relative p-1 flex items-center w-full space-x-4 justify-end font-bold dark:text-white text-xl">
+        <%= link_to root_path, class: "navbar-item" do %>
+          <%= image_tag 'logo.png', class: "object-contain h-12 w-32", alt: "olubalance" %>
+        <% end %>
+      </div>
+    </div>
+  </aside>
+  <aside data-dropdown-target="menu" 
+         class="hidden absolute left-4 top-20"
+  >
+    <%= render(Layout::Header::HeaderMenuComponent.new) %>
+  </aside>
+</header>

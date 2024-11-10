@@ -12,7 +12,8 @@
     "bulma": "^0.9.1",
     "bulma-toast": "^2.2.0",
     "esbuild": "^0.17.15",
-    "sass": "^1.80.6"
+    "sass": "^1.80.6",
+    "tailwindcss-stimulus-components": "^6.1.2"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
