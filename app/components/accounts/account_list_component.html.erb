@@ -1,52 +1,52 @@
 <div class="grid lg:grid-cols-3 gap-4">
   <% if @accounts.each do |account| %>
     <%= link_to account_transactions_path(account) do %>
-    <div class="flex bg-white rounded-lg h-full shadow-md hover:shadow-xl hover:scale-105 transition ease-in-out flex-col">
-      <div class="px-3 py-2 text-white bg-gradient-to-br from-accent-600 to-accent-500 rounded-t-lg">
-        <h2 class="font-medium"><%= account.name %></h2>
-      </div>
-      <div class="grid grid-cols-1 bg-white justify-between justify-items-end p-4 border-b border-primary-300">
-        <aside class="font-medium text-primary-600 flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-            <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" />
-            <path fill-rule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z" clip-rule="evenodd" />
-            <path d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z" />
-          </svg>Balance
-        </aside>
-        <h3 class="font-medium text-primary-700 text-3xl"><%= currency(account.current_balance) %></h3>
-        <aside class="text-xs text-primary-400">as of <%= friendly_datetime(account.updated_at) %></aside>
-      </div>
-      <div class="flex gap-6 justify-between rounded-b-lg px-8 py-2 text-primary-500">
-        <div class="grid grid-cols-1 justify-items-center">
-          <aside class="text-xs font-bold">Account #</aside>
-          <h4 class="text-sm"><%= account.last_four %></h4>
+      <div class="flex bg-white rounded-lg h-full shadow-md hover:shadow-xl hover:scale-105 transition ease-in-out flex-col">
+        <div class="px-3 py-2 text-white bg-gradient-to-br from-accent-600 to-accent-500 rounded-t-lg">
+          <h2 class="font-medium"><%= account.name %></h2>
         </div>
-        <% if account.checking? %>
-          <div class="grid grid-cols-1 justify-between justify-items-center">
-            <aside class="text-xs font-bold">Stashes</aside>
-            <h4 class="text-sm">2</h4>
+        <div class="grid grid-cols-1 bg-white justify-between justify-items-end p-4 border-b border-primary-300">
+          <aside class="font-medium text-primary-600 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" />
+              <path fill-rule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z" clip-rule="evenodd" />
+              <path d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z" />
+            </svg>Balance
+          </aside>
+          <h3 class="font-medium text-primary-700 text-3xl"><%= currency(account.current_balance) %></h3>
+          <aside class="text-xs text-primary-400">as of <%= friendly_datetime(account.updated_at) %></aside>
+        </div>
+        <div class="flex gap-6 justify-between rounded-b-lg px-8 py-2 text-primary-500">
+          <div class="grid grid-cols-1 justify-items-center">
+            <aside class="text-xs font-bold">Account #</aside>
+            <h4 class="text-sm"><%= account.last_four %></h4>
           </div>
-        <% end %>
-        <% if account.checking? %>
-          <div class="grid grid-cols-1 justify-between justify-items-center">
-            <aside class="text-xs font-bold">Pending</aside>
-            <h4 class="text-sm"><%= currency(5182.44) %></h4>
-          </div>
-        <% end %>
-        <% if account.credit? || account.savings? %>
-          <div class="grid grid-cols-1 justify-between justify-items-center">
-            <aside class="text-xs font-bold">Interest Rate</aside>
-            <h4 class="text-sm"><%= account.interest_rate %>%</h4>
-          </div>
-        <% end %>
-        <% if account.credit?%>
-          <div class="grid grid-cols-1 justify-between justify-items-center">
-            <aside class="text-xs font-bold">Utilization</aside>
-            <h4 class="text-sm"><%= ((account.current_balance / account.credit_limit) * 100).round(2) %>%</h4>
-          </div>
-        <% end %>
+          <% if account.checking? %>
+            <div class="grid grid-cols-1 justify-between justify-items-center">
+              <aside class="text-xs font-bold">Stashes</aside>
+              <h4 class="text-sm">2</h4>
+            </div>
+          <% end %>
+          <% if account.checking? %>
+            <div class="grid grid-cols-1 justify-between justify-items-center">
+              <aside class="text-xs font-bold">Pending</aside>
+              <h4 class="text-sm"><%= currency(5182.44) %></h4>
+            </div>
+          <% end %>
+          <% if account.credit? || account.savings? %>
+            <div class="grid grid-cols-1 justify-between justify-items-center">
+              <aside class="text-xs font-bold">Interest Rate</aside>
+              <h4 class="text-sm"><%= account.interest_rate %>%</h4>
+            </div>
+          <% end %>
+          <% if account.credit?%>
+            <div class="grid grid-cols-1 justify-between justify-items-center">
+              <aside class="text-xs font-bold">Utilization</aside>
+              <h4 class="text-sm"><%= ((account.current_balance / account.credit_limit) * 100).round(2) %>%</h4>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
     <% end %>
   <% end.empty? %>
     No accounts

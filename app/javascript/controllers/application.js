@@ -18,7 +18,7 @@ application.register('modal', Modal);
 
 
 // Custom Stimulus Controllers
-import AcctformController from "./acctform_controller"
-application.register("acctform", AcctformController)
+import AcctFormController from './account_form_controller';
+application.register('acctform', AcctFormController);
 
 export { application }

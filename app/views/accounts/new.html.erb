@@ -1,1 +1,7 @@
-<%= render partial: "shared/formPage", locals: { formPath: "accounts/components/form" } %>
+<%= render (Layout::ReturnLink::ReturnLinkComponent.new(return_link_path: accounts_path, return_link_text: 'Back to accounts')) %>
+
+<div class="oh-section">
+  <h1 class="oh-heading-1 text-primary-700">New account</h1>
+</div>
+
+<%= render (Accounts::AccountFormComponent.new(account: @account)) %>

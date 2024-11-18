@@ -50,10 +50,12 @@ class AccountsController < ApplicationController
   def create
     @account = current_user.accounts.build(account_params).decorate
 
-    if @account.save
-      redirect_to accounts_path, notice: "Account was successfully created."
-    else
-      render :new
+    respond_to do |format|
+      if @account.save
+        format.html { redirect_to accounts_path, notice: "Account was successfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
