@@ -50,7 +50,8 @@ add users.
 
 ## How it works
 
-- **Database**: PostgreSQL 17 in the `db` container; data persists in the `pgdata` volume.
+- **Database**: PostgreSQL 17 in the `db` container; data persists on the host at
+  `$OLUBALANCE_DATA_DIR/postgres` (bind-mounted to `/var/lib/postgresql/data`).
   On first boot the web container runs `db:prepare` (loads the schema, including the
   `pg_trgm` extension and the `transaction_balances` view) and then `self_host:bootstrap_admin`.
 - **Background jobs**: the `worker` container runs Sidekiq. Two scheduled jobs
@@ -60,11 +61,39 @@ add users.
   vars; that admin creates everyone else at `/admin`. With `SELF_HOST_SKIP_CONFIRMATION=true`,
   new users are auto-confirmed so no SMTP server is required.
 
+## Data directories
+
+All persisted state lives on the host under `OLUBALANCE_DATA_DIR` (default `./data`,
+relative to `docker-compose.yml`), as plain bind-mounted directories rather than named
+Docker volumes — easy to locate, back up, or point at a different disk/NAS path:
+
+```
+$OLUBALANCE_DATA_DIR/
+├── postgres/   # PostgreSQL data files (all financial data)
+├── redis/      # job queue / cron state (not critical; safe to recreate)
+└── storage/    # uploaded attachments — only used when STORAGE_SERVICE=local
+```
+
+Compose creates these directories automatically on first `up` if they don't exist. The
+`postgres` and `redis` official images run as root initially and fix ownership of their
+data directory themselves, but the `web`/`worker` containers run as a **non-root user
+(uid 1000)** — if you pre-create `storage/` yourself (e.g. to seed it or set permissions
+ahead of time), make sure it's writable by uid 1000:
+
+```bash
+mkdir -p data/storage
+chown -R 1000:1000 data/storage
+```
+
+To relocate data (e.g. to a NAS mount or a different disk on unraid), set
+`OLUBALANCE_DATA_DIR=/absolute/path` in `.env` before the first `docker compose up -d`,
+or stop the stack, move the directory tree, update `.env`, and start it again.
+
 ## Storage (attachments)
 
 By default attachments (receipts, data export/import archives) are stored on **local disk**
-in the `storage` volume, which is shared between the `web` and `worker` containers
-(`STORAGE_SERVICE=local`). This is the simplest option — just back up the volume.
+in `$OLUBALANCE_DATA_DIR/storage`, bind-mounted into both the `web` and `worker` containers
+(`STORAGE_SERVICE=local`). This is the simplest option — just back up that directory.
 
 To use S3-compatible object storage instead (e.g. the bundled MinIO service or a remote
 bucket), uncomment the `minio` service in `docker-compose.yml`, set `STORAGE_SERVICE=linode`
@@ -94,16 +123,19 @@ Use the **Compose Manager** plugin (Docker Compose), not the unraid app store:
    tokens, access to the `olumentary` org's packages).
 2. Create a new compose stack and paste the contents of `docker-compose.yml`.
 3. Provide the `.env` contents alongside the stack (Compose Manager supports a per-stack
-   env file).
+   env file). Set `OLUBALANCE_DATA_DIR` to an appdata path, e.g.
+   `/mnt/user/appdata/olubalance`, so persisted data lands under unraid's normal
+   appdata share instead of `./data` next to the compose file.
 4. Bring the stack up. Browse to `http://<unraid-ip>:3000`.
 
 ## Backups
 
-Persist and back up these volumes:
+Persist and back up the directories under `$OLUBALANCE_DATA_DIR` (see
+[Data directories](#data-directories)):
 
-- `pgdata` — the PostgreSQL database (all financial data).
-- `storage` — uploaded attachments (only when `STORAGE_SERVICE=local`).
-- `redis_data` — job/cron state (not critical; can be recreated).
+- `postgres/` — the PostgreSQL database (all financial data).
+- `storage/` — uploaded attachments (only when `STORAGE_SERVICE=local`).
+- `redis/` — job/cron state (not critical; can be recreated).
 
 Also back up your **`.env` file**, and treat the three `ACTIVE_RECORD_ENCRYPTION_*` keys as
 irreplaceable: they decrypt sensitive columns (2FA secrets). If they're lost or changed,

@@ -4,7 +4,8 @@
 #   2. docker compose up -d
 #   3. open http://<host>:${OLUBALANCE_PORT:-3000} and sign in as the bootstrapped admin
 #
-# Persisted state lives in the `pgdata`, `redis_data`, and `storage` volumes — back these up.
+# Persisted state lives on the host under ${OLUBALANCE_DATA_DIR:-./data} (postgres/,
+# redis/, storage/) — back these directories up. See docs/SELF_HOSTING.md.
 
 x-app-env: &app-env
   env_file: .env
@@ -18,7 +19,7 @@ services:
       POSTGRES_PASSWORD: ${OLUBALANCE_DATABASE_PASSWORD}
       POSTGRES_DB: olubalance_production
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ${OLUBALANCE_DATA_DIR:-./data}/postgres:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${OLUBALANCE_DATABASE_USERNAME} -d olubalance_production"]
       interval: 10s
@@ -30,7 +31,7 @@ services:
     restart: unless-stopped
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
-      - redis_data:/data
+      - ${OLUBALANCE_DATA_DIR:-./data}/redis:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -46,7 +47,7 @@ services:
     ports:
       - "${OLUBALANCE_PORT:-3000}:3000"
     volumes:
-      - storage:/rails/storage
+      - ${OLUBALANCE_DATA_DIR:-./data}/storage:/rails/storage
     depends_on:
       db:
         condition: service_healthy
@@ -65,9 +66,9 @@ services:
     <<: *app-env
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
     volumes:
-      # MUST share the same storage volume as `web`: DataExport/DataImport jobs
+      # MUST share the same storage path as `web`: DataExport/DataImport jobs
       # run here and read/write attachments uploaded via the web container.
-      - storage:/rails/storage
+      - ${OLUBALANCE_DATA_DIR:-./data}/storage:/rails/storage
     depends_on:
       db:
         condition: service_healthy
@@ -86,7 +87,7 @@ services:
       start_period: 40s
 
   # ---------------------------------------------------------------------------
-  # Optional: S3-compatible object storage instead of the local `storage` volume.
+  # Optional: S3-compatible object storage instead of the local `storage` directory.
   # The `linode` storage service supports a custom endpoint, so it's the one to use
   # for MinIO. To enable: uncomment this service, set STORAGE_SERVICE=linode and the
   # LINODE_* vars in .env (LINODE_ENDPOINT=http://minio:9000), and create the bucket.
@@ -101,10 +102,4 @@ services:
   #   ports:
   #     - "9001:9001"
   #   volumes:
-  #     - minio_data:/data
-
-volumes:
-  pgdata:
-  redis_data:
-  storage:
-  # minio_data:
+  #     - ${OLUBALANCE_DATA_DIR:-./data}/minio:/data

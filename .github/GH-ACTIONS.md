@@ -1,73 +1,61 @@
 # GitHub Actions Setup
 
-This directory contains the GitHub Actions workflow for automated testing and deployment.
+This directory contains the GitHub Actions workflows for CI, staging deployment, and self-hosting image publication.
 
-## Workflow: Test and Deploy to Staging
+## Workflow: Test and Deploy to Staging (`.github/workflows/test-and-deploy.yml`)
 
-The workflow in `.github/workflows/test-and-deploy.yml` performs the following:
+1. **Trigger**: Runs only on **pushes to `develop`**. It does *not* run on pull requests or other branches.
+2. **`test` job**: Boots a `postgres:17` service container, sets up Ruby 3.4.8 (`bundler-cache: true`) and Node 24 (`cache: yarn`), installs `libpq-dev`, runs `bundle install` + `yarn install`, builds assets (`yarn build:css`, `yarn build`), runs `bundle exec rails db:reset` against the test DB, then `bundle exec rspec`.
+3. **`deploy` job**: Runs only `if: github.ref == 'refs/heads/develop' && github.event_name == 'push'`, and only after `test` succeeds (`needs: test`). Deploys to the Dokku staging server via `dokku/github-action@v1.0.0`.
+4. Both jobs run under the `stage` GitHub Environment — secrets below must be set on that environment (or at the repo level if the environment doesn't override them).
 
-1. **Triggers**: Runs on pushes and pull requests to the `develop` branch
-2. **Testing**: Runs the full RSpec test suite with PostgreSQL
-3. **Deployment**: Deploys to Dokku staging server if tests pass (only on pushes to develop)
+### Required secrets (`stage` environment)
 
-## Required GitHub Secrets
+| Secret | Used by | Purpose |
+| --- | --- | --- |
+| `SECRET_KEY_BASE` | `test` job | Rails secret key base for the test environment (this app uses Figaro for app secrets, not Rails credentials, so there is no `RAILS_MASTER_KEY` secret here). |
+| `DOKKU_GIT_REMOTE_URL` | `deploy` job | Git remote URL for the Dokku app (e.g. `ssh://dokku@<host>/<app-name>`). |
+| `DOKKU_SSH_PRIVATE_KEY` | `deploy` job | SSH private key authorized on the Dokku server for deployment. |
+| `DOKKU_SSH_HOST_KEY` | `deploy` job | Host key(s) for the Dokku server, used to populate `known_hosts` (get via `ssh-keyscan -H <host>`). |
 
-You need to configure the following secrets in your GitHub repository:
+### Setting up GitHub secrets
 
-### 1. RAILS_MASTER_KEY
+1. Go to the GitHub repository → Settings → Environments → `stage` (create it if it doesn't exist).
+2. Add each secret above under that environment's secrets.
+3. Repository Settings → Secrets and variables → Actions can also hold repo-level secrets, but anything referenced above should live on the `stage` environment so it's scoped to staging deploys.
 
-- **Purpose**: Rails master key for decrypting credentials in test environment
-- **How to get it**: Copy the contents of `config/master.key` from your local Rails app
-- **Location**: Repository Settings → Secrets and variables → Actions → New repository secret
+### Workflow behavior
 
-### 2. DOKKU_SSH_PRIVATE_KEY
+- **Pull requests**: no workflow runs at all (no CI on PRs currently).
+- **Pushes to `develop`**: runs tests, and if they pass, deploys to Dokku staging.
+- **Other branches**: no action taken.
 
-- **Purpose**: SSH private key for connecting to your Dokku server
-- **How to get it**:
-  1. Generate a new SSH key pair: `ssh-keygen -t rsa -b 4096 -C "github-actions@yourdomain.com"`
-  2. Add the public key to your Dokku server: `ssh-copy-id -i ~/.ssh/id_rsa.pub dokku@45.79.159.125`
-  3. Copy the private key content: `cat ~/.ssh/id_rsa`
-- **Location**: Repository Settings → Secrets and variables → Actions → New repository secret
+### Troubleshooting
 
-### 3. DOKKU_SSH_KNOWN_HOSTS
+**Tests failing**
+- Check that `SECRET_KEY_BASE` is set on the `stage` environment.
+- Verify the Postgres service container is healthy (health check: `pg_isready`, 5 retries).
+- Check `bundle exec rails db:reset` output — schema is loaded from `db/structure.sql`, not `schema.rb`.
 
-- **Purpose**: SSH known hosts entry for your Dokku server
-- **How to get it**:
-  1. Run: `ssh-keyscan -H <ip_address>`
-  2. Copy the output (should be one line starting with the IP address)
-- **Location**: Repository Settings → Secrets and variables → Actions → New repository secret
+**Deployment failing**
+- Verify `DOKKU_GIT_REMOTE_URL`, `DOKKU_SSH_PRIVATE_KEY`, and `DOKKU_SSH_HOST_KEY` are correctly set.
+- Confirm the target Dokku app exists and the SSH key is authorized on the server.
+- The `deploy` job only runs after `test` passes — a red `test` job means `deploy` never fires.
 
-## Setting up GitHub Secrets
+## Workflow: Build and publish self-hosting image (`.github/workflows/build-image.yml`)
 
-1. Go to your GitHub repository
-2. Click on "Settings" tab
-3. In the left sidebar, click "Secrets and variables" → "Actions"
-4. Click "New repository secret" for each secret above
-5. Enter the secret name and value
-6. Click "Add secret"
+1. **Trigger**: runs on pushes of version tags matching `v*` (e.g. `v1.13.2`), or manually via `workflow_dispatch`.
+2. Builds the Dockerfile at the repo root with Docker Buildx (`linux/amd64` only) and pushes to **GitHub Container Registry** (`ghcr.io/${{ github.repository }}`, i.e. `ghcr.io/olumentary/olubalance`).
+3. Auth is via the built-in `GITHUB_TOKEN` (`packages: write` permission) — no extra secrets required.
+4. Tags are derived by `docker/metadata-action`:
+   - `type=semver,pattern={{version}}` — full version, e.g. `1.13.2`
+   - `type=semver,pattern={{major}}.{{minor}}` — e.g. `1.13`
+   - `type=sha` — commit SHA
+   - `latest` — only applied when the trigger was a `v*` tag push (not on manual `workflow_dispatch` runs without a tag)
+5. Uses GitHub Actions cache (`cache-from`/`cache-to: type=gha`) to speed up repeated builds.
+6. This image is what `docker-compose.yml` and self-hosted deployments pull by default (`OLUBALANCE_IMAGE`, see `docs/SELF_HOSTING.md`) — cutting a `vX.Y.Z` tag is what ships a new self-hosting release.
 
-## Workflow Behavior
+### Troubleshooting
 
-- **Pull Requests**: Only runs tests, no deployment
-- **Pushes to develop**: Runs tests, and if they pass, deploys to staging
-- **Other branches**: No action taken
-
-## Troubleshooting
-
-### Tests failing
-
-- Check that `RAILS_MASTER_KEY` is correctly set
-- Verify database configuration in test environment
-- Check test logs for specific error messages
-
-### Deployment failing
-
-- Verify SSH keys are correctly configured
-- Check that the Dokku app `<app-name>` exists on your server
-- Ensure the SSH user has proper permissions on the Dokku server
-
-### SSH Connection Issues
-
-- Verify `DOKKU_SSH_KNOWN_HOSTS` contains the correct fingerprint
-- Check that the SSH private key matches the public key on the server
-- Test SSH connection manually: `ssh dokku@<ip-addr>`
+- **Push denied / auth failure**: confirm the workflow's `packages: write` permission hasn't been overridden by a stricter repo-level default (Settings → Actions → General → Workflow permissions).
+- **Image not picked up by self-hosters**: only tag pushes produce the `latest` tag; a manual `workflow_dispatch` run without a corresponding tag only publishes the `sha`-tagged image.
