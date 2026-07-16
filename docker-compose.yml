@@ -6,6 +6,11 @@
 #
 # Persisted state lives on the host under ${OLUBALANCE_DATA_DIR:-./data} (postgres/,
 # redis/, storage/) — back these directories up. See docs/SELF_HOSTING.md.
+#
+# OLUBALANCE_PORT (host-side web port) is configurable via .env so multiple
+# stacks can run on one host, or to dodge a port already in use. `db`/`redis`/
+# `minio` are reached only over the internal Compose network and don't
+# publish host ports, so they never conflict with anything else on the host.
 
 x-app-env: &app-env
   env_file: .env
@@ -99,7 +104,5 @@ services:
   #   environment:
   #     MINIO_ROOT_USER: ${LINODE_ACCESS_KEY_ID}
   #     MINIO_ROOT_PASSWORD: ${LINODE_SECRET_ACCESS_KEY}
-  #   ports:
-  #     - "9001:9001"
   #   volumes:
   #     - ${OLUBALANCE_DATA_DIR:-./data}/minio:/data

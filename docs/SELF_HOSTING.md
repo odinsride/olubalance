@@ -54,6 +54,10 @@ add users.
   `$OLUBALANCE_DATA_DIR/postgres` (bind-mounted to `/var/lib/postgresql/data`).
   On first boot the web container runs `db:prepare` (loads the schema, including the
   `pg_trgm` extension and the `transaction_balances` view) and then `self_host:bootstrap_admin`.
+  `db:prepare` seeds the global category list on a fresh database either way; it only
+  seeds fake demo users/accounts/transactions/bills/documents if `SEED_DEMO_DATA=true`
+  is set in `.env` (it defaults to off in production, which is what the container
+  runs as) — leave it unset for a real instance.
 - **Background jobs**: the `worker` container runs Sidekiq. Two scheduled jobs
   (monthly interest sweep, data-export cleanup) load automatically via sidekiq-cron.
   Redis backs the job queue, the Rails cache, and ActionCable.

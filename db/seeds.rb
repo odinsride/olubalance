@@ -99,6 +99,31 @@ bill_expense_descriptions = [
   "Fuel"
 ]
 
+# Create global categories. This is real reference data (not demo content) —
+# it always seeds so a fresh install has a usable category list from the start,
+# rather than relying on the app to lazily create categories one at a time.
+category_names = [
+  "Groceries", "Dining", "Utilities", "Housing", "Auto", "Transportation", "Fuel",
+  "Health", "Insurance", "Entertainment", "Travel", "Transfer", "Income", "Savings",
+  "Investments", "Subscriptions", "Education", "Gifts", "Miscellaneous", "Family",
+  "Taxes", "Interest Charges"
+]
+
+category_names.each do |name|
+  Category.find_or_create_by!(name: name, kind: :global)
+end
+
+# Demo data (fake users/accounts/transactions/bills/documents) defaults to on
+# in development (matching the existing local dev workflow) and off elsewhere
+# (self-hosted production installs, CI's test-env db:reset) — set SEED_DEMO_DATA
+# explicitly to override either way.
+seed_demo_data = ENV.key?("SEED_DEMO_DATA") ? ENV["SEED_DEMO_DATA"] == "true" : Rails.env.development?
+
+unless seed_demo_data
+  puts "[seeds] Skipping demo users/accounts/transactions (SEED_DEMO_DATA not enabled for #{Rails.env}). Global categories seeded."
+  return
+end
+
 # Create 3 test accounts
 emails.each do |email|
   user = User.new(
@@ -113,18 +138,6 @@ emails.each do |email|
   user.skip_confirmation!
   user.save!
   users << user
-end
-
-# Create global categories
-category_names = [
-  "Groceries", "Dining", "Utilities", "Housing", "Auto", "Transportation", "Fuel",
-  "Health", "Insurance", "Entertainment", "Travel", "Transfer", "Income", "Savings",
-  "Investments", "Subscriptions", "Education", "Gifts", "Miscellaneous", "Family",
-  "Taxes", "Interest Charges"
-]
-
-category_names.each do |name|
-  Category.find_or_create_by!(name: name, kind: :global)
 end
 
 # Lookup table + description → category mapping so seeded transactions land in
