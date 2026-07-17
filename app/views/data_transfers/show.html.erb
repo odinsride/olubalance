@@ -62,29 +62,45 @@
             </div>
           </div>
 
-          <%# import-file controller must wrap BOTH the file input and the trigger
-              button — its "trigger" target is the button below, not inside .file. %>
-          <%= form_tag import_data_transfer_path, method: :post, multipart: true, id: "import-form", class: "mt-4", data: { controller: "import-file" } do %>
-            <div class="file has-name is-fullwidth mb-4">
+          <%# import-upload controller wraps the file input, the progress bar, the
+              hidden signed_id field, and the trigger button. The file uploads to
+              storage on selection (with a progress bar); the form then submits
+              only the signed_id, so the confirm step is instant. %>
+          <%= form_tag import_data_transfer_path, method: :post, id: "import-form", class: "mt-4",
+                data: { controller: "import-upload", "import-upload-url-value": rails_direct_uploads_path } do %>
+            <div class="file has-name is-fullwidth mb-3">
               <label class="file-label">
-                <input class="file-input" type="file" name="archive" accept=".zip"
-                       data-action="change->import-file#selected"
-                       data-import-file-target="input">
+                <input class="file-input" type="file" accept=".zip"
+                       data-action="change->import-upload#selected"
+                       data-import-upload-target="input">
                 <span class="file-cta">
                   <span class="file-icon"><i class="fas fa-upload"></i></span>
                   <span class="file-label">Choose export file…</span>
                 </span>
-                <span class="file-name has-text-grey" data-import-file-target="name">
+                <span class="file-name has-text-grey" data-import-upload-target="name">
                   No file selected
                 </span>
               </label>
+            </div>
+
+            <%# Holds the direct-upload signed_id — this is what submits as `archive`. %>
+            <%= hidden_field_tag :archive, nil, data: { "import-upload-target": "signedId" } %>
+
+            <div class="is-hidden mb-3" data-import-upload-target="progressWrap">
+              <div class="is-flex is-align-items-center mb-1">
+                <span class="is-size-7 has-text-grey">Uploading file…</span>
+                <span class="ml-auto is-size-7 has-text-weight-bold"
+                      data-import-upload-target="percent">0%</span>
+              </div>
+              <progress class="progress is-link is-small mb-0" value="0" max="100"
+                        data-import-upload-target="progress">0%</progress>
             </div>
 
             <button type="button"
                     class="button is-danger is-light is-fullwidth has-text-weight-bold"
                     data-action="click->shared#toggleModal"
                     data-id="import-confirm-modal"
-                    data-import-file-target="trigger"
+                    data-import-upload-target="trigger"
                     disabled>
               <span class="icon"><i class="fas fa-exclamation-triangle"></i></span>
               <span>Import &amp; replace all data…</span>

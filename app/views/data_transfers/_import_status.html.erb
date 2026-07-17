@@ -17,6 +17,13 @@
       <p class="help has-text-grey mt-2">
         Replacing your data — please don’t close the app until this finishes.
       </p>
+      <div class="mt-3">
+        <%= button_to cancel_data_import_path(data_import),
+              class: "button is-small is-warning is-light" do %>
+          <span class="icon"><i class="fas fa-stop"></i></span>
+          <span><%= data_import.cancel_requested? ? "Cancelling…" : "Stop import" %></span>
+        <% end %>
+      </div>
     </div>
 
   <% elsif data_import&.complete? %>
@@ -35,5 +42,54 @@
       </p>
       <p class="is-size-7"><%= data_import.error_message.presence || "An unknown error occurred. Please try again." %></p>
     </div>
+
+  <% elsif data_import&.cancelled? %>
+    <div class="notification is-warning is-light">
+      <p class="is-flex is-align-items-center mb-0">
+        <span class="icon has-text-warning-dark mr-2"><i class="fas fa-ban"></i></span>
+        <span class="has-text-weight-semibold">Import cancelled.</span>
+      </p>
+    </div>
+  <% end %>
+
+  <%# ── File info + controls (present whenever an archive is retained) ── %>
+  <% if data_import&.archive&.attached? %>
+    <div class="box p-3 mt-3">
+      <div class="is-flex is-align-items-center">
+        <span class="icon has-text-grey mr-2"><i class="fas fa-file-archive"></i></span>
+        <div>
+          <p class="is-size-7 has-text-weight-semibold"><%= data_import.archive.blob.filename %></p>
+          <p class="is-size-7 has-text-grey"><%= number_to_human_size(data_import.archive.blob.byte_size) %></p>
+        </div>
+      </div>
+
+      <% unless in_progress %>
+        <div class="buttons are-small mt-3 mb-0">
+          <% if data_import.reprocessable? %>
+            <%= button_to reprocess_data_import_path(data_import),
+                  class: "button is-link is-light" do %>
+              <span class="icon"><i class="fas fa-redo"></i></span>
+              <span>Reprocess this file</span>
+            <% end %>
+          <% end %>
+          <%= button_to data_import_path(data_import), method: :delete,
+                class: "button is-danger is-light",
+                form: { data: { turbo_confirm: "Delete this uploaded import file?" } } do %>
+            <span class="icon"><i class="fas fa-trash"></i></span>
+            <span>Purge file</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ── Import log ── %>
+  <% if data_import&.log.present? %>
+    <details class="mt-3" <%= "open" if data_import.failed? || data_import.cancelled? %>>
+      <summary class="is-size-7 has-text-grey has-text-weight-semibold" style="cursor: pointer;">
+        Import log
+      </summary>
+      <pre class="is-size-7 mt-2 p-2" style="max-height: 16rem; overflow: auto;"><%= data_import.log %></pre>
+    </details>
   <% end %>
 </div>

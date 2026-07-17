@@ -80,6 +80,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :data_imports, only: %i[destroy] do
+    member do
+      post :reprocess
+      post :cancel
+    end
+  end
+
   # Two-factor authentication: settings dashboard + per-device enrollment.
   resource :two_factor_settings, only: %i[show destroy] do
     post :regenerate_backup_codes, on: :collection

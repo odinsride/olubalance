@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "data_import_status" do %>
+  <%= render "data_transfers/import_frame", data_import: @data_import, src: status_data_transfer_path %>
+<% end %>

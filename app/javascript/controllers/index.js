@@ -85,5 +85,5 @@ application.register('confirm-destroy', ConfirmDestroyController);
 import StatusPollController from './status_poll_controller';
 application.register('status-poll', StatusPollController);
 
-import ImportFileController from './import_file_controller';
-application.register('import-file', ImportFileController);
+import ImportUploadController from './import_upload_controller';
+application.register('import-upload', ImportUploadController);

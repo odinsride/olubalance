@@ -102,6 +102,19 @@ These rules protect data integrity. Violating them produces wrong balances, whic
 
 4. **Scope everything by `current_user`.** Repeated from above because it's both an architecture rule and a security invariant.
 
+## Data transfer (export / import) — backward compatibility is an invariant
+
+Users back up and restore all their data via a versioned ZIP archive: `DataExport::Builder` writes a `manifest.json` (stamped with `MANIFEST_VERSION`) plus attachment blobs; `DataImport::Restorer` wipes and rebuilds the user's data from it (both run in the `DataExportJob` / `DataImportJob` background jobs). See `docs/DATA_TRANSFER_COMPAT.md` for the full contract.
+
+**The invariant: an export produced by an OLDER release must keep importing into a NEWER release.** This is now a critical, user-facing feature — a schema or feature change that silently breaks old imports is a data-loss bug. When you build anything that changes the shape of exported data (a new column, table, rename, or attachment/descriptor change), you MUST preserve it. The mechanics:
+
+- **Add a column** → free, *only if* it's nullable or has a **DB-level default** (a model/AR default is not enough — the restorer uses `insert_all!`, which bypasses AR defaults; absent keys fall back to the DB default). Prefer `null: false, default: …` in the migration.
+- **Add a new table / record type** → free; old manifests simply omit it.
+- **Remove a column** → free; the restorer's `columns_only(model, row)` drops keys that aren't real columns.
+- **Rename/split a column, add a `NOT NULL` column with no DB default, repurpose a column's meaning, or change the `attachments` / `category_ref` descriptor shape** → NOT free. Bump `MANIFEST_VERSION` in `DataExport::Builder` **and** add a matching step to `DataImport::ManifestMigrator::STEPS` that rewrites old manifests into the new shape.
+
+**The guardrail:** `spec/services/data_import/backward_compatibility_spec.rb` imports a frozen v1 fixture (`spec/fixtures/data_transfer/v1/`) and a real export with a column stripped. If your change breaks old imports, that spec fails — fix it with a DB default or a migrator step, never by regenerating/weakening the fixture. Keep this spec green.
+
 ## View / frontend conventions
 
 - **Forms**: `form_with` only (Rails 8 default). No `form_for`.

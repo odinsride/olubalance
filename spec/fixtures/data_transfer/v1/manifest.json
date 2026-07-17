@@ -1,0 +1,174 @@
+{
+  "schema": "olubalance.data_transfer",
+  "version": 1,
+  "exported_at": "2026-07-17T02:55:06Z",
+  "source_user_id": 3,
+  "records": {
+    "accounts": [
+      {
+        "id": 3,
+        "name": "Fixture Checking",
+        "starting_balance": "250.0",
+        "current_balance": "229.5",
+        "user_id": 3,
+        "created_at": "2026-07-17T02:55:06.438Z",
+        "updated_at": "2026-07-17T02:55:06.554Z",
+        "last_four": null,
+        "active": true,
+        "account_type": "checking",
+        "interest_rate": null,
+        "credit_limit": null,
+        "statement_day": null,
+        "last_interest_charged_on": null,
+        "last_transaction_on": "2026-07-17"
+      }
+    ],
+    "categories": [
+      {
+        "id": 4,
+        "name": "Fixture Cat",
+        "kind": "custom",
+        "user_id": 3,
+        "created_at": "2026-07-17T02:55:06.476Z",
+        "updated_at": "2026-07-17T02:55:06.476Z"
+      }
+    ],
+    "transactions": [
+      {
+        "id": 6,
+        "trx_date": "2026-07-17",
+        "description": "Starting Balance",
+        "amount": "250.0",
+        "account_id": 3,
+        "created_at": "2026-07-17T02:55:06.461Z",
+        "updated_at": "2026-07-17T02:55:06.461Z",
+        "memo": "This is the beginning transaction of the account.",
+        "pending": false,
+        "locked": true,
+        "transfer": false,
+        "quick_receipt": null,
+        "counterpart_transaction_id": null,
+        "batch_reference": null,
+        "bill_transaction_batch_id": null,
+        "category_id": null,
+        "category_ref": null,
+        "attachments": []
+      },
+      {
+        "id": 7,
+        "trx_date": "2023-01-15",
+        "description": "Fixture Coffee",
+        "amount": "4.5",
+        "account_id": 3,
+        "created_at": "2026-07-17T02:55:06.477Z",
+        "updated_at": "2026-07-17T02:55:06.477Z",
+        "memo": null,
+        "pending": true,
+        "locked": false,
+        "transfer": false,
+        "quick_receipt": null,
+        "counterpart_transaction_id": null,
+        "batch_reference": null,
+        "bill_transaction_batch_id": null,
+        "category_id": 4,
+        "category_ref": {
+          "kind": "custom",
+          "id": 4
+        },
+        "attachments": [
+          {
+            "blob_key": "oj5zs0v1o4mphx28uwenel7hxbd0",
+            "filename": "receipt.txt",
+            "content_type": "text/plain",
+            "byte_size": 21,
+            "checksum": "jq2I7mH1b5KahdC2NQGH6w==",
+            "created_at": "2026-07-17T02:55:06Z",
+            "path": "attachments/oj5zs0v1o4mphx28uwenel7hxbd0/receipt.txt"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "trx_date": "2026-07-17",
+        "description": "Transfer to Fixture Stash Stash",
+        "amount": "-25.0",
+        "account_id": 3,
+        "created_at": "2026-07-17T02:55:06.552Z",
+        "updated_at": "2026-07-17T02:55:06.552Z",
+        "memo": null,
+        "pending": false,
+        "locked": true,
+        "transfer": true,
+        "quick_receipt": null,
+        "counterpart_transaction_id": null,
+        "batch_reference": null,
+        "bill_transaction_batch_id": null,
+        "category_id": 5,
+        "category_ref": {
+          "kind": "global",
+          "name": "Transfer"
+        },
+        "attachments": []
+      }
+    ],
+    "stashes": [
+      {
+        "id": 2,
+        "name": "Fixture Stash",
+        "description": null,
+        "balance": "25.0",
+        "goal": "1000.0",
+        "active": true,
+        "account_id": 3,
+        "created_at": "2026-07-17T02:55:06.534Z",
+        "updated_at": "2026-07-17T02:55:06.547Z"
+      }
+    ],
+    "stash_entries": [
+      {
+        "id": 2,
+        "stash_entry_date": "2026-07-17T02:55:06.542Z",
+        "description": "Stash funded",
+        "amount": "25.0",
+        "stash_id": 2,
+        "created_at": "2026-07-17T02:55:06.542Z",
+        "updated_at": "2026-07-17T02:55:06.542Z",
+        "transaction_id": 8
+      }
+    ],
+    "bills": [
+      {
+        "id": 2,
+        "bill_type": "expense",
+        "description": "Fixture Bill",
+        "frequency": "monthly",
+        "day_of_month": 1,
+        "amount": "80.0",
+        "notes": null,
+        "account_id": 3,
+        "user_id": 3,
+        "created_at": "2026-07-17T02:55:06.524Z",
+        "updated_at": "2026-07-17T02:55:06.524Z",
+        "biweekly_mode": null,
+        "second_day_of_month": null,
+        "biweekly_anchor_weekday": null,
+        "biweekly_anchor_date": null,
+        "next_occurrence_month": null,
+        "category_id": 4,
+        "category_ref": {
+          "kind": "custom",
+          "id": 4
+        }
+      }
+    ],
+    "bill_transaction_batches": [],
+    "hidden_categories": [],
+    "category_lookups": [],
+    "documents": [],
+    "trusted_devices": [],
+    "login_events": []
+  },
+  "user_patch": {
+    "default_account_id": 3
+  }
+}

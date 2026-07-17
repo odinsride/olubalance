@@ -3,10 +3,25 @@
 # Reopens the DataImport model class as a namespace for the import restorer.
 # Must be `class` (not `module`) — DataImport is an ActiveRecord class.
 class DataImport
+  # Restores a user's data from an export archive.
+  #
+  # Forward-compatibility contract (see docs/DATA_TRANSFER_COMPAT.md): archives
+  # produced by OLDER releases must keep importing here. That works because:
+  #   * removed/renamed-away columns are dropped by `columns_only`;
+  #   * additive columns that are nullable or carry a DB default are filled
+  #     automatically by insert_all! (absent keys → Postgres default);
+  #   * anything those two can't cover (renames, new NOT NULL columns without a
+  #     DB default, descriptor-shape changes) is normalized by ManifestMigrator
+  #     before restore, gated by a MANIFEST_VERSION bump.
   class Restorer
-    SUPPORTED_VERSION = 1
+    # Oldest manifest version this release can still import. The current/max
+    # version is DataExport::Builder::MANIFEST_VERSION (single source of truth).
+    MIN_SUPPORTED_VERSION = 1
 
     class InvalidManifestError < StandardError; end
+    class Cancelled < StandardError; end
+
+    attr_reader :log_lines
 
     def initialize(user:, zip_path:, data_import: nil)
       @user = user
@@ -15,10 +30,22 @@ class DataImport
       @id_map = Hash.new { |h, k| h[k] = {} }
       @created_blobs = []
       @old_blob_ids = []
+      @log_lines = []
+    end
+
+    # Full accumulated import log. Kept in memory (not written mid-transaction,
+    # which would roll back on failure) and flushed to the record by the job
+    # once the transaction resolves — so the log survives success, failure, and
+    # cancellation alike.
+    def log_text
+      @log_lines.join("\n")
     end
 
     def call
       manifest = read_manifest!
+      # Normalize an older archive up to the current manifest shape before any
+      # inserts, so old exports import into this (newer) release.
+      manifest = ManifestMigrator.new(manifest).call
 
       # Collect old blob IDs *before* the transaction so we can safely purge
       # storage files after commit without risking data loss on rollback.
@@ -63,6 +90,13 @@ class DataImport
         patch_second_pass(manifest)
       end
 
+      # Past the commit point — cancellation must no longer take effect (the
+      # data is already durably imported). `report` checks this flag.
+      @committed = true
+
+      # `report` runs a cancellation check before each phase above; if a cancel
+      # was requested mid-transaction the block raises Cancelled and rolls back.
+
       # Transaction committed — safe to delete old storage files now.
       report("Cleaning up old files", 97)
       purge_old_blobs!
@@ -85,8 +119,16 @@ class DataImport
         unless manifest["schema"] == "olubalance.data_transfer"
           raise InvalidManifestError, "Unrecognized archive schema: #{manifest['schema']}"
         end
-        unless manifest["version"].to_i == SUPPORTED_VERSION
-          raise InvalidManifestError, "Unsupported archive version #{manifest['version']} (expected #{SUPPORTED_VERSION})"
+
+        version = manifest["version"].to_i
+        current = DataExport::Builder::MANIFEST_VERSION
+        if version > current
+          raise InvalidManifestError,
+            "This archive was created by a newer version of olubalance — update the app before importing."
+        end
+        if version < MIN_SUPPORTED_VERSION
+          raise InvalidManifestError,
+            "This archive is too old to import (version #{version}; minimum supported is #{MIN_SUPPORTED_VERSION})."
         end
 
         manifest
@@ -211,10 +253,10 @@ class DataImport
         cat_id = resolve_category(r["category_ref"])
         next unless cat_id
 
-        r.except("id", "category_ref").merge(
+        columns_only(HiddenCategory, r.except("id", "category_ref").merge(
           "user_id" => @user.id,
           "category_id" => cat_id
-        )
+        ))
       end.compact
 
       HiddenCategory.insert_all(rows) if rows.any?
@@ -225,22 +267,22 @@ class DataImport
         cat_id = resolve_category(r["category_ref"])
         next unless cat_id
 
-        r.except("id", "category_ref").merge(
+        columns_only(CategoryLookup, r.except("id", "category_ref").merge(
           "user_id" => @user.id,
           "category_id" => cat_id
-        )
+        ))
       end.compact
 
       CategoryLookup.insert_all(rows) if rows.any?
     end
 
     def import_trusted_devices(records)
-      rows = records.map { |r| r.except("id").merge("user_id" => @user.id) }
+      rows = records.map { |r| columns_only(TrustedDevice, r.except("id").merge("user_id" => @user.id)) }
       TrustedDevice.insert_all(rows) if rows.any?
     end
 
     def import_login_events(records)
-      rows = records.map { |r| r.except("id").merge("user_id" => @user.id) }
+      rows = records.map { |r| columns_only(LoginEvent, r.except("id").merge("user_id" => @user.id)) }
       LoginEvent.insert_all(rows) if rows.any?
     end
 
@@ -318,7 +360,7 @@ class DataImport
       path = descriptor["path"]
       entry = zip.find_entry(path)
       unless entry
-        Rails.logger.warn("DataImport::Restorer: attachment not found in zip: #{path}")
+        log("WARN: attachment not found in archive: #{path}")
         return nil
       end
 
@@ -329,7 +371,7 @@ class DataImport
         content_type: descriptor["content_type"]
       )
     rescue => e
-      Rails.logger.error("DataImport::Restorer: failed to recreate blob #{path}: #{e.message}")
+      log("ERROR: failed to recreate attachment #{path}: #{e.message}")
       nil
     end
 
@@ -351,7 +393,7 @@ class DataImport
         if new_id && new_counterpart_id
           Transaction.where(id: new_id).update_all(counterpart_transaction_id: new_counterpart_id)
         else
-          Rails.logger.warn("DataImport::Restorer: could not remap counterpart for transaction old_id=#{r['id']}")
+          log("WARN: could not remap counterpart for transaction old_id=#{r['id']}")
         end
       end
     end
@@ -366,7 +408,7 @@ class DataImport
         if new_entry_id && new_trx_id
           StashEntry.where(id: new_entry_id).update_all(transaction_id: new_trx_id)
         else
-          Rails.logger.warn("DataImport::Restorer: could not remap stash_entry transaction old_id=#{r['id']}")
+          log("WARN: could not remap stash_entry transaction old_id=#{r['id']}")
         end
       end
     end
@@ -385,7 +427,7 @@ class DataImport
 
       pairs = records.filter_map do |r|
         row = transform.call(r)
-        [ r["id"], row ] if row
+        [ r["id"], columns_only(model_class, row) ] if row
       end
 
       return if pairs.empty?
@@ -397,11 +439,19 @@ class DataImport
       old_ids.zip(new_ids).each { |old_id, new_id| @id_map[map_key][old_id] = new_id }
     end
 
+    # Drops any key that isn't an actual column on the target table. Defends
+    # against legacy/renamed columns present in older archives (e.g. the
+    # Paperclip-era `attachment_file_name` on transactions) that would otherwise
+    # blow up insert_all! with ActiveModel::UnknownAttributeError.
+    def columns_only(model_class, row)
+      row.slice(*model_class.column_names)
+    end
+
     def remap(table_key, old_id)
       return nil if old_id.blank?
 
       @id_map[table_key][old_id].tap do |new_id|
-        Rails.logger.warn("DataImport::Restorer: no mapping for #{table_key}[#{old_id}]") unless new_id
+        log("WARN: no mapping for #{table_key}[#{old_id}]") unless new_id
       end
     end
 
@@ -415,7 +465,7 @@ class DataImport
         Category.find_or_create_by!(user_id: nil, name: ref["name"]) { |c| c.kind = :global }.id
       end
     rescue => e
-      Rails.logger.error("DataImport::Restorer: failed to resolve category #{ref.inspect}: #{e.message}")
+      log("ERROR: failed to resolve category #{ref.inspect}: #{e.message}")
       nil
     end
 
@@ -438,9 +488,26 @@ class DataImport
     end
 
     def report(step, pct)
+      check_cancelled!
       @data_import&.update_columns(step: step, progress: pct)
+      log("#{step} (#{pct}%)")
+    rescue Cancelled
+      raise
     rescue => e
       Rails.logger.warn("DataImport::Restorer could not update progress: #{e.message}")
+    end
+
+    # Cooperative cancellation: the controller sets `cancel_requested` on the
+    # record; we notice it between phases and raise, which rolls back the whole
+    # import transaction cleanly (no partial data).
+    def check_cancelled!
+      return if @committed || @data_import.nil?
+      raise Cancelled, "Import cancelled by user" if @data_import.reload.cancel_requested?
+    end
+
+    def log(message)
+      Rails.logger.info("DataImport::Restorer: #{message}")
+      @log_lines << "[#{Time.current.utc.iso8601}] #{message}"
     end
   end
 end

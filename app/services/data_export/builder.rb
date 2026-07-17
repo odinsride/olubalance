@@ -4,6 +4,11 @@
 # Must be `class` (not `module`) — DataExport is an ActiveRecord class.
 class DataExport
   class Builder
+    # Current manifest version — the single source of truth for both export and
+    # import. Bump this ONLY together with a DataImport::ManifestMigrator step
+    # when a schema change can't be absorbed automatically (see
+    # docs/DATA_TRANSFER_COMPAT.md). Purely additive nullable/defaulted columns
+    # and new tables do NOT require a bump.
     MANIFEST_VERSION = 1
     MANIFEST_SCHEMA = "olubalance.data_transfer"
 

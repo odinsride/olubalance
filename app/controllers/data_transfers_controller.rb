@@ -55,8 +55,11 @@ class DataTransfersController < ApplicationController
     end
 
     di = current_user.data_imports.create!(status: :pending)
+    # params[:archive] is an ActiveStorage direct-upload signed_id — attach
+    # accepts it directly (no re-upload of the file bytes here).
     di.archive.attach(params[:archive])
-    DataImportJob.perform_later(di.id)
+    job = DataImportJob.perform_later(di.id)
+    di.update_column(:job_id, job.provider_job_id)
 
     redirect_to data_transfer_path, notice: "Import started. This page will show progress below."
   end
