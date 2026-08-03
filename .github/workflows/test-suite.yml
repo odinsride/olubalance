@@ -1,4 +1,4 @@
-name: Test and Deploy to Staging
+name: Test Suite
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.8'
+          ruby-version: '4.0.5'
           bundler-cache: true
 
       - name: Set up Node.js
@@ -66,21 +66,21 @@ jobs:
           SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
         run: bundle exec rspec
 
-  deploy:
-    needs: test
-    environment: stage
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+  # deploy:
+  #   needs: test
+  #   environment: stage
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
 
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
+  #   steps:
+  #     - uses: actions/checkout@v5
+  #       with:
+  #         fetch-depth: 0
 
-      - name: Deploy to Dokku Staging
-        uses: dokku/github-action@v1.0.0
-        with:
-          git_remote_url: ${{ secrets.DOKKU_GIT_REMOTE_URL }}
-          ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
-          ssh_host_key: ${{ secrets.DOKKU_SSH_HOST_KEY }}
-          branch: develop
+  #     - name: Deploy to Dokku Staging
+  #       uses: dokku/github-action@v1.0.0
+  #       with:
+  #         git_remote_url: ${{ secrets.DOKKU_GIT_REMOTE_URL }}
+  #         ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+  #         ssh_host_key: ${{ secrets.DOKKU_SSH_HOST_KEY }}
+  #         branch: develop

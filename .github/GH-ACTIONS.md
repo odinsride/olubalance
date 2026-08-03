@@ -5,7 +5,7 @@ This directory contains the GitHub Actions workflows for CI, staging deployment,
 ## Workflow: Test and Deploy to Staging (`.github/workflows/test-and-deploy.yml`)
 
 1. **Trigger**: Runs only on **pushes to `develop`**. It does *not* run on pull requests or other branches.
-2. **`test` job**: Boots a `postgres:17` service container, sets up Ruby 3.4.8 (`bundler-cache: true`) and Node 24 (`cache: yarn`), installs `libpq-dev`, runs `bundle install` + `yarn install`, builds assets (`yarn build:css`, `yarn build`), runs `bundle exec rails db:reset` against the test DB, then `bundle exec rspec`.
+2. **`test` job**: Boots a `postgres:17` service container, sets up Ruby 4.0.5 (`bundler-cache: true`) and Node 24 (`cache: yarn`), installs `libpq-dev`, runs `bundle install` + `yarn install`, builds assets (`yarn build:css`, `yarn build`), runs `bundle exec rails db:reset` against the test DB, then `bundle exec rspec`.
 3. **`deploy` job**: Runs only `if: github.ref == 'refs/heads/develop' && github.event_name == 'push'`, and only after `test` succeeds (`needs: test`). Deploys to the Dokku staging server via `dokku/github-action@v1.0.0`.
 4. Both jobs run under the `stage` GitHub Environment — secrets below must be set on that environment (or at the repo level if the environment doesn't override them).
 

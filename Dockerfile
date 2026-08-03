@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1
-# Self-hosting image for olubalance (Rails 8.1, esbuild + Dart Sass asset pipeline).
+# Self-hosting image for olubalance
 # Multi-stage: build compiles gems + assets, runtime carries only what's needed to boot.
 # Build:  docker build -t olubalance .
-# Pinned Ruby matches Gemfile / .ruby-version (3.4.8).
+# Pinned Ruby matches Gemfile.
 
-ARG RUBY_VERSION=3.4.8
+ARG RUBY_VERSION=4.0.5
 FROM docker.io/library/ruby:${RUBY_VERSION}-slim AS base
 
 # Rails app lives here

@@ -8,7 +8,7 @@ olubalance is a personal-finance app — an online checkbook register. Users man
 
 ## Tech stack
 
-- **Ruby** 3.4.8 / **Rails** 8.1
+- **Ruby** 4.0.5 / **Rails** 8.1
 - **PostgreSQL** 17 (uses `db/structure.sql`, not `schema.rb`, because of `pg_trgm` and a SQL view)
 - **Frontend**: Bulma 1.0, Stimulus 3, Turbo (Hotwire) 8 — bundled by **esbuild** (JS) and **Dart Sass** (CSS) via `jsbundling-rails` / `cssbundling-rails`
 - **Auth**: Devise 5 (database_authenticatable, recoverable, rememberable, trackable, validatable, confirmable)
