@@ -600,7 +600,7 @@ DEPENDENCIES
   ostruct
   pagy (~> 9)
   pg (~> 1.6.2)
-  puma (~> 7.1)
+  puma (~> 7.2)
   rack-attack
   rails (~> 8.1)
   rails-controller-testing
